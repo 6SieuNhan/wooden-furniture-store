@@ -13,21 +13,24 @@
     <context:component-scan base-package="com.webbanhang2" />
     <context:annotation-config />
     
+    <!-- Database access beans -->
     <bean id="datasource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="com.mysql.jdbc.Driver"
           p:url="jdbc:mysql://localhost:3306/webbanhang?zeroDateTimeBehavior=convertToNull"
           p:username="root"
-          p:password="DerpBottle123!">
-    </bean>
+          p:password="DerpBottle123!" />
     
-    <bean id="userService" class="com.webbanhang2.service.UserServiceImpl" />
-    <bean id="userDao" class="com.webbanhang2.dao.UserDaoImpl" />
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="datasource" />
     </bean>
     
-
+    <!-- Service/Dao beans -->
+    <bean id="productService" class="com.webbanhang2.service.ProductServiceImpl" />
+    <bean id="productDao" class="com.webbanhang2.dao.ProductDaoImpl" />
+    <bean id="userService" class="com.webbanhang2.service.UserServiceImpl" />
+    <bean id="userDao" class="com.webbanhang2.dao.UserDaoImpl" />
+    
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
 
 </beans>

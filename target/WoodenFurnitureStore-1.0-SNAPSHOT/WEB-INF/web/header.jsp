@@ -57,7 +57,7 @@
                         <li>
                             <span class="fa fa-phone" aria-hidden="true"></span> ${not empty user}
                         </li>
-                        
+
                         <!-- display either user info, or login/register form -->
                         <c:choose>
                             <c:when test="${not empty user}">
@@ -110,90 +110,111 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        
+
         <!-- remove login/register form when logged in, just in case -->
         <c:if test="${empty user}">
-        <!-- signin Model -->
-        <!-- Modal1 -->
-        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body modal-body-sub_agile">
-                        <div class="main-mailposi">
-                            <span class="fa fa-envelope-o" aria-hidden="true"></span>
+            <!-- signin Model -->
+            <!-- Modal1 -->
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal_body_left modal_body_left1">
-                            <h3 class="agileinfo_sign">Sign In </h3>
-                            <p>
-                                Sign In now, Let's start your Grocery Shopping. Don't have an account?
-                                <a href="#" data-toggle="modal" data-target="#myModal2">
-                                    Sign Up Now</a>
-                            </p>
+                        <div class="modal-body modal-body-sub_agile">
+                            <div class="main-mailposi">
+                                <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                            </div>
+                            <div class="modal_body_left modal_body_left1">
+                                <h3 class="agileinfo_sign">Sign In </h3>
+                                <p>
+                                    Sign In now, Let's start your Grocery Shopping. Don't have an account?
+                                    <a href="#" data-toggle="modal" data-target="#myModal2">
+                                        Sign Up Now</a>
+                                </p>
 
-                            <form:form id="loginForm" modelAttribute="login" action="login" method="post">
-                                <div class="styled-input agile-styled-input-top">
-                                    <form:input path="username" placeholder = "Username" required="required" />
-                                </div>
-                                <div class="styled-input">
-                                    <form:password path="password" placeholder = "Password" required="required" />
-                                </div>
-                                <form:button id="login" name="login">Sign In</form:button>
-                            </form:form>
+                                <form:form id="loginForm" modelAttribute="login" action="login" method="post">
+                                    <div class="styled-input agile-styled-input-top">
+                                        <form:input path="username" placeholder = "Username" required="required" />
+                                    </div>
+                                    <div class="styled-input">
+                                        <form:password path="password" placeholder = "Password" required="required" />
+                                    </div>
+                                    <form:button id="login" name="login">Sign In</form:button>
+                                </form:form>
 
+                                <div class="clearfix"></div>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
+                    <!-- //Modal content-->
                 </div>
-                <!-- //Modal content-->
             </div>
-        </div>
-        <!-- //Modal1 -->
-        <!-- //signin Model -->
-        <!-- signup Model -->
-        <!-- Modal2 -->
-        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body modal-body-sub_agile">
-                        <div class="main-mailposi">
-                            <span class="fa fa-envelope-o" aria-hidden="true"></span>
+            <!-- //Modal1 -->
+            <!-- //signin Model -->
+            <!-- signup Model -->
+            <!-- Modal2 -->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal_body_left modal_body_left1">
-                            <h3 class="agileinfo_sign">Sign Up</h3>
-                            <p>
-                                Come join the Grocery Shoppy! Let's set up your Account.
-                            </p>
-                            
-                            <form:form id="registerForm" modelAttribute="login" action="register" method="post">
-                                <div class="styled-input agile-styled-input-top">
-                                    <form:input path="username" placeholder = "Username" required="required" />
-                                </div>
-                                <div class="styled-input">
-                                    <form:password path="password" placeholder = "Password" id="password1" required="required" />
-                                </div>
-                                <div class="styled-input">
-                                    <input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
-                                </div>
-                                <input type="submit" value="Sign Up">
-                            </form:form>
-                            <p>
-                                <a href="#">By clicking register, I agree to your terms</a>
-                            </p>
+                        <div class="modal-body modal-body-sub_agile">
+                            <div class="main-mailposi">
+                                <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                            </div>
+                            <div class="modal_body_left modal_body_left1">
+                                <h3 class="agileinfo_sign">Sign Up</h3>
+                                <p>
+                                    Come join the Grocery Shoppy! Let's set up your Account.
+                                </p>
+
+                                <form:form id="registerForm" modelAttribute="login" action="register" method="post">
+                                    <div class="styled-input agile-styled-input-top">
+                                        <form:input path="username" placeholder = "Username" required="required" />
+                                    </div>
+                                    <div class="styled-input">
+                                        <form:input path="email" placeholder = "E-mail" id="email" required="required" />
+                                    </div>
+                                    <div class="styled-input">
+                                        <form:password path="password" placeholder = "Password" id="password1" required="required" />
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
+                                    </div>
+                                    <input type="submit" value="Sign Up">
+                                </form:form>
+                                <p>
+                                    <a href="#">By clicking register, I agree to your terms</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
+                    <!-- //Modal content-->
+                    <!-- password-script -->
+                    <script>
+                        window.onload = function () {
+                            document.getElementById("password1").onchange = validatePassword;
+                            document.getElementById("password2").onchange = validatePassword;
+                        };
+
+                        function validatePassword() {
+                            var pass2 = document.getElementById("password2").value;
+                            var pass1 = document.getElementById("password1").value;
+                            if (pass1 !== pass2)
+                                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+                            else
+                                document.getElementById("password2").setCustomValidity('');
+                            //empty string means no validation error
+                        }
+                    </script>
+                    <!-- //password-script -->
                 </div>
-                <!-- //Modal content-->
             </div>
-        </div>
         </c:if>
         <!-- //Modal2 -->
         <!-- //signup Model -->

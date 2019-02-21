@@ -64,7 +64,7 @@
                             <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav menu__list">
                                     <li class="active">
-                                        <a class="nav-stylehead" href="index.html">Home
+                                        <a class="nav-stylehead" href="home">Home
                                             <span class="sr-only">(current)</span>
                                         </a>
                                     </li>
@@ -80,7 +80,7 @@
                                                 <div class="col-sm-4 multi-gd-img">
                                                     <ul class="multi-column-dropdown">
                                                         <li>
-                                                            <a href="product.html">Bakery</a>
+                                                            <a href="productlist">Bakery</a>
                                                         </li>
                                                         <li>
                                                             <a href="product.html">Baking Supplies</a>

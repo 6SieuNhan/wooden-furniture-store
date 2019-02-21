@@ -29,13 +29,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean registerUser(User user) {
-        String sql = "insert into user (username, password)"
-                + "values('"+user.getUsername()+"'"
-                + ", '"+user.getPassword()+"');";
-        try{
+        String sql = "insert into user (`username`, `password`, `email`, `user_role_user_role_id`)"
+                + "values('" + user.getUsername() + "', '"
+                + user.getPassword() + "', '"
+                + user.getEmail() + "', '"
+                + "2');";
+        try {
             int res = jdbcTemplate.update(sql);
-            return res!=0;
-        } catch (DataAccessException ex){
+            return res != 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }
@@ -56,9 +59,13 @@ public class UserDaoImpl implements UserDao {
         @Override
         public User mapRow(ResultSet rs, int arg1) throws SQLException {
             User user = new User();
-            user.setUserId(rs.getString("userid"));
+            user.setUserId(rs.getString("user_id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
+            user.setEmail(rs.getString("email"));
+            user.setUserRoleId(rs.getInt("user_role_user_role_id"));
+            user.setAddress(rs.getString("address"));
+            user.setPhone(rs.getString("phone"));
             return user;
         }
     }

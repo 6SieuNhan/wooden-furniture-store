@@ -10,14 +10,52 @@ package com.webbanhang2.model;
  * @author fkien
  */
 public class User {
-    private String userId, username, password;
+    private String userId, username, password, email, address, phone;
+    
+    private int userRoleId;
     public User() {
     }
 
-    public User(String userId, String username, String password) {
+    public User(String userId, String username, String password, String email, String address, String phone, int userRoleId) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.userRoleId = userRoleId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getUserRoleId() {
+        return userRoleId;
+    }
+
+    public void setUserRoleId(int userRoleId) {
+        this.userRoleId = userRoleId;
     }
 
     public String getUserId() {

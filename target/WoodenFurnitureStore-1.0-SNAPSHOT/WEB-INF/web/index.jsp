@@ -1507,64 +1507,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </script>
         <!-- //flexisel (for special offers) -->
 
-        <!-- password-script -->
-        <script>
-            window.onload = function () {
-                document.getElementById("password1").onchange = validatePassword;
-                document.getElementById("password2").onchange = validatePassword;
-            }
-
-            function validatePassword() {
-                var pass2 = document.getElementById("password2").value;
-                var pass1 = document.getElementById("password1").value;
-                if (pass1 != pass2)
-                    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-                else
-                    document.getElementById("password2").setCustomValidity('');
-                //empty string means no validation error
-            }
-        </script>
-        <!-- //password-script -->
-
-        <!-- smoothscroll -->
-        <script src="<c:url value="/resource/js/SmoothScroll.min.js"/>"></script>
-        <!-- //smoothscroll -->
-
-        <!-- start-smooth-scrolling -->
-        <script src="<c:url value="/resource/js/move-top.js"/>"></script>
-        <script src="<c:url value="/resource/js/easing.js"/>"></script>
-        <script>
-            jQuery(document).ready(function ($) {
-                $(".scroll").click(function (event) {
-                    event.preventDefault();
-
-                    $('html,body').animate({
-                        scrollTop: $(this.hash).offset().top
-                    }, 1000);
-                });
-            });
-        </script>
-        <!-- //end-smooth-scrolling -->
-
-        <!-- smooth-scrolling-of-move-up -->
-        <script>
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
-                $().UItoTop({
-                    easingType: 'easeOutQuart'
-                });
-
-            });
-        </script>
-        <!-- //smooth-scrolling-of-move-up -->
-
         <!-- for bootstrap working -->
         <script src="<c:url value="/resource/js/bootstrap.js" />"></script>
         <!-- //for bootstrap working -->
