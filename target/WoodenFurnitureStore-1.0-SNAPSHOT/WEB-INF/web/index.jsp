@@ -1408,30 +1408,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- //jquery -->
 
-        <!-- popup modal (for signin & signup)-->
-        <script src="<c:url value="/resource/js/jquery.magnific-popup.js"/>"</script>
-        <script>
-            $(document).ready(function () {
-                $('.popup-with-zoom-anim').magnificPopup({
-                    type: 'inline',
-                    fixedContentPos: false,
-                    fixedBgPos: true,
-                    overflowY: 'auto',
-                    closeBtnInside: true,
-                    preloader: false,
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'my-mfp-zoom-in'
-                });
-
-            });
-        </script>
-        <!-- Large modal -->
-        <!-- <script>
-                $('#').modal('show');
-        </script> -->
-        <!-- //popup modal (for signin & signup)-->
-
         <!-- cart-js -->
         <script src="<c:url value="/resource/js/minicart.js"/>"></script>
         <script>

@@ -9,10 +9,12 @@ import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
 import com.webbanhang2.service.ProductService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +32,7 @@ public class HomeController {
 
     @Autowired
     ProductService productService;
+
     /**
      * Sets up the login model attribute, to be used by various forms requiring
      * an User model, such as: + The Login and Register form on header.jsp + The
@@ -55,17 +58,30 @@ public class HomeController {
         //Only the name of the jsp is needed, DispatcherServlet knows what to do.
         return "index";
     }
-    
-    
+
     @RequestMapping({"productlist"})
-    public ModelAndView showProductList(){
+    public ModelAndView showProductList() {
         System.out.println("showProductList");
         ModelAndView mav = new ModelAndView("productlist");
-        List<Product> productList = productService.getProductList(0, 2);
-        for(Product p:productList){
-            System.out.println(p.getProductName());
+            List<Product> productList = productService.getProductList(0, 15);
+        if (productList.size() > 0) {
+            for (Product p : productList) {
+                System.out.println(p.getProductName());
+                System.out.println(p.getThumbnail());
+            }
         }
         mav.addObject("productList", productList);
         return mav;
     }
+    
+    @RequestMapping({"product"})
+    public ModelAndView showProduct(@RequestParam("productid") String productId){
+        System.out.println("showProduct with productId = "+productId);
+        Product p = productService.getProduct(productId);
+        System.out.println(p==null);
+        ModelAndView mav = new ModelAndView("product");
+        mav.addObject("product", p);
+        return mav;
+    }
+
 }

@@ -5,7 +5,7 @@
  */
 package com.webbanhang2.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,19 +13,22 @@ import java.util.ArrayList;
  */
 public class Product {
 
-    private String productId, productName, description;
+    private String productId, productName, description, thumbnail;
 
-    private int productTypeId, productMaterialId, productOriginId, quantity, price;
+    private int productTypeId, productMaterialId, productOriginId, quantity;
     
-    private ArrayList<String> imgList;
+    private double price;
+    
+    private List<String> imgList;
 
     public Product() {
     }
 
-    public Product(String productId, String productName, String description, int productTypeId, int productMaterialId, int productOriginId, int quantity, int price, ArrayList<String> imgList) {
+    public Product(String productId, String productName, String description, String thumbnail, int productTypeId, int productMaterialId, int productOriginId, int quantity, double price, List<String> imgList) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
+        this.thumbnail = thumbnail;
         this.productTypeId = productTypeId;
         this.productMaterialId = productMaterialId;
         this.productOriginId = productOriginId;
@@ -33,12 +36,22 @@ public class Product {
         this.price = price;
         this.imgList = imgList;
     }
+    
 
-    public ArrayList<String> getImgList() {
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+
+    public List<String> getImgList() {
         return imgList;
     }
 
-    public void setImgList(ArrayList<String> imgList) {
+    public void setImgList(List<String> imgList) {
         this.imgList = imgList;
     }
 
@@ -98,13 +111,13 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
-    
+
     
 }

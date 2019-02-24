@@ -28,16 +28,26 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getProductList(int top, int count) {
-        String sql = "select * from product limit " + top + "," + count + ";";
-        List<Product> productList = jdbcTemplate.query(sql, new ProductMapper());
+        String sql = "select bin_to_uuid(`product_id_bin`) as product_id, `product_name`, `thumbnail`, `price`"
+                + " from product limit " + top + "," + count + ";";
+        List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList;
     }
 
     @Override
     public Product getProduct(String productId) {
-        String sql = "select * from product where product_id = " + productId;
+        String sql = "select *, bin_to_uuid(`product_id_bin`) as product_id from product where product_id_bin = uuid_to_bin('" + productId + "');";
         List<Product> productList = jdbcTemplate.query(sql, new ProductMapper());
         return productList.size() > 0 ? productList.get(0) : null;
+    }
+
+    class ImgNameMapper implements RowMapper<String> {
+
+        @Override
+        public String mapRow(ResultSet rs, int arg1) throws SQLException {
+            return rs.getString("img_name");
+        }
+
     }
 
     class ShortenedProductMapper implements RowMapper<Product> {
@@ -47,11 +57,12 @@ public class ProductDaoImpl implements ProductDao {
             Product product = new Product();
             product.setProductId(rs.getString("product_id"));
             product.setProductName(rs.getString("product_name"));
+            product.setThumbnail(rs.getString("thumbnail"));
+            product.setPrice(rs.getInt("price"));
             return product;
         }
     }
-            
-            
+
     class ProductMapper implements RowMapper<Product> {
 
         @Override
@@ -64,7 +75,11 @@ public class ProductDaoImpl implements ProductDao {
             product.setProductOriginId(rs.getInt("product_origin_product_origin_id"));
             product.setDescription(rs.getString("description"));
             product.setQuantity(rs.getInt("quantity"));
-            product.setPrice(rs.getInt("price"));
+            product.setPrice(rs.getDouble("price"));
+            String sql = "select * from webbanhang.product_img "
+                    + "where`product_product_id_bin` = uuid_to_bin('"
+                    + product.getProductId() + "');";
+            product.setImgList(jdbcTemplate.query(sql, new ImgNameMapper()));
             return product;
         }
     }

@@ -195,29 +195,56 @@
                         </div>
                     </div>
                     <!-- //Modal content-->
-                    <!-- password-script -->
-                    <script>
-                        window.onload = function () {
-                            document.getElementById("password1").onchange = validatePassword;
-                            document.getElementById("password2").onchange = validatePassword;
-                        };
 
-                        function validatePassword() {
-                            var pass2 = document.getElementById("password2").value;
-                            var pass1 = document.getElementById("password1").value;
-                            if (pass1 !== pass2)
-                                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-                            else
-                                document.getElementById("password2").setCustomValidity('');
-                            //empty string means no validation error
-                        }
-                    </script>
-                    <!-- //password-script -->
                 </div>
             </div>
         </c:if>
         <!-- //Modal2 -->
         <!-- //signup Model -->
         <!-- //header-bot -->
+
+        <!-- popup modal (for signin & signup)-->
+        <script src="js/jquery.magnific-popup.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.popup-with-zoom-anim').magnificPopup({
+                    type: 'inline',
+                    fixedContentPos: false,
+                    fixedBgPos: true,
+                    overflowY: 'auto',
+                    closeBtnInside: true,
+                    preloader: false,
+                    midClick: true,
+                    removalDelay: 300,
+                    mainClass: 'my-mfp-zoom-in'
+                });
+
+            });
+        </script>
+        <!-- Large modal -->
+        <!-- <script>
+                $('#').modal('show');
+        </script> -->
+        <!-- //popup modal (for signin & signup)-->
+
+        <!-- password-script -->
+        <script>
+            window.onload = function () {
+                document.getElementById("password1").onchange = validatePassword;
+                document.getElementById("password2").onchange = validatePassword;
+            };
+
+            function validatePassword() {
+                var pass2 = document.getElementById("password2").value;
+                var pass1 = document.getElementById("password1").value;
+                if (pass1 !== pass2)
+                    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+                else
+                    document.getElementById("password2").setCustomValidity('');
+                //empty string means no validation error
+            }
+        </script>
+        <!-- //password-script -->
+
     </body>
 </html>
