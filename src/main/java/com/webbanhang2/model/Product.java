@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Product {
 
-    private String productId, productName, description, thumbnail;
+    private String productId, productName, description, thumbnail, shortName;
 
     private int productTypeId, productMaterialId, productOriginId, quantity;
     
@@ -24,11 +24,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productId, String productName, String description, String thumbnail, int productTypeId, int productMaterialId, int productOriginId, int quantity, double price, List<String> imgList) {
+    public Product(String productId, String productName, String description, String thumbnail, String shortName, int productTypeId, int productMaterialId, int productOriginId, int quantity, double price, List<String> imgList) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
         this.thumbnail = thumbnail;
+        this.shortName = shortName;
         this.productTypeId = productTypeId;
         this.productMaterialId = productMaterialId;
         this.productOriginId = productOriginId;
@@ -36,7 +37,14 @@ public class Product {
         this.price = price;
         this.imgList = imgList;
     }
-    
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
 
     public String getThumbnail() {
         return thumbnail;

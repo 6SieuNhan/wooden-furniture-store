@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User validateUser(User user) {
-        String sql = "select *, bin_to_uuid(`user_id_bin`) as user_id from user where username = '"
+        String sql = "select * from user where username = '"
                 + user.getUsername()
                 + "' and password = '"
                 + user.getPassword()

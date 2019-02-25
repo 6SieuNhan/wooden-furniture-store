@@ -28,7 +28,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getProductList(int top, int count) {
-        String sql = "select bin_to_uuid(`product_id_bin`) as product_id, `product_name`, `thumbnail`, `price`"
+        String sql = "select `product_id`, `shortname`, `thumbnail`, `price`"
                 + " from product limit " + top + "," + count + ";";
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList;
@@ -36,7 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product getProduct(String productId) {
-        String sql = "select *, bin_to_uuid(`product_id_bin`) as product_id from product where product_id_bin = uuid_to_bin('" + productId + "');";
+        String sql = "select * from product where product_id = '" + productId + "';";
         List<Product> productList = jdbcTemplate.query(sql, new ProductMapper());
         return productList.size() > 0 ? productList.get(0) : null;
     }
@@ -56,7 +56,7 @@ public class ProductDaoImpl implements ProductDao {
         public Product mapRow(ResultSet rs, int arg1) throws SQLException {
             Product product = new Product();
             product.setProductId(rs.getString("product_id"));
-            product.setProductName(rs.getString("product_name"));
+            product.setShortName(rs.getString("shortname"));
             product.setThumbnail(rs.getString("thumbnail"));
             product.setPrice(rs.getInt("price"));
             return product;
@@ -77,8 +77,8 @@ public class ProductDaoImpl implements ProductDao {
             product.setQuantity(rs.getInt("quantity"));
             product.setPrice(rs.getDouble("price"));
             String sql = "select * from webbanhang.product_img "
-                    + "where`product_product_id_bin` = uuid_to_bin('"
-                    + product.getProductId() + "');";
+                    + "where`product_product_id` = '"
+                    + product.getProductId() + "';";
             product.setImgList(jdbcTemplate.query(sql, new ImgNameMapper()));
             return product;
         }

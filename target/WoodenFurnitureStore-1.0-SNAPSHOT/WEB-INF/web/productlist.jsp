@@ -329,10 +329,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         </div>
                                         <div class="item-info-product ">
                                             <h4>
-                                                <a href="product?productid=${product.productId}">${product.productName}</a>
+                                                <a href="product?productid=${product.productId}">${product.shortName}</a>
                                             </h4>
                                             <div class="info-product-price">
-                                                <span class="item_price">$${fn:length(productList)}</span>
+                                                <span class="item_price">$${product.price}</span>
                                             </div>
                                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                                 <form action="#" method="post">
