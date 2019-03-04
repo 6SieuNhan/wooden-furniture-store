@@ -12,5 +12,5 @@ import com.webbanhang2.model.User;
  */
 public interface UserDao {
   boolean registerUser(User user);
-  User validateUser(User user);
+  User getUser(User user);
 }

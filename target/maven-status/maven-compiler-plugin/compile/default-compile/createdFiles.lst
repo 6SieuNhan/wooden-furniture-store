@@ -11,6 +11,12 @@ com\webbanhang2\service\ProductService.class
 com\webbanhang2\controller\HomeController.class
 com\webbanhang2\dao\ProductDaoImpl$ProductMapper.class
 com\webbanhang2\model\Product.class
+com\webbanhang2\dao\CategoryDao.class
 com\webbanhang2\dao\ProductDao.class
+com\webbanhang2\service\CategoryServiceImpl.class
+com\webbanhang2\dao\CategoryDaoImpl$CategoryMapper.class
+com\webbanhang2\dao\CategoryDaoImpl.class
+com\webbanhang2\service\CategoryService.class
 com\webbanhang2\service\ProductServiceImpl.class
+com\webbanhang2\model\Category.class
 com\webbanhang2\dao\UserDaoImpl$UserMapper.class

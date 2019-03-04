@@ -7,6 +7,7 @@ package com.webbanhang2.dao;
 
 import com.webbanhang2.model.Product;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,7 +15,9 @@ import java.util.List;
  */
 public interface ProductDao {
 
-    List<Product> getProductList(int top, int count);
-
     Product getProduct(String productId);
+    
+    List<Product> getProductList(Map<String, Object> params, int top, int count);
+    
+    int getProductListPageCount(Map<String, Object> params, int size);
 }

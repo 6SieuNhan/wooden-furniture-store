@@ -42,10 +42,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     <body>
         <!-- header -->
-        <jsp:include page="header.jsp" />
+        <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="navbar.jsp" />
+        <jsp:include page="fragment/navbar.jsp" />
         <!-- //navbar -->
         <!-- banner-2 -->
         <div class="page-head_agile_info_w3l">
@@ -126,6 +126,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                             <form action="#" method="post">
                                 <fieldset>
+
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="add" value="1" />
+                                    <input type="hidden" name="business" value=" " />
+                                    <input type="hidden" name="item_name" value="${product.productName}" />
+                                    <input type="hidden" name="amount" value="${product.price}" />
+                                    <input type="hidden" name="currency_code" value="USD" />
+                                    <input type="hidden" name="return" value=" " />
+                                    <input type="hidden" name="cancel_return" value=" " />
+
                                     <input type="submit" name="submit" value="Add to cart" class="button" />
                                 </fieldset>
                             </form>
@@ -786,16 +796,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </footer>
         <!-- //footer -->
         <!-- copyright -->
-        <jsp:include page="copyright.jsp" />
+        <jsp:include page="fragment/copyright.jsp" />
         <!-- //copyright -->
 
         <!-- js-files -->
         <!-- jquery -->
-        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- //jquery -->
 
         <!-- cart-js -->
-        <script src="js/minicart.js"></script>
+        <script src="<c:url value="/resource/js/minicart.js"/>"></script>
         <script>
             paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
 

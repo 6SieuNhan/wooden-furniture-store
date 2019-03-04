@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Product {
 
-    private String productId, productName, description, thumbnail, shortName;
+    private String productId, productName, description, thumbnail, shortName, productCode;
 
     private int productTypeId, productMaterialId, productOriginId, quantity;
     
@@ -24,18 +24,27 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productId, String productName, String description, String thumbnail, String shortName, int productTypeId, int productMaterialId, int productOriginId, int quantity, double price, List<String> imgList) {
+    public Product(String productId, String productName, String description, String thumbnail, String shortName, String productCode, int productTypeId, int productMaterialId, int productOriginId, int quantity, double price, List<String> imgList) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
         this.thumbnail = thumbnail;
         this.shortName = shortName;
+        this.productCode = productCode;
         this.productTypeId = productTypeId;
         this.productMaterialId = productMaterialId;
         this.productOriginId = productOriginId;
         this.quantity = quantity;
         this.price = price;
         this.imgList = imgList;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
     public String getShortName() {

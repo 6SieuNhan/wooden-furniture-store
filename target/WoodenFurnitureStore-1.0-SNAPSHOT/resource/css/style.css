@@ -118,6 +118,9 @@ label{
 	width:90%;
 	letter-spacing: 1px;
 }
+
+
+
 .agileits_search .btn-default {
     border: none;
     width:60px;
@@ -808,6 +811,18 @@ button.w3view-cart {
   font-size: 13px;
   color: #c4c4c4;
 }
+
+.search-hotel input[type="number"] {
+  background:#fff;
+  border: none;
+  width: 40%;
+  outline: none;
+  padding: 11px 10px 10px 10px;
+  font-size: 13px;
+  color: #c4c4c4;
+}
+
+
 .search-hotel form input[type="submit"]{
   background: url(../images/search.png) no-repeat 13px 11px #1accfd;
   width: 44px;
@@ -816,6 +831,7 @@ button.w3view-cart {
   padding:0;
   margin-top: 0;
   }
+  
 .search-grid-left{
   padding: 15px;
   background:#f5f4f0;

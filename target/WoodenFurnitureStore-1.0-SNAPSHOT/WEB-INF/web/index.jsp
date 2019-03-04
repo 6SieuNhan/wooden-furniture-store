@@ -40,10 +40,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     <body>
         <!-- header -->
-        <jsp:include page="header.jsp" />
+        <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="navbar.jsp" />
+        <jsp:include page="fragment/navbar.jsp" />
         <!-- //navbar -->
         <!-- banner -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -1400,12 +1400,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </footer>
         <!-- //footer -->
         <!-- copyright -->
-        <jsp:include page="copyright.jsp" />
+        <jsp:include page="fragment/copyright.jsp" />
         <!-- //copyright -->
 
         <!-- js-files -->
         <!-- jquery -->
-        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- //jquery -->
 
         <!-- cart-js -->

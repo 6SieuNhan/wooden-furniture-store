@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User validateUser(User user) {
+    public User getUser(User user) {
         String sql = "select * from user where username = '"
                 + user.getUsername()
                 + "' and password = '"

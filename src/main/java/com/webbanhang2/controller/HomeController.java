@@ -5,11 +5,13 @@
  */
 package com.webbanhang2.controller;
 
+import com.webbanhang2.model.Category;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
+import com.webbanhang2.service.CategoryService;
 import com.webbanhang2.service.ProductService;
+import java.util.HashMap;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,11 +29,16 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 
-@SessionAttributes("login")
+@SessionAttributes(value = {"login", "productMaterialList", "productOriginList", "productTypeList"})
 public class HomeController {
+
+    public static final int PAGE_SIZE = 15;
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    CategoryService categoryService;
 
     /**
      * Sets up the login model attribute, to be used by various forms requiring
@@ -43,6 +50,43 @@ public class HomeController {
     @ModelAttribute("login")
     public User setUpUserForm() {
         return new User();
+    }
+
+    /**
+     * Sets up the Product Material category list. This list will be used for
+     * various purposes, such as populating the Product dropdown list and the
+     * Search menu.
+     *
+     * @return A list containing all the categories in the Material list
+     */
+    @ModelAttribute("productMaterialList")
+    public List<Category> setUpProductMaterialList() {
+        List<Category> pml = categoryService.getCategoryList(Category.PRODUCT_MATERIAL);
+        return pml;
+    }
+
+    /**
+     * Sets up the Product Origin category list. This list will be used for
+     * various purposes, such as populating the Product dropdown list and the
+     * Search menu.
+     *
+     * @return A list containing all the categories in the Origin list
+     */
+    @ModelAttribute("productOriginList")
+    public List<Category> setUpProductOriginList() {
+        return categoryService.getCategoryList(Category.PRODUCT_ORIGIN);
+    }
+
+    /**
+     * Sets up the Product Type category list. This list will be used for
+     * various purposes, such as populating the Product dropdown list and the
+     * Search menu.
+     *
+     * @return A list containing all the categories in the Type list
+     */
+    @ModelAttribute("productTypeList")
+    public List<Category> setUpProductTypeList() {
+        return categoryService.getCategoryList(Category.PRODUCT_TYPE);
     }
 
     /**
@@ -59,29 +103,74 @@ public class HomeController {
         return "index";
     }
 
+    /**
+     * Shows the product list page. Can take a number of (optional) search
+     * parameters, such as search query, product category IDs, min/max price.
+     *
+     * @param searchQuery
+     * @param productTypeIds
+     * @param productMaterialIds
+     * @param productOriginIds
+     * @param minPrice
+     * @param maxPrice
+     * @return A ModelAndView for productlist.jsp, along with the relevant
+     * product list and page count (for pagination purpose)
+     */
     @RequestMapping({"productlist"})
-    public ModelAndView showProductList() {
+    public ModelAndView showProductList(
+            @RequestParam(value = "searchquery", required = false) String searchQuery,
+            @RequestParam(value = "producttypeid", required = false) List<String> productTypeIds,
+            @RequestParam(value = "productmaterialid", required = false) List<String> productMaterialIds,
+            @RequestParam(value = "productoriginid", required = false) List<String> productOriginIds,
+            @RequestParam(value = "minprice", required = false) Double minPrice,
+            @RequestParam(value = "maxprice", required = false) Double maxPrice
+    ) {
+        //Prints stuff to console
         System.out.println("showProductList");
+
+        //Pack the params into a hashmap
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("searchQuery", searchQuery);
+        params.put("productTypeId", productTypeIds);
+        params.put("productMaterialId", productMaterialIds);
+        params.put("productOriginId", productOriginIds);
+        params.put("minPrice", minPrice);
+        params.put("maxPrice", maxPrice);
+
+        List<Product> productList = productService.getProductList(params, 0, PAGE_SIZE);
+        int pageCount = productService.getProductListPageCount(params, PAGE_SIZE);
         ModelAndView mav = new ModelAndView("productlist");
-            List<Product> productList = productService.getProductList(0, 15);
-        if (productList.size() > 0) {
-            for (Product p : productList) {
-                System.out.println(p.getProductName());
-                System.out.println(p.getThumbnail());
-            }
-        }
         mav.addObject("productList", productList);
+        mav.addObject("pageCount", pageCount);
         return mav;
     }
-    
+
+    /**
+     * Shows the Product page with the relevant productId. The product ID is not
+     * necessary for the sake of preventing error, but doing that is pointless
+     * because the method will just redirect to Home anyway.
+     *
+     * @param productId The product's ID.
+     * @return If product ID is not available or the product is not found,
+     * redirect to home. Otherwise returns a ModelAndView for product.jsp, with
+     * the relevant information.
+     */
     @RequestMapping({"product"})
-    public ModelAndView showProduct(@RequestParam("productid") String productId){
-        System.out.println("showProduct with productId = "+productId);
-        Product p = productService.getProduct(productId);
-        System.out.println(p==null);
-        ModelAndView mav = new ModelAndView("product");
-        mav.addObject("product", p);
-        return mav;
+    public ModelAndView showProduct(@RequestParam(value = "productid", required = false) String productId) {
+        System.out.println("showProduct with productId = " + productId);
+        if (productId == null || productId.isEmpty()) {
+            return new ModelAndView("redirect:home");
+        } else {
+            Product p = productService.getProduct(productId);
+            if (p == null) {
+                return new ModelAndView("redirect:home");
+            } else {
+                ModelAndView mav = new ModelAndView("product");
+                mav.addObject("product", p);
+                return mav;
+            }
+        }
+
     }
 
 }

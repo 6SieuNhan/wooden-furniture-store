@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public User validateUser(User user) {
-        return userDao.validateUser(user);
+        return userDao.getUser(user);
     }
 
     @Transactional

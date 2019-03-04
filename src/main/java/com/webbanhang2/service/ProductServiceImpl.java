@@ -8,6 +8,7 @@ package com.webbanhang2.service;
 import com.webbanhang2.dao.ProductDao;
 import com.webbanhang2.model.Product;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,14 +25,19 @@ public class ProductServiceImpl implements ProductService{
     
     @Transactional
     @Override
-    public List<Product> getProductList(int top, int count) {
-        return productDao.getProductList(top, count);
+    public List<Product> getProductList(Map<String, Object> params, int top, int count) {
+        return productDao.getProductList(params, top, count);
     }
 
     @Transactional
     @Override
     public Product getProduct(String productId) {
         return productDao.getProduct(productId);
+    }
+
+    @Override
+    public int getProductListPageCount(Map<String, Object> params, int size) {
+        return productDao.getProductListPageCount(params, size);
     }
     
 }
