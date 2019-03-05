@@ -8,6 +8,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -27,6 +30,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 window.scrollTo(0, 1);
             }
         </script>
+
+        <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css" media="all" />
         <!--//tags -->
         <link href="<c:url value="/resource/css/bootstrap.css" />" rel="stylesheet" type="text/css" media="all" />
         <link href="<c:url value="/resource/css/style.css" />" rel="stylesheet" type="text/css" media="all" />
@@ -108,6 +113,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                                 <form action="#" method="post">
                                                     <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="${product.productName}" />
+                                                        <input type="hidden" name="amount" value="${product.price}" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+
                                                         <input type="submit" name="submit" value="Add to cart" class="button" />
                                                     </fieldset>
                                                 </form>
@@ -123,12 +137,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                                 <div class="product-sec1">
                                 </c:if>
-
-
                             </c:forEach>
                             <!-- //product list -->
                             <div class="clearfix"></div>
                         </div>
+                        <!-- //paging -->
+                        <div class="pagination-holder clearfix">
+                            <div id="light-pagination" class="pagination"></div>
+                        </div>
+
                     </div>
                     <!-- //product right -->
                 </div>
@@ -789,8 +806,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
             <!-- //jquery -->
 
+            <!-- paging -->
+            <script src="<c:url value="/resource/js/jquery.simplePagination.js"/>"></script>
+            <script>
+            $('#light-pagination').pagination({
+                pages: ${pageCount},
+                currentPage: ${(empty param.page) ? '1': param.page},
+                selectOnClick: false,
+
+            });
+
+            </script>
+            <!-- //paging -->
+
+
             <!-- cart-js -->
-            <script src="js/minicart.js"></script>
+            <script src="<c:url value="/resource/js/minicart.js"/>"></script>
             <script>
             paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
 
@@ -814,7 +845,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!-- //cart-js -->
 
             <!-- price range (top products) -->
-            <script src="js/jquery-ui.js"></script>
+            <script src="<c:url value="/resource/js/jquery-ui.js"/>"></script>
             <script>
             //<![CDATA[ 
             $(window).load(function () {
@@ -834,7 +865,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!-- //price range (top products) -->
 
             <!-- flexisel (for special offers) -->
-            <script src="js/jquery.flexisel.js"></script>
+            <script src="<c:url value="/resource/js/jquery.flexisel.js"/>"></script>
             <script>
             $(window).load(function () {
                 $("#flexiselDemo1").flexisel({

@@ -184,7 +184,7 @@
         <!-- //header-bot -->
 
         <!-- popup modal (for signin & signup)-->
-        <script src="js/jquery.magnific-popup.js"></script>
+        <script src="<c:url value="/resource/js/jquery.magnific-popup.js"/>"></script>
         <script>
             $(document).ready(function () {
                 $('.popup-with-zoom-anim').magnificPopup({

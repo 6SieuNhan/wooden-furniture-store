@@ -32,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(value = {"login", "productMaterialList", "productOriginList", "productTypeList"})
 public class HomeController {
 
-    public static final int PAGE_SIZE = 15;
+    public static final int PAGE_SIZE = 3;
 
     @Autowired
     ProductService productService;
@@ -113,6 +113,7 @@ public class HomeController {
      * @param productOriginIds
      * @param minPrice
      * @param maxPrice
+     * @param page
      * @return A ModelAndView for productlist.jsp, along with the relevant
      * product list and page count (for pagination purpose)
      */
@@ -123,7 +124,8 @@ public class HomeController {
             @RequestParam(value = "productmaterialid", required = false) List<String> productMaterialIds,
             @RequestParam(value = "productoriginid", required = false) List<String> productOriginIds,
             @RequestParam(value = "minprice", required = false) Double minPrice,
-            @RequestParam(value = "maxprice", required = false) Double maxPrice
+            @RequestParam(value = "maxprice", required = false) Double maxPrice,
+            @RequestParam(value = "page", required = false) Integer page
     ) {
         //Prints stuff to console
         System.out.println("showProductList");
@@ -137,7 +139,10 @@ public class HomeController {
         params.put("minPrice", minPrice);
         params.put("maxPrice", maxPrice);
 
-        List<Product> productList = productService.getProductList(params, 0, PAGE_SIZE);
+        if(page==null){
+            page = 1;
+        }
+        List<Product> productList = productService.getProductList(params, (page-1)*PAGE_SIZE, PAGE_SIZE);
         int pageCount = productService.getProductListPageCount(params, PAGE_SIZE);
         ModelAndView mav = new ModelAndView("productlist");
         mav.addObject("productList", productList);
