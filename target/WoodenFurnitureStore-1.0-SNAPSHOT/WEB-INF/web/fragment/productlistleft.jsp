@@ -26,6 +26,26 @@
                 <input type="number" name="minprice" placeholder="From" value="${param.minprice}"> - <input type="number" name="maxprice" placeholder="To" value="${param.maxprice}">
             </div>
             <!-- //price range -->
+            <!-- category -->
+            <div class="left-side">
+                <h4 class="agileits-sear-head">Category</h4><br>
+                <ul>
+                    <c:forEach var="pcm" items="${productCategoryList}" >
+                        <li>
+                            <input type="checkbox" class="checked" name="productmaterialid" value="${pcm.categoryId}"
+                                   <c:forEach var="test1" items="${material}">
+                                       <c:if test="${test1 == pcm.categoryId}">
+                                           checked
+                                       </c:if>
+                                   </c:forEach>
+                                   >
+                            <span class="span">${pcm.categoryName}</span>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <!-- //category -->
+            
             <!-- material -->
             <div class="left-side">
                 <h4 class="agileits-sear-head">Material</h4><br>
@@ -66,11 +86,11 @@
             </div>
             <!-- //origin -->
 
-            <!-- type -->
+            <!-- room -->
             <div class="left-side">
-                <h4 class="agileits-sear-head">Type</h4><br>
+                <h4 class="agileits-sear-head">Room</h4><br>
                 <ul>
-                    <c:forEach var="pcm" items="${productTypeList}" >
+                    <c:forEach var="pcm" items="${productRoomList}" >
                         <li>
                             <input type="checkbox" class="checked" name="producttypeid" value="${pcm.categoryId}"
                                    <c:forEach var="test1" items="${type}">
@@ -84,7 +104,7 @@
                     </c:forEach>
                 </ul>
             </div>
-            <!-- //type -->
+            <!-- //room -->
         </form>
     </div>
 

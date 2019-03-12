@@ -43,6 +43,23 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     /**
+     * A shortened version of the getProduct() methods which only retrieves
+     * certain information about the Product. The retrieved information
+     * includes: ID, name, short name, thumbnail and price
+     *
+     * @param productId A string containing the requested ID.
+     * @return A Product object with only the aforementioned information.
+     * Returns null if product is not found.
+     */
+    @Override
+    public Product getShortenedProduct(String productId) {
+        String sql = "SELECT product_id, product_name, shortname, thumbnail, price "
+                + "FROM webbanhang.product where product_id = '" + productId + "';";
+        List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
+        return productList.size() > 0 ? productList.get(0) : null;
+    }
+
+    /**
      * Gets a List of Products according to the parameter map. The map can
      * containing any of the following parameters, or none at all: searchQuery
      * (String), productTypeID, productMaterialID, productOriginID (String
@@ -57,7 +74,8 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public List<Product> getProductList(Map<String, Object> params, int top, int count) {
-        String sql = "SELECT * FROM webbanhang.product " + getSQLParamString(params, top, count);
+        String sql = "SELECT product_id, product_name, shortname, thumbnail, price "
+                + "FROM webbanhang.product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList;
@@ -109,16 +127,16 @@ public class ProductDaoImpl implements ProductDao {
                 sql += "where product_name like '%" + searchQuery + "%' ";
             }
 
-            //Append type ID list
-            List<String> productTypeIds = (List<String>) params.get("productTypeId");
-            if (productTypeIds != null && !productTypeIds.isEmpty()) {
+            //Append Category ID list
+            List<String> productCategoryIds = (List<String>) params.get("productCategoryId");
+            if (productCategoryIds != null && !productCategoryIds.isEmpty()) {
                 if (first) {
                     sql += "and ";
                 } else {
                     sql += "where ";
                 }
                 first = true;
-                sql += "product_type_product_type_id in " + getArrayString(productTypeIds) + " ";
+                sql += "product_categories_id in " + getArrayString(productCategoryIds) + " ";
             }
 
             //Append material ID list
@@ -130,7 +148,7 @@ public class ProductDaoImpl implements ProductDao {
                     sql += "where ";
                 }
                 first = true;
-                sql += "product_material_product_material_id in " + getArrayString(productMaterialIds) + " ";
+                sql += "product_material_id in " + getArrayString(productMaterialIds) + " ";
             }
             //Append origin ID list
             List<String> productOriginIds = (List<String>) params.get("productOriginId");
@@ -141,12 +159,24 @@ public class ProductDaoImpl implements ProductDao {
                     sql += "where ";
                 }
                 first = true;
-                sql += "product_origin_product_origin_id in " + getArrayString(productOriginIds) + " ";
+                sql += "product_origin_id in " + getArrayString(productOriginIds) + " ";
             }
+            //Append room ID list
+            List<String> productRoomIds = (List<String>) params.get("productRoomId");
+            if (productRoomIds != null && !productRoomIds.isEmpty()) {
+                if (first) {
+                    sql += "and ";
+                } else {
+                    sql += "where ";
+                }
+                first = true;
+                sql += "product_room_id in " + getArrayString(productRoomIds) + " ";
+            }
+            
             //Append min price and max price
             Double minPrice = (Double) params.get("minPrice");
             Double maxPrice = (Double) params.get("maxPrice");
-            if(minPrice!=null){
+            if (minPrice != null) {
                 if (first) {
                     sql += "and ";
                 } else {
@@ -155,8 +185,8 @@ public class ProductDaoImpl implements ProductDao {
                 first = true;
                 sql += "price >= '" + minPrice + "' ";
             }
-            
-            if(maxPrice!=null){
+
+            if (maxPrice != null) {
                 if (first) {
                     sql += "and ";
                 } else {
@@ -204,6 +234,7 @@ public class ProductDaoImpl implements ProductDao {
         public Product mapRow(ResultSet rs, int arg1) throws SQLException {
             Product product = new Product();
             product.setProductId(rs.getString("product_id"));
+            product.setProductName(rs.getString("product_name"));
             product.setShortName(rs.getString("shortname"));
             product.setThumbnail(rs.getString("thumbnail"));
             product.setPrice(rs.getInt("price"));
@@ -222,9 +253,10 @@ public class ProductDaoImpl implements ProductDao {
             product.setProductId(rs.getString("product_id"));
             product.setProductName(rs.getString("product_name"));
             product.setProductCode(rs.getString("product_code"));
-            product.setProductTypeId(rs.getInt("product_type_product_type_id"));
-            product.setProductMaterialId(rs.getInt("product_material_product_material_id"));
-            product.setProductOriginId(rs.getInt("product_origin_product_origin_id"));
+            product.setProductCategoryId(rs.getInt("product_categories_id"));
+            product.setProductMaterialId(rs.getInt("product_material_id"));
+            product.setProductOriginId(rs.getInt("product_origin_id"));
+            product.setProductRoomId(rs.getInt("product_room_id"));
             product.setDescription(rs.getString("description"));
             product.setQuantity(rs.getInt("quantity"));
             product.setPrice(rs.getDouble("price"));

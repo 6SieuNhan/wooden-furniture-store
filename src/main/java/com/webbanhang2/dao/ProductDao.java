@@ -17,6 +17,8 @@ public interface ProductDao {
 
     Product getProduct(String productId);
     
+    Product getShortenedProduct(String productId);
+    
     List<Product> getProductList(Map<String, Object> params, int top, int count);
     
     int getProductListPageCount(Map<String, Object> params, int size);

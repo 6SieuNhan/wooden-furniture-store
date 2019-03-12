@@ -10,8 +10,10 @@ import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
 import com.webbanhang2.service.CategoryService;
 import com.webbanhang2.service.ProductService;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,10 +31,12 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 
-@SessionAttributes(value = {"login", "productMaterialList", "productOriginList", "productTypeList"})
+@SessionAttributes(value = {"login", "productCategoryList", 
+    "productMaterialList", "productOriginList", "productRoomList"})
 public class HomeController {
 
     public static final int PAGE_SIZE = 3;
+    public static final String ROOT_URL = "http://localhost:8080/WebBanHang2/";
 
     @Autowired
     ProductService productService;
@@ -52,6 +56,12 @@ public class HomeController {
         return new User();
     }
 
+    @ModelAttribute("productCategoryList")
+    public List<Category> setUpCategoryMaterialList() {
+        List<Category> pml = categoryService.getCategoryList(Category.PRODUCT_CATEGORY);
+        return pml;
+    }
+    
     /**
      * Sets up the Product Material category list. This list will be used for
      * various purposes, such as populating the Product dropdown list and the
@@ -77,28 +87,33 @@ public class HomeController {
         return categoryService.getCategoryList(Category.PRODUCT_ORIGIN);
     }
 
-    /**
-     * Sets up the Product Type category list. This list will be used for
-     * various purposes, such as populating the Product dropdown list and the
-     * Search menu.
-     *
-     * @return A list containing all the categories in the Type list
-     */
-    @ModelAttribute("productTypeList")
-    public List<Category> setUpProductTypeList() {
-        return categoryService.getCategoryList(Category.PRODUCT_TYPE);
+    @ModelAttribute("productRoomList")
+    public List<Category> setUpProductRoomList() {
+        return categoryService.getCategoryList(Category.PRODUCT_ROOM);
     }
 
+    @RequestMapping("message")
+    public String showMessage() {
+        //Console print line, just for tracking purpose.
+        System.out.println("showMessage");
+        //Only the name of the jsp is needed, DispatcherServlet knows what to do.
+        return "message";
+    }
+    
     /**
      * Shows the index.jsp form.
      *
+     * @param request
      * @return The String 'index', signaling the dispatcher to show the
      * index.jsp form.
      */
     @RequestMapping({"/", "home"})
-    public String showIndex() {
+    public String showIndex(HttpServletRequest request) {
         //Console print line, just for tracking purpose.
         System.out.println("showIndex");
+        System.out.println(request.getServerName());
+        System.out.println(request.getContextPath());
+        System.out.println(request.getRemoteHost());
         //Only the name of the jsp is needed, DispatcherServlet knows what to do.
         return "index";
     }
@@ -108,9 +123,10 @@ public class HomeController {
      * parameters, such as search query, product category IDs, min/max price.
      *
      * @param searchQuery
-     * @param productTypeIds
+     * @param productCategoryIds
      * @param productMaterialIds
      * @param productOriginIds
+     * @param productRoomIds
      * @param minPrice
      * @param maxPrice
      * @param page
@@ -120,9 +136,10 @@ public class HomeController {
     @RequestMapping({"productlist"})
     public ModelAndView showProductList(
             @RequestParam(value = "searchquery", required = false) String searchQuery,
-            @RequestParam(value = "producttypeid", required = false) List<String> productTypeIds,
+            @RequestParam(value = "productcategoryid", required = false) List<String> productCategoryIds,
             @RequestParam(value = "productmaterialid", required = false) List<String> productMaterialIds,
             @RequestParam(value = "productoriginid", required = false) List<String> productOriginIds,
+            @RequestParam(value = "productroomid", required = false) List<String> productRoomIds,
             @RequestParam(value = "minprice", required = false) Double minPrice,
             @RequestParam(value = "maxprice", required = false) Double maxPrice,
             @RequestParam(value = "page", required = false) Integer page
@@ -133,16 +150,17 @@ public class HomeController {
         //Pack the params into a hashmap
         HashMap<String, Object> params = new HashMap<>();
         params.put("searchQuery", searchQuery);
-        params.put("productTypeId", productTypeIds);
+        params.put("productCategoryId", productCategoryIds);
         params.put("productMaterialId", productMaterialIds);
         params.put("productOriginId", productOriginIds);
+        params.put("productRoomId", productRoomIds);
         params.put("minPrice", minPrice);
         params.put("maxPrice", maxPrice);
 
-        if(page==null){
+        if (page == null) {
             page = 1;
         }
-        List<Product> productList = productService.getProductList(params, (page-1)*PAGE_SIZE, PAGE_SIZE);
+        List<Product> productList = productService.getProductList(params, (page - 1) * PAGE_SIZE, PAGE_SIZE);
         int pageCount = productService.getProductListPageCount(params, PAGE_SIZE);
         ModelAndView mav = new ModelAndView("productlist");
         mav.addObject("productList", productList);
@@ -175,7 +193,42 @@ public class HomeController {
                 return mav;
             }
         }
+    }
 
+    @RequestMapping(value = "checkout")
+    public ModelAndView showCheckout(HttpServletRequest request) {
+        int i = 1;
+        Integer quantity;
+        String itemId;
+        ArrayList<Product> checkoutList = new ArrayList<>(), existing;
+        do {
+            itemId = request.getParameter("id_" + i);
+
+            if (itemId != null) {
+                quantity = Integer.parseInt(request.getParameter("quantity_" + i));
+                //Tracking line
+                System.out.println(itemId + ": " + quantity);
+
+                Product p = productService.getShortenedProduct(itemId);
+                p.setQuantity(quantity);
+                checkoutList.add(p);
+            }
+
+            i++;
+        } while (itemId != null);
+
+        //redirects to home if no product is found
+        existing = (ArrayList <Product>)request.getSession().getAttribute("checkoutList");
+        if (checkoutList.isEmpty()&& (existing==null || existing.isEmpty())) {
+            return new ModelAndView("redirect:home");
+        } else {
+            //binds checkout list to result
+            if(!checkoutList.isEmpty()){
+                request.getSession().setAttribute("checkoutList", checkoutList);
+            }
+            ModelAndView mav = new ModelAndView("checkout");
+            return mav;
+        }
     }
 
 }

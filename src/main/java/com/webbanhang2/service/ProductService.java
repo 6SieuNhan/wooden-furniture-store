@@ -17,6 +17,8 @@ public interface ProductService {
     
     public List<Product> getProductList(Map<String, Object> params, int top, int count);
 
+    public Product getShortenedProduct(String productId);
+    
     public Product getProduct(String productId);
     
     public int getProductListPageCount(Map<String, Object> params, int size);

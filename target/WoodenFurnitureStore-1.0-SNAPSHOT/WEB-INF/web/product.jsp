@@ -126,16 +126,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                             <form action="#" method="post">
                                 <fieldset>
-
                                     <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="add" value="1" />
-                                    <input type="hidden" name="business" value=" " />
+                                    <input type="hidden" name="id" value="${product.productId}" />
                                     <input type="hidden" name="item_name" value="${product.productName}" />
                                     <input type="hidden" name="amount" value="${product.price}" />
+                                    <input type="hidden" name="href" value="product?productid=${product.productId}" />
+                                    <input type="hidden" name="add" value="1" />
                                     <input type="hidden" name="currency_code" value="USD" />
-                                    <input type="hidden" name="return" value=" " />
-                                    <input type="hidden" name="cancel_return" value=" " />
-
                                     <input type="submit" name="submit" value="Add to cart" class="button" />
                                 </fieldset>
                             </form>
@@ -808,23 +805,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="<c:url value="/resource/js/minicart.js"/>"></script>
         <script>
             paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
-
-            paypalm.minicartk.cart.on('checkout', function (evt) {
-                var items = this.items(),
-                        len = items.length,
-                        total = 0,
-                        i;
-
-                // Count the number of each item in the cart
-                for (i = 0; i < len; i++) {
-                    total += items[i].get('quantity');
-                }
-
-                if (total < 3) {
-                    alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-                    evt.preventDefault();
-                }
-            });
         </script>
         <!-- //cart-js -->
 

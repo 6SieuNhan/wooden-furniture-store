@@ -15,28 +15,13 @@ public class Product {
 
     private String productId, productName, description, thumbnail, shortName, productCode;
 
-    private int productTypeId, productMaterialId, productOriginId, quantity;
+    private int productCategoryId, productMaterialId, productOriginId, productRoomId, quantity;
     
     private double price;
     
     private List<String> imgList;
 
     public Product() {
-    }
-
-    public Product(String productId, String productName, String description, String thumbnail, String shortName, String productCode, int productTypeId, int productMaterialId, int productOriginId, int quantity, double price, List<String> imgList) {
-        this.productId = productId;
-        this.productName = productName;
-        this.description = description;
-        this.thumbnail = thumbnail;
-        this.shortName = shortName;
-        this.productCode = productCode;
-        this.productTypeId = productTypeId;
-        this.productMaterialId = productMaterialId;
-        this.productOriginId = productOriginId;
-        this.quantity = quantity;
-        this.price = price;
-        this.imgList = imgList;
     }
 
     public String getProductCode() {
@@ -96,13 +81,23 @@ public class Product {
         this.description = description;
     }
 
-    public int getProductTypeId() {
-        return productTypeId;
+    public int getProductCategoryId() {
+        return productCategoryId;
     }
 
-    public void setProductTypeId(int productTypeId) {
-        this.productTypeId = productTypeId;
+    public void setProductCategoryId(int productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
+
+    public int getProductRoomId() {
+        return productRoomId;
+    }
+
+    public void setProductRoomId(int productRoomId) {
+        this.productRoomId = productRoomId;
+    }
+
+    
 
     public int getProductMaterialId() {
         return productMaterialId;

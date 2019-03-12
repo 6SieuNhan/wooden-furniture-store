@@ -38,14 +38,17 @@ public class CategoryDaoImpl implements CategoryDao {
     public List<Category> getCategoryList(int categoryType) {
         String sql = "select * from ";
         switch (categoryType) {
+            case Category.PRODUCT_CATEGORY:
+                sql += "product_categories";
+                break;
             case Category.PRODUCT_MATERIAL:
                 sql += "product_material";
                 break;
             case Category.PRODUCT_ORIGIN:
                 sql += "product_origin";
                 break;
-            case Category.PRODUCT_TYPE:
-                sql += "product_type";
+            case Category.PRODUCT_ROOM:
+                sql += "product_room";
                 break;
         }
 
@@ -76,17 +79,21 @@ public class CategoryDaoImpl implements CategoryDao {
             Category pc = new Category();
             String getId, getName;
             switch (categoryType) {
+                case Category.PRODUCT_CATEGORY:
+                    getId = "categories_id";
+                    getName = "categories_name";
+                    break;
                 case Category.PRODUCT_MATERIAL:
-                    getId = "product_material_id";
-                    getName = "product_material_name";
+                    getId = "material_id";
+                    getName = "material_name";
                     break;
                 case Category.PRODUCT_ORIGIN:
-                    getId = "product_origin_id";
-                    getName = "product_origin_name";
+                    getId = "origin_id";
+                    getName = "origin_name";
                     break;
-                case Category.PRODUCT_TYPE:
-                    getId = "product_type_id";
-                    getName = "product_type_name";
+                case Category.PRODUCT_ROOM:
+                    getId = "room_id";
+                    getName = "room_name";
                     break;
                 default:
                     getId = null;

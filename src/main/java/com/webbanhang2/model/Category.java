@@ -10,9 +10,10 @@ package com.webbanhang2.model;
  * @author fkien
  */
 public class Category {
+    public static final int PRODUCT_CATEGORY = 0;
     public static final int PRODUCT_MATERIAL = 1;
     public static final int PRODUCT_ORIGIN = 2;
-    public static final int PRODUCT_TYPE = 3;
+    public static final int PRODUCT_ROOM = 3;
     
     
     private String categoryId, categoryName;

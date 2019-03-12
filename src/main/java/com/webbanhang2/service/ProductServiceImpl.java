@@ -39,5 +39,10 @@ public class ProductServiceImpl implements ProductService{
     public int getProductListPageCount(Map<String, Object> params, int size) {
         return productDao.getProductListPageCount(params, size);
     }
+
+    @Override
+    public Product getShortenedProduct(String productId) {
+        return productDao.getShortenedProduct(productId);
+    }
     
 }
