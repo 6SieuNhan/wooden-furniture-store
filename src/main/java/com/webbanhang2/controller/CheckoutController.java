@@ -99,7 +99,7 @@ public class CheckoutController {
         for (int i = 0; i < items.size(); i++) {
             Product item = items.get(i);
             s += "<tr>\n";
-            s += "<td>" + i + "</td>\n";
+            s += "<td>" + (i+1) + "</td>\n";
             s += "<td>" + item.getProductName() + "</td>\n";
             s += "<td>" + item.getQuantity() + "</td>\n";
             s += "<td> $" + item.getPrice() + "</td>\n";

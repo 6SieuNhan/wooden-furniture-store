@@ -35,5 +35,6 @@ com\webbanhang2\dao\ProductDaoImpl$ProductMapper.class
 com\webbanhang2\model\Product.class
 com\webbanhang2\dao\ProductDao.class
 com\webbanhang2\service\OrderService.class
+com\webbanhang2\main\Main.class
 com\webbanhang2\service\CategoryService.class
 com\webbanhang2\dao\UserDaoImpl$UserMapper.class

@@ -513,6 +513,11 @@ button.w3view-cart {
     letter-spacing: 1px;
     font-weight: 600;
 }
+
+.snipcart-details input.button[disabled] {
+    background: #C0C0C0;
+}
+
 .snipcart-details input.button:hover{
     background: #000;
 }

@@ -9,9 +9,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <!-- product left -->
+<c:set var="category" value="${paramValues.productcategoryid}" />
 <c:set var="material" value="${paramValues.productmaterialid}" />
 <c:set var="origin" value="${paramValues.productoriginid}" />
-<c:set var="type" value="${paramValues.producttypeid}" />
+<c:set var="room" value="${paramValues.productroomid}" />
 
 <div class="side-bar col-md-3">
 
@@ -32,8 +33,8 @@
                 <ul>
                     <c:forEach var="pcm" items="${productCategoryList}" >
                         <li>
-                            <input type="checkbox" class="checked" name="productmaterialid" value="${pcm.categoryId}"
-                                   <c:forEach var="test1" items="${material}">
+                            <input type="checkbox" class="checked" name="productcategoryid" value="${pcm.categoryId}"
+                                   <c:forEach var="test1" items="${category}">
                                        <c:if test="${test1 == pcm.categoryId}">
                                            checked
                                        </c:if>
@@ -92,8 +93,8 @@
                 <ul>
                     <c:forEach var="pcm" items="${productRoomList}" >
                         <li>
-                            <input type="checkbox" class="checked" name="producttypeid" value="${pcm.categoryId}"
-                                   <c:forEach var="test1" items="${type}">
+                            <input type="checkbox" class="checked" name="productroomid" value="${pcm.categoryId}"
+                                   <c:forEach var="test1" items="${room}">
                                        <c:if test="${test1 == pcm.categoryId}">
                                            checked
                                        </c:if>

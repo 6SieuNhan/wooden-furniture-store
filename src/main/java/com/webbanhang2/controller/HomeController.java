@@ -31,11 +31,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 
-@SessionAttributes(value = {"login", "productCategoryList", 
+@SessionAttributes(value = {"login", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList"})
 public class HomeController {
 
-    public static final int PAGE_SIZE = 3;
+    public static final int PAGE_SIZE = 9;
     public static final String ROOT_URL = "http://localhost:8080/WebBanHang2/";
 
     @Autowired
@@ -46,8 +46,8 @@ public class HomeController {
 
     /**
      * Sets up the login model attribute, to be used by various forms requiring
-     * an User model, such as: + The Login and Register form on header.jsp + The
-     * Password recovery form (upcoming)
+     * an User model, such as: The Login and Register form on header.jsp, the
+     * checkout form, the Password recovery form (upcoming)
      *
      * @return An empty User object for the login model.
      */
@@ -61,7 +61,7 @@ public class HomeController {
         List<Category> pml = categoryService.getCategoryList(Category.PRODUCT_CATEGORY);
         return pml;
     }
-    
+
     /**
      * Sets up the Product Material category list. This list will be used for
      * various purposes, such as populating the Product dropdown list and the
@@ -99,7 +99,7 @@ public class HomeController {
         //Only the name of the jsp is needed, DispatcherServlet knows what to do.
         return "message";
     }
-    
+
     /**
      * Shows the index.jsp form.
      *
@@ -218,12 +218,12 @@ public class HomeController {
         } while (itemId != null);
 
         //redirects to home if no product is found
-        existing = (ArrayList <Product>)request.getSession().getAttribute("checkoutList");
-        if (checkoutList.isEmpty()&& (existing==null || existing.isEmpty())) {
+        existing = (ArrayList<Product>) request.getSession().getAttribute("checkoutList");
+        if (checkoutList.isEmpty() && (existing == null || existing.isEmpty())) {
             return new ModelAndView("redirect:home");
         } else {
             //binds checkout list to result
-            if(!checkoutList.isEmpty()){
+            if (!checkoutList.isEmpty()) {
                 request.getSession().setAttribute("checkoutList", checkoutList);
             }
             ModelAndView mav = new ModelAndView("checkout");

@@ -53,7 +53,7 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public Product getShortenedProduct(String productId) {
-        String sql = "SELECT product_id, product_name, shortname, thumbnail, price "
+        String sql = "SELECT product_id, product_name, shortname, thumbnail, price, quantity "
                 + "FROM webbanhang.product where product_id = '" + productId + "';";
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList.size() > 0 ? productList.get(0) : null;
@@ -74,7 +74,7 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public List<Product> getProductList(Map<String, Object> params, int top, int count) {
-        String sql = "SELECT product_id, product_name, shortname, thumbnail, price "
+        String sql = "SELECT product_id, product_name, shortname, thumbnail, price, quantity "
                 + "FROM webbanhang.product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
@@ -238,6 +238,7 @@ public class ProductDaoImpl implements ProductDao {
             product.setShortName(rs.getString("shortname"));
             product.setThumbnail(rs.getString("thumbnail"));
             product.setPrice(rs.getInt("price"));
+            product.setQuantity(rs.getInt("quantity"));
             return product;
         }
     }
