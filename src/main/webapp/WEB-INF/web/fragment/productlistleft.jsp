@@ -29,81 +29,119 @@
             <!-- //price range -->
             <!-- category -->
             <div class="left-side">
-                <h4 class="agileits-sear-head">Category</h4><br>
-                <ul>
-                    <c:forEach var="pcm" items="${productCategoryList}" >
-                        <li>
-                            <input type="checkbox" class="checked" name="productcategoryid" value="${pcm.categoryId}"
-                                   <c:forEach var="test1" items="${category}">
-                                       <c:if test="${test1 == pcm.categoryId}">
-                                           checked
-                                       </c:if>
-                                   </c:forEach>
-                                   >
-                            <span class="span">${pcm.categoryName}</span>
-                        </li>
-                    </c:forEach>
-                </ul>
+                <h4 class="agileits-sear-head">
+                    <a data-toggle="collapse" href="#collapse1">Category</a>
+                    <span class="caret"></span>
+                </h4>
+                <br>
+                <!-- uncollapse if selected checkbox is available -->
+                <div id="collapse1" class="collapse 
+                     <c:if test="${not empty category}">
+                         in
+                     </c:if>
+                     ">
+                    <ul>
+                        <c:forEach var="pcm" items="${productCategoryList}" >
+                            <li>
+                                <input type="checkbox" class="checked" name="productcategoryid" value="${pcm.categoryId}"
+                                       <c:forEach var="test1" items="${category}">
+                                           <c:if test="${test1 == pcm.categoryId}">
+                                               checked
+                                           </c:if>
+                                       </c:forEach>
+                                       >
+                                <span class="span">${pcm.categoryName}</span>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
             <!-- //category -->
-            
+
             <!-- material -->
             <div class="left-side">
-                <h4 class="agileits-sear-head">Material</h4><br>
-                <ul>
-                    <c:forEach var="pcm" items="${productMaterialList}" >
-                        <li>
-                            <input type="checkbox" class="checked" name="productmaterialid" value="${pcm.categoryId}"
-                                   <c:forEach var="test1" items="${material}">
-                                       <c:if test="${test1 == pcm.categoryId}">
-                                           checked
-                                       </c:if>
-                                   </c:forEach>
-                                   >
-                            <span class="span">${pcm.categoryName}</span>
-                        </li>
-                    </c:forEach>
-                </ul>
+                <h4 class="agileits-sear-head">
+                    <a data-toggle="collapse" href="#collapse2">Material</a>
+                    <span class="caret"></span>
+                </h4>
+                <br>
+                <!-- uncollapse if selected checkbox is available -->
+                <div id="collapse2" class="collapse 
+                     <c:if test="${not empty material}">
+                         in
+                     </c:if>">
+                    <ul>
+                        <c:forEach var="pcm" items="${productMaterialList}" >
+                            <li>
+                                <input type="checkbox" class="checked" name="productmaterialid" value="${pcm.categoryId}"
+                                       <c:forEach var="test1" items="${material}">
+                                           <c:if test="${test1 == pcm.categoryId}">
+                                               checked
+                                           </c:if>
+                                       </c:forEach>
+                                       >
+                                <span class="span">${pcm.categoryName}</span>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
             <!-- //material -->
 
             <!-- origin -->
             <div class="left-side">
-                <h4 class="agileits-sear-head">Origin</h4><br>
-                <ul>
-                    <c:forEach var="pcm" items="${productOriginList}" >
-                        <li>
-                            <input type="checkbox" class="checked" name="productoriginid" value="${pcm.categoryId}"
-                                   <c:forEach var="test1" items="${origin}">
-                                       <c:if test="${test1 == pcm.categoryId}">
-                                           checked
-                                       </c:if>
-                                   </c:forEach>
-                                   >
-                            <span class="span">${pcm.categoryName}</span>
-                        </li>
-                    </c:forEach>
-                </ul>
+                <h4 class="agileits-sear-head">
+                    <a data-toggle="collapse" href="#collapse3">Origin</a>
+                    <span class="caret"></span>
+                </h4><br>
+                <!-- uncollapse if selected checkbox is available -->
+                <div id="collapse3" class="collapse 
+                     <c:if test="${not empty origin}">
+                         in
+                     </c:if>">
+                    <ul>
+                        <c:forEach var="pcm" items="${productOriginList}" >
+                            <li>
+                                <input type="checkbox" class="checked" name="productoriginid" value="${pcm.categoryId}"
+                                       <c:forEach var="test1" items="${origin}">
+                                           <c:if test="${test1 == pcm.categoryId}">
+                                               checked
+                                           </c:if>
+                                       </c:forEach>
+                                       >
+                                <span class="span">${pcm.categoryName}</span>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
             <!-- //origin -->
 
             <!-- room -->
             <div class="left-side">
-                <h4 class="agileits-sear-head">Room</h4><br>
-                <ul>
-                    <c:forEach var="pcm" items="${productRoomList}" >
-                        <li>
-                            <input type="checkbox" class="checked" name="productroomid" value="${pcm.categoryId}"
-                                   <c:forEach var="test1" items="${room}">
-                                       <c:if test="${test1 == pcm.categoryId}">
-                                           checked
-                                       </c:if>
-                                   </c:forEach>
-                                   >
-                            <span class="span">${pcm.categoryName}</span>
-                        </li>
-                    </c:forEach>
-                </ul>
+                <h4 class="agileits-sear-head">
+                    <a data-toggle="collapse" href="#collapse4">Room</a>
+                    <span class="caret"></span>
+                </h4><br>
+                <div id="collapse4" class="collapse 
+                     <c:if test="${not empty room}">
+                         in
+                     </c:if>">
+                    <ul>
+                        <c:forEach var="pcm" items="${productRoomList}" >
+                            <li>
+                                <input type="checkbox" class="checked" name="productroomid" value="${pcm.categoryId}"
+                                       <c:forEach var="test1" items="${room}">
+                                           <c:if test="${test1 == pcm.categoryId}">
+                                               checked
+                                           </c:if>
+                                       </c:forEach>
+                                       >
+                                <span class="span">${pcm.categoryName}</span>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
             <!-- //room -->
         </form>

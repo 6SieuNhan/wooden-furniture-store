@@ -91,12 +91,18 @@ public class HomeController {
     public List<Category> setUpProductRoomList() {
         return categoryService.getCategoryList(Category.PRODUCT_ROOM);
     }
+    
+    @RequestMapping("about")
+    public String showAbout() {
+        //Console print line, just for tracking purpose.
+        System.out.println("showAbout");
+        return "about";
+    }
 
     @RequestMapping("message")
     public String showMessage() {
         //Console print line, just for tracking purpose.
         System.out.println("showMessage");
-        //Only the name of the jsp is needed, DispatcherServlet knows what to do.
         return "message";
     }
 

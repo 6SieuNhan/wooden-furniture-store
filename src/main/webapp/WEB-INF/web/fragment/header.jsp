@@ -19,10 +19,10 @@
                 <!-- header-bot-->
                 <div class="col-md-4 logo_agile">
                     <h1>
-                        <a href="index.html">
+                        <a href="home">
                             <span>G</span>rocery
                             <span>S</span>hoppy
-                            <img src="images/logo2.png" alt=" ">
+                            <img src="<c:url value="resource/images/logo2.png" />" alt=" ">
                         </a>
                     </h1>
                 </div>
@@ -64,8 +64,8 @@
                     <!-- //header lists -->
                     <!-- search -->
                     <div class="agileits_search">
-                        <form action="#" method="post">
-                            <input name="Search" type="search" placeholder="How can we help you today?" required="">
+                        <form action="productlist" method="get">
+                            <input name="searchquery" type="search" placeholder="How can we help you today?" required="">
                             <button type="submit" class="btn btn-default" aria-label="Left Align">
                                 <span class="fa fa-search" aria-hidden="true"> </span>
                             </button>
@@ -182,50 +182,3 @@
         <!-- //Modal2 -->
         <!-- //signup Model -->
         <!-- //header-bot -->
-
-        <!-- popup modal (for signin & signup)-->
-        <script src="<c:url value="/resource/js/jquery.magnific-popup.js"/>"></script>
-        <script>
-            $(document).ready(function () {
-                $('.popup-with-zoom-anim').magnificPopup({
-                    type: 'inline',
-                    fixedContentPos: false,
-                    fixedBgPos: true,
-                    overflowY: 'auto',
-                    closeBtnInside: true,
-                    preloader: false,
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'my-mfp-zoom-in'
-                });
-
-            });
-        </script>
-        <!-- Large modal -->
-        <!-- <script>
-                $('#').modal('show');
-        </script> -->
-        <!-- //popup modal (for signin & signup)-->
-
-        <!-- password-script -->
-        <script>
-            window.onload = function () {
-                document.getElementById("password1").onchange = validatePassword;
-                document.getElementById("password2").onchange = validatePassword;
-            };
-
-            function validatePassword() {
-                var pass2 = document.getElementById("password2").value;
-                var pass1 = document.getElementById("password1").value;
-                if (pass1 !== pass2)
-                    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-                else
-                    document.getElementById("password2").setCustomValidity('');
-                //empty string means no validation error
-            }
-        </script>
-        <!-- //password-script -->
-        <!-- cart-js -->
-        <script src="<c:url value="/resource/js/minicart.js"/>"></script>
-        <!-- //cart-js -->
-

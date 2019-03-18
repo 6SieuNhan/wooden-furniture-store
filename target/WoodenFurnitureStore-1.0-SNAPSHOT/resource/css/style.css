@@ -957,6 +957,12 @@ h3.heading-tittle {
 .men-thumb-item {
     text-align: center;
 }
+
+.men-thumb-item img {
+    max-width:80%;
+max-height:80%;
+}
+
 .item-info-product {
     margin-top: 40px;
     text-align: center;
@@ -2771,7 +2777,7 @@ input[type="radio"], input[type="checkbox"] {
         margin-right: 5px;
     }
     .agileits_search input[type="search"] {
-        width: 87%;
+        width: 80%;
     }    
     .logo_agile h1 a {
         font-size: 34px;
@@ -3034,7 +3040,7 @@ input[type="radio"], input[type="checkbox"] {
         width: 95%;
     }
     .agileits_search input[type="search"] {
-        width: 91%;
+        width: 80%;
     }
     #agileinfo-nav_search {
         font-size: 13px;
@@ -3198,7 +3204,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 @media(max-width: 900px){
     .agileits_search input[type="search"] {
-        width: 88%;
+        width: 80%;
     }
     .agile-leftmk {
         padding: 3em 0 3em 1em;
@@ -3471,7 +3477,7 @@ input[type="radio"], input[type="checkbox"] {
         font-size: 12px;
     }
     .agileits_search input[type="search"] {
-        width: 86%;
+        width: 80%;
     }
     .carousel-caption h2, .carousel-caption h3 {
         font-size: 2.8em;
@@ -4896,4 +4902,8 @@ input[type="radio"], input[type="checkbox"] {
     
 }
 
+#map {
+  height: 400px; 
+  width: 100%;
+ }
 /*--//responsive--*/
