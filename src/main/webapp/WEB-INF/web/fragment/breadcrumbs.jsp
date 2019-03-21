@@ -4,14 +4,21 @@
     Author     : fkien
 --%>
 
+<!-- Unused -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${requestScope['javax.servlet.forward.request_uri']}" />
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<div class="services-breadcrumb">
+    <div class="agile_inner_breadcrumb">
+        <div class="container">
+            <ul class="w3_short">
+                <li>
+                    <a href="index.html">Home</a>
+                    <i>|</i>
+                </li>
+                <li>${path}</li>
+            </ul>
+        </div>
+    </div>
+</div>

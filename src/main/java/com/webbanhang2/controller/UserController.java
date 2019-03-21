@@ -5,7 +5,9 @@
  */
 package com.webbanhang2.controller;
 
+import com.webbanhang2.config.WBHConstants;
 import com.webbanhang2.model.User;
+import com.webbanhang2.service.EmailService;
 import com.webbanhang2.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -20,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class UserController {
+
+    @Autowired
+    EmailService emailService;
 
     @Autowired
     UserService userService;
@@ -46,15 +53,22 @@ public class UserController {
      *
      * @param request The Session's current HttpServletRequest object
      * @param user The User object with the requested Username/Password data
-     * @return Redirects to Home, regardless of result.
+     * @return Redirects to Home if login is successful; returns to the Login
+     * page if login failed.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String processLogin(HttpServletRequest request,
+    public ModelAndView processLogin(HttpServletRequest request,
             @ModelAttribute("login") User user) {
         System.out.println("processLogin with acc " + user.getUsername() + " - " + user.getPassword());
         user = userService.validateUser(user);
-        request.getSession().setAttribute("user", user);
-        return "redirect:home";
+        if (user == null) {
+            ModelAndView mav = new ModelAndView("login");
+            mav.addObject("message", "Login failed; either your username or password is incorrect");
+            return mav;
+        } else {
+            request.getSession().setAttribute("user", user);
+            return new ModelAndView("redirect:home");
+        }
     }
 
     /**
@@ -71,4 +85,89 @@ public class UserController {
         return "redirect:home";
     }
 
+    /**
+     * WIP
+     *
+     * @param email
+     * @return
+     */
+    @RequestMapping("/requestrecovery")
+    public ModelAndView sendRecoveryCode(@RequestParam(value = "recoveryemail", required = false) String email) {
+        boolean success;
+        if (email == null) {
+            return new ModelAndView("redirect:home");
+        } else {
+            //Search for user by email
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                success = false;
+            } else {
+                //Generate recovery code
+                String recoveryCode = userService.createRecoveryCode(user);
+                //send email
+                String to = "kienntse04792@fpt.edu.vn",
+                        subject = "Password recovery for WebBanHang";
+                String recoveryMessage = getRecoveryMessage(user, recoveryCode);
+
+                System.out.println(recoveryMessage);
+                boolean res = emailService.sendHTMLMessage(to, subject, recoveryMessage);
+                System.out.println(res);
+                success = res;
+            }
+        }
+        if (success) {
+            ModelAndView mav = new ModelAndView("message");
+            mav.addObject("message", "An email with the password recovery link has been sent to your email account.");
+            return mav;
+        } else {
+            ModelAndView mav = new ModelAndView("login");
+            mav.addObject("message2", "No user with matching email can be found in the database");
+            return mav;
+        }
+    }
+
+    @RequestMapping("/resetpasswordform")
+    public String showResetPassword(@RequestParam(value = "userid", required = false) String userId,
+            @RequestParam(value = "recovery", required = false) String recoveryCode) {
+        if (userId == null || recoveryCode == null) {
+            return "redirect:home";
+        } else {
+            boolean result = userService.validateRecovery(userId, recoveryCode);
+            if (result) {
+                return "resetpasswordform";
+            } else {
+                return "redirect:home";
+            }
+        }
+    }
+
+    @RequestMapping("/resetpassword")
+    public ModelAndView processPasswordReset(@RequestParam(value = "userid", required = false) String userId,
+            @RequestParam(value = "recovery", required = false) String recoveryCode,
+            @RequestParam(value = "password1", required = false) String password) {
+        if (userId == null || recoveryCode == null || password == null) {
+            return new ModelAndView("redirect:home");
+        } else {
+            ModelAndView mav = new ModelAndView("message");;
+            boolean success = userService.resetPassword(userId, password);
+            if(success){
+                mav.addObject("message", "Reset password successful. You will now be redirected to the home page.");
+            }
+            else{
+                mav.addObject("message", "The server is currently experiencing some difficulties. You will now be redirected to the home page.");
+            }
+            return mav;
+        }
+    }
+
+    String getRecoveryMessage(User user, String recoveryCode) {
+        return "<div>\n"
+                + "            This mail was sent because somebody request a recovery email on this account<br/>\n"
+                + "            The following link should be valid until another recovery request with the same email address is created<br/>\n"
+                + "            Do not mark this as spam.<br/>\n"
+                + "            <a href=\""
+                + WBHConstants.ROOT_URL + "/resetpasswordform?userid=" + user.getUserId() + "&recovery=" + recoveryCode
+                + "\">Recovery link</a> \n"
+                + "        </div>\n";
+    }
 }

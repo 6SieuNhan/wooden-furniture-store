@@ -17,6 +17,8 @@ public class Order {
     
     private Date orderDate;
     
+    private int paymentMethodId;
+    
     private List<OrderDetail> orderDetailList;
     
 
@@ -94,5 +96,13 @@ public class Order {
 
     public void setValidationCode(String validationCode) {
         this.validationCode = validationCode;
+    }
+
+    public int getPaymentMethodId() {
+        return paymentMethodId;
+    }
+
+    public void setPaymentMethodId(int paymentMethodId) {
+        this.paymentMethodId = paymentMethodId;
     }
 }

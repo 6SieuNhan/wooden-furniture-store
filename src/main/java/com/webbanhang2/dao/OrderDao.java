@@ -24,7 +24,7 @@ public interface OrderDao {
     
     boolean validateOrder(String orderId);
     
-    Order addOrder(List<Product> items, User user);
+    Order addOrder(List<Product> items, User user, int paymentMethodId);
     
     
     

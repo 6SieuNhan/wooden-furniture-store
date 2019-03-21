@@ -5,6 +5,7 @@
  */
 package com.webbanhang2.controller;
 
+import com.webbanhang2.config.WBHConstants;
 import com.webbanhang2.model.Order;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
@@ -35,7 +36,9 @@ public class CheckoutController {
     private String checkoutMailMessage;
 
     @RequestMapping(value = "docheckout")
-    public ModelAndView doCheckout(HttpServletRequest request, @ModelAttribute("login") User user) {
+    public ModelAndView doCheckout(HttpServletRequest request, @ModelAttribute("login") User user,
+            @RequestParam(value="paymentmethodid") Integer paymentMethodId
+            ) {
         //Order detail is stored in session attribute
         List<Product> checkoutList = (List<Product>) request.getSession().getAttribute("checkoutList");
         if (checkoutList == null || checkoutList.isEmpty()) {
@@ -47,7 +50,7 @@ public class CheckoutController {
             user.setUserId(loggedIn.getUserId());
         }
         //Dump order into db
-        Order order = orderService.addOrder(checkoutList, user);
+        Order order = orderService.addOrder(checkoutList, user, paymentMethodId);
         //Send email
         String to = user.getEmail(),
                 subject = "Test message for WebBanHang";
@@ -107,7 +110,7 @@ public class CheckoutController {
         }
         s += "</table>\n"
                 + "        <div> <a href=\""
-                + HomeController.ROOT_URL + "/validate?orderid=" + order.getOrderId() + "&validation=" + order.getValidationCode()
+                + WBHConstants.ROOT_URL + "/validate?orderid=" + order.getOrderId() + "&validation=" + order.getValidationCode()
                 + "\">Validation link</a> </div>"
                 + "        <div>Copyright never.</div>";
         return s;

@@ -54,6 +54,39 @@ public class UserDaoImpl implements UserDao {
         return users.size() > 0 ? users.get(0) : null;
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        String sql = "select * from user where email = ?";
+        List<User> users = jdbcTemplate.query(sql, new Object[]{email}, new UserMapper());
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    @Override
+    public String createRecoveryCode(User user) {
+        String sql1 = "update webbanhang.user\n"
+                + "set recovery_code = UUID() where user_id = ?";
+        jdbcTemplate.update(sql1, user.getUserId());
+        String sql2 = "select recovery_code from webbanhang.user where user_id = ?";
+        List<String> recoveryCode = jdbcTemplate.query(sql2, new Object[]{user.getUserId()}, new RecoveryCodeMapper());
+        return recoveryCode.size() > 0 ? recoveryCode.get(0) : null;
+    }
+
+    @Override
+    public boolean validateRecovery(String userId, String recoveryCode) {
+        String sql = "select * from webbanhang.user\n"
+                + "where user_id = ? and recovery_code = ?";
+        return jdbcTemplate.query(sql, new Object[]{userId, recoveryCode}, new UserMapper()).size() > 0;
+    }
+
+    @Override
+    public boolean resetPassword(String userId, String password) {
+        String sql = "update webbanhang.user\n"
+                + "set password = ?,\n"
+                + "recovery_code = null\n"
+                + "where user_id = ?;";
+        return jdbcTemplate.update(sql, password, userId)>0;
+    }
+
     class UserMapper implements RowMapper<User> {
 
         @Override
@@ -67,6 +100,14 @@ public class UserDaoImpl implements UserDao {
             user.setAddress(rs.getString("address"));
             user.setPhone(rs.getString("phone"));
             return user;
+        }
+    }
+
+    class RecoveryCodeMapper implements RowMapper<String> {
+
+        @Override
+        public String mapRow(ResultSet rs, int arg1) throws SQLException {
+            return rs.getString("recovery_code");
         }
     }
 }

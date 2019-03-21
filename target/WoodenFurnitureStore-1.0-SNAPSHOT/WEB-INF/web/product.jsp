@@ -27,21 +27,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         </div>
         <!-- //banner-2 -->
-        <!-- page -->
-        <div class="services-breadcrumb">
-            <div class="agile_inner_breadcrumb">
-                <div class="container">
-                    <ul class="w3_short">
-                        <li>
-                            <a href="index.html">Home</a>
-                            <i>|</i>
-                        </li>
-                        <li>Single Page</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- //page -->
         <!-- Single Page -->
         <div class="banner-bootom-w3-agileits">
             <div class="container">

@@ -16,4 +16,12 @@ public interface UserService {
     public boolean registerUser(User user);
     
     public User validateUser(User user);
+    
+    public User getUserByEmail(String email);
+    
+    public String createRecoveryCode(User user);
+    
+    public boolean validateRecovery(String userId, String recoveryCode);
+    
+    public boolean resetPassword(String userId, String password);
 }

@@ -1,3 +1,4 @@
+com\webbanhang2\config\WBHConstants.class
 com\webbanhang2\service\EmailService.class
 com\webbanhang2\service\EmailServiceImpl.class
 com\webbanhang2\service\UserService.class
@@ -11,7 +12,6 @@ com\webbanhang2\dao\UserDao.class
 com\webbanhang2\service\UserServiceImpl.class
 com\webbanhang2\controller\CheckoutController.class
 com\webbanhang2\service\OrderServiceImpl.class
-com\webbanhang2\util\JavaMailSenderConfig.class
 com\webbanhang2\service\OrderDetailService.class
 com\webbanhang2\service\ProductService.class
 com\webbanhang2\dao\CategoryDao.class
@@ -26,9 +26,11 @@ com\webbanhang2\dao\OrderDaoImpl.class
 com\webbanhang2\dao\OrderDaoImpl$OrderMapper.class
 com\webbanhang2\controller\UserController.class
 com\webbanhang2\dao\OrderDetailDao.class
+com\webbanhang2\config\JavaMailSenderConfig.class
 com\webbanhang2\dao\OrderDao.class
 com\webbanhang2\model\Order.class
 com\webbanhang2\dao\ProductDaoImpl$ShortenedProductMapper.class
+com\webbanhang2\dao\UserDaoImpl$RecoveryCodeMapper.class
 com\webbanhang2\dao\ProductDaoImpl$ImgNameMapper.class
 com\webbanhang2\controller\HomeController.class
 com\webbanhang2\dao\ProductDaoImpl$ProductMapper.class

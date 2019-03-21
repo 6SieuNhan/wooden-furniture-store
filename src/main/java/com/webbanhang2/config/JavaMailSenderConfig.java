@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.webbanhang2.util;
+package com.webbanhang2.config;
 
 import java.util.Properties;
 import org.springframework.context.annotation.Bean;
@@ -24,8 +24,8 @@ public class JavaMailSenderConfig {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("yourgmail@gmail.com");
-        mailSender.setPassword("yourapppassword");
+        mailSender.setUsername(WBHConstants.MAIL_SENDER_ADDRESS);
+        mailSender.setPassword(WBHConstants.MAIL_SENDER_APP_PASSWORD);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

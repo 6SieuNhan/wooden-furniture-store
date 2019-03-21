@@ -17,7 +17,7 @@ public class Product {
 
     private int productCategoryId, productMaterialId, productOriginId, productRoomId, quantity;
     
-    private double price;
+    private int price;
     
     private List<String> imgList;
 
@@ -123,13 +123,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
-
-    
 }

@@ -20,9 +20,7 @@
                 <div class="col-md-4 logo_agile">
                     <h1>
                         <a href="home">
-                            <span>G</span>rocery
-                            <span>S</span>hoppy
-                            <img src="<c:url value="resource/images/logo2.png" />" alt=" ">
+                            <span>C</span>ửa <span>H</span>àng <span>Đ</span>ồ <span>G</span>ỗ 
                         </a>
                     </h1>
                 </div>
@@ -121,7 +119,8 @@
                                     <div class="styled-input">
                                         <form:password path="password" placeholder = "Password" required="required" />
                                     </div>
-                                    <form:button id="login" name="login">Sign In</form:button>
+                                    <a href="login">Forget your password?</a><br>
+                                    <input type="submit" value="Login">
                                 </form:form>
 
                                 <div class="clearfix"></div>

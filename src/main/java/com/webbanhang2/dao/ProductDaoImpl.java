@@ -260,7 +260,7 @@ public class ProductDaoImpl implements ProductDao {
             product.setProductRoomId(rs.getInt("product_room_id"));
             product.setDescription(rs.getString("description"));
             product.setQuantity(rs.getInt("quantity"));
-            product.setPrice(rs.getDouble("price"));
+            product.setPrice(rs.getInt("price"));
             String sql = "select * from webbanhang.product_img "
                     + "where`product_product_id` = '"
                     + product.getProductId() + "';";

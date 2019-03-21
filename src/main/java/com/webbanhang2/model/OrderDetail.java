@@ -13,7 +13,7 @@ public class OrderDetail {
     
     private String orderId, productId;
     
-    private double price, total;
+    private int price, total;
     
     private int quantity;
     
@@ -38,19 +38,19 @@ public class OrderDetail {
         this.productId = productId;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

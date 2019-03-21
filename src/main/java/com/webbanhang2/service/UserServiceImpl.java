@@ -16,11 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author fkien
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
-    
+
     @Transactional
     @Override
     public User validateUser(User user) {
@@ -32,5 +32,28 @@ public class UserServiceImpl implements UserService{
     public boolean registerUser(User user) {
         return userDao.registerUser(user);
     }
+
+    @Transactional
+    @Override
+    public User getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
+    }
     
+    @Transactional
+    @Override
+    public String createRecoveryCode(User user) {
+        return userDao.createRecoveryCode(user);
+    }
+    
+    @Transactional
+    @Override
+    public boolean validateRecovery(String userId, String recoveryCode){
+        return userDao.validateRecovery(userId, recoveryCode);
+    }
+    
+    @Transactional
+    @Override
+    public boolean resetPassword(String userId, String password){
+        return userDao.resetPassword(userId, password);
+    }
 }

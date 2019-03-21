@@ -119,7 +119,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
             od.setOrderId(rs.getString("order_id"));
             od.setProductId(rs.getString("product_id"));
             od.setQuantity(rs.getInt("quantity"));
-            od.setPrice(rs.getDouble("price"));
+            od.setPrice(rs.getInt("price"));
             return od;
         }
     }

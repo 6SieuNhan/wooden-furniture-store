@@ -10,11 +10,20 @@ package com.webbanhang2.model;
  * @author fkien
  */
 public class Category {
+    //for the 4 category types
     public static final int PRODUCT_CATEGORY = 0;
     public static final int PRODUCT_MATERIAL = 1;
     public static final int PRODUCT_ORIGIN = 2;
     public static final int PRODUCT_ROOM = 3;
     
+    //for order status
+    public static final int ORDER_STATUS = 5;
+    
+    //for payment method
+    public static final int PAYMENT_METHOD = 6;
+    
+    //for user role
+    public static final int USER_ROLE = 7;
     
     private String categoryId, categoryName;
     private int categoryType;

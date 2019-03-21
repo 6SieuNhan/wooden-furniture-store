@@ -6,11 +6,22 @@
 package com.webbanhang2.dao;
 
 import com.webbanhang2.model.User;
+
 /**
  *
  * @author fkien
  */
 public interface UserDao {
-  boolean registerUser(User user);
-  User getUser(User user);
+
+    boolean registerUser(User user);
+
+    User getUser(User user);
+    
+    User getUserByEmail(String email);
+    
+    String createRecoveryCode(User user);
+    
+    boolean validateRecovery(String userId, String recoveryCode);
+    
+    boolean resetPassword(String userId, String password);
 }

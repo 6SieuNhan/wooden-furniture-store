@@ -84,17 +84,17 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order addOrder(List<Product> items, User user) {
+    public Order addOrder(List<Product> items, User user, int paymentMethodId) {
         //begin by inserting into the order table
         String sql1;
         if (user.getUserId() == null || user.getUserId().isEmpty()) {
-            sql1 = "insert into webbanhang.order(order_date, user_address, user_phone, user_email)"
-                    + "values (NOW(), ?, ?, ?)";
-            jdbcTemplate.update(sql1, user.getAddress(), user.getPhone(), user.getEmail());
-        } else {
-            sql1 = "insert into webbanhang.order(user_id, order_date, user_address, user_phone, user_email)"
+            sql1 = "insert into webbanhang.order(order_date, user_address, user_phone, user_email, payment_method_id)"
                     + "values (NOW(), ?, ?, ?, ?)";
-            jdbcTemplate.update(sql1, user.getUserId(), user.getAddress(), user.getPhone(), user.getEmail());
+            jdbcTemplate.update(sql1, user.getAddress(), user.getPhone(), user.getEmail(), paymentMethodId);
+        } else {
+            sql1 = "insert into webbanhang.order(user_id, order_date, user_address, user_phone, user_email, payment_method_id)"
+                    + "values (NOW(), ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql1, user.getUserId(), user.getAddress(), user.getPhone(), user.getEmail(), paymentMethodId);
         }
         //get last inserted ID
         String sql2;
@@ -128,6 +128,7 @@ public class OrderDaoImpl implements OrderDao {
             order.setUserEmail(rs.getString("user_email"));
             order.setOrderStatusId(rs.getString("order_status_id"));
             order.setValidationCode(rs.getString("validation_code"));
+            order.setPaymentMethodId(rs.getInt("payment_method_id"));
             return order;
         }
     }

@@ -31,21 +31,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         </div>
         <!-- //banner-2 -->
-        <!-- page -->
-        <div class="services-breadcrumb">
-            <div class="agile_inner_breadcrumb">
-                <div class="container">
-                    <ul class="w3_short">
-                        <li>
-                            <a href="index.html">Home</a>
-                            <i>|</i>
-                        </li>
-                        <li>Checkout</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- //page -->
         <!-- checkout page -->
         <div class="privacy">
             <div class="container">
@@ -115,35 +100,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <form:input path="address" placeholder = "Delivery Address" required="required"/>
                                         </div>
                                     </div>
-                                    <button class="submit check_out" onsubmit="clearCart()" >Delivery to this Address</button>
-                                    <script>
-                                        function clearCart() {
-                                            paypalm.minicartk.cart.destroy();
-                                        }
-                                    </script>
+                                    <b>Payment method:</b>
+                                    <div class="funkyradio">
+                                        <c:forEach var="pm" items="${paymentMethodList}" varStatus="loop">
+                                            <div class="funkyradio-primary">
+                                                <input type="radio" name="paymentmethodid" id="paymentmethod${pm.categoryId}" value="${pm.categoryId}" 
+                                                       <c:if test="${loop.index==0}">
+                                                           checked
+                                                       </c:if>
+                                                       />
+                                                <label for="paymentmethod${pm.categoryId}">${pm.categoryName}</label>
+                                            </c:forEach>
+                                        </div>
+                                        <button class="submit check_out" onsubmit="clearCart()" >Delivery to this Address</button>
+                                        <script>
+                                            function clearCart() {
+                                                paypalm.minicartk.cart.destroy();
+                                            }
+                                        </script>
+                                    </div>
+
                                 </div>
+                            </form:form>
+                            <div class="checkout-right-basket">
+                                <a href="#" onclick="clearCart()">Make a Payment
+                                    <span class="fa fa-hand-o-right" aria-hidden="true"></span>
+                                </a>
                             </div>
-                        </form:form>
-                        <div class="checkout-right-basket">
-                            <a href="#" onclick="clearCart()">Make a Payment
-                                <span class="fa fa-hand-o-right" aria-hidden="true"></span>
-                            </a>
                         </div>
+                        <div class="clearfix"> </div>
                     </div>
-                    <div class="clearfix"> </div>
                 </div>
             </div>
-        </div>
-        <!-- //checkout page -->
-        <!-- footer -->
-        <jsp:include page="fragment/footer.jsp" />
-        <!-- //footer -->
-        <!-- copyright -->
-        <jsp:include page="fragment/copyright.jsp" />
-        <!-- //copyright -->
-        <!-- js-files -->
-        <jsp:include page="fragment/js/jsdump.jsp" />
-        <!-- //js-files -->
+            <!-- //checkout page -->
+            <!-- footer -->
+            <jsp:include page="fragment/footer.jsp" />
+            <!-- //footer -->
+            <!-- copyright -->
+            <jsp:include page="fragment/copyright.jsp" />
+            <!-- //copyright -->
+            <!-- js-files -->
+            <jsp:include page="fragment/js/jsdump.jsp" />
+            <!-- //js-files -->
     </body>
 
 </html>

@@ -44,8 +44,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Order addOrder(List<Product> items, User user) {
-        return orderDao.addOrder(items, user);
+    public Order addOrder(List<Product> items, User user, int paymentMethodId) {
+        return orderDao.addOrder(items, user, paymentMethodId);
     }
 
     @Transactional

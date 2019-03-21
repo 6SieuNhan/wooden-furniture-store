@@ -277,7 +277,7 @@
                                         <a class="nav-stylehead" href="about">About Us</a>
                                     </li>
                                     <li class="">
-                                        <a class="nav-stylehead" href="contact.html">Contact</a>
+                                        <a class="nav-stylehead" href="contact">Contact</a>
                                     </li>
                                 </ul>
                             </div>

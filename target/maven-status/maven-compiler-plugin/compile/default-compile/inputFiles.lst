@@ -2,6 +2,7 @@ D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\model\Catego
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\OrderService.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\dao\OrderDao.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\EmailServiceImpl.java
+D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\config\WBHConstants.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\model\OrderDetail.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\EmailService.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\CategoryService.java
@@ -17,7 +18,6 @@ D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\Prod
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\dao\UserDaoImpl.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\CategoryServiceImpl.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\dao\ProductDaoImpl.java
-D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\util\JavaMailSenderConfig.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\controller\HomeController.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\dao\CategoryDao.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\dao\OrderDaoImpl.java
@@ -29,4 +29,5 @@ D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\dao\UserDao.
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\UserServiceImpl.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\model\Product.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\controller\UserController.java
+D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\config\JavaMailSenderConfig.java
 D:\Project\wooden-furniture-store\dev\src\main\java\com\webbanhang2\service\UserService.java

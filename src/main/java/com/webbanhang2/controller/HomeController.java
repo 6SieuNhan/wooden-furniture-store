@@ -5,6 +5,7 @@
  */
 package com.webbanhang2.controller;
 
+import com.webbanhang2.config.WBHConstants;
 import com.webbanhang2.model.Category;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,11 +34,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 
 @SessionAttributes(value = {"login", "productCategoryList",
-    "productMaterialList", "productOriginList", "productRoomList"})
+    "productMaterialList", "productOriginList", "productRoomList",
+    "paymentMethodList"})
 public class HomeController {
-
-    public static final int PAGE_SIZE = 9;
-    public static final String ROOT_URL = "http://localhost:8080/WebBanHang2/";
 
     @Autowired
     ProductService productService;
@@ -92,6 +92,11 @@ public class HomeController {
         return categoryService.getCategoryList(Category.PRODUCT_ROOM);
     }
     
+    @ModelAttribute("paymentMethodList")
+    public List<Category> setUpPaymentMethodList() {
+        return categoryService.getCategoryList(Category.PAYMENT_METHOD);
+    }
+    
     @RequestMapping("about")
     public String showAbout() {
         //Console print line, just for tracking purpose.
@@ -104,6 +109,20 @@ public class HomeController {
         //Console print line, just for tracking purpose.
         System.out.println("showMessage");
         return "message";
+    }
+    
+    @RequestMapping("contact")
+    public String showContact() {
+        //Console print line, just for tracking purpose.
+        System.out.println("showContact");
+        return "contact";
+    }
+    
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String showLogin() {
+        //Console print line, just for tracking purpose.
+        System.out.println("showLogin");
+        return "login";
     }
 
     /**
@@ -166,8 +185,8 @@ public class HomeController {
         if (page == null) {
             page = 1;
         }
-        List<Product> productList = productService.getProductList(params, (page - 1) * PAGE_SIZE, PAGE_SIZE);
-        int pageCount = productService.getProductListPageCount(params, PAGE_SIZE);
+        List<Product> productList = productService.getProductList(params, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+        int pageCount = productService.getProductListPageCount(params, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
         ModelAndView mav = new ModelAndView("productlist");
         mav.addObject("productList", productList);
         mav.addObject("pageCount", pageCount);

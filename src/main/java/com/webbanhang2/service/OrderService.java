@@ -22,7 +22,7 @@ public interface OrderService {
     
     public Order getOrder(String orderId);
     
-    public Order addOrder(List<Product> items, User user);
+    public Order addOrder(List<Product> items, User user, int paymentMethodId);
     
     public boolean validateOrder(String orderId, String validationCode);
     
