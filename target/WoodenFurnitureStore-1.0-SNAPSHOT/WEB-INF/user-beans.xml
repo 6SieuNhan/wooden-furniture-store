@@ -25,14 +25,6 @@
         <property name="dataSource" ref="datasource" />
     </bean>
     
-    <!-- Service/Dao beans -->
-    <bean id="productService" class="com.webbanhang2.service.ProductServiceImpl" />
-    <bean id="productDao" class="com.webbanhang2.dao.ProductDaoImpl" />
-    <bean id="userService" class="com.webbanhang2.service.UserServiceImpl" />
-    <bean id="userDao" class="com.webbanhang2.dao.UserDaoImpl" />
-    <bean id="categoryService" class="com.webbanhang2.service.CategoryServiceImpl" />
-    <bean id="categoryDao" class="com.webbanhang2.dao.CategoryDaoImpl" />
-    
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
 
 </beans>

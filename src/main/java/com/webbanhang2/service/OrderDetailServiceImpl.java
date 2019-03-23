@@ -10,14 +10,14 @@ import com.webbanhang2.model.OrderDetail;
 import com.webbanhang2.model.Product;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author fkien
  */
-@Component
+@Service
 public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Autowired

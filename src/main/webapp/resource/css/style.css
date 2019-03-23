@@ -5028,4 +5028,10 @@ input[type="radio"]{
   color: #fff;
   background-color: #5bc0de;
 }
+
+.welcome iframe {
+    width: 100%;
+    min-height: 415px;
+    border:none;
+}
 /*--//responsive--*/

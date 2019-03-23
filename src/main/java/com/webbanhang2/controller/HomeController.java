@@ -7,6 +7,7 @@ package com.webbanhang2.controller;
 
 import com.webbanhang2.config.WBHConstants;
 import com.webbanhang2.model.Category;
+import com.webbanhang2.model.Message;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
 import com.webbanhang2.service.CategoryService;
@@ -33,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 
-@SessionAttributes(value = {"login", "productCategoryList",
+@SessionAttributes(value = {"login", "message", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
     "paymentMethodList"})
 public class HomeController {
@@ -54,6 +55,11 @@ public class HomeController {
     @ModelAttribute("login")
     public User setUpUserForm() {
         return new User();
+    }
+    
+    @ModelAttribute("message")
+    public Message setUpMessageForm() {
+        return new Message();
     }
 
     @ModelAttribute("productCategoryList")
@@ -133,12 +139,9 @@ public class HomeController {
      * index.jsp form.
      */
     @RequestMapping({"/", "home"})
-    public String showIndex(HttpServletRequest request) {
+    public String showIndex() {
         //Console print line, just for tracking purpose.
         System.out.println("showIndex");
-        System.out.println(request.getServerName());
-        System.out.println(request.getContextPath());
-        System.out.println(request.getRemoteHost());
         //Only the name of the jsp is needed, DispatcherServlet knows what to do.
         return "index";
     }

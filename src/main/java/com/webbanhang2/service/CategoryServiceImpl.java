@@ -9,12 +9,14 @@ import com.webbanhang2.dao.CategoryDao;
 import com.webbanhang2.model.Category;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author fkien
  */
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
     @Autowired
