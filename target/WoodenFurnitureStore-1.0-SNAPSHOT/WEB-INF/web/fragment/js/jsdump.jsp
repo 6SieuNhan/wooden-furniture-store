@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+
 <!-- jquery -->
 <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
 <!-- //jquery -->
@@ -28,11 +30,6 @@
 
     });
 </script>
-<!-- Large modal -->
-<!-- <script>
-        $('#').modal('show');
-</script> -->
-<!-- //popup modal (for signin & signup)-->
 
 <!-- password-script -->
 <script>

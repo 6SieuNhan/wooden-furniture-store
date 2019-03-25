@@ -22,4 +22,14 @@ public interface ProductDao {
     List<Product> getProductList(Map<String, Object> params, int top, int count);
     
     int getProductListPageCount(Map<String, Object> params, int size);
+    
+    List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count);
+    
+    public boolean checkProduct(String productId);
+    //add, edit, delete product
+    public void deleteProduct(String productId);
+    
+    public void addProduct(Product p);
+    
+    public void updateProduct(Product p);
 }

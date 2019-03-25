@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 
-@SessionAttributes(value = {"login", "message", "productCategoryList",
+@SessionAttributes(value = {"login", "messageForm", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
     "paymentMethodList"})
 public class HomeController {
@@ -57,7 +57,7 @@ public class HomeController {
         return new User();
     }
     
-    @ModelAttribute("message")
+    @ModelAttribute("messageForm")
     public Message setUpMessageForm() {
         return new Message();
     }
@@ -105,29 +105,21 @@ public class HomeController {
     
     @RequestMapping("about")
     public String showAbout() {
-        //Console print line, just for tracking purpose.
-        System.out.println("showAbout");
         return "about";
     }
 
     @RequestMapping("message")
     public String showMessage() {
-        //Console print line, just for tracking purpose.
-        System.out.println("showMessage");
         return "message";
     }
     
     @RequestMapping("contact")
     public String showContact() {
-        //Console print line, just for tracking purpose.
-        System.out.println("showContact");
         return "contact";
     }
     
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String showLogin() {
-        //Console print line, just for tracking purpose.
-        System.out.println("showLogin");
         return "login";
     }
 
@@ -139,11 +131,14 @@ public class HomeController {
      * index.jsp form.
      */
     @RequestMapping({"/", "home"})
-    public String showIndex() {
-        //Console print line, just for tracking purpose.
-        System.out.println("showIndex");
-        //Only the name of the jsp is needed, DispatcherServlet knows what to do.
-        return "index";
+    public String showIndex(HttpServletRequest request) {
+        User user = (User)request.getSession().getAttribute("user");
+        if(user!=null&&user.getUserRoleId()==User.ADMIN){
+            return "redirect:adminpage";
+        }
+        else{
+            return "index";
+        }
     }
 
     /**

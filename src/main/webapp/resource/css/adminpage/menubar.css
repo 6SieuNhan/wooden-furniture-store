@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 20, 2019, 7:41:09 PM
+    Author     : Đào Minh Quang
+*/
+
+/*the menu bar*/
+#menuBar{
+    background-color: #890400;
+    height: 25px;
+    width: 100%;
+    margin: 0px;
+    padding-top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 30px;
+}
+
+.subMenuBar{
+    margin: 0px;
+    color: white;   
+    font-family: Arial;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 2%;
+    padding-right: 10px;
+}
+.noneLine{
+    text-decoration: none;
+}

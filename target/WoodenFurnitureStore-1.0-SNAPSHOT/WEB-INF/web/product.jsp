@@ -16,6 +16,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </head>
 
     <body>
+        <!-- fb stuff -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+        <!-- //fb stuff -->
+
         <!-- header -->
         <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
@@ -112,6 +117,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </form>
                         </div>
                     </div>
+                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
                 </div>
                 <div class="clearfix"> </div>
             </div>

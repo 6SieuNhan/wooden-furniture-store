@@ -35,14 +35,39 @@ public class ProductServiceImpl implements ProductService{
         return productDao.getProduct(productId);
     }
 
+    @Transactional
     @Override
     public int getProductListPageCount(Map<String, Object> params, int size) {
         return productDao.getProductListPageCount(params, size);
     }
 
+    @Transactional
     @Override
     public Product getShortenedProduct(String productId) {
         return productDao.getShortenedProduct(productId);
     }
     
+    @Transactional
+    @Override
+    public void deleteProduct(String productId) {
+        productDao.deleteProduct(productId);
+    }
+
+    @Transactional
+    @Override
+    public void saveProduct(Product p) {
+        boolean hasProduct = productDao.checkProduct(p.getProductId());
+        if(!hasProduct){
+            productDao.addProduct(p);
+        }
+        else{
+            productDao.updateProduct(p);
+        }
+    }
+    
+    @Transactional
+    @Override
+    public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count) {
+        return productDao.getProductListForAdmin(params, top, count);
+    }
 }

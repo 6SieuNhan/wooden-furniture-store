@@ -22,4 +22,10 @@ public interface ProductService {
     public Product getProduct(String productId);
     
     public int getProductListPageCount(Map<String, Object> params, int size);
+    
+    public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count);
+
+    public void deleteProduct(String productId);
+
+    public void saveProduct(Product p);
 }

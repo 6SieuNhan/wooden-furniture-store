@@ -44,6 +44,13 @@ public class ProductDaoImpl implements ProductDao {
         return productList.size() > 0 ? productList.get(0) : null;
     }
 
+    @Override
+    public boolean checkProduct(String productId) {
+        String sql = "select * from product where product_id = '" + productId + "';";
+        List<Product> productList = jdbcTemplate.query(sql, new ProductMapper());
+        return productList.size() > 0;
+    }
+
     /**
      * A shortened version of the getProduct() methods which only retrieves
      * certain information about the Product. The retrieved information
@@ -55,7 +62,7 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public Product getShortenedProduct(String productId) {
-        String sql = "SELECT product_id, product_name, shortname, thumbnail, price, quantity "
+        String sql = "SELECT product_id, product_name, thumbnail, price, quantity "
                 + "FROM webbanhang.product where product_id = '" + productId + "';";
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList.size() > 0 ? productList.get(0) : null;
@@ -76,7 +83,7 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public List<Product> getProductList(Map<String, Object> params, int top, int count) {
-        String sql = "SELECT product_id, product_name, shortname, thumbnail, price, quantity "
+        String sql = "SELECT product_id, product_name, thumbnail, price, quantity "
                 + "FROM webbanhang.product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
@@ -126,7 +133,8 @@ public class ProductDaoImpl implements ProductDao {
             String searchQuery = (String) params.get("searchQuery");
             if (searchQuery != null && !searchQuery.isEmpty()) {
                 first = true;
-                sql += "where product_name like '%" + searchQuery + "%' ";
+                sql += "where product_name like '%" + searchQuery + "%' "
+                        + "or product_code like '%" + searchQuery + "%' ";
             }
 
             //Append Category ID list
@@ -174,7 +182,7 @@ public class ProductDaoImpl implements ProductDao {
                 first = true;
                 sql += "product_room_id in " + getArrayString(productRoomIds) + " ";
             }
-            
+
             //Append min price and max price
             Double minPrice = (Double) params.get("minPrice");
             Double maxPrice = (Double) params.get("maxPrice");
@@ -225,6 +233,69 @@ public class ProductDaoImpl implements ProductDao {
         }
     }
 
+    @Override
+    public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count) {
+        String sql = "SELECT product_id,product_code, product_name, thumbnail, quantity,price "
+                + "FROM webbanhang.product " + getSQLParamString(params, top, count);
+//        String sql1 = "select p.product_id,p.product_code,p.product_name,p.thumbnail,p.quantity,p.price, c.categories_name, m.material_name from webbanhang.product p "
+//                + "inner join webbanhang.product_categories c"
+//                + "on p.product_categories_id = c.categories_id"
+//                + "inner join webbanhang.product_material m"
+//                + "on p.product_material_id = m.material_id"+ getSQLParamString(params, top, count);
+        System.out.println(sql);
+        List<Product> productList = jdbcTemplate.query(sql, new ProductForAdmin());
+        return productList;
+    }
+
+    @Override
+    public void deleteProduct(String productId) {
+        String sql = "delete from product where product_id = '" + productId + "';";
+        jdbcTemplate.update(sql);
+    }
+
+    @Override
+    public void addProduct(Product p) {
+        System.out.println(p.getProductName());
+        String productCode = p.getProductCode();
+        String productName = p.getProductName();
+        int productCategoryId = p.getProductCategoryId();
+        int productMaterialId = p.getProductMaterialId();
+        int productRoomId = p.getProductRoomId();
+        String thumbnail = p.getThumbnail();
+        String descipt = p.getDescription();
+        int quantity = p.getQuantity();
+        double price = p.getPrice();
+        String sql = "insert into product"
+                + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price) "
+                + "values(?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price);
+    }
+
+    @Override
+    public void updateProduct(Product p) {
+        System.out.println(p.getProductName());
+        String productCode = p.getProductCode();
+        String productName = p.getProductName();
+        int productCategoryId = p.getProductCategoryId();
+        int productMaterialId = p.getProductMaterialId();
+        int productRoomId = p.getProductRoomId();
+        String thumbnail = p.getThumbnail();
+        String descipt = p.getDescription();
+        int quantity = p.getQuantity();
+        double price = p.getPrice();
+        String sql = "Update product set product_name = '" + productName + "'"
+                + ",product_categories_id= '" + productCategoryId + "'"
+                + ",product_material_id ='" + productMaterialId + "'"
+                + ",product_room_id='" + productRoomId + "'"
+                + ",thumbnail='" + thumbnail + "'"
+                + ",description='" + descipt + "'"
+                + ",quantity='" + quantity + "'"
+                + ",price='" + price + "'"
+                + "where product_code='" + productCode + "'";
+        jdbcTemplate.update(sql);
+
+    }
+
     /**
      * A simplified version of the Product Mapper class, intended to only be
      * used for fetching product list pages. Unnecessary components like
@@ -237,7 +308,6 @@ public class ProductDaoImpl implements ProductDao {
             Product product = new Product();
             product.setProductId(rs.getString("product_id"));
             product.setProductName(rs.getString("product_name"));
-            product.setShortName(rs.getString("shortname"));
             product.setThumbnail(rs.getString("thumbnail"));
             product.setPrice(rs.getInt("price"));
             product.setQuantity(rs.getInt("quantity"));
@@ -279,6 +349,25 @@ public class ProductDaoImpl implements ProductDao {
         @Override
         public String mapRow(ResultSet rs, int arg1) throws SQLException {
             return rs.getString("img_name");
+        }
+    }
+
+    class ProductForAdmin implements RowMapper<Product> {
+
+        @Override
+        public Product mapRow(ResultSet rs, int arg1) throws SQLException {
+            Product product = new Product();
+            product.setProductId(rs.getString("product_id"));
+            product.setProductCode(rs.getString("product_code"));
+            product.setProductName(rs.getString("product_name"));
+            product.setThumbnail(rs.getString("thumbnail"));
+//            String sql = "select * from webbanhang.product_img "
+//                    + "where`product_code` = '"
+//                    + product.getProductId() + "';";
+//            product.setImgList(jdbcTemplate.query(sql, new ImgNameMapper()));
+            product.setQuantity(rs.getInt("quantity"));
+            product.setPrice(rs.getInt("price"));
+            return product;
         }
     }
 }

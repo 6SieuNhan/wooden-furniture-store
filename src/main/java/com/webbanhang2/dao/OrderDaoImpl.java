@@ -93,7 +93,7 @@ public class OrderDaoImpl implements OrderDao {
             jdbcTemplate.update(sql1, user.getAddress(), user.getPhone(), user.getEmail(), paymentMethodId);
         } else {
             sql1 = "insert into webbanhang.order(user_id, order_date, user_address, user_phone, user_email, payment_method_id)"
-                    + "values (NOW(), ?, ?, ?, ?, ?)";
+                    + "values (?, NOW(), ?, ?, ?, ?)";
             jdbcTemplate.update(sql1, user.getUserId(), user.getAddress(), user.getPhone(), user.getEmail(), paymentMethodId);
         }
         //get last inserted ID

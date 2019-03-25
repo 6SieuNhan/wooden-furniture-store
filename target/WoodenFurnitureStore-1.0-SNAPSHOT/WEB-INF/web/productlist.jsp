@@ -59,7 +59,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         </div>
                                         <div class="item-info-product ">
                                             <h4>
-                                                <a href="product?productid=${product.productId}">${product.shortName}</a>
+                                                <a href="product?productid=${product.productId}">${product.productName}</a>
                                             </h4>
                                             <div class="info-product-price">
                                                 <span class="item_price">$${product.price}</span>

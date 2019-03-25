@@ -10,6 +10,10 @@ package com.webbanhang2.model;
  * @author fkien
  */
 public class User {
+    
+    public static final int ADMIN = 1;
+    public static final int USER = 2;
+    
     private String userId, username, password, email, address, phone;
     
     private int userRoleId;

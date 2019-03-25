@@ -40,7 +40,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="contact-right wthree">
                             <div class="col-xs-5 contact-text w3-agileits">
                                 
-                                <form:form modelAttribute="message" action="sendcontactmessage" method="post">
+                                <form:form modelAttribute="messageForm" action="sendcontactmessage" method="post">
                                     <form:input path="senderName" placeholder = "Name" required="required" />
                                     <form:input path="subject" placeholder = "Subject" required="required" />
                                     <form:input path="senderEmail" placeholder = "Email" required="required" />
