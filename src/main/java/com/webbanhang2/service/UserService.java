@@ -23,5 +23,7 @@ public interface UserService {
     
     public boolean validateRecovery(String userId, String recoveryCode);
     
+    public boolean editUser(User user);
+    
     public boolean resetPassword(String userId, String password);
 }

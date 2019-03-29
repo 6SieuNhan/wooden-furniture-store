@@ -86,7 +86,15 @@ public class UserDaoImpl implements UserDao {
                 + "set password = ?,\n"
                 + "recovery_code = null\n"
                 + "where user_id = ?;";
-        return jdbcTemplate.update(sql, password, userId)>0;
+        return jdbcTemplate.update(sql, password, userId) > 0;
+    }
+
+    @Override
+    public boolean editUser(User user) {
+        String sql = "update webbanhang.user\n"
+                + "set email = ?, address = ?, phone = ?\n"
+                + "where user_id = ?;";
+        return jdbcTemplate.update(sql, user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()) > 0;
     }
 
     class UserMapper implements RowMapper<User> {
@@ -96,7 +104,6 @@ public class UserDaoImpl implements UserDao {
             User user = new User();
             user.setUserId(rs.getString("user_id"));
             user.setUsername(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             user.setUserRoleId(rs.getInt("user_role_id"));
             user.setAddress(rs.getString("address"));

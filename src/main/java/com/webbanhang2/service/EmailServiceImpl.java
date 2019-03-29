@@ -5,8 +5,13 @@
  */
 package com.webbanhang2.service;
 
+import com.webbanhang2.config.WBHConstants;
+import com.webbanhang2.model.Order;
+import com.webbanhang2.model.Product;
+import java.util.List;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -53,5 +58,35 @@ public class EmailServiceImpl implements EmailService {
             System.out.println(ex.getMessage());
             return false;
         }
+    }
+    
+    public String getCheckoutMailMessage(HttpServletRequest request, List<Product> items, Order order) {
+        String s = "<div>\n"
+                + "            This is a test message for WebBanHang.<br/>\n"
+                + "            This message is included with a copy of the receipt of the latest purchase attempt <br/>\n"
+                + "            Do not mark this as spam.\n"
+                + "        </div>\n"
+                + "        <table>\n"
+                + "            <tr>\n"
+                + "                <th>SL No.</th>\n"
+                + "                <th>Product</th>\n"
+                + "                <th>Quantity</th>\n"
+                + "                <th>Price</th>\n"
+                + "            </tr>";
+        for (int i = 0; i < items.size(); i++) {
+            Product item = items.get(i);
+            s += "<tr>\n";
+            s += "<td>" + (i+1) + "</td>\n";
+            s += "<td>" + item.getProductName() + "</td>\n";
+            s += "<td>" + item.getQuantity() + "</td>\n";
+            s += "<td> $" + item.getPrice() + "</td>\n";
+            s += "</tr>\n";
+        }
+        s += "</table>\n"
+                + "        <div> <a href=\""
+                + WBHConstants.ROOT_URL + "/validate?orderid=" + order.getOrderId() + "&validation=" + order.getValidationCode()
+                + "\">Validation link</a> </div>"
+                + "        <div>Copyright never.</div>";
+        return s;
     }
 }

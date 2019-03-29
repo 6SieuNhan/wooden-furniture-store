@@ -32,10 +32,16 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    ProductDao productDao;
+
     @Override
     public OrderDetail getOrderDetail(String orderId, String productId) {
-        String sql = "select * from webbanhang.order_detail where order_id = ? and product_id = ?;";
-        List<OrderDetail> orderList = jdbcTemplate.query(sql, new Object[]{orderId, productId}, new OrderDetailMapper());
+        String sql = "SELECT * FROM webbanhang.order_detail left join webbanhang.product\n"
+                + "on order_detail.product_id = product.product_id\n"
+                + "where order_id = ?;\n"
+                + "and order_detail.product_id = ?;";
+        List<OrderDetail> orderList = jdbcTemplate.query(sql, new Object[]{orderId, productId}, new OrderDetailMapper(true));
         if (orderList == null || orderList.isEmpty()) {
             return null;
         } else {
@@ -57,8 +63,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
     @Override
     public List<OrderDetail> getOrderDetailList(String orderId) {
-        String sql = "select * from webbanhang.order_detail where order_id = '" + orderId + "';";
-        return jdbcTemplate.query(sql, new OrderDetailMapper());
+        String sql = "SELECT * FROM webbanhang.order_detail left join webbanhang.product\n"
+                + "on order_detail.product_id = product.product_id\n"
+                + "where order_id = ?;";
+        return jdbcTemplate.query(sql, new Object[]{orderId}, new OrderDetailMapper(true));
     }
 
     @Override
@@ -77,6 +85,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     }
 
     class OrderDetailPreparedStatementSetter implements BatchPreparedStatementSetter {
+
         String orderId;
         private List<Product> items;
 
@@ -95,7 +104,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
         public void setItems(List<Product> items) {
             this.items = items;
         }
-        
+
         @Override
         public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, orderId);
@@ -113,6 +122,13 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
     class OrderDetailMapper implements RowMapper<OrderDetail> {
 
+        boolean getProduct;
+
+        public OrderDetailMapper(boolean getProduct) {
+            super();
+            this.getProduct = getProduct;
+        }
+
         @Override
         public OrderDetail mapRow(ResultSet rs, int i) throws SQLException {
             OrderDetail od = new OrderDetail();
@@ -120,6 +136,14 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
             od.setProductId(rs.getString("product_id"));
             od.setQuantity(rs.getInt("quantity"));
             od.setPrice(rs.getInt("price"));
+            od.setTotal(rs.getInt("total"));
+            //Do Product object
+            if (getProduct) {
+                Product product = new Product();
+                product.setProductId(rs.getString("product_id"));
+                product.setProductName(rs.getString("product_name"));
+                od.setProduct(product);
+            }
             return od;
         }
     }

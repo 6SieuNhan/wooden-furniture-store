@@ -41,9 +41,10 @@ public class AdminController {
     @RequestMapping("adminpage")
     public ModelAndView showProductList(
             @RequestParam(value = "searchquery", required = false) String searchQuery,
-            @RequestParam(value = "producttypeid", required = false) List<String> productTypeIds,
+            @RequestParam(value = "productcategoryid", required = false) List<String> productCategoryIds,
             @RequestParam(value = "productmaterialid", required = false) List<String> productMaterialIds,
             @RequestParam(value = "productoriginid", required = false) List<String> productOriginIds,
+            @RequestParam(value = "productroomid", required = false) List<String> productRoomIds,
             @RequestParam(value = "minprice", required = false) Double minPrice,
             @RequestParam(value = "maxprice", required = false) Double maxPrice,
             @RequestParam(value = "page", required = false) Integer page,
@@ -58,9 +59,10 @@ public class AdminController {
         //Pack the params into a hashmap
         HashMap<String, Object> params = new HashMap<>();
         params.put("searchQuery", searchQuery);
-        params.put("productTypeId", productTypeIds);
+        params.put("productCategoryId", productCategoryIds);
         params.put("productMaterialId", productMaterialIds);
         params.put("productOriginId", productOriginIds);
+        params.put("productRoomId", productRoomIds);
         params.put("minPrice", minPrice);
         params.put("maxPrice", maxPrice);
 
@@ -75,6 +77,7 @@ public class AdminController {
         mav.addObject("pm", "fontBold");
         return mav;
     }
+    
 
     private String formProduct(Model model, Product p) {
         model.addAttribute("productForm", p);

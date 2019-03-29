@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Component;
 
 /**
@@ -38,9 +39,10 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getOrderList(int top, int count) {
         String sql = "select * from webbanhang.order limit " + top + ", " + count + " ;";
         List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
-        for (Order o : orderList) {
+        //don't need order details, this is for list view only
+        /*for (Order o : orderList) {
             o.setOrderDetailList(orderDetailDao.getOrderDetailList(o.getOrderId()));
-        }
+        }*/
         return orderList;
     }
 
@@ -50,10 +52,37 @@ public class OrderDaoImpl implements OrderDao {
                 + "where user_id = '" + userId + "' "
                 + "limit " + top + ", " + count + " ;";
         List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
-        for (Order o : orderList) {
+        //don't need order details, this is for list view only
+        /*for (Order o : orderList) {
             o.setOrderDetailList(orderDetailDao.getOrderDetailList(o.getOrderId()));
-        }
+        }*/
         return orderList;
+    }
+    
+    @Override
+    public int getOrderListPageCount(int size){
+        String sql = "select COUNT(*) from webbanhang.order;";
+        SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
+        List<Integer> rs = jdbcTemplate.query(sql, rowMapper);
+        int count = rs.get(0);
+        if (count % size == 0) {
+            return count / size;
+        } else {
+            return count / size + 1;
+        }
+    }
+    
+    @Override
+    public int getOrderListPageCount(String userId, int size){
+        String sql = "select COUNT(*) from webbanhang.order where user_id = ?;";
+        SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
+        List<Integer> rs = jdbcTemplate.query(sql, new Object[]{userId}, rowMapper);
+        int count = rs.get(0);
+        if (count % size == 0) {
+            return count / size;
+        } else {
+            return count / size + 1;
+        }
     }
 
     @Override

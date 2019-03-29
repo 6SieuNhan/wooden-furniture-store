@@ -20,6 +20,10 @@ public interface OrderDao {
     
     List<Order> getOrderList(String userId, int top, int count);
     
+    int getOrderListPageCount(int size);
+    
+    int getOrderListPageCount(String userId, int size);
+    
     Order getOrder(String orderId);
     
     boolean validateOrder(String orderId);

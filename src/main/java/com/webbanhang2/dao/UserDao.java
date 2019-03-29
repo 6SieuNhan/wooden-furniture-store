@@ -21,6 +21,8 @@ public interface UserDao {
     
     String createRecoveryCode(User user);
     
+    boolean editUser(User user);
+    
     boolean validateRecovery(String userId, String recoveryCode);
     
     boolean resetPassword(String userId, String password);

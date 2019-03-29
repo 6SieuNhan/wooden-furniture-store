@@ -55,6 +55,9 @@ public class CategoryDaoImpl implements CategoryDao {
             case Category.PAYMENT_METHOD:
                 sql += "payment_method";
                 break;
+            case Category.ORDER_STATUS:
+                sql += "order_status";
+                break;
         }
 
         CategoryMapper cm = new CategoryMapper();
@@ -103,6 +106,10 @@ public class CategoryDaoImpl implements CategoryDao {
                 case Category.PAYMENT_METHOD:
                     getId = "payment_method_id";
                     getName = "payment_method_name";
+                    break;
+                case Category.ORDER_STATUS:
+                    getId = "order_status_id";
+                    getName = "order_status_name";
                     break;
                 default:
                     getId = null;

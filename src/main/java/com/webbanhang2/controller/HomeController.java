@@ -8,9 +8,12 @@ package com.webbanhang2.controller;
 import com.webbanhang2.config.WBHConstants;
 import com.webbanhang2.model.Category;
 import com.webbanhang2.model.Message;
+import com.webbanhang2.model.Order;
+import com.webbanhang2.model.OrderDetail;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
 import com.webbanhang2.service.CategoryService;
+import com.webbanhang2.service.OrderService;
 import com.webbanhang2.service.ProductService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SessionAttributes(value = {"login", "messageForm", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
-    "paymentMethodList"})
+    "paymentMethodList", "orderStatusList"})
 public class HomeController {
 
     @Autowired
@@ -44,6 +47,9 @@ public class HomeController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    OrderService orderService;
 
     /**
      * Sets up the login model attribute, to be used by various forms requiring
@@ -56,7 +62,7 @@ public class HomeController {
     public User setUpUserForm() {
         return new User();
     }
-    
+
     @ModelAttribute("messageForm")
     public Message setUpMessageForm() {
         return new Message();
@@ -97,12 +103,17 @@ public class HomeController {
     public List<Category> setUpProductRoomList() {
         return categoryService.getCategoryList(Category.PRODUCT_ROOM);
     }
-    
+
     @ModelAttribute("paymentMethodList")
     public List<Category> setUpPaymentMethodList() {
         return categoryService.getCategoryList(Category.PAYMENT_METHOD);
     }
-    
+
+    @ModelAttribute("orderStatusList")
+    public List<Category> setUpOrderStatusList() {
+        return categoryService.getCategoryList(Category.ORDER_STATUS);
+    }
+
     @RequestMapping("about")
     public String showAbout() {
         return "about";
@@ -112,12 +123,12 @@ public class HomeController {
     public String showMessage() {
         return "message";
     }
-    
+
     @RequestMapping("contact")
     public String showContact() {
         return "contact";
     }
-    
+
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String showLogin() {
         return "login";
@@ -132,13 +143,7 @@ public class HomeController {
      */
     @RequestMapping({"/", "home"})
     public String showIndex(HttpServletRequest request) {
-        User user = (User)request.getSession().getAttribute("user");
-        if(user!=null&&user.getUserRoleId()==User.ADMIN){
-            return "redirect:adminpage";
-        }
-        else{
-            return "index";
-        }
+        return "index";
     }
 
     /**
@@ -254,4 +259,52 @@ public class HomeController {
         }
     }
 
+    @RequestMapping("dashboard")
+    public ModelAndView showDashboard(
+            @RequestParam(value = "action", required = false) String action,
+            @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "orderid", required = false) String orderId,
+            HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        ModelAndView mav;
+        if (user == null) {
+            return new ModelAndView("redirect:home");
+        }
+        if (action == null) {
+            return new ModelAndView("dashboardaccinfo");
+        }
+        switch (action) {
+            case "accountinfo":
+                return new ModelAndView("dashboardaccinfo");
+            case "editpassword":
+                return new ModelAndView("dashboardeditpassword");
+            case "order":
+                if (page == null) {
+                    page = 1;
+                }
+                mav = new ModelAndView("dashboardorder");
+                List<Order> orderList = orderService.getOrderList(user.getUserId(), (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                int pageCount = orderService.getOrderListPageCount(user.getUserId(), WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                mav.addObject("orderList", orderList);
+                mav.addObject("pageCount", pageCount);
+                return mav;
+            case "orderdetail":
+                Order o = orderService.getOrder(orderId);
+                //validation stuff; prevent users from viewing other's order info
+                if (o == null || !o.getUserId().equals(user.getUserId())) {
+                    return new ModelAndView("redirect:home");
+                } else {
+                    int total = 0;
+                    for (OrderDetail od : o.getOrderDetailList()) {
+                        total += od.getTotal();
+                    }
+                    mav = new ModelAndView("dashboardorderinfo");
+                    mav.addObject("order", o);
+                    mav.addObject("total", total);
+                    return mav;
+                }
+            default:
+                return new ModelAndView("dashboardaccinfo");
+        }
+    }
 }

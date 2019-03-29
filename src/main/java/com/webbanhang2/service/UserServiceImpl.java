@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserService {
     public boolean resetPassword(String userId, String password){
         return userDao.resetPassword(userId, password);
     }
+
+    @Override
+    public boolean editUser(User user) {
+        return userDao.editUser(user);
+    }
 }

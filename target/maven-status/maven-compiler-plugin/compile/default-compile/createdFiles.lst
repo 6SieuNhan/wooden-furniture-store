@@ -15,6 +15,7 @@ com\webbanhang2\config\JavaMailSenderConfig.class
 com\webbanhang2\dao\OrderDao.class
 com\webbanhang2\dao\ProductDaoImpl$ShortenedProductMapper.class
 com\webbanhang2\dao\UserDaoImpl$RecoveryCodeMapper.class
+com\webbanhang2\controller\DashboardController.class
 com\webbanhang2\dao\ProductDao.class
 com\webbanhang2\service\OrderService.class
 com\webbanhang2\service\MessageServiceImpl.class

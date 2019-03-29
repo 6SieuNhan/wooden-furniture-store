@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -41,8 +42,7 @@ public class UserController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegister(@ModelAttribute("login") User user) {
-        System.out.println("processRegister with acc " + user.getUsername() + " - " + user.getPassword());
-        System.out.println("Update result: " + userService.registerUser(user));
+        boolean result = userService.registerUser(user);
         return "redirect:home";
     }
 
@@ -59,7 +59,6 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView processLogin(HttpServletRequest request,
             @ModelAttribute("login") User user) {
-        System.out.println("processLogin with acc " + user.getUsername() + " - " + user.getPassword());
         user = userService.validateUser(user);
         if (user == null) {
             ModelAndView mav = new ModelAndView("login");
@@ -80,7 +79,6 @@ public class UserController {
      */
     @RequestMapping("/logout")
     public String processLogout(HttpServletRequest request) {
-        System.out.println("processLogout");
         request.getSession().setAttribute("user", null);
         return "redirect:home";
     }
@@ -148,16 +146,58 @@ public class UserController {
         if (userId == null || recoveryCode == null || password == null) {
             return new ModelAndView("redirect:home");
         } else {
-            ModelAndView mav = new ModelAndView("message");;
+            ModelAndView mav = new ModelAndView("message");
             boolean success = userService.resetPassword(userId, password);
-            if(success){
+            if (success) {
                 mav.addObject("message", "Reset password successful. You will now be redirected to the home page.");
-            }
-            else{
+            } else {
                 mav.addObject("message", "The server is currently experiencing some difficulties. You will now be redirected to the home page.");
             }
             return mav;
         }
+    }
+
+    @RequestMapping("/editaccinfo")
+    public ModelAndView processEditAccInfo(@ModelAttribute("login") User user, HttpServletRequest request, RedirectAttributes redir) {
+        //validation
+        ModelAndView mav = new ModelAndView("redirect:dashboard");
+        User valid = userService.validateUser(user);
+        if (valid == null) {
+            redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
+        } else {
+            boolean result = userService.editUser(user);
+            //we do something?
+            if (result) {
+                redir.addFlashAttribute("message", "Edit successful.");
+            } else {
+                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+            }
+            //reset user info
+            user = userService.validateUser(user);
+            request.getSession().setAttribute("user", user);
+        }
+        return mav;
+    }
+
+    @RequestMapping("/editpassword")
+    public ModelAndView processEditPassword(@ModelAttribute("login") User user,
+            @RequestParam(value = "password1", required = false) String newPassword,
+            HttpServletRequest request, RedirectAttributes redir) {
+        ModelAndView mav = new ModelAndView("redirect:dashboard?action=editpassword");
+        User valid = userService.validateUser(user);
+        if (valid == null) {
+            redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
+        } else {
+            boolean result = userService.resetPassword(user.getUserId(), newPassword);
+            //we do something?
+            if (result) {
+                redir.addFlashAttribute("message", "Edit successful.");
+            } else {
+                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+            }
+        }
+        return mav;
+        
     }
 
     String getRecoveryMessage(User user, String recoveryCode) {

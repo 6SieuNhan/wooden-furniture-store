@@ -20,6 +20,10 @@ public interface OrderService {
     
     public List<Order> getOrderList(String userId, int top, int count);
     
+    public int getOrderListPageCount(int size);
+    
+    public int getOrderListPageCount(String userId, int size);
+    
     public Order getOrder(String orderId);
     
     public Order addOrder(List<Product> items, User user, int paymentMethodId);

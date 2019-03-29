@@ -91,13 +91,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <div class="information-wrapper">
                                     <div class="first-row">
                                         <div class="controls">
-                                            <form:input path="email" placeholder = "Email" required="required"/>
+                                            <form:input path="email" placeholder = "Email" required="required" value="${user.email}"/>
                                         </div>
                                         <div class="controls">
-                                            <form:input path="phone" placeholder = "Telephone number" required="required"/>
+                                            <form:input path="phone" placeholder = "Telephone number" required="required" value="${user.phone}"/>
                                         </div>
                                         <div class="controls">
-                                            <form:input path="address" placeholder = "Delivery Address" required="required"/>
+                                            <form:input path="address" placeholder = "Delivery Address" required="required" value="${user.address}"/>
                                         </div>
                                     </div>
                                     <b>Payment method:</b>

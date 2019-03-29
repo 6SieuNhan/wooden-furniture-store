@@ -40,8 +40,8 @@
                     <div class="col-12 logo_agile">
                         <h1>
                             <a href="index.html">
-                                <span>G</span>rocery
-                                <span>S</span>hoppy
+                                <span>A</span>DMIN
+                                <span>P</span>AGE
                                 <img src="images/logo2.png" alt=" ">
                             </a>
                         </h1>
@@ -120,15 +120,17 @@
                         <tr>
                             <th>Mã sản phẩm</th>
                             <th>Tên sản phẩm</th>
-                            <th>Hình ảnh</th>
                             <th>Số lượng</th>
                             <th>Giá</th>
+
                         </tr>
                         <c:forEach var = "product" items ="${productList}" varStatus = "loop">
                             <tr>
                                 <td><c:out value="${product.productCode}" /></td>
                                 <td><c:out value="${product.productName}" /></td>
-                                <td><img class="resize" src="<c:url value="resource/images/default/${product.thumbnail}"/> " alt=""></td>
+
+
+
                                 <td><c:out value="${product.quantity}" /></td>
                                 <td><c:out value="${product.price}" /></td>
 

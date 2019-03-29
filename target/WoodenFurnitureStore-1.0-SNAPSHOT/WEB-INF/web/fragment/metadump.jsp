@@ -21,7 +21,7 @@
         window.scrollTo(0, 1);
     }
 </script>
-<link href="<c:url value="/resource/css/bootstrap.css" />" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.css">
 <link href="<c:url value="/resource/css/style.css" />" rel="stylesheet" type="text/css" media="all" />
 <link href="<c:url value="/resource/css/font-awesome.css" />" rel="stylesheet">
 <!--pop-up-box-->

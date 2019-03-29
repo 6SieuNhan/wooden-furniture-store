@@ -39,9 +39,11 @@
                                     <input type="password" placeholder="Confirm password" id="password2" name="password2" required="">
                                 </div>
                             </div>
-                            <div class="simple-alert-msg" >
-                                This is a danger alert—check it out!
-                            </div>
+                            <c:if test="${not empty message}">
+                                <div class="simple-alert-msg" >
+                                    ${message}
+                                </div>
+                            </c:if>
                             <button class="submit check_out">Reset Password</button>
                         </div>
                     </div>

@@ -23,6 +23,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
+    
+    /*@Autowired
+    private EmailService emailService;*/
 
     @Transactional
     @Override
@@ -58,5 +61,15 @@ public class OrderServiceImpl implements OrderService {
         else{
             return orderDao.validateOrder(orderId);
         }
+    }
+    
+    @Override
+    public int getOrderListPageCount(int size){
+        return orderDao.getOrderListPageCount(size);
+    }
+    
+    @Override
+    public int getOrderListPageCount(String userId, int size){
+        return orderDao.getOrderListPageCount(userId, size);
     }
 }
