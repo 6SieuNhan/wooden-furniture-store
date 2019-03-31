@@ -129,6 +129,11 @@ public class HomeController {
         return "contact";
     }
 
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String showRegister() {
+        return "register";
+    }
+    
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String showLogin() {
         return "login";

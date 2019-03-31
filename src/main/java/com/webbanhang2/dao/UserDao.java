@@ -17,6 +17,8 @@ public interface UserDao {
 
     User getUser(User user);
     
+    User getUserByName(String username);
+    
     User getUserByEmail(String email);
     
     String createRecoveryCode(User user);

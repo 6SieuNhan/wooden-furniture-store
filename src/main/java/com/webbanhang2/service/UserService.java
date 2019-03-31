@@ -17,6 +17,8 @@ public interface UserService {
     
     public User validateUser(User user);
     
+    public User getUserByName(String username);
+    
     public User getUserByEmail(String email);
     
     public String createRecoveryCode(User user);

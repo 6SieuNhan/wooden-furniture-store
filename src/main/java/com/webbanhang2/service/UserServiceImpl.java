@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
     public boolean editUser(User user) {
         return userDao.editUser(user);
     }
+    
+    @Override
+    public User getUserByName(String username){
+        return userDao.getUserByName(username);
+    }
 }

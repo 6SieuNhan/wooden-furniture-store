@@ -39,23 +39,15 @@
                 <!-- display either user info, or login/register form -->
                 <c:choose>
                     <c:when test="${not empty user}">
-                        <!--<li>
-                        Welcome user.username
-                        <span class="caret"></span>
-                        </li>
-                        <li>
-                            <a href="logout">Sign Out</a>
-                        </li> -->
-
                         <li>
                             <div class="dropdown ">
                                 <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Welcome ${user.username} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="dashboard">Dashboard</a><br/>
-                                    <a class="dropdown-item" href="#">Another action</a><br/>
-                                    <a class="dropdown-item" href="logout">Logout</a><br/>
+                                    <a class="dropdown-item" href="dashboard">Dashboard</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="logout">Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -67,7 +59,7 @@
                                 <span class="fa fa-unlock-alt" aria-hidden="true"></span> Sign In </a>
                         </li>
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#myModal2">
+                            <a href="register">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign Up </a>
                         </li>
                     </c:otherwise>
@@ -124,7 +116,7 @@
                         <h3 class="agileinfo_sign">Sign In </h3>
                         <p>
                             Sign In now, Let's start your Grocery Shopping. Don't have an account?
-                            <a href="#" data-toggle="modal" data-target="#myModal2">
+                            <a href="register">
                                 Sign Up Now</a>
                         </p>
 
@@ -149,51 +141,6 @@
     </div>
     <!-- //Modal1 -->
     <!-- //signin Model -->
-    <!-- signup Model -->
-    <!-- Modal2 -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body modal-body-sub_agile">
-                    <div class="main-mailposi">
-                        <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                    </div>
-                    <div class="modal_body_left modal_body_left1">
-                        <h3 class="agileinfo_sign">Sign Up</h3>
-                        <p>
-                            Come join the Grocery Shoppy! Let's set up your Account.
-                        </p>
-
-                        <form:form id="registerForm" modelAttribute="login" action="register" method="post">
-                            <div class="styled-input agile-styled-input-top">
-                                <form:input path="username" placeholder = "Username" required="required" />
-                            </div>
-                            <div class="styled-input">
-                                <form:input path="email" placeholder = "E-mail" id="email" required="required" />
-                            </div>
-                            <div class="styled-input">
-                                <form:password path="password" placeholder = "Password" id="password1" required="required" />
-                            </div>
-                            <div class="styled-input">
-                                <input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
-                            </div>
-                            <input type="submit" value="Sign Up">
-                        </form:form>
-                        <p>
-                            <a href="#">By clicking register, I agree to your terms</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- //Modal content-->
-
-        </div>
-    </div>
+    
 </c:if>
-<!-- //Modal2 -->
-<!-- //signup Model -->
 <!-- //header-bot -->

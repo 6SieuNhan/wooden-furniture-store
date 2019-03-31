@@ -402,12 +402,13 @@ CREATE TABLE `user` (
   `password` varchar(30) NOT NULL,
   `email` varchar(45) NOT NULL,
   `user_role_id` int(11) NOT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `phone` varchar(12) DEFAULT NULL,
+  `address` varchar(100) NOT NULL,
+  `phone` varchar(12) NOT NULL,
   `recovery_code` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id_bin_UNIQUE` (`user_id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_user_user_role1_idx` (`user_role_id`),
   CONSTRAINT `fk_user_user_role1` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -419,7 +420,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('defe4bf4-38cc-11e9-97d5-20474704b06e','admin1','123123','admin1@gmail.com',1,'aaaaa','091234567',NULL),('defeae12-38cc-11e9-97d5-20474704b06e','admin2','123456','admin2@gmail.com',1,'asdf','09111111',NULL),('defec356-38cc-11e9-97d5-20474704b06e','user1','12341234','user1@gmail.com',2,'sdafdsafdsaf','123456789',NULL);
+INSERT INTO `user` VALUES ('37ee6ada-52f6-11e9-90ab-20474704b06e','user2','test','user2@gmail.com',2,'111111','123123123',NULL),('defe4bf4-38cc-11e9-97d5-20474704b06e','admin1','123123','admin1@gmail.com',1,'aaaaa','091234567','test_recovery_code'),('defeae12-38cc-11e9-97d5-20474704b06e','admin2','123456','admin2@gmail.com',1,'asdf','09111111',NULL),('defec356-38cc-11e9-97d5-20474704b06e','user1','12341234','user1@gmail.com',2,'sdafdsafdsaf','123456789',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -483,4 +484,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-29 21:12:14
+-- Dump completed on 2019-03-31 14:18:41

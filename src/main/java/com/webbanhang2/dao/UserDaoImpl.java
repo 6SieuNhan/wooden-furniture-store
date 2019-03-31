@@ -31,13 +31,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean registerUser(User user) {
-        String sql = "insert into user (`username`, `password`, `email`, `user_role_user_role_id`)"
-                + "values('" + user.getUsername() + "', '"
-                + user.getPassword() + "', '"
-                + user.getEmail() + "', '"
-                + "2');";
         try {
-            int res = jdbcTemplate.update(sql);
+            String sql = "insert into user(username, password, email, user_role_id, address, phone)"
+                    + "values(?,?,?,2,?,?)\n";
+            int res = jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getAddress(), user.getPhone());
             return res != 0;
         } catch (DataAccessException ex) {
             System.out.println(ex.getMessage());
@@ -47,54 +44,96 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUser(User user) {
-        String sql = "select * from user where username = '"
-                + user.getUsername()
-                + "' and password = '"
-                + user.getPassword()
-                + "';";
-        List<User> users = jdbcTemplate.query(sql, new UserMapper());
-        return users.size() > 0 ? users.get(0) : null;
+        try {
+            String sql = "select * from user where username = '"
+                    + user.getUsername()
+                    + "' and password = '"
+                    + user.getPassword()
+                    + "';";
+            List<User> users = jdbcTemplate.query(sql, new UserMapper());
+            return users.size() > 0 ? users.get(0) : null;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public User getUserByName(String username) {
+        try {
+            String sql = "select * from user where username = ?";
+            List<User> users = jdbcTemplate.query(sql, new Object[]{username}, new UserMapper());
+            return users.size() > 0 ? users.get(0) : null;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @Override
     public User getUserByEmail(String email) {
-        String sql = "select * from user where email = ?";
-        List<User> users = jdbcTemplate.query(sql, new Object[]{email}, new UserMapper());
-        return users.size() > 0 ? users.get(0) : null;
+        try {
+            String sql = "select * from user where email = ?";
+            List<User> users = jdbcTemplate.query(sql, new Object[]{email}, new UserMapper());
+            return users.size() > 0 ? users.get(0) : null;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @Override
     public String createRecoveryCode(User user) {
-        String sql1 = "update webbanhang.user\n"
-                + "set recovery_code = UUID() where user_id = ?";
-        jdbcTemplate.update(sql1, user.getUserId());
-        String sql2 = "select recovery_code from webbanhang.user where user_id = ?";
-        List<String> recoveryCode = jdbcTemplate.query(sql2, new Object[]{user.getUserId()}, new RecoveryCodeMapper());
-        return recoveryCode.size() > 0 ? recoveryCode.get(0) : null;
+        try {
+            String sql1 = "update webbanhang.user\n"
+                    + "set recovery_code = UUID() where user_id = ?";
+            jdbcTemplate.update(sql1, user.getUserId());
+            String sql2 = "select recovery_code from webbanhang.user where user_id = ?";
+            List<String> recoveryCode = jdbcTemplate.query(sql2, new Object[]{user.getUserId()}, new RecoveryCodeMapper());
+            return recoveryCode.size() > 0 ? recoveryCode.get(0) : null;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @Override
     public boolean validateRecovery(String userId, String recoveryCode) {
-        String sql = "select * from webbanhang.user\n"
-                + "where user_id = ? and recovery_code = ?";
-        return jdbcTemplate.query(sql, new Object[]{userId, recoveryCode}, new UserMapper()).size() > 0;
+        try {
+            String sql = "select * from webbanhang.user\n"
+                    + "where user_id = ? and recovery_code = ?";
+            return jdbcTemplate.query(sql, new Object[]{userId, recoveryCode}, new UserMapper()).size() > 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean resetPassword(String userId, String password) {
-        String sql = "update webbanhang.user\n"
-                + "set password = ?,\n"
-                + "recovery_code = null\n"
-                + "where user_id = ?;";
-        return jdbcTemplate.update(sql, password, userId) > 0;
+        try {
+            String sql = "update webbanhang.user\n"
+                    + "set password = ?,\n"
+                    + "recovery_code = null\n"
+                    + "where user_id = ?;";
+            return jdbcTemplate.update(sql, password, userId) > 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean editUser(User user) {
-        String sql = "update webbanhang.user\n"
-                + "set email = ?, address = ?, phone = ?\n"
-                + "where user_id = ?;";
-        return jdbcTemplate.update(sql, user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()) > 0;
+        try {
+            String sql = "update webbanhang.user\n"
+                    + "set email = ?, address = ?, phone = ?\n"
+                    + "where user_id = ?;";
+            return jdbcTemplate.update(sql, user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()) > 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     class UserMapper implements RowMapper<User> {

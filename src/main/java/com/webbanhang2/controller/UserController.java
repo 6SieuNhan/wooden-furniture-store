@@ -41,9 +41,33 @@ public class UserController {
      * @return Redirects to Home, regardless of result.
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute("login") User user) {
-        boolean result = userService.registerUser(user);
-        return "redirect:home";
+    public ModelAndView processRegister(@ModelAttribute("login") User user) {
+        ModelAndView mav;
+        //check duplicate email
+        User test = userService.getUserByEmail(user.getEmail());
+        if (test != null) {
+            mav = new ModelAndView("register");
+            mav.addObject("message", "There is already an account associated with this e-mail address.");
+        } else {
+            //check username
+            test = userService.getUserByName(user.getUsername());
+            if (test != null) {
+                mav = new ModelAndView("register");
+                mav.addObject("message", "There is already an account with this username.");
+            }
+            else{
+                boolean result = userService.registerUser(user);
+                mav = new ModelAndView("message");
+                if(result){
+                    mav.addObject("message", "Register successful, please login to continue.");
+                }
+                else{
+                    mav.addObject("message", "An unfortunate error has happened; please try again later.");
+                }
+                
+            }
+        }
+        return mav;
     }
 
     /**
@@ -61,8 +85,8 @@ public class UserController {
             @ModelAttribute("login") User user) {
         user = userService.validateUser(user);
         if (user == null) {
-            ModelAndView mav = new ModelAndView("login");
-            mav.addObject("message", "Login failed; either your username or password is incorrect");
+            ModelAndView mav = new ModelAndView(WBHConstants.LOGIN_VIEW_NAME);
+            mav.addObject("message", WBHConstants.LOGIN_FAIL_MESSAGE);
             return mav;
         } else {
             request.getSession().setAttribute("user", user);
@@ -197,7 +221,7 @@ public class UserController {
             }
         }
         return mav;
-        
+
     }
 
     String getRecoveryMessage(User user, String recoveryCode) {
