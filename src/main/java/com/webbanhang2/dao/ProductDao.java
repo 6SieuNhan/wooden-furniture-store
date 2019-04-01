@@ -27,9 +27,9 @@ public interface ProductDao {
     
     public boolean checkProduct(String productId);
     //add, edit, delete product
-    public void deleteProduct(String productId);
+    public boolean deleteProduct(String productId);
     
-    public void addProduct(Product p);
+    public boolean addProduct(Product p);
     
-    public void updateProduct(Product p);
+    public boolean updateProduct(Product p);
 }

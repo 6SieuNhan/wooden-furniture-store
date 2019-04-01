@@ -69,7 +69,6 @@
                                                 <div class="form-group">
                                                     <label>Username: </label>
                                                     <p class="form-control-static">${user.username}</p>
-                                                    <form:hidden disabled="true" path="userId" value="${user.userId}" />
                                                     <form:hidden disabled="true" path="username" value="${user.username}" />
                                                 </div>
                                                 <div class="form-group">

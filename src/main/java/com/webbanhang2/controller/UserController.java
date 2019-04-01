@@ -189,6 +189,9 @@ public class UserController {
         if (valid == null) {
             redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
         } else {
+            //set user Id
+            User current = (User)request.getSession().getAttribute("user");
+            user.setUserId(current.getUserId());
             boolean result = userService.editUser(user);
             //we do something?
             if (result) {

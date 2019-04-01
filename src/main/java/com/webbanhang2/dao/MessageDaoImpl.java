@@ -8,6 +8,7 @@ package com.webbanhang2.dao;
 import com.webbanhang2.model.Message;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +24,17 @@ public class MessageDaoImpl implements MessageDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-    
+
     @Override
     public boolean addMessage(Message message) {
-        String sql = "insert into webbanhang.message(subject, message, sender_name, sender_email, date)\n"
-                + "values (?,?,?,?,NOW());";
-        return jdbcTemplate.update(sql, message.getSubject(), message.getMessage(), message.getSenderName(), message.getSenderEmail()) > 0;
+        try {
+            String sql = "insert into webbanhang.message(subject, message, sender_name, sender_email, date)\n"
+                    + "values (?,?,?,?,NOW());";
+            return jdbcTemplate.update(sql, message.getSubject(), message.getMessage(), message.getSenderName(), message.getSenderEmail()) > 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
-    
+
 }

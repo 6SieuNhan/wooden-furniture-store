@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -38,33 +39,43 @@ public class CategoryDaoImpl implements CategoryDao {
      */
     @Override
     public List<Category> getCategoryList(int categoryType) {
-        String sql = "select * from ";
-        switch (categoryType) {
-            case Category.PRODUCT_CATEGORY:
-                sql += "product_categories";
-                break;
-            case Category.PRODUCT_MATERIAL:
-                sql += "product_material";
-                break;
-            case Category.PRODUCT_ORIGIN:
-                sql += "product_origin";
-                break;
-            case Category.PRODUCT_ROOM:
-                sql += "product_room";
-                break;
-            case Category.PAYMENT_METHOD:
-                sql += "payment_method";
-                break;
-            case Category.ORDER_STATUS:
-                sql += "order_status";
-                break;
+        try {
+            String sql = "select * from ";
+            switch (categoryType) {
+                case Category.PRODUCT_CATEGORY:
+                    sql += "product_categories";
+                    break;
+                case Category.PRODUCT_MATERIAL:
+                    sql += "product_material";
+                    break;
+                case Category.PRODUCT_ORIGIN:
+                    sql += "product_origin";
+                    break;
+                case Category.PRODUCT_ROOM:
+                    sql += "product_room";
+                    break;
+                case Category.PAYMENT_METHOD:
+                    sql += "payment_method";
+                    break;
+                case Category.ORDER_STATUS:
+                    sql += "order_status";
+                    break;
+                case Category.USER_ROLE:
+                    sql += "user_role";
+                    break;
+                default:
+                    return null;
+            }
+
+            CategoryMapper cm = new CategoryMapper();
+            cm.setCategoryType(categoryType);
+
+            List<Category> categoryList = jdbcTemplate.query(sql, cm);
+            return categoryList;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return null;
         }
-
-        CategoryMapper cm = new CategoryMapper();
-        cm.setCategoryType(categoryType);
-
-        List<Category> categoryList = jdbcTemplate.query(sql, cm);
-        return categoryList;
     }
 
     /**
@@ -110,6 +121,10 @@ public class CategoryDaoImpl implements CategoryDao {
                 case Category.ORDER_STATUS:
                     getId = "order_status_id";
                     getName = "order_status_name";
+                    break;
+                case Category.USER_ROLE:
+                    getId = "user_role_id";
+                    getName = "user_role_name";
                     break;
                 default:
                     getId = null;

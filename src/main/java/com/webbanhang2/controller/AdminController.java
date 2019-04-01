@@ -102,7 +102,7 @@ public class AdminController {
         if (productId != null) {
             productService.deleteProduct(productId);
         }
-        return "redirect:adminpage";
+        return "redirect:dashboard?action=productlist";
     }
 
     @RequestMapping(value = "edit")

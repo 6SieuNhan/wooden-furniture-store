@@ -133,7 +133,7 @@ public class HomeController {
     public String showRegister() {
         return "register";
     }
-    
+
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String showLogin() {
         return "login";
@@ -267,11 +267,19 @@ public class HomeController {
     @RequestMapping("dashboard")
     public ModelAndView showDashboard(
             @RequestParam(value = "action", required = false) String action,
-            @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "searchquery", required = false) String searchQuery,
+            @RequestParam(value = "productcategoryid", required = false) List<String> productCategoryIds,
+            @RequestParam(value = "productmaterialid", required = false) List<String> productMaterialIds,
+            @RequestParam(value = "productoriginid", required = false) List<String> productOriginIds,
+            @RequestParam(value = "productroomid", required = false) List<String> productRoomIds,
+            @RequestParam(value = "minprice", required = false) Double minPrice,
+            @RequestParam(value = "maxprice", required = false) Double maxPrice,
             @RequestParam(value = "orderid", required = false) String orderId,
+            @RequestParam(value = "page", required = false) Integer page,
             HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mav;
+        int pageCount;
         if (user == null) {
             return new ModelAndView("redirect:home");
         }
@@ -289,7 +297,7 @@ public class HomeController {
                 }
                 mav = new ModelAndView("dashboardorder");
                 List<Order> orderList = orderService.getOrderList(user.getUserId(), (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
-                int pageCount = orderService.getOrderListPageCount(user.getUserId(), WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                pageCount = orderService.getOrderListPageCount(user.getUserId(), WBHConstants.PRODUCT_LIST_PAGE_SIZE);
                 mav.addObject("orderList", orderList);
                 mav.addObject("pageCount", pageCount);
                 return mav;
@@ -306,6 +314,28 @@ public class HomeController {
                     mav = new ModelAndView("dashboardorderinfo");
                     mav.addObject("order", o);
                     mav.addObject("total", total);
+                    return mav;
+                }
+            //admin stuff
+            case "productlist":
+                if (user.getUserRoleId() == User.ADMIN) {
+                    HashMap<String, Object> params = new HashMap<>();
+                    params.put("searchQuery", searchQuery);
+                    params.put("productCategoryId", productCategoryIds);
+                    params.put("productMaterialId", productMaterialIds);
+                    params.put("productOriginId", productOriginIds);
+                    params.put("productRoomId", productRoomIds);
+                    params.put("minPrice", minPrice);
+                    params.put("maxPrice", maxPrice);
+
+                    if (page == null) {
+                        page = 1;
+                    }
+                    List<Product> productList = productService.getProductListForAdmin(params, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    pageCount = productService.getProductListPageCount(params, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    mav = new ModelAndView("dashboardadmin_productlist");
+                    mav.addObject("productList", productList);
+                    mav.addObject("pageCount", pageCount);
                     return mav;
                 }
             default:

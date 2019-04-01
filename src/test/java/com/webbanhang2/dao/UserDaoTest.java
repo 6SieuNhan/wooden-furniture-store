@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -23,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring-mvc-servlet.xml")
+@ActiveProfiles("test")
 @WebAppConfiguration
 public class UserDaoTest extends TestCase {
 
@@ -147,8 +149,8 @@ public class UserDaoTest extends TestCase {
     @Test
     public void getUserIncorrectAll() {
         User test = new User();
-        test.setUsername("admin1");
-        test.setPassword("12341234");
+        test.setUsername("INCORRECT_USERNAME");
+        test.setPassword("INCORRECT_PASSWORD");
         User result = userDaoMock.getUser(test);
         assertEquals(result, null);
     }
@@ -156,7 +158,7 @@ public class UserDaoTest extends TestCase {
     @Test
     public void getUserIncorrectUsername() {
         User test = new User();
-        test.setUsername("admin1234");
+        test.setUsername("INCORRECT_USERNAME");
         test.setPassword("123123");
         User result = userDaoMock.getUser(test);
         assertEquals(result, null);
@@ -166,7 +168,7 @@ public class UserDaoTest extends TestCase {
     public void getUserIncorrectPassword() {
         User test = new User();
         test.setUsername("admin1");
-        test.setPassword("12341234");
+        test.setPassword("INCORRECT_PASSWORD");
         User result = userDaoMock.getUser(test);
         assertEquals(result, null);
     }
@@ -287,14 +289,6 @@ public class UserDaoTest extends TestCase {
     @Rollback(true)
     public void resetPasswordNullPassword(){
         boolean result = userDaoMock.resetPassword("defe4bf4-38cc-11e9-97d5-20474704b06e", null);
-        assertEquals(result, false);
-    }
-    
-    @Test
-    @Transactional
-    @Rollback(true)
-    public void resetPasswordIncorrectUser(){
-        boolean result = userDaoMock.resetPassword("WRONG_USER_ID", "testpassword");
         assertEquals(result, false);
     }
     

@@ -248,13 +248,13 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void deleteProduct(String productId) {
+    public boolean deleteProduct(String productId) {
         String sql = "delete from product where product_id = '" + productId + "';";
-        jdbcTemplate.update(sql);
+        return (jdbcTemplate.update(sql)> 0);
     }
 
     @Override
-    public void addProduct(Product p) {
+    public boolean addProduct(Product p) {
         System.out.println(p.getProductName());
         String productCode = p.getProductCode();
         String productName = p.getProductName();
@@ -268,11 +268,12 @@ public class ProductDaoImpl implements ProductDao {
         String sql = "insert into product"
                 + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price) "
                 + "values(?,?,?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price);
+        int res = jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price);
+        return (res>0);
     }
 
     @Override
-    public void updateProduct(Product p) {
+    public boolean updateProduct(Product p) {
         System.out.println(p.getProductName());
         String productCode = p.getProductCode();
         String productName = p.getProductName();
@@ -292,8 +293,7 @@ public class ProductDaoImpl implements ProductDao {
                 + ",quantity='" + quantity + "'"
                 + ",price='" + price + "'"
                 + "where product_code='" + productCode + "'";
-        jdbcTemplate.update(sql);
-
+        return (jdbcTemplate.update(sql) > 0);
     }
 
     /**
