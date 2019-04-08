@@ -1,16 +1,19 @@
 <%-- 
-    Document   : userdashboard
-    Created on : Mar 26, 2019, 3:01:02 PM
+    Document   : dashboardadmin_messagelist
+    Created on : Apr 8, 2019, 9:01:47 AM
     Author     : fkien
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="searchquery" value="${param.searchquery}" />
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bluebox Free Bootstrap Admin Template</title>
         <!-- Bootstrap Styles-->
@@ -24,35 +27,34 @@
         <!-- Google Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
+        <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
     </head>
     <body>
         <div id="wrapper">
             <nav class="navbar navbar-default top-navbar" role="navigation">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><strong>bluebox</strong></a>
+                    <a class="navbar-brand" href="home"><strong>Cửa hàng đồ gỗ</strong></a>
                 </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li style="color: white;">
+                        Welcome ${user.username}
+                    </li>
+                    <li>
+                        <a href="logout">Sign Out</a>
+                    </li>
+                </ul>
             </nav>
             <!--/. NAV TOP  -->
-            <c:choose>
-                <c:when test="${user.userRoleId == 1}">
-                    <jsp:include page="fragment/dashboardadminnav.jsp" />
-                </c:when>
-                <c:otherwise>
-                    <jsp:include page="fragment/dashboardusernav.jsp" />
-                </c:otherwise>
-            </c:choose>
+            <jsp:include page="fragment/dashboardadminnav.jsp" />
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Message
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -61,62 +63,68 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Order history
+                                    Danh sách message
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-12">
+                                            <!-- search garbage -->
+                                            <form action="dashboard" method="get" >
+                                                <div class="search">
+                                                    <input type="text" placeholder="Nhập từ khóa tìm kiếm"
+                                                           name="searchquery" value="${param.searchquery}">
+                                                    <input type="hidden" id="action" name="action" value="messagelist">
+                                                    <button type="submit" value=" "><i class="fa fa-search"></i></button>      
+                                                </div>
+                                            </form> 
+
+                                            <!-- //search garbage -->
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>SI No</th>
-                                                            <th>Product</th>
-                                                            <th>Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total</th>
+                                                            <th>Subject</th>
+                                                            <th>Sender</th>
+                                                            <th>Email</th>
+                                                            <th>Date</th>
+                                                            <th></th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach var="od" items="${order.orderDetailList}" varStatus="loop">
-                                                            <tr class="gradeA clickable-row" role="button" data-href="home">
-                                                                <td>${loop.index+1}</td>
+                                                        <c:forEach var="o" items="${messageList}">
+                                                            <tr class="gradeA" >
+                                                                <td>${o.subject}</td>
+                                                                <td>${o.senderName}</td>
+                                                                <td>${o.senderEmail}</td>
+                                                                <td>${o.date}</td>
                                                                 <td>
-                                                                    <a href="product?productid=${od.productId}">
-                                                                        ${od.product.productName}
+                                                                    <a href="dashboard?action=message&messageid=${o.messageId}">
+                                                                        View
                                                                     </a>
                                                                 </td>
-                                                                <td>${od.price}</td>
-                                                                <td>${od.quantity}</td>
-                                                                <td>${od.total}</td>
+                                                                <td>
+                                                                    <a href="deletemessage?messageid=${o.messageId}" onclick="return confirm('Bạn có muốn xóa tin nhắn này?')">
+                                                                        Delete
+                                                                    </a>
+                                                                </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>
-                                                <table class="table table-borderless">
-                                                    <tr>
-                                                        <td>Total:</td>
-                                                        <td><label class="pull-right">${total}</label></td>
-                                                    </tr>
-                                                </table>
+                                                <c:if test = "${empty messageList}">
+                                                    <div class="notiSearch">
+                                                        No message with this keyword can be found.
+                                                    </div>
+                                                </c:if>
+
+                                                <div class="pagination-holder clearfix">
+                                                    <div id="light-pagination" class="pagination pull-right"></div>
+                                                </div>
 
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label>Address</label>
-                                            <div>${order.userAddress}</div>
-                                            <label>Email</label>
-                                            <div>${order.userEmail}</div>
-                                            <label>Phone</label>
-                                            <div>${order.userPhone}</div>
-                                            <label>Order Status</label>
-                                            <div>
-                                                <c:forEach var="pci" items="${orderStatusList}">
-                                                    <c:if test="${pci.categoryId==order.orderStatusId}">
-                                                        <td>${pci.categoryName}</td>
-                                                    </c:if>
-                                                </c:forEach>
-                                            </div>
+
+
                                         </div>
                                     </div>
                                     <!-- /.row (nested) -->
@@ -140,6 +148,15 @@
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
+        <script src="<c:url value="/resource/js/jquery.simplePagination.js"/>"></script>
+        <script>
+            $('#light-pagination').pagination({
+                pages: ${pageCount},
+                currentPage: ${(empty param.page) ? '1': param.page},
+                selectOnClick: false
+            });
+
+        </script>
 
 
         <!-- Metis Menu Js -->
@@ -157,13 +174,6 @@
         <!-- Custom Js -->
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
-        <script>
-            jQuery(document).ready(function ($) {
-                $(".clickable-row").click(function () {
-                    window.location = $(this).data("href");
-                });
-            });
-        </script>
 
     </body>
 </body>

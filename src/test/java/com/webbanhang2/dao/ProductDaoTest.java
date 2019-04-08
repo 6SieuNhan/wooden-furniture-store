@@ -111,7 +111,7 @@ public class ProductDaoTest extends TestCase {
         boolean result = productDaoMock.checkProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
         assertEquals(result, true);
     }
-
+/*
     //tests for method deleteProduct(String productId)
     @Test
     @Transactional
@@ -371,5 +371,5 @@ public class ProductDaoTest extends TestCase {
         Product p = getMockProductUpdate();
         boolean result = productDaoMock.updateProduct(p);
         assertEquals(result,true);
-    }
+    }*/
 }

@@ -20,13 +20,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="fragment/navbar.jsp" />
+        <jsp:include page="fragment/navbar.jsp" >
+            <jsp:param name="page" value="contact" />
+        </jsp:include>
         <!-- //navbar -->
         <!-- contact page -->
         <div class="contact-w3l">
             <div class="container">
                 <!-- tittle heading -->
-                <h3 class="tittle-w3l">Contact Us
+                <h3 class="tittle-w3l">Liên hệ
                     <span class="heading-style">
                         <i></i>
                         <i></i>
@@ -41,23 +43,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <div class="col-xs-5 contact-text w3-agileits">
                                 
                                 <form:form modelAttribute="messageForm" action="sendcontactmessage" method="post">
-                                    <form:input path="senderName" placeholder = "Name" required="required" />
-                                    <form:input path="subject" placeholder = "Subject" required="required" />
-                                    <form:input path="senderEmail" placeholder = "Email" required="required" />
-                                    <form:textarea path="message" placeholder = "Message" required="required" />
+                                    <form:input path="senderName" placeholder = "Tên" required="required" maxlength="45"/>
+                                    <form:input path="subject" placeholder = "Tiêu đề" required="required" />
+                                    <form:input path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="45"/>
+                                    <form:textarea path="message" placeholder = "Nội dung" required="required" />
                                     <button class="submit check_out">Submit</button>
                                 </form:form>
                             </div>
                             <div class="col-xs-7 contact-agile">
                                 <p>
-                                    <i class="fa fa-map-marker"></i> Số 1, ngõ 185, phố Tây Sơn, phường Trung Liệt, quận Đống Đa, Hà Nội</p>
+                                    <i class="fa fa-map-marker"></i> Số 2, Kho Sau - Van Diem - Thuong Tin - Ha Noi</p>
                                 <p>
-                                    <i class="fa fa-phone"></i> Telephone : 333 222 3333</p>
+                                    <i class="fa fa-phone"></i> 0347545020 - 0913076724</p>
                                 <p>
-                                    <i class="fa fa-fax"></i> FAX : +1 888 888 4444</p>
+                                    <i class="fa fa-fax"></i> +1 888 888 4444</p>
                                 <p>
                                     <i class="fa fa-envelope-o"></i> Email :
-                                    <a href="mailto:example@mail.com">mail@example.com</a>
+                                    <a href="mailto:dogothuyhang@gmail.com">dogothuyhang@gmail.com</a>
                                 </p>
                                 <br/>
                                 <div id="map2"></div>

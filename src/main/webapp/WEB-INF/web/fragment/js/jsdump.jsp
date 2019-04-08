@@ -31,6 +31,11 @@
     });
 </script>
 
+<!-- number -->
+<script src="<c:url value="/resource/js/jquery.number.min.js"/>"></script>
+<script>
+    $('span.number').number( true, 0, '.', ' ' );
+</script>
 <!-- password-script -->
 <script>
     window.onload = function () {
@@ -100,7 +105,7 @@
     }
 </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMuEIhFUsSZD3iNL0ilVRT2MApzOWwTKc&callback=initMap">
 </script>
 <!-- //map -->
 

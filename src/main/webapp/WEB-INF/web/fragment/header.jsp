@@ -20,7 +20,7 @@
         <div class="col-md-4 logo_agile">
             <h1>
                 <a href="home">
-                    <span>C</span>ửa <span>H</span>àng <span>Đ</span>ồ <span>G</span>ỗ 
+                    <span>Đ</span>ồ <span>G</span>ỗ <span>T</span>húy <span>H</span>ằng 
                 </a>
             </h1>
         </div>
@@ -28,26 +28,17 @@
         <div class="col-md-8 header text-right">
             <!-- header lists -->
             <ul>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#myModal1">
-                        <span class="fa fa-truck" aria-hidden="true"></span>Track Order</a>
-                </li>
-                <li>
-                    <span class="fa fa-phone" aria-hidden="true"></span> ${not empty user}
-                </li>
-
                 <!-- display either user info, or login/register form -->
                 <c:choose>
                     <c:when test="${not empty user}">
                         <li>
                             <div class="dropdown ">
                                 <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Welcome ${user.username} <span class="caret"></span>
+                                    Xin chào, ${user.username} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu pull-right" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="dashboard">Dashboard</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="logout">Logout</a>
+                                    <a class="dropdown-item" href="dashboard">Bảng điều khiển</a>
+                                    <a class="dropdown-item" href="logout">Đăng xuất</a>
                                 </div>
                             </div>
                         </li>
@@ -56,11 +47,11 @@
                     <c:otherwise>
                         <li>
                             <a href="#" data-toggle="modal" data-target="#myModal1">
-                                <span class="fa fa-unlock-alt" aria-hidden="true"></span> Sign In </a>
+                                <span class="fa fa-unlock-alt" aria-hidden="true"></span> Đăng nhập </a>
                         </li>
                         <li>
                             <a href="register">
-                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Sign Up </a>
+                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Đăng ký </a>
                         </li>
                     </c:otherwise>
                 </c:choose>
@@ -71,7 +62,7 @@
             <!-- search -->
             <div class="agileits_search">
                 <form action="productlist" method="get">
-                    <input name="searchquery" type="search" placeholder="How can we help you today?" required="">
+                    <input name="searchquery" type="search" placeholder="Tôi có thể giúp gì bạn hôm nay?" required="">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
@@ -113,22 +104,22 @@
                         <span class="fa fa-envelope-o" aria-hidden="true"></span>
                     </div>
                     <div class="modal_body_left modal_body_left1">
-                        <h3 class="agileinfo_sign">Sign In </h3>
+                        <h3 class="agileinfo_sign">Đăng nhập</h3>
                         <p>
-                            Sign In now, Let's start your Grocery Shopping. Don't have an account?
+                            Bạn chưa có tài khoản à?
                             <a href="register">
-                                Sign Up Now</a>
+                                Đăng ký ngay</a>
                         </p>
 
                         <form:form id="loginForm" modelAttribute="login" action="login" method="post">
                             <div class="styled-input agile-styled-input-top">
-                                <form:input path="username" placeholder = "Username" required="required" />
+                                <form:input path="username" placeholder = "Tên người dùng" required="required" />
                             </div>
                             <div class="styled-input">
-                                <form:password path="password" placeholder = "Password" required="required" />
+                                <form:password path="password" placeholder = "Mật khẩu" required="required" />
                             </div>
-                            <a href="login">Forget your password?</a><br>
-                            <input type="submit" value="Login">
+                            <a href="login">Quên mật khẩu?</a><br>
+                            <input type="submit" value="Đăng nhập">
                         </form:form>
 
                         <div class="clearfix"></div>

@@ -20,9 +20,13 @@ public interface OrderDao {
     
     List<Order> getOrderList(String userId, int top, int count);
     
+    List<Order> getOrderListSearch(String username, int top, int count);
+    
     int getOrderListPageCount(int size);
     
     int getOrderListPageCount(String userId, int size);
+    
+    int getOrderListSearchPageCount(String username, int size);
     
     Order getOrder(String orderId);
     
@@ -30,6 +34,6 @@ public interface OrderDao {
     
     Order addOrder(List<Product> items, User user, int paymentMethodId);
     
-    
+    boolean deleteOrder(String orderId);
     
 }

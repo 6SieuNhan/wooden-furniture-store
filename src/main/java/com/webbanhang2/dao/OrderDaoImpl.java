@@ -39,10 +39,6 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getOrderList(int top, int count) {
         String sql = "select * from webbanhang.order limit " + top + ", " + count + " ;";
         List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
-        //don't need order details, this is for list view only
-        /*for (Order o : orderList) {
-            o.setOrderDetailList(orderDetailDao.getOrderDetailList(o.getOrderId()));
-        }*/
         return orderList;
     }
 
@@ -52,15 +48,21 @@ public class OrderDaoImpl implements OrderDao {
                 + "where user_id = '" + userId + "' "
                 + "limit " + top + ", " + count + " ;";
         List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
-        //don't need order details, this is for list view only
-        /*for (Order o : orderList) {
-            o.setOrderDetailList(orderDetailDao.getOrderDetailList(o.getOrderId()));
-        }*/
         return orderList;
     }
-    
+
     @Override
-    public int getOrderListPageCount(int size){
+    public List<Order> getOrderListSearch(String username, int top, int count) {
+        String sql = "SELECT * FROM webbanhang.`order` left join webbanhang.user \n"
+                + "on `order`.user_id = user.user_id\n"
+                + "where user.username like ?\n"
+                + "limit ?, ?;";
+        List<Order> orderList = jdbcTemplate.query(sql, new Object[]{username, top, count}, new OrderMapper(true));
+        return orderList;
+    }
+
+    @Override
+    public int getOrderListPageCount(int size) {
         String sql = "select COUNT(*) from webbanhang.order;";
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
         List<Integer> rs = jdbcTemplate.query(sql, rowMapper);
@@ -71,12 +73,27 @@ public class OrderDaoImpl implements OrderDao {
             return count / size + 1;
         }
     }
-    
+
     @Override
-    public int getOrderListPageCount(String userId, int size){
+    public int getOrderListPageCount(String userId, int size) {
         String sql = "select COUNT(*) from webbanhang.order where user_id = ?;";
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
         List<Integer> rs = jdbcTemplate.query(sql, new Object[]{userId}, rowMapper);
+        int count = rs.get(0);
+        if (count % size == 0) {
+            return count / size;
+        } else {
+            return count / size + 1;
+        }
+    }
+
+    @Override
+    public int getOrderListSearchPageCount(String username, int size) {
+        String sql = "SELECT COUNT(*) FROM webbanhang.`order` left join webbanhang.user \n"
+                + "on `order`.user_id = user.user_id\n"
+                + "where user.username like ?;";
+        SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
+        List<Integer> rs = jdbcTemplate.query(sql, new Object[]{username}, rowMapper);
         int count = rs.get(0);
         if (count % size == 0) {
             return count / size;
@@ -130,11 +147,13 @@ public class OrderDaoImpl implements OrderDao {
         Order o;
         if (user.getUserId() == null || user.getUserId().isEmpty()) {
             //for Guest (no userID), need to search by email
-            sql2 = "SELECT *, MAX(order_date) FROM webbanhang.order where user_email = ?;";
+            sql2 = "SELECT * FROM webbanhang.order where order_date in \n"
+                    + "(select MAX(order_date) FROM webbanhang.order where user_email = ?);";
             o = jdbcTemplate.queryForObject(sql2, new Object[]{user.getEmail()}, new OrderMapper());
         } //for User, just search by userID
         else {
-            sql2 = "SELECT *, MAX(order_date) FROM webbanhang.order where user_id = ?;";
+            sql2 = "SELECT * FROM webbanhang.order where order_date in \n"
+                    + "(select MAX(order_date) FROM webbanhang.order where user_id = ?);";
             o = jdbcTemplate.queryForObject(sql2, new Object[]{user.getUserId()}, new OrderMapper());
         }
         //dump order detail lines
@@ -144,7 +163,31 @@ public class OrderDaoImpl implements OrderDao {
         return o;
     }
 
+    @Override
+    public boolean deleteOrder(String orderId) {
+        boolean result2 = orderDetailDao.deleteOrderDetail(orderId);
+        if (result2) {
+            String sql = "DELETE FROM webbanhang.order where order_id = ?";
+            int result = jdbcTemplate.update(sql, orderId);
+            return result > 0;
+        } else {
+            return false;
+        }
+    }
+
     class OrderMapper implements RowMapper<Order> {
+
+        boolean hasUsername;
+
+        public OrderMapper() {
+            super();
+            hasUsername = false;
+        }
+
+        public OrderMapper(boolean hasUsername) {
+            super();
+            this.hasUsername = hasUsername;
+        }
 
         @Override
         public Order mapRow(ResultSet rs, int i) throws SQLException {
@@ -158,6 +201,9 @@ public class OrderDaoImpl implements OrderDao {
             order.setOrderStatusId(rs.getString("order_status_id"));
             order.setValidationCode(rs.getString("validation_code"));
             order.setPaymentMethodId(rs.getInt("payment_method_id"));
+            if (hasUsername) {
+                order.setUsername(rs.getString("user.username"));
+            }
             return order;
         }
     }

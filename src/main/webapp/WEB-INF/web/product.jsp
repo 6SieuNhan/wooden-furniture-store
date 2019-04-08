@@ -25,25 +25,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="fragment/navbar.jsp" />
+        <jsp:include page="fragment/navbar.jsp" >
+            <jsp:param name="page" value="product" />
+        </jsp:include>
         <!-- //navbar -->
-        <!-- banner-2 -->
-        <div class="page-head_agile_info_w3l">
-
-        </div>
-        <!-- //banner-2 -->
         <!-- Single Page -->
         <div class="banner-bootom-w3-agileits">
             <div class="container">
-                <!-- tittle heading -->
-                <h3 class="tittle-w3l">Single Page
-                    <span class="heading-style">
-                        <i></i>
-                        <i></i>
-                        <i></i>
-                    </span>
-                </h3>
-                <!-- //tittle heading -->
                 <div class="col-md-5 single-right-left ">
                     <div class="grid images_3_of_2">
                         <div class="flexslider">
@@ -70,7 +58,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="col-md-7 single-right-left simpleCart_shelfItem">
                     <h3>${product.productName}</h3>
                     <p>
-                        <span class="item_price">$${product.price}</span>
+                        <span class="item_price number">${product.price}</span>
+                        <span class="item_price">đ</span>
                         <label>Free delivery</label>
                     </p>
                     <div class="single-infoagile">
@@ -86,7 +75,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </li>
                             <li>
                                 ${product.quantity} in stock at
-                                <span class="item_price">$${product.price}</span>
+                                <span class="item_price number">${product.price}</span>
+                                <span class="item_price">đ</span>
                             </li>
                         </ul>
                     </div>
@@ -100,7 +90,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <fieldset>
                                     <c:choose>
                                         <c:when test="${product.quantity == 0}">
-                                            <input type="submit" name="submit" value="Out of stock" class="button" disabled />
+                                            <input type="submit" name="submit" value="Hết hàng" class="button" disabled />
                                         </c:when>
                                         <c:otherwise>
                                             <input type="hidden" name="cmd" value="_cart" />
@@ -110,7 +100,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <input type="hidden" name="href" value="product?productid=${product.productId}" />
                                             <input type="hidden" name="add" value="1" />
                                             <input type="hidden" name="currency_code" value="USD" />
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                            <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
                                         </c:otherwise>
                                     </c:choose>
                                 </fieldset>

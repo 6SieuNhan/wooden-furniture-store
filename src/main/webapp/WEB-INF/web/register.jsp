@@ -21,19 +21,13 @@
     <!-- navbar -->
     <jsp:include page="fragment/navbar.jsp" />
     <!-- //navbar -->
-    <!-- page -->
-    <jsp:include page="fragment/breadcrumbs.jsp" />
-    <!-- //page -->
     <!-- login page -->
     <div class="privacy">
         <div class="container">
             <!-- ripped CSS off checkout page -->
             <!-- register form -->
             <div class="address_form_agile col-md-12">
-                <h4>Login</h4>
-                <p>
-                    Come join the Grocery Shoppy! Let's set up your Account.
-                </p>
+                <h4>Đăng ký</h4>
             </div>
             <form:form modelAttribute="login" action="register" method="post" cssClass="creditly-card-form agileinfo_form">
                 <div class="address_form_agile col-md-6">
@@ -41,20 +35,20 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Username" required="required" maxlength="30"/>
+                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input path="address" placeholder = "Address" required="required"  maxlength="100"/>
+                                    <form:input path="address" placeholder = "Địa chỉ" required="required"  maxlength="100"/>
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" id="password1" placeholder = "Password" required="required"  maxlength="30"/>
+                                    <form:password path="password" id="password1" placeholder = "Mật khẩu" required="required"  maxlength="30"/>
                                 </div>
                                 <c:if test="${not empty message}">
                                     <div class="simple-alert-msg" >
                                         ${message}
                                     </div>
                                 </c:if>
-                                <button class="submit check_out">Sign up</button>
+                                <button class="submit check_out">Đăng ký</button>
                             </div>
                         </div>
                     </div>
@@ -64,13 +58,13 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="email" placeholder = "Email address" required="required" maxlength="45"/>
+                                    <form:input path="email" placeholder = "Địa chỉ email" required="required" maxlength="45"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input path="phone" placeholder = "Phone number (maximum 12 characters)" required="required" maxlength="12"/>
+                                    <form:input path="phone" placeholder = "Số điện thoại (tối đa 12 ký tự)" required="required" maxlength="12"/>
                                 </div>
                                 <div class="controls">
-                                    <input type="password" placeholder="Reenter password" id="password2" required="" maxlength="30">
+                                    <input type="password" placeholder="Nhập lại mật khẩu" id="password2" required="" maxlength="30">
                                 </div>
                             </div>
                         </div>

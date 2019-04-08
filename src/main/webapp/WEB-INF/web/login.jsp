@@ -21,26 +21,23 @@
     <!-- navbar -->
     <jsp:include page="fragment/navbar.jsp" />
     <!-- //navbar -->
-    <!-- page -->
-    <jsp:include page="fragment/breadcrumbs.jsp" />
-    <!-- //page -->
     <!-- login page -->
     <div class="privacy">
         <div class="container">
             <!-- ripped CSS off checkout page -->
             <!-- Login form -->
             <div class="col-xs-6 address_form_agile">
-                <h4>Login</h4>
+                <h4>Đăng nhập</h4>
                 <br>
                 <form:form modelAttribute="login" action="login" method="post" cssClass="creditly-card-form agileinfo_form">
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Username" required="required" />
+                                    <form:input path="username" placeholder = "Tên người dùng" required="required" />
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" placeholder = "Password" required="required" />
+                                    <form:password path="password" placeholder = "Mật khẩu" required="required" />
                                 </div>
                             </div>
                             <c:if test="${not empty message}">
@@ -48,15 +45,15 @@
                                     ${message}
                                 </div>
                             </c:if>
-                            <button class="submit check_out">Login</button>
+                            <button class="submit check_out">Đăng nhập</button>
                         </div>
                     </div>
                 </form:form>
             </div>
             <!--Password recovery form -->
             <div class="col-xs-6 address_form_agile">
-                <h4>Password Recovery</h4>
-                <p>Forgot your password? Fill in your email address and we'll send you a recovery link:</p>
+                <h4>Đặt lại mật khẩu</h4>
+                <p>Bạn quên mật khẩu à? Hãy điền địa chỉ email vào trường phía dưới và chúng tôi sẽ gửi đường dẫn đến trang đặt lại mật khẩu</p>
                 <br/>
                 <form action="requestrecovery" method="post" class="creditly-card-form agileinfo_form">
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
@@ -71,7 +68,7 @@
                                     ${message2}
                                 </div>
                             </c:if>
-                            <button class="submit check_out">Reset my Password</button>
+                            <button class="submit check_out">Đặt lại mật khẩu của tôi</button>
                         </div>
                     </div>
                 </form>

@@ -6,6 +6,7 @@
 package com.webbanhang2.dao;
 
 import com.webbanhang2.model.Message;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,12 @@ import com.webbanhang2.model.Message;
  */
 public interface MessageDao {
     boolean addMessage(Message message);
+    
+    public List<Message> getMessageList(String subjectQuery, int top, int count);
+    
+    public int getMessageListPageCount(String subjectQuery, int size);
+    
+    public Message getMessage(String messageId);
+    
+    public boolean deleteMessage(String messageId);
 }

@@ -23,10 +23,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
-    
+
     /*@Autowired
     private EmailService emailService;*/
-
     @Transactional
     @Override
     public List<Order> getOrderList(int top, int count) {
@@ -55,21 +54,44 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean validateOrder(String orderId, String validationCode) {
         Order o = getOrder(orderId);
-        if(o==null || !o.getValidationCode().equals(validationCode)){
+        if (o == null || !o.getValidationCode().equals(validationCode)) {
             return false;
-        }
-        else{
+        } else {
             return orderDao.validateOrder(orderId);
         }
     }
-    
+
     @Override
-    public int getOrderListPageCount(int size){
+    public int getOrderListPageCount(int size) {
         return orderDao.getOrderListPageCount(size);
     }
-    
+
     @Override
-    public int getOrderListPageCount(String userId, int size){
+    public int getOrderListPageCount(String userId, int size) {
         return orderDao.getOrderListPageCount(userId, size);
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteOrder(String orderId) {
+        return orderDao.deleteOrder(orderId);
+    }
+
+    @Override
+    public List<Order> getOrderListSearch(String username, int top, int count) {
+        if (username == null || username.isEmpty()) {
+            return orderDao.getOrderList(top, count);
+        } else {
+            return orderDao.getOrderListSearch(username, top, count);
+        }
+    }
+
+    @Override
+    public int getOrderListSearchPageCount(String username, int size) {
+        if (username == null || username.isEmpty()) {
+            return orderDao.getOrderListPageCount(size);
+        } else {
+            return orderDao.getOrderListSearchPageCount(username, size);
+        }
     }
 }

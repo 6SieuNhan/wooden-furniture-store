@@ -26,7 +26,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="fragment/navbar.jsp" />
+        <jsp:include page="fragment/navbar.jsp" >
+            <jsp:param name="page" value="product" />
+        </jsp:include>
         <!-- //navbar -->
         <!-- top Products -->
         <div class="ads-grid">
@@ -42,7 +44,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <!-- Just return some error message if no product is found or something -->
                             <c:if test = "${empty productList}">
                                 <div class="text-center">
-                                    No product with the requested parameters can be found.
+                                    Không tìm được sản phẩm nào.
                                 </div>
                             </c:if>
                             <c:forEach var = "product" items ="${productList}" varStatus = "loop">
@@ -53,7 +55,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <img src="<c:url value="resource/images/default/no-image-available-md.png"/>" alt="">
                                             <div class="men-cart-pro">
                                                 <div class="inner-men-cart-pro">
-                                                    <a href="product?productid=${product.productId}" class="link-product-add-cart">Quick View</a>
+                                                    <a href="product?productid=${product.productId}" class="link-product-add-cart">Xem nhanh</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +64,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 <a href="product?productid=${product.productId}">${product.productName}</a>
                                             </h4>
                                             <div class="info-product-price">
-                                                <span class="item_price">$${product.price}</span>
+                                                <span class="item_price number">${product.price}</span>
+                                                <span class="item_price">đ</span>
                                             </div>
                                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                                 <form action="#" method="post">
@@ -79,7 +82,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                 <input type="hidden" name="href" value="product?productid=${product.productId}" />
                                                                 <input type="hidden" name="add" value="1" />
                                                                 <input type="hidden" name="currency_code" value="USD" />
-                                                                <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                                <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </fieldset>

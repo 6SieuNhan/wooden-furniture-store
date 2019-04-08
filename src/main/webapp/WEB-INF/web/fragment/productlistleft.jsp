@@ -17,20 +17,20 @@
 <div class="side-bar col-md-3">
 
     <div class="search-hotel">
-        <h3 class="agileits-sear-head">Page count: ${pageCount}</h3>
+        <h3 class="agileits-sear-head">Tìm kiếm</h3>
         <form action="productlist" method="get">
-            <input type="search" placeholder="Product name..." name="searchquery" value="${param.searchquery}">
+            <input type="search" placeholder="Tên sản phẩm..." name="searchquery" value="${param.searchquery}">
             <input type="submit" value=" ">
             <!-- price range -->
             <div class="left-side">
-                <h4 class="agileits-sear-head">Price Range</h4><br>
-                <input type="number" name="minprice" placeholder="From" value="${param.minprice}"> - <input type="number" name="maxprice" placeholder="To" value="${param.maxprice}">
+                <h4 class="agileits-sear-head">Mức giá</h4><br>
+                <input type="number" name="minprice" placeholder="Từ" value="${param.minprice}"> - <input type="number" name="maxprice" placeholder="Đến" value="${param.maxprice}">
             </div>
             <!-- //price range -->
             <!-- category -->
             <div class="left-side">
                 <h4 class="agileits-sear-head">
-                    <a data-toggle="collapse" href="#collapse1">Category</a>
+                    <a data-toggle="collapse" href="#collapse1">Danh mục</a>
                     <span class="caret"></span>
                 </h4>
                 <br>
@@ -61,7 +61,7 @@
             <!-- material -->
             <div class="left-side">
                 <h4 class="agileits-sear-head">
-                    <a data-toggle="collapse" href="#collapse2">Material</a>
+                    <a data-toggle="collapse" href="#collapse2">Chất liệu</a>
                     <span class="caret"></span>
                 </h4>
                 <br>
@@ -91,7 +91,7 @@
             <!-- origin -->
             <div class="left-side">
                 <h4 class="agileits-sear-head">
-                    <a data-toggle="collapse" href="#collapse3">Origin</a>
+                    <a data-toggle="collapse" href="#collapse3">Xuất sứ</a>
                     <span class="caret"></span>
                 </h4><br>
                 <!-- uncollapse if selected checkbox is available -->
@@ -120,7 +120,7 @@
             <!-- room -->
             <div class="left-side">
                 <h4 class="agileits-sear-head">
-                    <a data-toggle="collapse" href="#collapse4">Room</a>
+                    <a data-toggle="collapse" href="#collapse4">Không gian</a>
                     <span class="caret"></span>
                 </h4><br>
                 <div id="collapse4" class="collapse 

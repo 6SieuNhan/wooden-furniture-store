@@ -1,6 +1,6 @@
 <%-- 
-    Document   : userdashboard
-    Created on : Mar 26, 2019, 3:01:02 PM
+    Document   : dashboardadmin_message
+    Created on : Apr 8, 2019, 9:42:23 AM
     Author     : fkien
 --%>
 
@@ -38,14 +38,9 @@
                     <a class="navbar-brand" href="index.html"><strong>bluebox</strong></a>
                 </div>
             </nav>
-            <c:choose>
-                <c:when test="${user.userRoleId == 1}">
-                    <jsp:include page="fragment/dashboardadminnav.jsp" />
-                </c:when>
-                <c:otherwise>
-                    <jsp:include page="fragment/dashboardusernav.jsp" />
-                </c:otherwise>
-            </c:choose>
+            <!--/. NAV TOP  -->
+            <jsp:include page="fragment/dashboardadminnav.jsp" />
+            <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
                 <div class="header"> 
@@ -56,41 +51,39 @@
                 <div id="page-inner"> 
                     <div class="row">
                         <div class="col-lg-12">
+                            <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Reset Password
+                                    Message detail
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <form:form modelAttribute="login" action="editpassword" method="post">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>New password </label>
-                                                    <input name="password1" type="password" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Confirm old password:</label>
-                                                    <form:hidden path="userId" value="${user.userId}" />
-                                                    <form:hidden path="username" value="${user.username}" />
-                                                    <form:password cssClass="form-control" path="password" />
-                                                    <c:if test="${not empty message}">
-                                                        <div class="simple-alert-msg" >
-                                                            ${message}
-                                                        </div>
-                                                    </c:if>
-                                                </div>
-
-                                                <button id="submit" type="submit" class="btn btn-default">Submit Button</button>
-                                                <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Reset Button</button>
-
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Reenter new password:</label>
-                                                    <input name="password2" type="password" class="form-control">
-                                                </div>
-                                            </div>
-                                        </form:form>
+                                        <div class="col-lg-12">
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <th colspan="3">Subject</th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">${messageObject.subject}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Sender</th>
+                                                    <th>Email</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>${messageObject.senderName}</td>
+                                                    <td>${messageObject.senderEmail}</td>
+                                                    <td>${messageObject.date}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="3">Message</th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">${messageObject.message}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                     <!-- /.row (nested) -->
                                 </div>
@@ -113,6 +106,8 @@
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
+
+
         <!-- Metis Menu Js -->
         <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
         <!-- Morris Chart Js -->
@@ -129,11 +124,14 @@
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
-                                                    function confirm_reset() {
-                                                        return confirm('Are you sure you want to reset the form?');
-                                                    }
+            jQuery(document).ready(function ($) {
+                $(".clickable-row").click(function () {
+                    window.location = $(this).data("href");
+                });
+            });
         </script>
 
     </body>
 </body>
 </html>
+

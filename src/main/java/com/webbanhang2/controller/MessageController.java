@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -40,6 +41,21 @@ public class MessageController {
             else{
                 mav.addObject("message","An error has occured. You will now be redirected to homepage.");
             }
+            return mav;
+        }
+    }
+    
+    @RequestMapping("/deletemessage")
+    public ModelAndView deleteMessage(@RequestParam(value = "messageid", required = false) String messageId){
+        ModelAndView mav;
+        boolean result = messageService.deleteMessage(messageId);
+        //do something for result?
+        if(result){
+            return new ModelAndView("redirect:dashboard?action=messagelist");
+        }
+        else{
+            mav = new ModelAndView("message");
+            mav.addObject("message", "something delete failed");
             return mav;
         }
     }

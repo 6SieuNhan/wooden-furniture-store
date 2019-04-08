@@ -13,6 +13,7 @@ import com.webbanhang2.model.OrderDetail;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
 import com.webbanhang2.service.CategoryService;
+import com.webbanhang2.service.MessageService;
 import com.webbanhang2.service.OrderService;
 import com.webbanhang2.service.ProductService;
 import java.util.ArrayList;
@@ -50,6 +51,9 @@ public class HomeController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    MessageService messageService;
 
     /**
      * Sets up the login model attribute, to be used by various forms requiring
@@ -276,6 +280,7 @@ public class HomeController {
             @RequestParam(value = "maxprice", required = false) Double maxPrice,
             @RequestParam(value = "orderid", required = false) String orderId,
             @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "messageid", required = false) String messageId,
             HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mav;
@@ -295,17 +300,28 @@ public class HomeController {
                 if (page == null) {
                     page = 1;
                 }
+                List<Order> orderList;
+                if (user.getUserRoleId() == User.ADMIN) {
+                    //do something for admin
+                    orderList = orderService.getOrderListSearch(searchQuery, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    pageCount = orderService.getOrderListSearchPageCount(searchQuery, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                } else {
+                    //do something for user
+                    orderList = orderService.getOrderList(user.getUserId(), (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    pageCount = orderService.getOrderListPageCount(user.getUserId(), WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                }
+
                 mav = new ModelAndView("dashboardorder");
-                List<Order> orderList = orderService.getOrderList(user.getUserId(), (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
-                pageCount = orderService.getOrderListPageCount(user.getUserId(), WBHConstants.PRODUCT_LIST_PAGE_SIZE);
                 mav.addObject("orderList", orderList);
                 mav.addObject("pageCount", pageCount);
                 return mav;
             case "orderdetail":
                 Order o = orderService.getOrder(orderId);
-                //validation stuff; prevent users from viewing other's order info
-                if (o == null || !o.getUserId().equals(user.getUserId())) {
-                    return new ModelAndView("redirect:home");
+                //validation stuff; prevent non-admin users from viewing other's order info
+                if (o == null || 
+                        ((o.getUserId() == null || !o.getUserId().equals(user.getUserId())) 
+                        && user.getUserRoleId() != User.ADMIN)) {
+                    return new ModelAndView("redirect:dashboard?action=order");
                 } else {
                     int total = 0;
                     for (OrderDetail od : o.getOrderDetailList()) {
@@ -338,6 +354,28 @@ public class HomeController {
                     mav.addObject("pageCount", pageCount);
                     return mav;
                 }
+            case "messagelist":
+                if (page == null) {
+                    page = 1;
+                }
+                List<Message> messageList = messageService.getMessageList(searchQuery, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                pageCount = messageService.getMessageListPageCount(searchQuery, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+
+                mav = new ModelAndView("dashboardadmin_messagelist");
+                mav.addObject("messageList", messageList);
+                mav.addObject("pageCount", pageCount);
+                return mav;
+            case "message":
+                Message m = messageService.getMessage(messageId);
+                if (m == null) {
+                    //what do I do here
+                    mav = new ModelAndView("message");
+                    mav.addObject("message", "something not found.");
+                } else {
+                    mav = new ModelAndView("dashboardadmin_message");
+                    mav.addObject("messageObject", m);
+                }
+                return mav;
             default:
                 return new ModelAndView("dashboardaccinfo");
         }

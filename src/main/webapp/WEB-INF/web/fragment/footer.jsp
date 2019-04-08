@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <footer>
     <div class="container">
@@ -20,40 +21,27 @@
             <!-- quick links -->
             <div class="col-sm-5 address-right">
                 <div class="col-xs-6 footer-grids">
-                    <h3>Quick Links</h3>
+                    <h3>Không gian</h3>
                     <ul>
-                        <li>
-                            <a href="about.html">About Us</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="help.html">Help</a>
-                        </li>
-                        <li>
-                            <a href="faqs.html">Faqs</a>
-                        </li>
-                        <li>
-                            <a href="terms.html">Terms of use</a>
-                        </li>
-                        <li>
-                            <a href="privacy.html">Privacy Policy</a>
-                        </li>
+                        <c:forEach var="pci" items="${productRoomList}">
+                            <li>
+                                <a href="productlist?productroomid=${pci.categoryId}">${pci.categoryName}</a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="col-xs-6 footer-grids">
-                    <h3>Get in Touch</h3>
+                    <h3>Thông tin liên hệ</h3>
                     <ul>
                         <li>
-                            <i class="fa fa-map-marker"></i> 123 Sebastian, USA.</li>
+                            <i class="fa fa-map-marker"></i>Số 2, Kho Sau - Van Diem - Thuong Tin - Ha Noi</li>
                         <li>
-                            <i class="fa fa-mobile"></i> 333 222 3333 </li>
+                            <i class="fa fa-mobile"></i>0347545020 - 0913076724</li>
                         <li>
-                            <i class="fa fa-phone"></i> +222 11 4444 </li>
+                            <i class="fa fa-fax"></i>+1 888 888 4444</li>
                         <li>
                             <i class="fa fa-envelope-o"></i>
-                            <a href="mailto:example@mail.com"> mail@example.com</a>
+                            <a href="mailto:dogothuyhang@gmail.com">dogothuyhang@gmail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -63,7 +51,7 @@
                 <!-- map -->
                 <!--The div element for the map -->
                 <div id="map"></div>
-                
+
             </div>
             <!-- //social icons -->
             <div class="clearfix"></div>

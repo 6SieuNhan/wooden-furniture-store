@@ -13,7 +13,7 @@ import java.util.List;
  * @author fkien
  */
 public class Order {
-    private String orderId, userId, userAddress, userPhone, userEmail, orderStatusId, validationCode;
+    private String orderId, userId, username, userAddress, userPhone, userEmail, orderStatusId, validationCode;
     
     private Date orderDate;
     
@@ -25,6 +25,15 @@ public class Order {
     public Order() {
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
     public String getOrderId() {
         return orderId;
     }

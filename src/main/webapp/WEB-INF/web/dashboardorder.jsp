@@ -40,7 +40,14 @@
                 </div>
             </nav>
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/userdashboardnav.jsp" />
+            <c:choose>
+                <c:when test="${user.userRoleId == 1}">
+                    <jsp:include page="fragment/dashboardadminnav.jsp" />
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="fragment/dashboardusernav.jsp" />
+                </c:otherwise>
+            </c:choose>
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
@@ -64,17 +71,26 @@
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
                                                         <tr>
+                                                            <c:if test="${user.userRoleId == 1}">
+                                                                <th>Username</th>
+                                                                </c:if>
                                                             <th>Address</th>
                                                             <th>E-mail</th>
                                                             <th>Phone Number</th>
                                                             <th>Order Date</th>
                                                             <th>Order Status</th>
                                                             <th></th>
+                                                                <c:if test="${user.userRoleId == 1}">
+                                                                <th></th>
+                                                                </c:if>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var="o" items="${orderList}">
                                                             <tr class="gradeA" >
+                                                                <c:if test="${user.userRoleId == 1}">
+                                                                    <td>${o.username}</td>
+                                                                </c:if>
                                                                 <td>${o.userAddress}</td>
                                                                 <td>${o.userEmail}</td>
                                                                 <td>${o.userPhone}</td>
@@ -89,6 +105,13 @@
                                                                         View
                                                                     </a>
                                                                 </td>
+                                                                <c:if test="${user.userRoleId == 1}">
+                                                                    <td>
+                                                                        <a href="deleteorder?orderid=${o.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
+                                                                            Delete
+                                                                        </a>
+                                                                    </td>
+                                                                </c:if>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>

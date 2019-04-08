@@ -84,6 +84,13 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
         }
     }
 
+    @Override
+    public boolean deleteOrderDetail(String orderId) {
+        String sql = "DELETE FROM webbanhang.order_detail where order_id = ?";
+        int result = jdbcTemplate.update(sql, orderId);
+        return (result>0);
+    }
+
     class OrderDetailPreparedStatementSetter implements BatchPreparedStatementSetter {
 
         String orderId;

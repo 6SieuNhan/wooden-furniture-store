@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author fkien
  */
 @Controller
-public class CheckoutController {
+public class OrderController {
 
     @Autowired
     EmailService emailService;
@@ -37,8 +37,8 @@ public class CheckoutController {
 
     @RequestMapping(value = "docheckout")
     public ModelAndView doCheckout(HttpServletRequest request, @ModelAttribute("login") User user,
-            @RequestParam(value="paymentmethodid") Integer paymentMethodId
-            ) {
+            @RequestParam(value = "paymentmethodid") Integer paymentMethodId
+    ) {
         //Order detail is stored in session attribute
         List<Product> checkoutList = (List<Product>) request.getSession().getAttribute("checkoutList");
         if (checkoutList == null || checkoutList.isEmpty()) {
@@ -86,6 +86,18 @@ public class CheckoutController {
         return mav;
     }
 
+    @RequestMapping(value = "deleteorder")
+    public ModelAndView deleteOrder(@RequestParam(value = "orderid", required = false) String orderId,
+            HttpServletRequest request) {
+        //validation stuff
+        User user = (User) request.getSession().getAttribute("user");
+        if (user.getUserRoleId() == User.ADMIN) {
+            boolean res = orderService.deleteOrder(orderId);
+            //do something if delete fails?
+        }
+        return new ModelAndView("redirect:dashboard?action=order");
+    }
+
     public String getCheckoutMailMessage(HttpServletRequest request, List<Product> items, Order order) {
         String s = "<div>\n"
                 + "            This is a test message for WebBanHang.<br/>\n"
@@ -102,7 +114,7 @@ public class CheckoutController {
         for (int i = 0; i < items.size(); i++) {
             Product item = items.get(i);
             s += "<tr>\n";
-            s += "<td>" + (i+1) + "</td>\n";
+            s += "<td>" + (i + 1) + "</td>\n";
             s += "<td>" + item.getProductName() + "</td>\n";
             s += "<td>" + item.getQuantity() + "</td>\n";
             s += "<td> $" + item.getPrice() + "</td>\n";

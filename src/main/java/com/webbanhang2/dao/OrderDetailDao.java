@@ -22,4 +22,6 @@ public interface OrderDetailDao {
     List<OrderDetail> getOrderDetailList(String orderId);
     
     OrderDetail getOrderDetail(String orderId, String productId);
+    
+    boolean deleteOrderDetail(String orderId);
 }

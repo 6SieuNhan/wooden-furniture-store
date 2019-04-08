@@ -20,14 +20,20 @@ public interface OrderService {
     
     public List<Order> getOrderList(String userId, int top, int count);
     
+    public List<Order> getOrderListSearch(String username, int top, int count);
+    
     public int getOrderListPageCount(int size);
     
     public int getOrderListPageCount(String userId, int size);
+    
+    public int getOrderListSearchPageCount(String username, int size);
     
     public Order getOrder(String orderId);
     
     public Order addOrder(List<Product> items, User user, int paymentMethodId);
     
     public boolean validateOrder(String orderId, String validationCode);
+    
+    public boolean deleteOrder(String orderId);
     
 }

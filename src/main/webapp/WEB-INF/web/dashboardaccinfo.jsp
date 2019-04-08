@@ -27,21 +27,17 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html"><strong>Cửa hàng đồ gỗ</strong></a>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li style="color: white;">
-                        Welcome ${user.username}
-                    </li>
-                    <li>
-                        <a href="logout">Sign Out</a>
-                    </li>
-                </ul>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/userdashboardnav.jsp" />
+            <c:choose>
+                <c:when test="${user.userRoleId == 1}">
+                    <jsp:include page="fragment/dashboardadminnav.jsp" />
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="fragment/dashboardusernav.jsp" />
+                </c:otherwise>
+            </c:choose>
+            
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">

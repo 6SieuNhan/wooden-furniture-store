@@ -26,16 +26,18 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1" >
                         <ul class="nav navbar-nav menu__list">
-                            <li class="active">
-                                <a class="nav-stylehead" href="home">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
+                            <li class="
+                                <c:if test= "${param.page == 'index'}">active</c:if>
+                                ">
+                                <a class="nav-stylehead" href="home">Trang chủ</a>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="productlist">Our Products</a>
+                            <li class="
+                                <c:if test= "${param.page == 'product'}">active</c:if>
+                                ">
+                                <a class="nav-stylehead" href="productlist">Sản phẩm</a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category
+                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Danh mục
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu multi-column columns-3">
@@ -61,7 +63,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Material
+                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chất liệu
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -80,7 +82,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Room
+                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Không gian
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -99,11 +101,15 @@
                                     </div>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="about">About Us</a>
+                            <li class="
+                                <c:if test= "${param.page == 'about'}">active</c:if>
+                                ">
+                                <a class="nav-stylehead" href="about">Giới thiệu</a>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="contact">Contact</a>
+                            <li class="
+                                <c:if test= "${param.page == 'contact'}">active</c:if>
+                                ">
+                                <a class="nav-stylehead" href="contact">Liên hệ</a>
                             </li>
                         </ul>
                     </div>

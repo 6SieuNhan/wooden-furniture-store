@@ -18,7 +18,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="fragment/navbar.jsp" />
+        <jsp:include page="fragment/navbar.jsp" >
+            <jsp:param name="page" value="about" />
+        </jsp:include>
         <!-- //navbar -->
         <!-- banner-2 -->
         <div class="page-head_agile_info_w3l">
@@ -30,7 +32,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="welcome">
             <div class="container">
                 <!-- tittle heading -->
-                <h3 class="tittle-w3l">Welcome to our Site
+                <h3 class="tittle-w3l">Chào mừng quý khách
                     <span class="heading-style">
                         <i></i>
                         <i></i>
@@ -66,12 +68,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="clearfix"> </div>
                 </div>
                 <div class="w3l-welcome-text">
-                    <p>Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus
-                        omnis optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.Sed ut perspiciatis unde omnis iste
-                        natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
-                        et quasi architecto beatae vitae </p>
-                    <p>libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus
-                        omnis optio cumque nihil impedit </p>
+                    <br>
+                    <h4>Giá trị và sự khác biệt</h4>
+                    <p>&nbsp;&nbsp;&nbsp;Một ngôi nhà đẹp không thể thiếu đi những nội thất cao cấp. Khác với những nội thất thông thường, nội thất được làm từ gỗ toát lên sự sang trọng, quý phái. Không những thế, gỗ là một chất liệu tự nhiên không hề độc hại, sẽ tạo cho bạn cảm giác gẫn vũi với thiên nhiên ngay bên trong ngôi nhà tiện nghi của bạn. Một trong những ưu điểm của đồ được làm từ gỗ là chúng vô cùng bền vững với thời gian, bạn có thể sử dụng tới vài chục năm thậm chí hơn thế.</p>
+                    <p>&nbsp;&nbsp;&nbsp;Sự khác biệt của chúng tôi chính là sáng tạo nội thất thành phong cách riêng, phù hợp với nhu cầu khách hàng. Không chỉ là sản phẩm nội thất đơn thuần, mà còn là không gian sống theo phong cách riêng với cách bày trí hài hòa từ đồ nội thất kết hợp với đồ trang trí. Giúp khách hàng cảm nhận được một không gian sống thực sự, cảm thấy thoải mái để tận hưởng cuộc sống.</p>
+                    <br>
+                    <h4>Chất lượng và dịch vụ</h4>
+                    <p>&nbsp;&nbsp;&nbsp;Chất lượng của nguyên vật liệu, phụ kiện và quy trình sản xuất đều được kiểm định và giám sát chặt chẽ bởi hệ thống quản lý chất lượng ISO 9001. Sản phẩm của Nhà Xinh được thiết kế theo định hướng công năng sử dụng, thẩm mỹ và chất lượng. Trong những năm gần đây, thương hiệu luôn hướng đến xu hướng thiết kế xanh nhằm đóng góp không chỉ một không gian sống tiện nghi mà còn là một môi trường sống trong lành cho người sử dụng và cộng đồng.</p>
+                    <br>
                 </div>
                 <!-- video -->
                 <iframe src="https://player.vimeo.com/video/15520702?color=ffffff&title=0&byline=0"></iframe>
