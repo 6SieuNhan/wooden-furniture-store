@@ -18,8 +18,6 @@ public class Product {
     private int productCategoryId, productMaterialId, productOriginId, productRoomId, quantity;
     
     private int price;
-    
-    private List<String> imgList;
 
     public Product() {
     }
@@ -46,15 +44,6 @@ public class Product {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-
-    public List<String> getImgList() {
-        return imgList;
-    }
-
-    public void setImgList(List<String> imgList) {
-        this.imgList = imgList;
     }
 
     public String getProductId() {

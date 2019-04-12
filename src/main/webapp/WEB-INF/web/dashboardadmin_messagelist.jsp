@@ -34,21 +34,11 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="home"><strong>Cửa hàng đồ gỗ</strong></a>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li style="color: white;">
-                        Welcome ${user.username}
-                    </li>
-                    <li>
-                        <a href="logout">Sign Out</a>
-                    </li>
-                </ul>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/dashboardadminnav.jsp" />
+            <jsp:include page="fragment/dashboardadminnav.jsp">
+                <jsp:param name="page" value="messagelist" />
+            </jsp:include>
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">

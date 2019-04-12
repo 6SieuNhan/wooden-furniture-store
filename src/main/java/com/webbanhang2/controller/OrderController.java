@@ -85,16 +85,47 @@ public class OrderController {
         }
         return mav;
     }
+    
+    @RequestMapping(value = "changeorderstatus")
+    public ModelAndView changeOrderStatus(@RequestParam(value = "orderid", required = false) String orderId,
+            @RequestParam(value = "orderstatusid", required = false) Integer orderStatusId,
+            HttpServletRequest request){
+        //validation stuff
+        User user = (User) request.getSession().getAttribute("user");
+        if(user.getUserRoleId()!=User.ADMIN || orderId==null || orderId.isEmpty() || orderStatusId == null){
+            return new ModelAndView("redirect:home");
+        }
+        else{
+            boolean result = orderService.changeOrderStatus(orderId, orderStatusId);
+            //do something with the result?
+            ModelAndView mav = new ModelAndView("redirect:dashboard?action=orderdetail&orderid="+orderId);
+            return mav;
+        }
+    }
 
     @RequestMapping(value = "deleteorder")
     public ModelAndView deleteOrder(@RequestParam(value = "orderid", required = false) String orderId,
             HttpServletRequest request) {
         //validation stuff
+        //user: Can only delete pending order (orders in Unverified and Verified statuses,
+        //belonging to the user in question
+        //admin: Can always delete order
         User user = (User) request.getSession().getAttribute("user");
+        boolean allow = false;
         if (user.getUserRoleId() == User.ADMIN) {
-            boolean res = orderService.deleteOrder(orderId);
-            //do something if delete fails?
+            allow = true;
         }
+        else{
+            Order o = orderService.getOrder(orderId);
+            if((o.getOrderStatusId().equals("1")||o.getOrderStatusId().equals("2"))
+                    && o.getUserId().equals(user.getUserId())){
+                allow = true;
+            }
+        }
+        if(allow){
+            boolean res = orderService.deleteOrder(orderId);
+        }
+            //do something if delete fails?
         return new ModelAndView("redirect:dashboard?action=order");
     }
 

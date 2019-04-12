@@ -43,14 +43,14 @@ public class CategoryDaoTest extends TestCase {
     @Test
     public void getCategoryListProductCategory() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.PRODUCT_CATEGORY);
-        assertEquals(result.get(0).getCategoryName(), "Bàn Ghế");
+        assertEquals(result.get(0).getCategoryName(), "Bàn");
     }
 
     @Test
     public void getCategoryListProductMaterial() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.PRODUCT_MATERIAL
         );
-        assertEquals(result.get(0).getCategoryName(), "Gỗ Gụ");
+        assertEquals(result.get(0).getCategoryName(), "Gỗ Cẩm lai");
     }
 
     @Test
@@ -64,14 +64,14 @@ public class CategoryDaoTest extends TestCase {
     public void getCategoryListProductRoom() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.PRODUCT_ROOM
         );
-        assertEquals(result.get(0).getCategoryName(), "Phòng khách");
+        assertEquals(result.get(0).getCategoryName(), "Phòng ăn");
     }
 
     @Test
     public void getCategoryListOrderStatus() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.ORDER_STATUS
         );
-        assertEquals(result.get(0).getCategoryName(), "unverified");
+        assertEquals(result.get(0).getCategoryName(), "Unverified");
     }
 
     @Test

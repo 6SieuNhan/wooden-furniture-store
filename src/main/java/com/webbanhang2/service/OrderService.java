@@ -16,11 +16,10 @@ import java.util.List;
  */
 public interface OrderService {
     
-    public List<Order> getOrderList(int top, int count);
     
     public List<Order> getOrderList(String userId, int top, int count);
     
-    public List<Order> getOrderListSearch(String username, int top, int count);
+    public List<Order> getOrderListSearch(String query, int top, int count);
     
     public int getOrderListPageCount(int size);
     
@@ -31,6 +30,8 @@ public interface OrderService {
     public Order getOrder(String orderId);
     
     public Order addOrder(List<Product> items, User user, int paymentMethodId);
+    
+    public boolean changeOrderStatus(String orderId, int orderStatusId);
     
     public boolean validateOrder(String orderId, String validationCode);
     

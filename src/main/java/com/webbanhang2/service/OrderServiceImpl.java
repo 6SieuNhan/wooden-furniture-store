@@ -26,11 +26,6 @@ public class OrderServiceImpl implements OrderService {
 
     /*@Autowired
     private EmailService emailService;*/
-    @Transactional
-    @Override
-    public List<Order> getOrderList(int top, int count) {
-        return orderDao.getOrderList(top, count);
-    }
 
     @Transactional
     @Override
@@ -78,12 +73,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrderListSearch(String username, int top, int count) {
-        if (username == null || username.isEmpty()) {
-            return orderDao.getOrderList(top, count);
-        } else {
-            return orderDao.getOrderListSearch(username, top, count);
-        }
+    public List<Order> getOrderListSearch(String query, int top, int count) {
+        return orderDao.getOrderListSearch(query, top, count);
     }
 
     @Override
@@ -93,5 +84,10 @@ public class OrderServiceImpl implements OrderService {
         } else {
             return orderDao.getOrderListSearchPageCount(username, size);
         }
+    }
+    
+    @Override
+    public boolean changeOrderStatus(String orderId, int orderStatusId){
+        return orderDao.changeOrderStatus(orderId, orderStatusId);
     }
 }

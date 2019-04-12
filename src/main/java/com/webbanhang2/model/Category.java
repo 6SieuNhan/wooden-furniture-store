@@ -25,23 +25,25 @@ public class Category {
     //for user role
     public static final int USER_ROLE = 7;
     
-    private String categoryId, categoryName;
-    private int categoryType;
+    private String  categoryName;
+    private int categoryType,categoryId, productCount;
 
     public Category() {
     }
 
-    public Category(String categoryId, String categoryName, int categoryType) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-        this.categoryType = categoryType;
+    public int getProductCount() {
+        return productCount;
     }
 
-    public String getCategoryId() {
+    public void setProductCount(int productCount) {
+        this.productCount = productCount;
+    }
+
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 

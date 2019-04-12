@@ -19,18 +19,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </head>
 
     <body>
-        <!-- header -->
-        <jsp:include page="fragment/header.jsp" />
-        <!-- //header -->
-        <!-- navbar -->
-        <jsp:include page="fragment/navbar.jsp" />
-        <!-- //navbar -->
-
-        <!-- banner-2 -->
-        <div class="page-head_agile_info_w3l">
-
-        </div>
-        <!-- //banner-2 -->
         <!-- checkout page -->
         <div class="privacy">
             <div class="container">
@@ -133,9 +121,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
             </div>
             <!-- //checkout page -->
-            <!-- footer -->
-            <jsp:include page="fragment/footer.jsp" />
-            <!-- //footer -->
             <!-- copyright -->
             <jsp:include page="fragment/copyright.jsp" />
             <!-- //copyright -->

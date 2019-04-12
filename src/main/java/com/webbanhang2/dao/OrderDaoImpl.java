@@ -36,28 +36,32 @@ public class OrderDaoImpl implements OrderDao {
     OrderDetailDao orderDetailDao;
 
     @Override
-    public List<Order> getOrderList(int top, int count) {
-        String sql = "select * from webbanhang.order limit " + top + ", " + count + " ;";
-        List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
-        return orderList;
-    }
-
-    @Override
     public List<Order> getOrderList(String userId, int top, int count) {
-        String sql = "select * from webbanhang.order "
-                + "where user_id = '" + userId + "' "
-                + "limit " + top + ", " + count + " ;";
-        List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
+        String sql = "SELECT * FROM webbanhang.`order` left join \n"
+                + "(SELECT user_id, username from webbanhang.user) a1\n"
+                + "on `order`.user_id = a1.user_id\n"
+                + "where a1.user_id = ? limit ?, ?;";
+        List<Order> orderList = jdbcTemplate.query(sql, new Object[]{userId, top, count}, new OrderMapper());
         return orderList;
     }
 
     @Override
-    public List<Order> getOrderListSearch(String username, int top, int count) {
-        String sql = "SELECT * FROM webbanhang.`order` left join webbanhang.user \n"
-                + "on `order`.user_id = user.user_id\n"
-                + "where user.username like ?\n"
-                + "limit ?, ?;";
-        List<Order> orderList = jdbcTemplate.query(sql, new Object[]{username, top, count}, new OrderMapper(true));
+    public List<Order> getOrderListSearch(String query, int top, int count) {
+        List<Order> orderList;
+        String sql;
+        if (query != null && !query.isEmpty()) {
+            sql = "SELECT * FROM webbanhang.`order` left join \n"
+                    + "(SELECT user_id, username from webbanhang.user) a1\n"
+                    + "on `order`.user_id = a1.user_id\n"
+                    + "where a1.username like ?\n"
+                    + "limit ?, ?;";
+            orderList = jdbcTemplate.query(sql, new Object[]{query, top, count}, new OrderMapper(true));
+        } else {
+            sql = "SELECT * FROM webbanhang.`order` left join \n"
+                    + "(SELECT user_id, username from webbanhang.user) a1\n"
+                    + "on `order`.user_id = a1.user_id limit ?, ?;";
+            orderList = jdbcTemplate.query(sql, new Object[]{top, count}, new OrderMapper(true));
+        }
         return orderList;
     }
 
@@ -123,6 +127,18 @@ public class OrderDaoImpl implements OrderDao {
                     + "and order_status_id = '1');";
             int i = jdbcTemplate.update(sql, orderId);
             return i != 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean changeOrderStatus(String orderId, int orderStatusId){
+        try {
+            String sql = "UPDATE webbanhang.order SET order_status_id = ? "
+                    + "WHERE order_id = ?;";
+            return jdbcTemplate.update(sql, orderStatusId, orderId) > 0;
         } catch (DataAccessException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -202,7 +218,8 @@ public class OrderDaoImpl implements OrderDao {
             order.setValidationCode(rs.getString("validation_code"));
             order.setPaymentMethodId(rs.getInt("payment_method_id"));
             if (hasUsername) {
-                order.setUsername(rs.getString("user.username"));
+                order.setUsername(rs.getString("username"));
+                System.out.println(order.getUsername());
             }
             return order;
         }

@@ -27,23 +27,18 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><strong>bluebox</strong></a>
-                </div>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
+            <!--/. NAV TOP  -->
             <c:choose>
                 <c:when test="${user.userRoleId == 1}">
-                    <jsp:include page="fragment/dashboardadminnav.jsp" />
+                    <jsp:include page="fragment/dashboardadminnav.jsp" >
+                        <jsp:param name="page" value="editpassword" />
+                    </jsp:include>
                 </c:when>
                 <c:otherwise>
-                    <jsp:include page="fragment/dashboardusernav.jsp" />
+                    <jsp:include page="fragment/dashboardusernav.jsp" >
+                        <jsp:param name="page" value="editpassword" />
+                    </jsp:include>
                 </c:otherwise>
             </c:choose>
 

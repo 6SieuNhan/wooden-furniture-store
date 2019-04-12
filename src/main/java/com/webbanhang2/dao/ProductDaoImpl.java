@@ -237,11 +237,6 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count) {
         String sql = "SELECT product_id,product_code, product_name, thumbnail, quantity,price "
                 + "FROM webbanhang.product " + getSQLParamString(params, top, count);
-//        String sql1 = "select p.product_id,p.product_code,p.product_name,p.thumbnail,p.quantity,p.price, c.categories_name, m.material_name from webbanhang.product p "
-//                + "inner join webbanhang.product_categories c"
-//                + "on p.product_categories_id = c.categories_id"
-//                + "inner join webbanhang.product_material m"
-//                + "on p.product_material_id = m.material_id"+ getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ProductForAdmin());
         return productList;
@@ -333,10 +328,6 @@ public class ProductDaoImpl implements ProductDao {
             product.setDescription(rs.getString("description"));
             product.setQuantity(rs.getInt("quantity"));
             product.setPrice(rs.getInt("price"));
-            String sql = "select * from webbanhang.product_img "
-                    + "where`product_product_id` = '"
-                    + product.getProductId() + "';";
-            product.setImgList(jdbcTemplate.query(sql, new ImgNameMapper()));
             return product;
         }
     }

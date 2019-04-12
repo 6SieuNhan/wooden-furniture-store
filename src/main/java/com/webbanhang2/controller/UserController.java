@@ -54,17 +54,15 @@ public class UserController {
             if (test != null) {
                 mav = new ModelAndView("register");
                 mav.addObject("message", "There is already an account with this username.");
-            }
-            else{
+            } else {
                 boolean result = userService.registerUser(user);
                 mav = new ModelAndView("message");
-                if(result){
+                if (result) {
                     mav.addObject("message", "Register successful, please login to continue.");
-                }
-                else{
+                } else {
                     mav.addObject("message", "An unfortunate error has happened; please try again later.");
                 }
-                
+
             }
         }
         return mav;
@@ -83,7 +81,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView processLogin(HttpServletRequest request,
             @ModelAttribute("login") User user) {
-        user = userService.validateUser(user);
+        user = userService.getUser(user);
         if (user == null) {
             ModelAndView mav = new ModelAndView(WBHConstants.LOGIN_VIEW_NAME);
             mav.addObject("message", WBHConstants.LOGIN_FAIL_MESSAGE);
@@ -171,7 +169,7 @@ public class UserController {
             return new ModelAndView("redirect:home");
         } else {
             ModelAndView mav = new ModelAndView("message");
-            boolean success = userService.resetPassword(userId, password);
+            boolean success = userService.changePassword(userId, password);
             if (success) {
                 mav.addObject("message", "Reset password successful. You will now be redirected to the home page.");
             } else {
@@ -185,12 +183,12 @@ public class UserController {
     public ModelAndView processEditAccInfo(@ModelAttribute("login") User user, HttpServletRequest request, RedirectAttributes redir) {
         //validation
         ModelAndView mav = new ModelAndView("redirect:dashboard");
-        User valid = userService.validateUser(user);
+        User valid = userService.getUser(user);
         if (valid == null) {
             redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
         } else {
             //set user Id
-            User current = (User)request.getSession().getAttribute("user");
+            User current = (User) request.getSession().getAttribute("user");
             user.setUserId(current.getUserId());
             boolean result = userService.editUser(user);
             //we do something?
@@ -200,10 +198,41 @@ public class UserController {
                 redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
             }
             //reset user info
-            user = userService.validateUser(user);
+            user = userService.getUser(user);
             request.getSession().setAttribute("user", user);
         }
         return mav;
+    }
+
+    @RequestMapping("/editaccinfoadmin")
+    public ModelAndView processEditAccInfoAdmin(@ModelAttribute("login") User user2,
+            @RequestParam(value = "userRoleId", required = false) Integer userRoleId,
+            HttpServletRequest request, RedirectAttributes redir) {
+
+        //admin validation
+        User current = (User) request.getSession().getAttribute("user");
+        if (current == null || current.getUserRoleId() != User.ADMIN) {
+            return new ModelAndView("redirect:home");
+        } else {
+            ModelAndView mav = new ModelAndView("redirect:dashboard?action=accountinfo&userid=" + user2.getUserId());
+            if(userRoleId!= null && userRoleId != 0){
+                user2.setUserRoleId(userRoleId);
+            }
+            boolean result = userService.editUser(user2);
+            //we do something?
+            if (result) {
+                redir.addFlashAttribute("message", "Edit successful.");
+            } else {
+                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+            }
+            //in case user2 = current
+            if(user2.getUserId().equals(current.getUserId())){
+                current = userService.getUser(current);
+                request.getSession().setAttribute("user",current);
+            }
+            return mav;
+        }
+        
     }
 
     @RequestMapping("/editpassword")
@@ -211,11 +240,11 @@ public class UserController {
             @RequestParam(value = "password1", required = false) String newPassword,
             HttpServletRequest request, RedirectAttributes redir) {
         ModelAndView mav = new ModelAndView("redirect:dashboard?action=editpassword");
-        User valid = userService.validateUser(user);
+        User valid = userService.getUser(user);
         if (valid == null) {
             redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
         } else {
-            boolean result = userService.resetPassword(user.getUserId(), newPassword);
+            boolean result = userService.changePassword(user.getUserId(), newPassword);
             //we do something?
             if (result) {
                 redir.addFlashAttribute("message", "Edit successful.");

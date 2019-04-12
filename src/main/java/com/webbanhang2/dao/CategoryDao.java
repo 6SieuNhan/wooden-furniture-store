@@ -14,4 +14,12 @@ import java.util.List;
  */
 public interface CategoryDao {
     List<Category> getCategoryList(int categoryType);
+    
+    List<Category> getCategoryListWithProductCount(int categoryType);
+    
+    Category getCategoryByName(String categoryName, int categoryType);
+    
+    boolean saveCategory(String oldCategory, String newCategory, int categoryType); 
+    
+    boolean deleteCategory(String categoryName, int categoryType);
 }

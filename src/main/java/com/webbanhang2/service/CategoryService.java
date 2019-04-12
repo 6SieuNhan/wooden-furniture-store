@@ -15,4 +15,12 @@ import java.util.List;
 public interface CategoryService {
     
     public List<Category> getCategoryList(int categoryType);
+    
+     public List<Category> getCategoryListWithProductCount(int categoryType);
+    
+    public Category getCategoryByName(String categoryName, int categoryType);
+    
+    public boolean saveCategory(String oldCategory, String newCategory, int categoryType);
+    
+    public boolean deleteCategory(String categoryName, int categoryType);
 }

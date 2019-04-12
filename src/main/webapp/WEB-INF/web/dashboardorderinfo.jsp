@@ -27,24 +27,18 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><strong>bluebox</strong></a>
-                </div>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
             <c:choose>
                 <c:when test="${user.userRoleId == 1}">
-                    <jsp:include page="fragment/dashboardadminnav.jsp" />
+                    <jsp:include page="fragment/dashboardadminnav.jsp" >
+                        <jsp:param name="page" value="order" />
+                    </jsp:include>
                 </c:when>
                 <c:otherwise>
-                    <jsp:include page="fragment/dashboardusernav.jsp" />
+                    <jsp:include page="fragment/dashboardusernav.jsp" >
+                        <jsp:param name="page" value="order" />
+                    </jsp:include>
                 </c:otherwise>
             </c:choose>
             <!-- /. NAV SIDE  -->
@@ -111,12 +105,35 @@
                                             <div>${order.userPhone}</div>
                                             <label>Order Status</label>
                                             <div>
-                                                <c:forEach var="pci" items="${orderStatusList}">
-                                                    <c:if test="${pci.categoryId==order.orderStatusId}">
-                                                        <td>${pci.categoryName}</td>
-                                                    </c:if>
-                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${user.userRoleId == 1}">
+                                                        <select class="form-control" onchange="if (this.value)
+                                                            window.location.href = 'changeorderstatus?orderid=${order.orderId}&orderstatusid=' + this.value">
+                                                            <c:forEach var="pci" items="${orderStatusList}">
+                                                                <option
+                                                                    <c:if test="${pci.categoryId==order.orderStatusId}">
+                                                                        selected
+                                                                    </c:if>
+                                                                    value="${pci.categoryId}">${pci.categoryName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:forEach var="pci" items="${orderStatusList}">
+                                                            <c:if test="${pci.categoryId==order.orderStatusId}">
+                                                                <div>${pci.categoryName}</div>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </c:otherwise>
+                                                </c:choose>
+
                                             </div>
+                                            <c:if test="${user.userRoleId == 1 || order.orderStatusId=='1' || order.orderStatusId=='2'  }">
+                                                <br>
+                                                <a role="button" class="btn btn-default" href="deleteorder?orderid=${order.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
+                                                    Delete
+                                                </a>
+                                            </c:if>
                                         </div>
                                     </div>
                                     <!-- /.row (nested) -->
@@ -158,11 +175,11 @@
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
-            jQuery(document).ready(function ($) {
-                $(".clickable-row").click(function () {
-                    window.location = $(this).data("href");
-                });
-            });
+                                                    jQuery(document).ready(function ($) {
+                                                        $(".clickable-row").click(function () {
+                                                            window.location = $(this).data("href");
+                                                        });
+                                                    });
         </script>
 
     </body>

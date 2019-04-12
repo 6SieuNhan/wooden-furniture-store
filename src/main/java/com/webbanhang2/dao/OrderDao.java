@@ -16,11 +16,9 @@ import java.util.List;
  */
 public interface OrderDao {
     
-    List<Order> getOrderList(int top, int count);
-    
     List<Order> getOrderList(String userId, int top, int count);
     
-    List<Order> getOrderListSearch(String username, int top, int count);
+    List<Order> getOrderListSearch(String query, int top, int count);
     
     int getOrderListPageCount(int size);
     
@@ -31,6 +29,8 @@ public interface OrderDao {
     Order getOrder(String orderId);
     
     boolean validateOrder(String orderId);
+    
+    boolean changeOrderStatus(String orderId, int orderStatusId);
     
     Order addOrder(List<Product> items, User user, int paymentMethodId);
     

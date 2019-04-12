@@ -22,10 +22,30 @@ public class CategoryServiceImpl implements CategoryService{
     @Autowired
     private CategoryDao categoryDao;
     
-    @Transactional
     @Override
     public List<Category> getCategoryList(int categoryType) {
         return categoryDao.getCategoryList(categoryType);
     }
     
+    @Override
+    public List<Category> getCategoryListWithProductCount(int categoryType){
+        return categoryDao.getCategoryListWithProductCount(categoryType);
+    }
+    
+    @Override
+    public Category getCategoryByName(String categoryName, int categoryType){
+        return categoryDao.getCategoryByName(categoryName, categoryType);
+    }
+    
+    @Transactional
+    @Override
+    public boolean saveCategory(String oldCategory, String newCategory, int categoryType){
+        return categoryDao.saveCategory(oldCategory, newCategory, categoryType);
+    }
+    
+    @Transactional
+    @Override
+    public boolean deleteCategory(String categoryName, int categoryType){
+        return categoryDao.deleteCategory(categoryName, categoryType);
+    }
 }

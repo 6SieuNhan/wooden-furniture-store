@@ -272,7 +272,7 @@ public class UserDaoTest extends TestCase {
     @Transactional
     @Rollback(true)
     public void resetPasswordNullAll(){
-        boolean result = userDaoMock.resetPassword(null, null);
+        boolean result = userDaoMock.changePassword(null, null);
         assertEquals(result, false);
     }
     
@@ -280,7 +280,7 @@ public class UserDaoTest extends TestCase {
     @Transactional
     @Rollback(true)
     public void resetPasswordNullUser(){
-        boolean result = userDaoMock.resetPassword(null, "testpassword");
+        boolean result = userDaoMock.changePassword(null, "testpassword");
         assertEquals(result, false);
     }
     
@@ -288,7 +288,7 @@ public class UserDaoTest extends TestCase {
     @Transactional
     @Rollback(true)
     public void resetPasswordNullPassword(){
-        boolean result = userDaoMock.resetPassword("defe4bf4-38cc-11e9-97d5-20474704b06e", null);
+        boolean result = userDaoMock.changePassword("defe4bf4-38cc-11e9-97d5-20474704b06e", null);
         assertEquals(result, false);
     }
     
@@ -296,7 +296,7 @@ public class UserDaoTest extends TestCase {
     @Transactional
     @Rollback(true)
     public void resetPasswordCorrect(){
-        boolean result = userDaoMock.resetPassword("defe4bf4-38cc-11e9-97d5-20474704b06e", "testpassword");
+        boolean result = userDaoMock.changePassword("defe4bf4-38cc-11e9-97d5-20474704b06e", "testpassword");
         assertEquals(result, true);
     }
     

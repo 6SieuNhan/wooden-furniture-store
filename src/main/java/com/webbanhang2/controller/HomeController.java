@@ -16,9 +16,17 @@ import com.webbanhang2.service.CategoryService;
 import com.webbanhang2.service.MessageService;
 import com.webbanhang2.service.OrderService;
 import com.webbanhang2.service.ProductService;
+import com.webbanhang2.service.UserService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +48,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SessionAttributes(value = {"login", "messageForm", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
-    "paymentMethodList", "orderStatusList"})
+    "paymentMethodList", "orderStatusList", "userRoleList"})
 public class HomeController {
 
     @Autowired
@@ -54,6 +62,9 @@ public class HomeController {
 
     @Autowired
     MessageService messageService;
+
+    @Autowired
+    UserService userService;
 
     /**
      * Sets up the login model attribute, to be used by various forms requiring
@@ -116,6 +127,11 @@ public class HomeController {
     @ModelAttribute("orderStatusList")
     public List<Category> setUpOrderStatusList() {
         return categoryService.getCategoryList(Category.ORDER_STATUS);
+    }
+
+    @ModelAttribute("userRoleList")
+    public List<Category> setUpUserRoleList() {
+        return categoryService.getCategoryList(Category.USER_ROLE);
     }
 
     @RequestMapping("about")
@@ -211,22 +227,40 @@ public class HomeController {
      * because the method will just redirect to Home anyway.
      *
      * @param productId The product's ID.
+     * @param request
      * @return If product ID is not available or the product is not found,
      * redirect to home. Otherwise returns a ModelAndView for product.jsp, with
      * the relevant information.
      */
     @RequestMapping({"product"})
-    public ModelAndView showProduct(@RequestParam(value = "productid", required = false) String productId) {
+    public ModelAndView showProduct(@RequestParam(value = "productid", required = false) String productId, HttpServletRequest request) {
         System.out.println("showProduct with productId = " + productId);
         if (productId == null || productId.isEmpty()) {
             return new ModelAndView("redirect:home");
         } else {
             Product p = productService.getProduct(productId);
+
             if (p == null) {
                 return new ModelAndView("redirect:home");
             } else {
+                //get image list
+                ArrayList<String> imgList = new ArrayList<>();
+                StringBuilder path3 = new StringBuilder("/resource/images/product_img/");
+                path3.append(p.getProductCode());
+                path3.append("/");
+                String path2 = request.getSession().getServletContext().getRealPath(path3.toString());
+                try (Stream<Path> paths = Files.walk(Paths.get(path2))) {
+                    paths.filter(Files::isRegularFile).forEach(path -> {
+                        System.out.println(path.getFileName());
+                        imgList.add(path.getFileName().toString());
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 ModelAndView mav = new ModelAndView("product");
                 mav.addObject("product", p);
+                mav.addObject("imgList", imgList);
                 return mav;
             }
         }
@@ -281,6 +315,13 @@ public class HomeController {
             @RequestParam(value = "orderid", required = false) String orderId,
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "messageid", required = false) String messageId,
+            @RequestParam(value = "userid", required = false) String userId,
+            @RequestParam(value = "userquery", required = false) String userQuery,
+            @RequestParam(value = "emailquery", required = false) String emailQuery,
+            @RequestParam(value = "addressquery", required = false) String addressQuery,
+            @RequestParam(value = "phonequery", required = false) String phoneQuery,
+            @RequestParam(value = "categorytype", required = false) Integer categoryType,
+            @RequestParam(value = "userroleid", required = false) Integer userRoleId,
             HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mav;
@@ -293,7 +334,13 @@ public class HomeController {
         }
         switch (action) {
             case "accountinfo":
-                return new ModelAndView("dashboardaccinfo");
+                mav = new ModelAndView("dashboardaccinfo");
+                //admin edit form stuff
+                if (user.getUserRoleId() == User.ADMIN && userId != null && !userId.isEmpty()) {
+                    User user2 = userService.getUserById(userId);
+                    mav.addObject("user2", user2);
+                }
+                return mav;
             case "editpassword":
                 return new ModelAndView("dashboardeditpassword");
             case "order":
@@ -303,14 +350,24 @@ public class HomeController {
                 List<Order> orderList;
                 if (user.getUserRoleId() == User.ADMIN) {
                     //do something for admin
-                    orderList = orderService.getOrderListSearch(searchQuery, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
-                    pageCount = orderService.getOrderListSearchPageCount(searchQuery, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    if (userId != null && !userId.isEmpty()) {
+                        orderList = orderService.getOrderList(userId, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                        pageCount = orderService.getOrderListPageCount(userId, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    } else {
+                        if (searchQuery != null && !searchQuery.isEmpty()) {
+                            searchQuery = "%" + searchQuery + "%";
+                        }
+                        orderList = orderService.getOrderListSearch(searchQuery, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                        pageCount = orderService.getOrderListSearchPageCount(searchQuery, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    }
                 } else {
                     //do something for user
                     orderList = orderService.getOrderList(user.getUserId(), (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
                     pageCount = orderService.getOrderListPageCount(user.getUserId(), WBHConstants.PRODUCT_LIST_PAGE_SIZE);
                 }
-
+                if (orderList != null && !orderList.isEmpty()) {
+                    System.out.println(orderList.get(0).getUsername());
+                }
                 mav = new ModelAndView("dashboardorder");
                 mav.addObject("orderList", orderList);
                 mav.addObject("pageCount", pageCount);
@@ -318,8 +375,8 @@ public class HomeController {
             case "orderdetail":
                 Order o = orderService.getOrder(orderId);
                 //validation stuff; prevent non-admin users from viewing other's order info
-                if (o == null || 
-                        ((o.getUserId() == null || !o.getUserId().equals(user.getUserId())) 
+                if (o == null
+                        || ((o.getUserId() == null || !o.getUserId().equals(user.getUserId()))
                         && user.getUserRoleId() != User.ADMIN)) {
                     return new ModelAndView("redirect:dashboard?action=order");
                 } else {
@@ -333,6 +390,32 @@ public class HomeController {
                     return mav;
                 }
             //admin stuff
+            case "categorylist":
+                if (user.getUserRoleId() == User.ADMIN) {
+                    if (categoryType == null) {
+                        categoryType = Category.PRODUCT_CATEGORY;
+                    }
+                    List<Category> categoryList = categoryService.getCategoryListWithProductCount(categoryType);
+                    mav = new ModelAndView("dashboardadmin_categorylist");
+                    mav.addObject("categoryList", categoryList);
+                    mav.addObject("categoryType", categoryType);
+                    return mav;
+                }
+            case "userlist":
+                if (user.getUserRoleId() == User.ADMIN) {
+                    if (page == null) {
+                        page = 1;
+                    }
+                    if (userRoleId == null) {
+                        userRoleId = 0;
+                    }
+                    List<User> userList = userService.getUserList(userQuery, emailQuery, addressQuery, phoneQuery, userRoleId, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    pageCount = userService.getUserListPageCount(userQuery, emailQuery, addressQuery, phoneQuery, userRoleId, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+                    mav = new ModelAndView("dashboardadmin_userlist");
+                    mav.addObject("userList", userList);
+                    mav.addObject("pageCount", pageCount);
+                    return mav;
+                }
             case "productlist":
                 if (user.getUserRoleId() == User.ADMIN) {
                     HashMap<String, Object> params = new HashMap<>();

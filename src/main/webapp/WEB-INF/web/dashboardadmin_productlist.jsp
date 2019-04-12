@@ -39,7 +39,9 @@
         <div id="wrapper">
             <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/dashboardadminnav.jsp" />
+            <jsp:include page="fragment/dashboardadminnav.jsp">
+                <jsp:param name="page" value="productlist" />
+            </jsp:include>
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">

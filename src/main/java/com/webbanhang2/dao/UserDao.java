@@ -6,6 +6,7 @@
 package com.webbanhang2.dao;
 
 import com.webbanhang2.model.User;
+import java.util.List;
 
 /**
  *
@@ -15,7 +16,13 @@ public interface UserDao {
 
     boolean registerUser(User user);
 
+    List<User> getUserList(String userQuery, String emailQuery, String addressQuery, String phoneQuery, int userRoleId, int top, int count);
+    
+    int getUserListPageCount(String userQuery, String emailQuery, String addressQuery, String phoneQuery, int userRoleId, int size);
+    
     User getUser(User user);
+    
+    User getUserById(String userId);
     
     User getUserByName(String username);
     
@@ -27,5 +34,5 @@ public interface UserDao {
     
     boolean validateRecovery(String userId, String recoveryCode);
     
-    boolean resetPassword(String userId, String password);
+    boolean changePassword(String userId, String password);
 }

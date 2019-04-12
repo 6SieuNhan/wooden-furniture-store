@@ -28,24 +28,18 @@
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><strong>bluebox</strong></a>
-                </div>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
             <c:choose>
                 <c:when test="${user.userRoleId == 1}">
-                    <jsp:include page="fragment/dashboardadminnav.jsp" />
+                    <jsp:include page="fragment/dashboardadminnav.jsp" >
+                        <jsp:param name="page" value="order" />
+                    </jsp:include>
                 </c:when>
                 <c:otherwise>
-                    <jsp:include page="fragment/dashboardusernav.jsp" />
+                    <jsp:include page="fragment/dashboardusernav.jsp" >
+                        <jsp:param name="page" value="order" />
+                    </jsp:include>
                 </c:otherwise>
             </c:choose>
             <!-- /. NAV SIDE  -->
@@ -67,6 +61,20 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
+                                            <!-- search form for admin -->
+                                            <c:if test="${user.userRoleId == 1}">
+                                                <div class="form-group">
+                                                    <form action="dashboard" method="get" >
+                                                        <label>Tìm kiếm theo tên người dùng:</label>
+                                                        <input type="text" placeholder="Nhập từ khóa tìm kiếm"
+                                                               name="searchquery" value="${param.searchquery}">
+                                                        <input type="hidden" id="action" name="action" value="order">
+                                                        <button type="submit" value=" "><i class="fa fa-search"></i></button>
+                                                    </form>
+                                                </div>
+                                            </c:if>
+
+
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
@@ -105,7 +113,7 @@
                                                                         View
                                                                     </a>
                                                                 </td>
-                                                                <c:if test="${user.userRoleId == 1}">
+                                                                <c:if test="${user.userRoleId == 1 || o.orderStatusId=='1' || o.orderStatusId=='2'  }">
                                                                     <td>
                                                                         <a href="deleteorder?orderid=${o.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
                                                                             Delete
@@ -116,6 +124,12 @@
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>
+
+                                                <c:if test = "${empty orderList}">
+                                                    <div class="notiSearch">
+                                                        Không tìm được hóa đơn nào.
+                                                    </div>
+                                                </c:if>
 
                                                 <div class="pagination-holder clearfix">
                                                     <div id="light-pagination" class="pagination pull-right"></div>
@@ -147,11 +161,11 @@
 
         <script src="<c:url value="/resource/js/jquery.simplePagination.js"/>"></script>
         <script>
-            $('#light-pagination').pagination({
-                pages: ${pageCount},
-                currentPage: ${(empty param.page) ? '1': param.page},
-                selectOnClick: false
-            });
+                                                                            $('#light-pagination').pagination({
+                                                                                pages: ${pageCount},
+                                                                                currentPage: ${(empty param.page) ? '1': param.page},
+                                                                                selectOnClick: false
+                                                                            });
 
         </script>
 
