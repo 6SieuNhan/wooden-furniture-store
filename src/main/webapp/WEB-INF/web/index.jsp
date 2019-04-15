@@ -19,9 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <jsp:include page="fragment/header.jsp" />
         <!-- //header -->
         <!-- navbar -->
-        <jsp:include page="fragment/navbar.jsp" >
-            <jsp:param name="page" value="index" />
-        </jsp:include>
+        <jsp:include page="fragment/navbar.jsp" />
         <!-- //navbar -->
         <!-- banner -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -41,7 +39,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </h3>
                             <p>Get flat
                                 <span>10%</span> Cashback</p>
-                            <a class="button2" href="product.html">Mua ngay</a>
+                            <a class="button2" href="product.html">Shop Now </a>
                         </div>
                     </div>
                 </div>

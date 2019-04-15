@@ -34,10 +34,10 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng" required="required" />
+                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30" />
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" placeholder = "Mật khẩu" required="required" />
+                                    <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" />
                                 </div>
                             </div>
                             <c:if test="${not empty message}">
@@ -60,7 +60,7 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <input type="text" placeholder="mail@example.com" name="recoveryemail" required="">
+                                    <input type="text" placeholder="mail@example.com" name="recoveryemail" required="" maxlength="30">
                                 </div>
                             </div>
                             <c:if test="${not empty message2}">

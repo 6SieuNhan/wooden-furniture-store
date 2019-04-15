@@ -43,7 +43,7 @@ public class UserDaoTest extends TestCase {
         test.setPhone("123456789");
         return test;
     }
-    
+
     User getMockUserEdit() {
         User test = new User();
         test.setUserId("defe4bf4-38cc-11e9-97d5-20474704b06e");
@@ -142,6 +142,56 @@ public class UserDaoTest extends TestCase {
         User test = getMockUserRegister();
         boolean result = userDaoMock.registerUser(test);
         assertEquals(result, true);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void registerUserLongUsername() {
+        User test = getMockUserRegister();
+        test.setUsername("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.registerUser(test);
+        assertEquals(result, false);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void registerUserLongPassword() {
+        User test = getMockUserRegister();
+        test.setPassword("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.registerUser(test);
+        assertEquals(result, false);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void registerUserLongEmail() {
+        User test = getMockUserRegister();
+        test.setEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.registerUser(test);
+        assertEquals(result, false);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void registerUserLongAddress() {
+        User test = getMockUserRegister();
+        test.setUsername("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.registerUser(test);
+        assertEquals(result, false);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void registerUserLongPhone() {
+        User test = getMockUserRegister();
+        test.setPhone("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.registerUser(test);
+        assertEquals(result, false);
     }
 
     //test for getUser()
@@ -249,7 +299,7 @@ public class UserDaoTest extends TestCase {
         boolean result = userDaoMock.validateRecovery("WRONG_USER_ID", "test_recovery_code");
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
@@ -265,99 +315,128 @@ public class UserDaoTest extends TestCase {
         boolean result = userDaoMock.validateRecovery("defe4bf4-38cc-11e9-97d5-20474704b06e", "test_recovery_code");
         assertEquals(result, true);
     }
-    
+
     //tests for resetPassword(String userId, String password)
     //Use account: defe4bf4-38cc-11e9-97d5-20474704b06e, testpassword
     @Test
     @Transactional
     @Rollback(true)
-    public void resetPasswordNullAll(){
+    public void resetPasswordNullAll() {
         boolean result = userDaoMock.changePassword(null, null);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void resetPasswordNullUser(){
+    public void resetPasswordNullUser() {
         boolean result = userDaoMock.changePassword(null, "testpassword");
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void resetPasswordNullPassword(){
+    public void resetPasswordNullPassword() {
         boolean result = userDaoMock.changePassword("defe4bf4-38cc-11e9-97d5-20474704b06e", null);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void resetPasswordCorrect(){
+    public void resetPasswordCorrect() {
         boolean result = userDaoMock.changePassword("defe4bf4-38cc-11e9-97d5-20474704b06e", "testpassword");
         assertEquals(result, true);
     }
-    
+
     //tests for editUser(User user)
     //Use account: defe4bf4-38cc-11e9-97d5-20474704b06e
     @Test
     @Transactional
     @Rollback(true)
-    public void editUserNullAll(){
+    public void editUserNullAll() {
         User test = new User();
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void editUserNullUserId(){
+    public void editUserNullUserId() {
         User test = getMockUserEdit();
         test.setUserId(null);
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void editUserNullEmail(){
+    public void editUserNullEmail() {
         User test = getMockUserEdit();
         test.setEmail(null);
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void editUserNullAddress(){
+    public void editUserNullAddress() {
         User test = getMockUserEdit();
         test.setAddress(null);
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void editUserNullPhone(){
+    public void editUserNullPhone() {
         User test = getMockUserEdit();
         test.setPhone(null);
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, false);
     }
-    
+
     @Test
     @Transactional
     @Rollback(true)
-    public void editUserCorrect(){
+    public void editUserCorrect() {
         User test = getMockUserEdit();
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, true);
     }
-    
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void editUserLongEmail() {
+        User test = getMockUserEdit();
+        test.setEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.editUser(test);
+        assertEquals(result, false);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void editUserLongAddress() {
+        User test = getMockUserEdit();
+        test.setAddress("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.editUser(test);
+        assertEquals(result, false);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void editUserLongPhone() {
+        User test = getMockUserEdit();
+        test.setPhone("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        boolean result = userDaoMock.editUser(test);
+        assertEquals(result, false);
+    }
 }

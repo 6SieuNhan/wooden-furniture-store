@@ -62,7 +62,7 @@
                                             <form action="dashboard" method="get" >
                                                 <div class="search">
                                                     <input type="text" placeholder="Nhập từ khóa tìm kiếm"
-                                                           name="searchquery" value="${param.searchquery}">
+                                                           name="searchquery" value="${param.searchquery}" maxlength="30">
                                                     <input type="hidden" id="action" name="action" value="messagelist">
                                                     <button type="submit" value=" "><i class="fa fa-search"></i></button>      
                                                 </div>

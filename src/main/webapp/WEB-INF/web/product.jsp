@@ -68,9 +68,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="single-infoagile">
                         <ul>
                             <li>
-                                Cash on Delivery Eligible.
-                            </li>
-                            <li>
                                 Shipping Speed to Delivery.
                             </li>
                             <li>

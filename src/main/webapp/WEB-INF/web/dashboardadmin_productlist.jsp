@@ -66,7 +66,7 @@
                                             <form action="dashboard?action=productlist" method="get" >
                                                 <div class="search">
                                                     <input type="text" placeholder="Nhập từ khóa tìm kiếm"
-                                                           name="searchquery" value="${param.searchquery}">
+                                                           name="searchquery" value="${param.searchquery}" maxlength="45">
                                                     <input type="hidden" id="action" name="action" value="productlist">
                                                     <button type="submit" value=" "><i class="fa fa-search"></i></button>      
                                                 </div>
@@ -119,53 +119,52 @@
                                                     </select>
 
                                                 </div>
-                                                <div class="floatRight">
-                                                    <a href="createProduct"><button class="button">Create Product</button></a>
-                                                </div>
-
-
-                                                <!-- //search garbage -->
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Mã sản phẩm</th>
-                                                                <th>Tên sản phẩm</th>
-                                                                <th>Hình ảnh</th>
-                                                                <th>Số lượng</th>
-                                                                <th>Giá</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach var = "product" items ="${productList}" varStatus = "loop">
-                                                                <tr>
-                                                                    <td>${product.productCode}</td>
-                                                                    <td>${product.productName}</td>
-                                                                    <td><img class="resize" src="<c:url value="resource/images/default/${product.thumbnail}"/> " alt=""></td>
-                                                                    <td>${product.quantity}</td>
-                                                                    <td>${product.price}</td>
-                                                                    <td>
-                                                                        <a href="edit?productid=${product.productId}">Edit</a>
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Delete</a>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                    <c:if test = "${empty productList}">
-                                                        <div class="notiSearch">
-                                                            No product with this keyword can be found.
-                                                        </div>
-                                                    </c:if>
-
-                                                    <div class="pagination-holder clearfix">
-                                                        <div id="light-pagination" class="pagination pull-right"></div>
-                                                    </div>
-
-                                                </div>
-
                                             </form> 
+                                            <div class="floatRight">
+                                                <a href="createProduct"><button class="button">Create Product</button></a>
+                                            </div>
+
+
+                                            <!-- //search garbage -->
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Mã sản phẩm</th>
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Giá</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var = "product" items ="${productList}" varStatus = "loop">
+                                                            <tr>
+                                                                <td>${product.productCode}</td>
+                                                                <td>${product.productName}</td>
+                                                                <td>${product.quantity}</td>
+                                                                <td><span class="number">${product.price}</span> đ</td>
+                                                                <td>
+                                                                    <a href="edit?productid=${product.productId}">Edit</a>
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Delete</a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                                <c:if test = "${empty productList}">
+                                                    <div class="notiSearch">
+                                                        No product with this keyword can be found.
+                                                    </div>
+                                                </c:if>
+
+                                                <div class="pagination-holder clearfix">
+                                                    <div id="light-pagination" class="pagination pull-right"></div>
+                                                </div>
+
+                                            </div>
+
+
                                         </div>
                                     </div>
                                     <!-- /.row (nested) -->
@@ -191,11 +190,11 @@
 
         <script src="<c:url value="/resource/js/jquery.simplePagination.js"/>"></script>
         <script>
-                                                                            $('#light-pagination').pagination({
-                                                                                pages: ${pageCount},
-                                                                                currentPage: ${(empty param.page) ? '1': param.page},
-                                                                                selectOnClick: false
-                                                                            });
+                                                                        $('#light-pagination').pagination({
+                                                                            pages: ${pageCount},
+                                                                            currentPage: ${(empty param.page) ? '1': param.page},
+                                                                            selectOnClick: false
+                                                                        });
 
         </script>
 
@@ -215,7 +214,11 @@
         <!-- Custom Js -->
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
-
+        <!-- number -->
+        <script src="<c:url value="/resource/js/jquery.number.min.js"/>"></script>
+        <script>
+        $('span.number').number(true, 0, '.', ' ');
+        </script>
     </body>
 </body>
 </html>

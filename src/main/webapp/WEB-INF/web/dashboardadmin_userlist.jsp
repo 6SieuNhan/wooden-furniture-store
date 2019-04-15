@@ -60,13 +60,13 @@
                                             <form action="dashboard" method="get" >
                                                 <div class="search">
                                                     <input type="text" placeholder="Tên người dùng"
-                                                           name="userquery" value="${param.userquery}">
+                                                           name="userquery" value="${param.userquery}" maxlength="30">
                                                     <input type="text" placeholder="Email"
-                                                           name="emailquery" value="${param.emailquery}">
+                                                           name="emailquery" value="${param.emailquery}" maxlength="30">
                                                     <input type="text" placeholder="Địa chỉ"
-                                                           name="addressquery" value="${param.addressquery}">
+                                                           name="addressquery" value="${param.addressquery}" maxlength="100">
                                                     <input type="text" placeholder="Số điện thoại"
-                                                           name="phonequery" value="${param.phonequery}">
+                                                           name="phonequery" value="${param.phonequery}" maxlength="12">
                                                     <select name="userroleid">
                                                         <option value="0">All users</option>
                                                         <option

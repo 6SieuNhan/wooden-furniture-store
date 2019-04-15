@@ -13,6 +13,10 @@ import java.util.List;
  * @author fkien
  */
 public class Order {
+    public static final int UNVERIFIED = 1;
+    public static final int VERIFIED = 2;
+    public static final int COMPLETE = 3;
+    
     private String orderId, userId, username, userAddress, userPhone, userEmail, orderStatusId, validationCode;
     
     private Date orderDate;

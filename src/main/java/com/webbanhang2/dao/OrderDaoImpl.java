@@ -132,12 +132,23 @@ public class OrderDaoImpl implements OrderDao {
             return false;
         }
     }
-    
+
     @Override
-    public boolean changeOrderStatus(String orderId, int orderStatusId){
+    public boolean changeOrderStatus(String orderId, int orderStatusId) {
         try {
-            String sql = "UPDATE webbanhang.order SET order_status_id = ? "
-                    + "WHERE order_id = ?;";
+            String sql;
+            try {
+                if (Integer.parseInt(orderId) == Order.COMPLETE) {
+                    sql = "UPDATE webbanhang.order SET order_status_id = ?, complete_date = NOW() "
+                            + "WHERE order_id = ?;";
+                } else {
+                    sql = "UPDATE webbanhang.order SET order_status_id = ? "
+                            + "WHERE order_id = ?;";
+                }
+            } catch (NumberFormatException ex) {
+                sql = "UPDATE webbanhang.order SET order_status_id = ? "
+                        + "WHERE order_id = ?;";
+            }
             return jdbcTemplate.update(sql, orderStatusId, orderId) > 0;
         } catch (DataAccessException ex) {
             System.out.println(ex.getMessage());

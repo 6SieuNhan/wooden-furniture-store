@@ -67,7 +67,7 @@
                                                     <form action="dashboard" method="get" >
                                                         <label>Tìm kiếm theo tên người dùng:</label>
                                                         <input type="text" placeholder="Nhập từ khóa tìm kiếm"
-                                                               name="searchquery" value="${param.searchquery}">
+                                                               name="searchquery" value="${param.searchquery}" maxlength="30">
                                                         <input type="hidden" id="action" name="action" value="order">
                                                         <button type="submit" value=" "><i class="fa fa-search"></i></button>
                                                     </form>

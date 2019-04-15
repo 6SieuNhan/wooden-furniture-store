@@ -88,7 +88,7 @@ public class AdminController {
             model.addAttribute("formTitle", "Sửa sản phẩm");
         }
 
-        return "formProduct";
+        return "dashboardadmin_formproduct";
     }
 
     @RequestMapping("/createProduct")
@@ -108,7 +108,7 @@ public class AdminController {
     @RequestMapping(value = "edit")
     public String editProduct(Model model, @RequestParam(value = "productid", required = false) String productId) {
         if (productId == null) {
-            return "redirect:adminpage";
+            return "redirect:dashboard?action=productlist";
         } else {
             Product p = productService.getProduct(productId);
             return this.formProduct(model, p);
@@ -131,7 +131,7 @@ public class AdminController {
         // Add message to flash scope
         redirectAttributes.addFlashAttribute("message", "Save Product Successful");
 
-        return "redirect:adminpage";
+        return "redirect:dashboard?action=productlist";
 
     }
 

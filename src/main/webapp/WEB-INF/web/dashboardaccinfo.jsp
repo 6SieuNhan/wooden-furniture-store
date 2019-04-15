@@ -78,15 +78,15 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Số điện thoại:</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}"/>
+                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="12"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" />
+                                                            <form:input type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" maxlength="30"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user2.address}"/>
+                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user2.address}" maxlength="100"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quyền người dùng</label>
@@ -114,20 +114,20 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Số điện thoại:</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}"/>
+                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="12"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user.email}" />
+                                                            <form:input disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user.email}" maxlength="30"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user.address}"/>
+                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user.address}" maxlength="100"/>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Confirm password: </label>
-                                                            <form:password disabled="true" cssClass="form-control" path="password" />
+                                                            <form:password disabled="true" cssClass="form-control" path="password" maxlength="16"/>
                                                             <c:if test="${not empty message}">
                                                                 <div class="simple-alert-msg" >
                                                                     ${message}

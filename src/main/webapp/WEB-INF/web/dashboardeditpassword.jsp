@@ -61,7 +61,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>New password </label>
-                                                    <input name="password1" type="password" class="form-control">
+                                                    <input name="password1" type="password" class="form-control" minlength="4" maxlength="16">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Confirm old password:</label>
@@ -82,7 +82,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Reenter new password:</label>
-                                                    <input name="password2" type="password" class="form-control">
+                                                    <input name="password2" type="password" class="form-control" maxlength="16">
                                                 </div>
                                             </div>
                                         </form:form>

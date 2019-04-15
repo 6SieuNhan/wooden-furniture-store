@@ -328,6 +328,7 @@ public class ProductDaoImpl implements ProductDao {
             product.setDescription(rs.getString("description"));
             product.setQuantity(rs.getInt("quantity"));
             product.setPrice(rs.getInt("price"));
+            product.setThumbnail(rs.getString("thumbnail"));
             return product;
         }
     }

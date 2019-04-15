@@ -33,10 +33,10 @@
                                 <input type="text" name="userid" value="${param.userid}" >
                                 <input type="text" name="recovery" value="${param.recovery}" >
                                 <div class="controls">
-                                    <input type="password" placeholder="Password" id="password1" name="password1" required="">
+                                    <input type="password" placeholder="Password (4-16 chars)" id="password1" name="password1" required="" minlength="4" maxlength="16">
                                 </div>
                                 <div class="controls">
-                                    <input type="password" placeholder="Confirm password" id="password2" name="password2" required="">
+                                    <input type="password" placeholder="Confirm password" id="password2" name="password2" required="" maxlength="16">
                                 </div>
                             </div>
                             <c:if test="${not empty message}">

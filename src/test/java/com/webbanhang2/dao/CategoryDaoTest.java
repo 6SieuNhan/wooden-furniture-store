@@ -71,14 +71,14 @@ public class CategoryDaoTest extends TestCase {
     public void getCategoryListOrderStatus() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.ORDER_STATUS
         );
-        assertEquals(result.get(0).getCategoryName(), "Unverified");
+        assertEquals(result.get(0).getCategoryName(), "completed");
     }
 
     @Test
     public void getCategoryListPaymentMethod() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.PAYMENT_METHOD
         );
-        assertEquals(result.get(0).getCategoryName(), "cod");
+        assertEquals(result.get(0).getCategoryName(), "cash");
     }
 
     @Test

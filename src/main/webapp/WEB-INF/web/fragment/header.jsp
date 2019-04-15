@@ -113,10 +113,10 @@
 
                         <form:form id="loginForm" modelAttribute="login" action="login" method="post">
                             <div class="styled-input agile-styled-input-top">
-                                <form:input path="username" placeholder = "Tên người dùng" required="required" />
+                                <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30" />
                             </div>
                             <div class="styled-input">
-                                <form:password path="password" placeholder = "Mật khẩu" required="required" />
+                                <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" />
                             </div>
                             <a href="login">Quên mật khẩu?</a><br>
                             <input type="submit" value="Đăng nhập">

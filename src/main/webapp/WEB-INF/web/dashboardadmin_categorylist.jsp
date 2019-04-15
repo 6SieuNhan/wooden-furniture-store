@@ -153,7 +153,7 @@
                                             <div class="form-group">
                                                 <label>Tên danh mục mới</label>
                                                 <input class="form-control" name="newcategory">
-                                                <input type="hidden" name="categorytype" value="${categoryType}">
+                                                <input type="hidden" name="categorytype" value="${categoryType}" maxlength="45">
                                             </div>
                                             <c:if test="${not empty message}">
                                                 <div class="simple-alert-msg" >

@@ -43,10 +43,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <div class="col-xs-5 contact-text w3-agileits">
                                 
                                 <form:form modelAttribute="messageForm" action="sendcontactmessage" method="post">
-                                    <form:input path="senderName" placeholder = "Tên" required="required" maxlength="45"/>
-                                    <form:input path="subject" placeholder = "Tiêu đề" required="required" />
-                                    <form:input path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="45"/>
-                                    <form:textarea path="message" placeholder = "Nội dung" required="required" />
+                                    <form:input path="senderName" placeholder = "Tên" required="required" maxlength="30"/>
+                                    <form:input path="subject" placeholder = "Tiêu đề" required="required" maxlength="30" />
+                                    <form:input path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
+                                    <form:textarea path="message" placeholder = "Nội dung" required="required" maxlength="300" />
                                     <button class="submit check_out">Submit</button>
                                 </form:form>
                             </div>

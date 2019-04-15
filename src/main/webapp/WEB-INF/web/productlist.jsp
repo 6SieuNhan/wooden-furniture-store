@@ -52,10 +52,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <div class="col-xs-4 product-men">
                                     <div class="men-pro-item simpleCart_shelfItem">
                                         <div class="men-thumb-item">
-                                            <img src="<c:url value="resource/images/default/no-image-available-md.png"/>" alt="">
+                                            <img src="resource/images/product_img/${product.thumbnail}" alt="" onerror="this.src='<c:url value="resource/images/default/no-image-available-md.png"/>';">
                                             <div class="men-cart-pro">
                                                 <div class="inner-men-cart-pro">
-                                                    <a href="product?productid=${product.productId}" class="link-product-add-cart">Xem nhanh</a>
+                                                    <a href="product?productid=${product.productId}" class="link-product-add-cart">Xem ngay</a>
                                                 </div>
                                             </div>
                                         </div>
