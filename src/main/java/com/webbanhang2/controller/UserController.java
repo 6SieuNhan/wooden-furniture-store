@@ -130,7 +130,7 @@ public class UserController {
                 String recoveryMessage = getRecoveryMessage(user, recoveryCode);
 
                 System.out.println(recoveryMessage);
-                boolean res = emailService.sendHTMLMessage(to, subject, recoveryMessage);
+                boolean res = emailService.sendHTMLMessage(email, subject, recoveryMessage);
                 System.out.println(res);
                 success = res;
             }

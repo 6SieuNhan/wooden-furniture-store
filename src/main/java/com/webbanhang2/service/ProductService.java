@@ -17,6 +17,8 @@ public interface ProductService {
     
     public List<Product> getProductList(Map<String, Object> params, int top, int count);
 
+    public List<Product> getProductListByTop();
+    
     public Product getShortenedProduct(String productId);
     
     public Product getProduct(String productId);
@@ -27,5 +29,5 @@ public interface ProductService {
 
     public void deleteProduct(String productId);
 
-    public void saveProduct(Product p);
+    public boolean saveProduct(Product p);
 }

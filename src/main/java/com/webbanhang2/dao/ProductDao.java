@@ -21,6 +21,8 @@ public interface ProductDao {
     
     List<Product> getProductList(Map<String, Object> params, int top, int count);
     
+    List<Product> getProductListByTop();
+    
     int getProductListPageCount(Map<String, Object> params, int size);
     
     List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count);

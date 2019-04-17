@@ -37,7 +37,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
     @Override
     public OrderDetail getOrderDetail(String orderId, String productId) {
-        String sql = "SELECT * FROM webbanhang.order_detail left join webbanhang.product\n"
+        String sql = "SELECT * FROM order_detail left join product\n"
                 + "on order_detail.product_id = product.product_id\n"
                 + "where order_id = ?;\n"
                 + "and order_detail.product_id = ?;";
@@ -52,7 +52,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     @Override
     public boolean addOrderDetail(String orderId, Product item) {
         try {
-            String sql = "insert into webbanhang.order_detail(order_id, product_id, quantity, price) values(?, ?, ?, ?)";
+            String sql = "insert into order_detail(order_id, product_id, quantity, price) values(?, ?, ?, ?)";
             int i = jdbcTemplate.update(sql, orderId, item.getProductId(), item.getQuantity(), item.getPrice());
             return i != 0;
         } catch (DataAccessException ex) {
@@ -63,7 +63,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
     @Override
     public List<OrderDetail> getOrderDetailList(String orderId) {
-        String sql = "SELECT * FROM webbanhang.order_detail left join webbanhang.product\n"
+        String sql = "SELECT * FROM order_detail left join product\n"
                 + "on order_detail.product_id = product.product_id\n"
                 + "where order_id = ?;";
         return jdbcTemplate.query(sql, new Object[]{orderId}, new OrderDetailMapper(true));
@@ -72,7 +72,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     @Override
     public boolean addOrderDetailList(String orderId, List<Product> items) {
         try {
-            String sql = "insert into webbanhang.order_detail(order_id, product_id, quantity, price) values(?, ?, ?, ?)";
+            String sql = "insert into order_detail(order_id, product_id, quantity, price) values(?, ?, ?, ?)";
             OrderDetailPreparedStatementSetter odpss = new OrderDetailPreparedStatementSetter();
             odpss.setOrderId(orderId);
             odpss.setItems(items);
@@ -86,7 +86,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
     @Override
     public boolean deleteOrderDetail(String orderId) {
-        String sql = "DELETE FROM webbanhang.order_detail where order_id = ?";
+        String sql = "DELETE FROM order_detail where order_id = ?";
         int result = jdbcTemplate.update(sql, orderId);
         return (result>0);
     }

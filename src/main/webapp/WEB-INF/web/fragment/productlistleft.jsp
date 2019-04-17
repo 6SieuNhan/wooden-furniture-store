@@ -24,7 +24,27 @@
             <!-- price range -->
             <div class="left-side">
                 <h4 class="agileits-sear-head">Mức giá</h4><br>
-                <input type="number" name="minprice" placeholder="Từ" value="${param.minprice}"> - <input type="number" name="maxprice" placeholder="Đến" value="${param.maxprice}">
+                <select name="minprice">
+                    <option selected value="">Từ</option>
+                    <option <c:if test="${param.minprice == 1000000}">selected</c:if> value="1000000">1 triệu</option>
+                    <option <c:if test="${param.minprice == 2000000}">selected</c:if>  value="2000000">2 triệu</option>
+                    <option <c:if test="${param.minprice == 5000000}">selected</c:if>  value="5000000">5 triệu</option>
+                    <option <c:if test="${param.minprice == 10000000}">selected</c:if>  value="10000000">10 triệu</option>
+                    <option <c:if test="${param.minprice == 20000000}">selected</c:if>  value="20000000">20 triệu</option>
+                    <option <c:if test="${param.minprice == 50000000}">selected</c:if>  value="50000000">50 triệu</option>
+                    <option <c:if test="${param.minprice == 100000000}">selected</c:if>  value="100000000">100 triệu</option>
+                </select>
+                -
+                <select name="maxprice">
+                    <option selected value="">Đến</option>
+                    <option <c:if test="${param.maxprice == 1000000}">selected</c:if> value="1000000">1 triệu</option>
+                    <option <c:if test="${param.maxprice == 2000000}">selected</c:if>  value="2000000">2 triệu</option>
+                    <option <c:if test="${param.maxprice == 5000000}">selected</c:if>  value="5000000">5 triệu</option>
+                    <option <c:if test="${param.maxprice == 10000000}">selected</c:if>  value="10000000">10 triệu</option>
+                    <option <c:if test="${param.maxprice == 20000000}">selected</c:if>  value="20000000">20 triệu</option>
+                    <option <c:if test="${param.maxprice == 50000000}">selected</c:if>  value="50000000">50 triệu</option>
+                    <option <c:if test="${param.maxprice == 100000000}">selected</c:if>  value="100000000">100 triệu</option>
+                </select>
             </div>
             <!-- //price range -->
             <!-- category -->

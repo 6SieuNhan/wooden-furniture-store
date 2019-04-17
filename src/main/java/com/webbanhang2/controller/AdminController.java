@@ -77,7 +77,6 @@ public class AdminController {
         mav.addObject("pm", "fontBold");
         return mav;
     }
-    
 
     private String formProduct(Model model, Product p) {
         model.addAttribute("productForm", p);
@@ -92,13 +91,23 @@ public class AdminController {
     }
 
     @RequestMapping("/createProduct")
-    public String createProduct(Model model) {
+    public String createProduct(Model model, HttpServletRequest request) {
+        //Authorization
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getUserRoleId() != User.ADMIN) {
+            return "redirect:home";
+        }
         Product p = new Product();
         return this.formProduct(model, p);
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "productid", required = false) String productId) {
+    public String delete(@RequestParam(value = "productid", required = false) String productId, HttpServletRequest request) {
+        //Authorization
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getUserRoleId() != User.ADMIN) {
+            return "redirect:home";
+        }
         if (productId != null) {
             productService.deleteProduct(productId);
         }
@@ -106,7 +115,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "edit")
-    public String editProduct(Model model, @RequestParam(value = "productid", required = false) String productId) {
+    public String editProduct(Model model, @RequestParam(value = "productid", required = false) String productId, HttpServletRequest request) {
+        //Authorization
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getUserRoleId() != User.ADMIN) {
+            return "redirect:home";
+        }
         if (productId == null) {
             return "redirect:dashboard?action=productlist";
         } else {
@@ -119,19 +133,35 @@ public class AdminController {
     public String saveProduct(Model model, //
             @ModelAttribute("productForm") @Validated Product p, //
             BindingResult result, //
-            final RedirectAttributes redirectAttributes) {
-
+            final RedirectAttributes redirectAttributes,
+            HttpServletRequest request) {
+        //Authorization
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getUserRoleId() != User.ADMIN) {
+            return "redirect:home";
+        }
         // Nếu validate có lỗi.
         if (result.hasErrors()) {
             return this.formProduct(model, p);
         }
-        this.productService.saveProduct(p);
+        boolean saveResult = this.productService.saveProduct(p);
 
+        //case of insertion fail (most likely due to duplicate key)
+        if (saveResult) {
+            // Add message to flash scope
+            redirectAttributes.addFlashAttribute("message", "Save Product Successful");
+
+            return "redirect:dashboard?action=productlist"; 
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Duplicate product code");
+            if(p.getProductId()==null||p.getProductId().isEmpty()){
+                return "redirect:createProduct";
+            }
+            else{
+                return "redirect:edit?productid="+p.getProductId();
+            }
+        }
         // Important!!: Need @EnableWebMvc
-        // Add message to flash scope
-        redirectAttributes.addFlashAttribute("message", "Save Product Successful");
-
-        return "redirect:dashboard?action=productlist";
 
     }
 

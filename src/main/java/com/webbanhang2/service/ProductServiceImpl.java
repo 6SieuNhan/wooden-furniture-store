@@ -28,6 +28,12 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getProductList(Map<String, Object> params, int top, int count) {
         return productDao.getProductList(params, top, count);
     }
+    
+    @Transactional
+    @Override
+    public List<Product> getProductListByTop(){
+        return productDao.getProductListByTop();
+    }
 
     @Transactional
     @Override
@@ -55,13 +61,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Transactional
     @Override
-    public void saveProduct(Product p) {
+    public boolean saveProduct(Product p) {
         boolean hasProduct = productDao.checkProduct(p.getProductId());
         if(!hasProduct){
-            productDao.addProduct(p);
+            return productDao.addProduct(p);
         }
         else{
-            productDao.updateProduct(p);
+            return productDao.updateProduct(p);
         }
     }
     

@@ -47,12 +47,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUser(User user) {
         try {
-            String sql = "select * from user where username = '"
-                    + user.getUsername()
-                    + "' and password = '"
-                    + user.getPassword()
-                    + "';";
-            List<User> users = jdbcTemplate.query(sql, new UserMapper());
+            String sql = "select * from user where (username = ? or email = ?) and password = ?";
+            List<User> users = jdbcTemplate.query(sql, new Object[]{user.getUsername(), user.getUsername(), user.getPassword()}, new UserMapper());
             return users.size() > 0 ? users.get(0) : null;
         } catch (DataAccessException ex) {
             System.out.println(ex.getMessage());
@@ -99,10 +95,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public String createRecoveryCode(User user) {
         try {
-            String sql1 = "update webbanhang.user\n"
+            String sql1 = "update user\n"
                     + "set recovery_code = UUID() where user_id = ?";
             jdbcTemplate.update(sql1, user.getUserId());
-            String sql2 = "select recovery_code from webbanhang.user where user_id = ?";
+            String sql2 = "select recovery_code from user where user_id = ?";
             List<String> recoveryCode = jdbcTemplate.query(sql2, new Object[]{user.getUserId()}, new RecoveryCodeMapper());
             return recoveryCode.size() > 0 ? recoveryCode.get(0) : null;
         } catch (DataAccessException ex) {
@@ -114,7 +110,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean validateRecovery(String userId, String recoveryCode) {
         try {
-            String sql = "select * from webbanhang.user\n"
+            String sql = "select * from user\n"
                     + "where user_id = ? and recovery_code = ?";
             return jdbcTemplate.query(sql, new Object[]{userId, recoveryCode}, new UserMapper()).size() > 0;
         } catch (DataAccessException ex) {
@@ -126,7 +122,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean changePassword(String userId, String password) {
         try {
-            String sql = "update webbanhang.user\n"
+            String sql = "update user\n"
                     + "set password = ?,\n"
                     + "recovery_code = null\n"
                     + "where user_id = ?;";
@@ -141,12 +137,12 @@ public class UserDaoImpl implements UserDao {
     public boolean editUser(User user) {
         try {
             if (user.getUserRoleId() != 0) {
-                String sql = "update webbanhang.user\n"
+                String sql = "update user\n"
                         + "set email = ?, address = ?, phone = ?, user_role_id = ?\n"
                         + "where user_id = ?;";
                 return jdbcTemplate.update(sql, user.getEmail(), user.getAddress(), user.getPhone(), user.getUserRoleId(), user.getUserId()) > 0;
             } else {
-                String sql = "update webbanhang.user\n"
+                String sql = "update user\n"
                         + "set email = ?, address = ?, phone = ?\n"
                         + "where user_id = ?;";
                 return jdbcTemplate.update(sql, user.getEmail(), user.getAddress(), user.getPhone(), user.getUserId()) > 0;
@@ -160,7 +156,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getUserList(String userQuery, String emailQuery, String addressQuery, String phoneQuery, int userRoleId, int top, int count) {
-        String sql = "SELECT * FROM webbanhang.user " + getUserWhereString(userQuery, emailQuery, addressQuery, phoneQuery, userRoleId, top, count);
+        String sql = "SELECT * FROM user " + getUserWhereString(userQuery, emailQuery, addressQuery, phoneQuery, userRoleId, top, count);
         //build param array
         ArrayList<Object> param = new ArrayList<>();
         if (userQuery != null && !userQuery.isEmpty()) {
@@ -188,7 +184,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int getUserListPageCount(String userQuery, String emailQuery, String addressQuery, String phoneQuery, int userRoleId, int size) {
-        String sql = "SELECT COUNT(*) FROM webbanhang.user " + getUserWhereString(userQuery, emailQuery, addressQuery, phoneQuery, userRoleId, 0, 0);
+        String sql = "SELECT COUNT(*) FROM user " + getUserWhereString(userQuery, emailQuery, addressQuery, phoneQuery, userRoleId, 0, 0);
         //build param array
         ArrayList<Object> param = new ArrayList<>();
         if (userQuery != null && !userQuery.isEmpty()) {

@@ -16,8 +16,18 @@ public class Product {
     private String productId, productName, description, thumbnail, shortName, productCode;
 
     private int productCategoryId, productMaterialId, productOriginId, productRoomId, quantity;
-    
+
     private int price;
+    
+    private boolean product_top;
+
+    public boolean isProduct_top() {
+        return product_top;
+    }
+
+    public void setProduct_top(boolean product_top) {
+        this.product_top = product_top;
+    }
 
     public Product() {
     }
@@ -85,8 +95,6 @@ public class Product {
     public void setProductRoomId(int productRoomId) {
         this.productRoomId = productRoomId;
     }
-
-    
 
     public int getProductMaterialId() {
         return productMaterialId;

@@ -11,9 +11,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>${formTitle}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bluebox Free Bootstrap Admin Template</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -24,23 +24,27 @@
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-        <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
-        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+        <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
     </head>
     <body>
         <div id="wrapper">
-            <jsp:include page="fragment/dashboardheader.jsp" />
+            <nav class="navbar navbar-default top-navbar" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="home"><strong>Cửa hàng đồ gỗ</strong></a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li style="color: white;">
+                        Welcome ${user.username}
+                    </li>
+                    <li>
+                        <a href="logout">Sign Out</a>
+                    </li>
+                </ul>
+            </nav>
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/dashboardadminnav.jsp">
-                <jsp:param name="page" value="productlist" />
-            </jsp:include>
+            <jsp:include page="fragment/dashboardadminnav.jsp" />
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
@@ -56,7 +60,6 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     ${formTitle}
-                                    ${productForm.thumbnail}
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -66,35 +69,37 @@
                                                 <div class="col-6">
                                                     <p>      
                                                         <label class="w3-text-brown"><b>Mã sản phẩm</b></label>
-                                                        <form:input class="w3-input w3-border w3-sand" path="productCode" required="required" maxlength="45"/>
+                                                        <c:if test="${not empty message}">
+                                                        <div class="simple-alert-msg" >
+                                                            ${message}
+                                                        </div>
+                                                        </c:if>
+                                                    <form:input class="form-control" path="productCode" required="required"/>
+
                                                     </p>   
                                                     <p>
                                                         <label class="w3-text-brown"><b>Tên sản phẩm</b></label>
-                                                        <form:input class="w3-input w3-border w3-sand" path="productName" required="required" maxlength="45"/>
+                                                        <form:input class="form-control" path="productName" required="required"/>
                                                     </p>
-                                                    <p><form:errors path="productName" class="simple-alert-msg" /></p>
+                                                    <p><form:errors path="productName" class="error-message" /></p>
 
                                                     <div id="myform">
                                                         <label class="w3-text-brown"><b>Hình đại diện</b></label>
-                                                        <div class="yes">
-                                                            <span class="btn_upload">
-                                                                <form:input id="img-txt" class="w3-input w3-border w3-sand" path="thumbnail" placeholder="CT-1/1.jpg" maxlength="45"/>
-                                                            </span>
-                                                            <img id="img-preview" src="resource/images/product_img/${productForm.thumbnail}" class="preview1" alt="Image not found"/>
-                                                        </div>
-                                                    </div>
+                                                        <form:input id="img-txt" class="form-control" path="thumbnail" placeholder="CT-1/1.jpg" maxlength="45"/>
+                                                        <img id="img-preview" src="resource/images/product_img/${productForm.thumbnail}" class="preview1" alt="Image not found"/>
 
+                                                    </div>                 
                                                     <p>
                                                         <label class="w3-text-brown"><b>Mô tả sản phẩm</b></label>
                                                         <br>
-                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80" required="required" />
+                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80" required="required"/>
                                                     </p>
                                                 </div>
                                                 <div class="col-6 right_side">
                                                     <p>
                                                         <label class="w3-text-brown"><b>Thuộc danh mục</b></label>
                                                         <br>
-                                                        <form:select path="productCategoryId" cssClass="classic">
+                                                        <form:select path="productCategoryId" cssClass="form-control">
                                                             <c:forEach var="pcm" items="${productCategoryList}" >
                                                                 <form:option value="${pcm.categoryId}">${pcm.categoryName}</form:option>
                                                             </c:forEach>
@@ -103,7 +108,7 @@
                                                     <p>
                                                         <label class="w3-text-brown"><b>Thuộc chất liệu</b></label>
                                                         <br>
-                                                        <form:select path="productMaterialId" cssClass="classic">
+                                                        <form:select path="productMaterialId" cssClass="form-control">
                                                             <c:forEach var="pcm" items="${productMaterialList}" >
                                                                 <form:option value="${pcm.categoryId}">${pcm.categoryName}</form:option>
                                                             </c:forEach>
@@ -112,7 +117,7 @@
                                                     <p>
                                                         <label class="w3-text-brown"><b>Thuộc phòng</b></label>
                                                         <br>
-                                                        <form:select path="productRoomId" cssClass="classic">
+                                                        <form:select path="productRoomId" cssClass="form-control">
                                                             <c:forEach var="pcm" items="${productRoomList}" >
                                                                 <form:option value="${pcm.categoryId}">${pcm.categoryName}</form:option>
                                                             </c:forEach>
@@ -121,7 +126,7 @@
                                                     <p>
                                                         <label class="w3-text-brown"><b>Nơi sản xuất</b></label>
                                                         <br>
-                                                        <form:select path="productOriginId" cssClass="classic">
+                                                        <form:select path="productOriginId" cssClass="form-control">
                                                             <c:forEach var="pcm" items="${productOriginList}" >
                                                                 <form:option value="${pcm.categoryId}">${pcm.categoryName}</form:option>
                                                             </c:forEach>
@@ -129,11 +134,11 @@
                                                     </p>
                                                     <p>
                                                         <label class="w3-text-brown"><b>Giá bán (VNĐ)</b></label>
-                                                        <form:input type="number" class="w3-input w3-border w3-sand" path="price" required="required" maxlength="11"/>
+                                                        <form:input type="number" class="form-control" path="price" required="required"/>
                                                     </p>
                                                     <p>
                                                         <label class="w3-text-brown"><b>Số lượng</b></label>
-                                                        <form:input type="number" min="0" step="1" class="w3-input w3-border w3-sand" path="quantity" required="required" maxlength="11"/>
+                                                        <form:input type="number" min="0" step="1" class="form-control" path="quantity" pattern="\d+" required="required"/>
                                                     </p>
                                                     <p class="floatLeft">
                                                         <button class="w3-btn w3-blue submit"><i class="fa fa-save"></i> Lưu Dữ Liệu</button>
@@ -169,6 +174,17 @@
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
+        <script src="<c:url value="/resource/js/jquery.simplePagination.js"/>"></script>
+        <script>
+                                                    $('#light-pagination').pagination({
+                                                        pages: ${pageCount},
+                                                        currentPage: ${(empty param.page) ? '1': param.page},
+                                                        selectOnClick: false
+                                                    });
+
+        </script>
+
+
         <!-- Metis Menu Js -->
         <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
         <!-- Morris Chart Js -->
@@ -185,10 +201,10 @@
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
-            $('#img-txt').on('input', function() { 
-                $('#img-preview').attr("src",'resource/images/' + $(this).val());
-            });
-            
+                                                    $('#img-txt').on('input', function () {
+                                                        $('#img-preview').attr("src", 'resource/images/product_img/' + $(this).val());
+                                                    });
+
         </script>
 
     </body>

@@ -34,7 +34,7 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30" />
+                                    <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="30" />
                                 </div>
                                 <div class="controls">
                                     <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" />

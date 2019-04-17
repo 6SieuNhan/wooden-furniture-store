@@ -10,9 +10,9 @@ package com.webbanhang2.config;
  * @author fkien
  */
 public class WBHConstants {
-    public static final String MAIL_SENDER_ADDRESS = "f.kien1997@gmail.com";
+    public static final String MAIL_SENDER_ADDRESS = "yourmail@gmail.com";
     
-    public static final String MAIL_SENDER_APP_PASSWORD = "sxqvdazomfhndtvn";
+    public static final String MAIL_SENDER_APP_PASSWORD = "yourapppassword";
     
     public static final int PRODUCT_LIST_PAGE_SIZE = 15;
     

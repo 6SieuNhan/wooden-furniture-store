@@ -80,16 +80,16 @@ public class CategoryDaoImpl implements CategoryDao {
         String sql;
         switch (categoryType) {
             case Category.PRODUCT_CATEGORY:
-                sql = "select product_categories_id as category_id, count(*) as `count` from webbanhang.product group by product_categories_id;";
+                sql = "select product_categories_id as category_id, count(*) as `count` from product group by product_categories_id;";
                 break;
             case Category.PRODUCT_MATERIAL:
-                sql = "select product_material_id as category_id, count(*) as `count` from webbanhang.product group by product_material_id;";
+                sql = "select product_material_id as category_id, count(*) as `count` from product group by product_material_id;";
                 break;
             case Category.PRODUCT_ORIGIN:
-                sql = "select product_origin_id as category_id, count(*) as `count` from webbanhang.product group by product_origin_id;";
+                sql = "select product_origin_id as category_id, count(*) as `count` from product group by product_origin_id;";
                 break;
             case Category.PRODUCT_ROOM:
-                sql = "select product_room_id as category_id, count(*) as `count` from webbanhang.product group by product_room_id;";
+                sql = "select product_room_id as category_id, count(*) as `count` from product group by product_room_id;";
                 break;
             default:
                 return cList;
@@ -146,16 +146,16 @@ public class CategoryDaoImpl implements CategoryDao {
                 //get product count
                 switch (categoryType) {
                     case Category.PRODUCT_CATEGORY:
-                        sql = "select product_categories_id as category_id, count(*) as `count` from webbanhang.product where product_categories_id = ?;";
+                        sql = "select product_categories_id as category_id, count(*) as `count` from product where product_categories_id = ?;";
                         break;
                     case Category.PRODUCT_MATERIAL:
-                        sql = "select product_material_id as category_id, count(*) as `count` from webbanhang.product where product_material_id = ?;";
+                        sql = "select product_material_id as category_id, count(*) as `count` from product where product_material_id = ?;";
                         break;
                     case Category.PRODUCT_ORIGIN:
-                        sql = "select product_origin_id as category_id, count(*) as `count` from webbanhang.product where product_origin_id = ?;";
+                        sql = "select product_origin_id as category_id, count(*) as `count` from product where product_origin_id = ?;";
                         break;
                     case Category.PRODUCT_ROOM:
-                        sql = "select product_room_id as category_id, count(*) as `count` from webbanhang.product where product_room_id = ?;";
+                        sql = "select product_room_id as category_id, count(*) as `count` from product where product_room_id = ?;";
                         break;
                     default:
                         return c;

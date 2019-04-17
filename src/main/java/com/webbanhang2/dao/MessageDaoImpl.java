@@ -33,7 +33,7 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public boolean addMessage(Message message) {
         try {
-            String sql = "insert into webbanhang.message(subject, message, sender_name, sender_email, date)\n"
+            String sql = "insert into message(subject, message, sender_name, sender_email, date)\n"
                     + "values (?,?,?,?,NOW());";
             return jdbcTemplate.update(sql, message.getSubject(), message.getMessage(), message.getSenderName(), message.getSenderEmail()) > 0;
         } catch (DataAccessException ex) {
@@ -47,11 +47,11 @@ public class MessageDaoImpl implements MessageDao {
         String sql;
         List<Message> messageList;
         if (subjectQuery == null || subjectQuery.isEmpty()) {
-            sql = "SELECT * FROM webbanhang.message order by date desc, sender_name desc limit ?, ?;";
+            sql = "SELECT * FROM message order by date desc, sender_name desc limit ?, ?;";
             messageList = jdbcTemplate.query(sql, new Object[]{top, count}, new ShortenedMessageMapper());
         } else {
             subjectQuery = "%" + subjectQuery + "%";
-            sql = "SELECT * FROM webbanhang.message where subject like ? \n"
+            sql = "SELECT * FROM message where subject like ? \n"
                     + "order by date desc, sender_name desc limit ?, ?;";
             messageList = jdbcTemplate.query(sql, new Object[]{subjectQuery, top, count}, new ShortenedMessageMapper());
         }
@@ -65,11 +65,11 @@ public class MessageDaoImpl implements MessageDao {
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
         List<Integer> rs;
         if (subjectQuery == null || subjectQuery.isEmpty()) {
-            sql = "SELECT COUNT(*) FROM webbanhang.message;";
+            sql = "SELECT COUNT(*) FROM message;";
             rs = jdbcTemplate.query(sql, rowMapper);
         } else {
             subjectQuery = "%" + subjectQuery + "%";
-            sql = "SELECT COUNT(*) FROM webbanhang.message where subject like ?;";
+            sql = "SELECT COUNT(*) FROM message where subject like ?;";
             rs = jdbcTemplate.query(sql, new Object[]{subjectQuery}, rowMapper);
         }
         int count = rs.get(0);
@@ -83,14 +83,14 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public Message getMessage(String messageId) {
-        String sql = "SELECT * FROM webbanhang.message where message_id = ?;";
+        String sql = "SELECT * FROM message where message_id = ?;";
         List<Message> messageList = jdbcTemplate.query(sql, new Object[]{messageId}, new MessageMapper());
         return messageList.size() > 0 ? messageList.get(0) : null;
     }
     
     @Override
     public boolean deleteMessage(String messageId) {
-        String sql = "DELETE FROM webbanhang.message where message_id = ?;";
+        String sql = "DELETE FROM message where message_id = ?;";
         int res = jdbcTemplate.update(sql, messageId);
         return (res>0);
     }

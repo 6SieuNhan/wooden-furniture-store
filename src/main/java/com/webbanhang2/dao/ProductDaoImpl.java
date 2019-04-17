@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
@@ -87,6 +88,14 @@ public class ProductDaoImpl implements ProductDao {
                 + "FROM webbanhang.product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
+        return productList;
+    }
+
+    @Override
+    public List<Product> getProductListByTop() {
+        String sql = "SELECT product_id, product_name, thumbnail,price FROM webbanhang.product where product_top = true";
+        System.out.println(sql);
+        List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper1());
         return productList;
     }
 
@@ -235,7 +244,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count) {
-        String sql = "SELECT product_id,product_code, product_name, thumbnail, quantity,price "
+        String sql = "SELECT product_id,product_code, product_name, thumbnail, quantity,price ,product_top "
                 + "FROM webbanhang.product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ProductForAdmin());
@@ -245,50 +254,54 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public boolean deleteProduct(String productId) {
         String sql = "delete from product where product_id = '" + productId + "';";
-        return (jdbcTemplate.update(sql)> 0);
+        return (jdbcTemplate.update(sql) > 0);
     }
 
     @Override
     public boolean addProduct(Product p) {
-        System.out.println(p.getProductName());
-        String productCode = p.getProductCode();
-        String productName = p.getProductName();
-        int productCategoryId = p.getProductCategoryId();
-        int productMaterialId = p.getProductMaterialId();
-        int productRoomId = p.getProductRoomId();
-        String thumbnail = p.getThumbnail();
-        String descipt = p.getDescription();
-        int quantity = p.getQuantity();
-        double price = p.getPrice();
-        String sql = "insert into product"
-                + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price) "
-                + "values(?,?,?,?,?,?,?,?,?)";
-        int res = jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price);
-        return (res>0);
+        try {
+            System.out.println(p.getProductName());
+            String productCode = p.getProductCode();
+            String productName = p.getProductName();
+            int productCategoryId = p.getProductCategoryId();
+            int productMaterialId = p.getProductMaterialId();
+            int productRoomId = p.getProductRoomId();
+            String thumbnail = p.getThumbnail();
+            String descipt = p.getDescription();
+            int quantity = p.getQuantity();
+            double price = p.getPrice();
+            String sql = "insert into product"
+                    + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price) "
+                    + "values(?,?,?,?,?,?,?,?,?)";
+            int res = jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price);
+            return (res > 0);
+        } catch (DataAccessException ex) {
+            return false;
+        }
     }
 
     @Override
     public boolean updateProduct(Product p) {
-        System.out.println(p.getProductName());
-        String productCode = p.getProductCode();
-        String productName = p.getProductName();
-        int productCategoryId = p.getProductCategoryId();
-        int productMaterialId = p.getProductMaterialId();
-        int productRoomId = p.getProductRoomId();
-        String thumbnail = p.getThumbnail();
-        String descipt = p.getDescription();
-        int quantity = p.getQuantity();
-        double price = p.getPrice();
-        String sql = "Update product set product_name = '" + productName + "'"
-                + ",product_categories_id= '" + productCategoryId + "'"
-                + ",product_material_id ='" + productMaterialId + "'"
-                + ",product_room_id='" + productRoomId + "'"
-                + ",thumbnail='" + thumbnail + "'"
-                + ",description='" + descipt + "'"
-                + ",quantity='" + quantity + "'"
-                + ",price='" + price + "'"
-                + "where product_code='" + productCode + "'";
-        return (jdbcTemplate.update(sql) > 0);
+        try {
+            String sql = "Update product set product_code = ?, product_name = ?"
+                    + ",product_categories_id= ?"
+                    + ",product_material_id =?"
+                    + ",product_room_id=?"
+                    + ",thumbnail=?"
+                    + ",description=?"
+                    + ",quantity=?"
+                    + ",price=?"
+                    + "where product_id=?";
+            int result = jdbcTemplate.update(sql, p.getProductCode(), p.getProductName(),
+                    p.getProductCategoryId(), p.getProductMaterialId(),
+                    p.getProductRoomId(), p.getThumbnail(),
+                    p.getDescription(), p.getQuantity(),
+                    p.getPrice(), p.getProductId());
+            return result > 0;
+        } catch (DataAccessException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
 
     /**
@@ -306,6 +319,20 @@ public class ProductDaoImpl implements ProductDao {
             product.setThumbnail(rs.getString("thumbnail"));
             product.setPrice(rs.getInt("price"));
             product.setQuantity(rs.getInt("quantity"));
+            return product;
+        }
+    }
+
+    class ShortenedProductMapper1 implements RowMapper<Product> {
+
+        @Override
+        public Product mapRow(ResultSet rs, int arg1) throws SQLException {
+            Product product = new Product();
+            product.setProductId(rs.getString("product_id"));
+            product.setProductName(rs.getString("product_name"));
+            product.setThumbnail(rs.getString("thumbnail"));
+            product.setPrice(rs.getInt("price"));
+//            product.setProduct_top(rs.getBoolean("product_top"));
             return product;
         }
     }
@@ -359,6 +386,7 @@ public class ProductDaoImpl implements ProductDao {
 //            product.setImgList(jdbcTemplate.query(sql, new ImgNameMapper()));
             product.setQuantity(rs.getInt("quantity"));
             product.setPrice(rs.getInt("price"));
+            product.setProduct_top(rs.getBoolean("product_top"));
             return product;
         }
     }

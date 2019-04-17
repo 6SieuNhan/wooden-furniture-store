@@ -3,10 +3,12 @@
     Created on : Mar 26, 2019, 3:01:02 PM
     Author     : fkien
 --%>
-
+<%@page import="java.text.DecimalFormat"%>
+<%@ page buffer="64kb" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="pci" value="${param.productcategoryid}" />
 <c:set var="pmi" value="${param.productmaterialid}" />
@@ -31,6 +33,8 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+        <script src="simple.money.format.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
@@ -39,9 +43,18 @@
         <div id="wrapper">
             <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/dashboardadminnav.jsp">
-                <jsp:param name="page" value="productlist" />
-            </jsp:include>
+            <c:choose>
+                <c:when test="${user.userRoleId == 1}">
+                    <jsp:include page="fragment/dashboardadminnav.jsp" >
+                        <jsp:param name="page" value="productlist" />
+                    </jsp:include>
+                </c:when>
+                <c:otherwise>
+                    <jsp:include page="fragment/dashboardusernav.jsp" >
+                        <jsp:param name="page" value="productlist" />
+                    </jsp:include>
+                </c:otherwise>
+            </c:choose>
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
@@ -66,8 +79,8 @@
                                             <form action="dashboard?action=productlist" method="get" >
                                                 <div class="search">
                                                     <input type="text" placeholder="Nhập từ khóa tìm kiếm"
-                                                           name="searchquery" value="${param.searchquery}" maxlength="45">
-                                                    <input type="hidden" id="action" name="action" value="productlist">
+                                                           name="searchquery" value="${param.searchquery}"/>
+                                                    <input type="hidden" id="action" name="action" value="productlist"/>
                                                     <button type="submit" value=" "><i class="fa fa-search"></i></button>      
                                                 </div>
                                                 <div class="filCate">
@@ -121,7 +134,9 @@
                                                 </div>
                                             </form> 
                                             <div class="floatRight">
-                                                <a href="createProduct"><button class="button">Create Product</button></a>
+                                                <a href="createProduct">
+                                                    <button class="button">Create Product</button>
+                                                </a>
                                             </div>
 
 
@@ -132,24 +147,44 @@
                                                         <tr>
                                                             <th>Mã sản phẩm</th>
                                                             <th>Tên sản phẩm</th>
+                                                            <th>Hình ảnh</th>
                                                             <th>Số lượng</th>
-                                                            <th>Giá</th>
+                                                            <th>Giá (VNĐ)</th>
+                                                            <th>Sản phẩm đặc biệt</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var = "product" items ="${productList}" varStatus = "loop">
                                                             <tr>
+
                                                                 <td>${product.productCode}</td>
                                                                 <td>${product.productName}</td>
+                                                                <td class="imageWidth">
+                                                                    <img class="resize" src="<c:url value="resource/images/product/${product.thumbnail}"/> " alt="">
+                                                                </td>
                                                                 <td>${product.quantity}</td>
-                                                                <td><span class="number">${product.price}</span> đ</td>
+                                                                <td>
+                                                                    <span id="money">${product.price}</span>
+                                                                </td>
+                                                                <td width="5px">
+                                                                    <c:if test="${product.product_top}">
+                                                                         <input type="checkbox" checked disabled>
+                                                                    </c:if>
+                                                                    <c:if test="${!product.product_top}">
+                                                                         <input type="checkbox" disabled>
+                                                                    </c:if>
+                                                                </td>
                                                                 <td>
                                                                     <a href="edit?productid=${product.productId}">Edit</a>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Delete</a>
                                                                 </td>
                                                             </tr>
-                                                        </c:forEach>
+                                                            <c:if test="${(loop.index + 1)!= fn:length(productList) && (loop.index+1) % 3 == 0}">
+                                                            <div class="clearfix"></div>
+                                                            <div class="product-sec1"></div>
+                                                        </c:if>
+                                                    </c:forEach>
                                                     </tbody>
                                                 </table>
                                                 <c:if test = "${empty productList}">
@@ -214,10 +249,20 @@
         <!-- Custom Js -->
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
-        <!-- number -->
-        <script src="<c:url value="/resource/js/jquery.number.min.js"/>"></script>
         <script>
-        $('span.number').number(true, 0, '.', ' ');
+                                                                        $(function () {
+                                                                            $('optgroup').each(function () {
+                                                                                var
+                                                                                        optgroup = $(this),
+                                                                                        options = optgroup.children().toArray().sort(function (a, b) {
+                                                                                    return $(a).text() < $(b).text() ? 1 : -1;
+                                                                                });
+                                                                                $.each(options, function (i, v) {
+                                                                                    optgroup.prepend(v);
+                                                                                });
+
+                                                                            });
+                                                                        });
         </script>
     </body>
 </body>

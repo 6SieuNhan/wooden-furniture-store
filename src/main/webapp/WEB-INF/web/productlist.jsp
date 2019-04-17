@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                 <input type="hidden" name="amount" value="${product.price}" />
                                                                 <input type="hidden" name="href" value="product?productid=${product.productId}" />
                                                                 <input type="hidden" name="add" value="1" />
-                                                                <input type="hidden" name="currency_code" value="USD" />
+                                                                <input type="hidden" name="currency_code" value="VND" />
                                                                 <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
                                                             </c:otherwise>
                                                         </c:choose>

@@ -37,8 +37,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrderList(String userId, int top, int count) {
-        String sql = "SELECT * FROM webbanhang.`order` left join \n"
-                + "(SELECT user_id, username from webbanhang.user) a1\n"
+        String sql = "SELECT * FROM `order` left join \n"
+                + "(SELECT user_id, username from user) a1\n"
                 + "on `order`.user_id = a1.user_id\n"
                 + "where a1.user_id = ? limit ?, ?;";
         List<Order> orderList = jdbcTemplate.query(sql, new Object[]{userId, top, count}, new OrderMapper());
@@ -50,15 +50,15 @@ public class OrderDaoImpl implements OrderDao {
         List<Order> orderList;
         String sql;
         if (query != null && !query.isEmpty()) {
-            sql = "SELECT * FROM webbanhang.`order` left join \n"
-                    + "(SELECT user_id, username from webbanhang.user) a1\n"
+            sql = "SELECT * FROM `order` left join \n"
+                    + "(SELECT user_id, username from user) a1\n"
                     + "on `order`.user_id = a1.user_id\n"
                     + "where a1.username like ?\n"
                     + "limit ?, ?;";
             orderList = jdbcTemplate.query(sql, new Object[]{query, top, count}, new OrderMapper(true));
         } else {
-            sql = "SELECT * FROM webbanhang.`order` left join \n"
-                    + "(SELECT user_id, username from webbanhang.user) a1\n"
+            sql = "SELECT * FROM `order` left join \n"
+                    + "(SELECT user_id, username from user) a1\n"
                     + "on `order`.user_id = a1.user_id limit ?, ?;";
             orderList = jdbcTemplate.query(sql, new Object[]{top, count}, new OrderMapper(true));
         }
@@ -67,7 +67,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int getOrderListPageCount(int size) {
-        String sql = "select COUNT(*) from webbanhang.order;";
+        String sql = "select COUNT(*) from `order`;";
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
         List<Integer> rs = jdbcTemplate.query(sql, rowMapper);
         int count = rs.get(0);
@@ -80,7 +80,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int getOrderListPageCount(String userId, int size) {
-        String sql = "select COUNT(*) from webbanhang.order where user_id = ?;";
+        String sql = "select COUNT(*) from `order` where user_id = ?;";
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
         List<Integer> rs = jdbcTemplate.query(sql, new Object[]{userId}, rowMapper);
         int count = rs.get(0);
@@ -93,7 +93,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int getOrderListSearchPageCount(String username, int size) {
-        String sql = "SELECT COUNT(*) FROM webbanhang.`order` left join webbanhang.user \n"
+        String sql = "SELECT COUNT(*) FROM `order` left join user \n"
                 + "on `order`.user_id = user.user_id\n"
                 + "where user.username like ?;";
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
@@ -108,7 +108,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order getOrder(String orderId) {
-        String sql = "select * from webbanhang.order where order_id = '" + orderId + "';";
+        String sql = "select * from `order` where order_id = '" + orderId + "';";
         List<Order> orderList = jdbcTemplate.query(sql, new OrderMapper());
         if (orderList == null || orderList.isEmpty()) {
             return null;
@@ -122,7 +122,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean validateOrder(String orderId) {
         try {
-            String sql = "UPDATE webbanhang.order SET order_status_id = '2' "
+            String sql = "UPDATE `order` SET order_status_id = '2' "
                     + "WHERE (order_id = ? "
                     + "and order_status_id = '1');";
             int i = jdbcTemplate.update(sql, orderId);
@@ -139,14 +139,14 @@ public class OrderDaoImpl implements OrderDao {
             String sql;
             try {
                 if (Integer.parseInt(orderId) == Order.COMPLETE) {
-                    sql = "UPDATE webbanhang.order SET order_status_id = ?, complete_date = NOW() "
+                    sql = "UPDATE `order` SET order_status_id = ?, complete_date = NOW() "
                             + "WHERE order_id = ?;";
                 } else {
-                    sql = "UPDATE webbanhang.order SET order_status_id = ? "
+                    sql = "UPDATE `order` SET order_status_id = ? "
                             + "WHERE order_id = ?;";
                 }
             } catch (NumberFormatException ex) {
-                sql = "UPDATE webbanhang.order SET order_status_id = ? "
+                sql = "UPDATE `order` SET order_status_id = ? "
                         + "WHERE order_id = ?;";
             }
             return jdbcTemplate.update(sql, orderStatusId, orderId) > 0;
@@ -161,11 +161,11 @@ public class OrderDaoImpl implements OrderDao {
         //begin by inserting into the order table
         String sql1;
         if (user.getUserId() == null || user.getUserId().isEmpty()) {
-            sql1 = "insert into webbanhang.order(order_date, user_address, user_phone, user_email, payment_method_id)"
+            sql1 = "insert into `order`(order_date, user_address, user_phone, user_email, payment_method_id)"
                     + "values (NOW(), ?, ?, ?, ?)";
             jdbcTemplate.update(sql1, user.getAddress(), user.getPhone(), user.getEmail(), paymentMethodId);
         } else {
-            sql1 = "insert into webbanhang.order(user_id, order_date, user_address, user_phone, user_email, payment_method_id)"
+            sql1 = "insert into `order`(user_id, order_date, user_address, user_phone, user_email, payment_method_id)"
                     + "values (?, NOW(), ?, ?, ?, ?)";
             jdbcTemplate.update(sql1, user.getUserId(), user.getAddress(), user.getPhone(), user.getEmail(), paymentMethodId);
         }
@@ -174,13 +174,13 @@ public class OrderDaoImpl implements OrderDao {
         Order o;
         if (user.getUserId() == null || user.getUserId().isEmpty()) {
             //for Guest (no userID), need to search by email
-            sql2 = "SELECT * FROM webbanhang.order where order_date in \n"
-                    + "(select MAX(order_date) FROM webbanhang.order where user_email = ?);";
+            sql2 = "SELECT * FROM `order` where order_date in \n"
+                    + "(select MAX(order_date) FROM `order` where user_email = ?);";
             o = jdbcTemplate.queryForObject(sql2, new Object[]{user.getEmail()}, new OrderMapper());
         } //for User, just search by userID
         else {
-            sql2 = "SELECT * FROM webbanhang.order where order_date in \n"
-                    + "(select MAX(order_date) FROM webbanhang.order where user_id = ?);";
+            sql2 = "SELECT * FROM `order` where order_date in \n"
+                    + "(select MAX(order_date) FROM `order` where user_id = ?);";
             o = jdbcTemplate.queryForObject(sql2, new Object[]{user.getUserId()}, new OrderMapper());
         }
         //dump order detail lines
@@ -194,7 +194,7 @@ public class OrderDaoImpl implements OrderDao {
     public boolean deleteOrder(String orderId) {
         boolean result2 = orderDetailDao.deleteOrderDetail(orderId);
         if (result2) {
-            String sql = "DELETE FROM webbanhang.order where order_id = ?";
+            String sql = "DELETE FROM `order` where order_id = ?";
             int result = jdbcTemplate.update(sql, orderId);
             return result > 0;
         } else {

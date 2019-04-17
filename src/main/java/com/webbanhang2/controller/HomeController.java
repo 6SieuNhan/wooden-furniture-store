@@ -48,7 +48,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SessionAttributes(value = {"login", "messageForm", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
-    "paymentMethodList", "orderStatusList", "userRoleList"})
+    "paymentMethodList", "orderStatusList", "userRoleList", "productlistByTop"})
 public class HomeController {
 
     @Autowired
@@ -132,6 +132,16 @@ public class HomeController {
     @ModelAttribute("userRoleList")
     public List<Category> setUpUserRoleList() {
         return categoryService.getCategoryList(Category.USER_ROLE);
+    }
+    
+        @ModelAttribute("productlistByTop")
+    public List<Product> showProductListByTop() {
+//        HashMap<String, Object> params = new HashMap<>();
+//        List<Product> productListbytop = productService.getProductListByTop(params, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
+//        ModelAndView mav = new ModelAndView("productlistByTop");
+//        mav.addObject("productListByTop", productListbytop);
+//        return mav;
+        return productService.getProductListByTop();
     }
 
     @RequestMapping("about")
@@ -270,13 +280,18 @@ public class HomeController {
     public ModelAndView showCheckout(HttpServletRequest request) {
         int i = 1;
         Integer quantity;
-        String itemId;
+        String itemId, quantityString;
         ArrayList<Product> checkoutList = new ArrayList<>(), existing;
         do {
             itemId = request.getParameter("id_" + i);
 
             if (itemId != null) {
-                quantity = Integer.parseInt(request.getParameter("quantity_" + i));
+                quantityString = request.getParameter("quantity_" + i);
+                try{
+                    quantity = Integer.parseInt(quantityString);
+                } catch(NumberFormatException ex){
+                    return new ModelAndView("redirect:home");
+                }
                 //Tracking line
                 System.out.println(itemId + ": " + quantity);
 
