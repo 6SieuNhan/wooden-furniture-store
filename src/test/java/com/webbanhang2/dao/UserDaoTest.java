@@ -56,7 +56,7 @@ public class UserDaoTest extends TestCase {
     }
 
     //Tests for registerUser()
-    @Test
+    /*@Test
     @Transactional
     @Rollback(true)
     public void registerUserNullAll() {
@@ -133,7 +133,7 @@ public class UserDaoTest extends TestCase {
         test.setEmail("admin1@gmail.com");
         boolean result = userDaoMock.registerUser(test);
         assertEquals(result, false);
-    }
+    }*/
 
     @Test
     @Transactional

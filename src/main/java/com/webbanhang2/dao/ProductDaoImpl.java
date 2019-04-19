@@ -6,13 +6,16 @@
 package com.webbanhang2.dao;
 
 import com.webbanhang2.model.Product;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
@@ -253,8 +256,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean deleteProduct(String productId) {
-        String sql = "delete from product where product_id = '" + productId + "';";
-        return (jdbcTemplate.update(sql) > 0);
+        try {
+            String sql = "delete from product where product_id = '" + productId + "';";
+            return (jdbcTemplate.update(sql) > 0);
+        } catch (DataAccessException ex) {
+            return false;
+        }
     }
 
     @Override
@@ -290,7 +297,7 @@ public class ProductDaoImpl implements ProductDao {
                     + ",thumbnail=?"
                     + ",description=?"
                     + ",quantity=?"
-                    + ",price=?"
+                    + ",price=? "
                     + "where product_id=?";
             int result = jdbcTemplate.update(sql, p.getProductCode(), p.getProductName(),
                     p.getProductCategoryId(), p.getProductMaterialId(),
@@ -302,6 +309,85 @@ public class ProductDaoImpl implements ProductDao {
             System.out.println(ex.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public boolean checkStock(List<Product> productList) {
+        ArrayList<String> productIds = new ArrayList<>();
+        for (Product p : productList) {
+            productIds.add(p.getProductId());
+        }
+        StringBuilder sqlstr = new StringBuilder("select * from product where product_id in (");
+        for (int i = 0; i < productList.size(); i++) {
+            if (i == productList.size() - 1) {
+                sqlstr.append("?);");
+            } else {
+                sqlstr.append("?,");
+            }
+        }
+        //String sql = "select * from product where product_id in (?);";
+        List<Product> stockList = jdbcTemplate.query(sqlstr.toString(), productIds.toArray(), new ShortenedProductMapper());
+        //compare product list to stock list
+        boolean even; //boolean to check if productList contains odd productId value (not existing in db)
+        for (Product p : productList) {
+            even = false;
+            for (Product s : stockList) {
+                if (p.getProductId().equals(s.getProductId())) {
+                    even = true;
+                    if (p.getQuantity() > s.getQuantity()) {
+                        return false;
+                    }
+                    stockList.remove(s);
+                    break;
+                }
+            }
+            //if productList contains odd id value, return false
+            if (!even) {
+                return false;
+            }
+        }
+        //return true if all tests passed
+        return true;
+    }
+
+    @Override
+    public boolean updateStock(List<Product> productList, boolean addMode) {
+        String sql;
+        if (addMode) {
+            sql = "call add_stock2(?, ?);";
+        } else {
+            sql = "call remove_stock2(?, ?);";
+        }
+        int[] batchUpdate = jdbcTemplate.batchUpdate(sql, new UpdateStockPreparedStatementSetter(productList));
+        for (int i : batchUpdate) {
+            if (i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    class UpdateStockPreparedStatementSetter implements BatchPreparedStatementSetter {
+
+        public UpdateStockPreparedStatementSetter(List<Product> productList) {
+            super();
+            this.productList = productList;
+        }
+
+        List<Product> productList;
+
+        @Override
+        public void setValues(PreparedStatement ps, int i) throws SQLException {
+            Product p = productList.get(i);
+            ps.setString(1, p.getProductId());
+            ps.setInt(2, p.getQuantity());
+        }
+
+        @Override
+        public int getBatchSize() {
+            return productList.size();
+        }
+
     }
 
     /**

@@ -27,7 +27,11 @@ public interface ProductService {
     
     public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count);
 
-    public void deleteProduct(String productId);
+    public boolean deleteProduct(String productId);
 
     public boolean saveProduct(Product p);
+    
+    boolean checkStock(List<Product> productList);
+    
+    boolean updateStock(List<Product> productList, boolean addMode);
 }

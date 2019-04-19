@@ -6,10 +6,12 @@
 package com.webbanhang2.dao;
 
 import com.webbanhang2.model.Order;
+import com.webbanhang2.model.OrderDetail;
 import com.webbanhang2.model.Product;
 import com.webbanhang2.model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class OrderDaoImpl implements OrderDao {
     JdbcTemplate jdbcTemplate;
 
     @Autowired
+    ProductDao productDao;
+
+    @Autowired
     OrderDetailDao orderDetailDao;
 
     @Override
@@ -40,7 +45,8 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "SELECT * FROM `order` left join \n"
                 + "(SELECT user_id, username from user) a1\n"
                 + "on `order`.user_id = a1.user_id\n"
-                + "where a1.user_id = ? limit ?, ?;";
+                + "where a1.user_id = ?\n"
+                + "order by order_date desc limit ?, ?;";
         List<Order> orderList = jdbcTemplate.query(sql, new Object[]{userId, top, count}, new OrderMapper());
         return orderList;
     }
@@ -54,12 +60,12 @@ public class OrderDaoImpl implements OrderDao {
                     + "(SELECT user_id, username from user) a1\n"
                     + "on `order`.user_id = a1.user_id\n"
                     + "where a1.username like ?\n"
-                    + "limit ?, ?;";
+                    + "order by order_date desc limit ?, ?;";
             orderList = jdbcTemplate.query(sql, new Object[]{query, top, count}, new OrderMapper(true));
         } else {
             sql = "SELECT * FROM `order` left join \n"
                     + "(SELECT user_id, username from user) a1\n"
-                    + "on `order`.user_id = a1.user_id limit ?, ?;";
+                    + "on `order`.user_id = a1.user_id order by order_date desc limit ?, ?;";
             orderList = jdbcTemplate.query(sql, new Object[]{top, count}, new OrderMapper(true));
         }
         return orderList;
@@ -122,11 +128,27 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean validateOrder(String orderId) {
         try {
-            String sql = "UPDATE `order` SET order_status_id = '2' "
+            Order o = getOrder(orderId);
+            //check stock; prevents validation if there's not enough
+            ArrayList<Product> productList = new ArrayList<>();
+            for (OrderDetail od : o.getOrderDetailList()) {
+                Product p = od.getProduct();
+                p.setQuantity(od.getQuantity());
+                productList.add(p);
+            }
+            if (!productDao.checkStock(productList)) {
+                return false;
+            }
+            String sql = "UPDATE `order` SET order_status_id = '2', validation_code = null "
                     + "WHERE (order_id = ? "
                     + "and order_status_id = '1');";
             int i = jdbcTemplate.update(sql, orderId);
-            return i != 0;
+            //if validation is successful, start removing items
+            if (i != 0) {
+                return productDao.updateStock(productList, false);
+            } else {
+                return false;
+            }
         } catch (DataAccessException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -136,6 +158,26 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean changeOrderStatus(String orderId, int orderStatusId) {
         try {
+            //get order, to prepare for unverified <-> verified
+            Order o = getOrder(orderId);
+
+            if ((o.getOrderStatusId().equals("1") && orderStatusId == 2)
+                    || (o.getOrderStatusId().equals("2") && orderStatusId == 1)) {
+                ArrayList<Product> productList = new ArrayList<>();
+                for (OrderDetail od : o.getOrderDetailList()) {
+                    Product p = od.getProduct();
+                    p.setQuantity(od.getQuantity());
+                    productList.add(p);
+                }
+                //removes stock if unverified -> verified
+                if (orderStatusId == 2) {
+                    productDao.updateStock(productList, false);
+                } //adds stock if verified -> unverified
+                else {
+                    productDao.updateStock(productList, true);
+                }
+            }
+
             String sql;
             try {
                 if (Integer.parseInt(orderId) == Order.COMPLETE) {
@@ -192,6 +234,18 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean deleteOrder(String orderId) {
+        //get order to prepare for verified delete
+        Order o = getOrder(orderId);
+        if (o.getOrderStatusId().equals("2")) {
+            ArrayList<Product> productList = new ArrayList<>();
+            for (OrderDetail od : o.getOrderDetailList()) {
+                Product p = od.getProduct();
+                p.setQuantity(od.getQuantity());
+                productList.add(p);
+            }
+            //returns stock from verified order
+            productDao.updateStock(productList, true);
+        }
         boolean result2 = orderDetailDao.deleteOrderDetail(orderId);
         if (result2) {
             String sql = "DELETE FROM `order` where order_id = ?";

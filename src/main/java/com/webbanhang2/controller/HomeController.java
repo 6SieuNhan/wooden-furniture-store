@@ -303,6 +303,14 @@ public class HomeController {
             i++;
         } while (itemId != null);
 
+        //checks item quantity status
+        boolean hasItem = productService.checkStock(checkoutList);
+        if(!hasItem){
+            ModelAndView mav = new ModelAndView("message");
+            mav.addObject("message", "Không đủ sản phẩm trong kho hàng, xin mời kiểm tra lại đơn hàng và sửa lại nếu cần");
+            return mav;
+        }
+        
         //redirects to home if no product is found
         existing = (ArrayList<Product>) request.getSession().getAttribute("checkoutList");
         if (checkoutList.isEmpty() && (existing == null || existing.isEmpty())) {

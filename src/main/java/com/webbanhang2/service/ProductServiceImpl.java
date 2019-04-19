@@ -55,8 +55,8 @@ public class ProductServiceImpl implements ProductService{
     
     @Transactional
     @Override
-    public void deleteProduct(String productId) {
-        productDao.deleteProduct(productId);
+    public boolean deleteProduct(String productId) {
+        return productDao.deleteProduct(productId);
     }
 
     @Transactional
@@ -71,9 +71,19 @@ public class ProductServiceImpl implements ProductService{
         }
     }
     
-    @Transactional
     @Override
     public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count) {
         return productDao.getProductListForAdmin(params, top, count);
+    }
+    
+    @Override
+    public boolean checkStock(List<Product> productList){
+        return productDao.checkStock(productList);
+    }
+    
+    @Transactional
+    @Override
+    public boolean updateStock(List<Product> productList, boolean addMode){
+        return productDao.updateStock(productList, addMode);
     }
 }

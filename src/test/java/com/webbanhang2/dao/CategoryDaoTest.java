@@ -64,7 +64,7 @@ public class CategoryDaoTest extends TestCase {
     public void getCategoryListProductRoom() {
         List<Category> result = categoryDaoMock.getCategoryList(Category.PRODUCT_ROOM
         );
-        assertEquals(result.get(0).getCategoryName(), "Phòng ăn");
+        assertEquals(result.get(0).getCategoryName(), "Khác");
     }
 
     @Test

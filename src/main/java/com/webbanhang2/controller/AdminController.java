@@ -102,16 +102,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "productid", required = false) String productId, HttpServletRequest request) {
+    public ModelAndView delete(@RequestParam(value = "productid", required = false) String productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         //Authorization
         User user = (User) request.getSession().getAttribute("user");
         if (user == null || user.getUserRoleId() != User.ADMIN) {
-            return "redirect:home";
+            return new ModelAndView("redirect:home");
         }
         if (productId != null) {
-            productService.deleteProduct(productId);
+            boolean result = productService.deleteProduct(productId);
+            if(result){
+                redirectAttributes.addFlashAttribute("message", "Delete Product Successful");
+            }
+            else{
+                redirectAttributes.addFlashAttribute("message", "Delete product failed as some order currently contains this product");
+            }
         }
-        return "redirect:dashboard?action=productlist";
+        return new ModelAndView("redirect:dashboard?action=productlist");
     }
 
     @RequestMapping(value = "edit")

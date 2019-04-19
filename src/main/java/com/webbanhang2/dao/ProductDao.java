@@ -34,4 +34,8 @@ public interface ProductDao {
     public boolean addProduct(Product p);
     
     public boolean updateProduct(Product p);
+    
+    boolean checkStock(List<Product> productList);
+    
+    boolean updateStock(List<Product> productList, boolean addMode);
 }

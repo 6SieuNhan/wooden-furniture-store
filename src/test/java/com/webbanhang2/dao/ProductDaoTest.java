@@ -6,6 +6,8 @@
 package com.webbanhang2.dao;
 
 import com.webbanhang2.model.Product;
+import java.util.ArrayList;
+import java.util.List;
 import javax.transaction.Transactional;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -54,6 +56,23 @@ public class ProductDaoTest extends TestCase {
         p.setProductId("1457473f-4036-11e9-91dc-448a5bec6a0c");
         return p;
     }
+    
+    List<Product> getMockProductList(){
+        ArrayList<Product> list = new ArrayList<>();
+        Product p1 = new Product();
+        p1.setProductId("1457473f-4036-11e9-91dc-448a5bec6a0c");
+        p1.setQuantity(3);
+        list.add(p1);
+        Product p2 = new Product();
+        p2.setProductId("1459461b-4036-11e9-91dc-448a5bec6a0c");
+        p2.setQuantity(3);
+        list.add(p2);
+        Product p3 = new Product();
+        p3.setProductId("145b39d6-4036-11e9-91dc-448a5bec6a0c");
+        p3.setQuantity(3);
+        list.add(p3);
+        return list;
+    }
 
     //tests for method getProduct(String productId)
     @Test
@@ -71,7 +90,7 @@ public class ProductDaoTest extends TestCase {
     @Test
     public void getProductCorrect() {
         Product result = productDaoMock.getProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
-        assertEquals(result.getProductName(), "Thang Bộ 1");
+        assertEquals(result.getProductName(), "Cầu Thang loại 1");
     }
 
     //tests for method getShortenedProduct(String productId)
@@ -90,7 +109,7 @@ public class ProductDaoTest extends TestCase {
     @Test
     public void getShortenedProductCorrect() {
         Product result = productDaoMock.getShortenedProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
-        assertEquals(result.getProductName(), "Thang Bộ 1");
+        assertEquals(result.getProductName(), "Cầu Thang loại 1");
     }
 
     //tests for method checkProduct(String productId)
@@ -111,7 +130,7 @@ public class ProductDaoTest extends TestCase {
         boolean result = productDaoMock.checkProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
         assertEquals(result, true);
     }
-/*
+
     //tests for method deleteProduct(String productId)
     @Test
     @Transactional
@@ -133,7 +152,7 @@ public class ProductDaoTest extends TestCase {
     @Transactional
     @Rollback(true)
     public void deleteProductCorrect() {
-        boolean result = productDaoMock.deleteProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
+        boolean result = productDaoMock.deleteProduct("ffe19f21-61db-11e9-9240-448a5bec6a0c");
         assertEquals(result, true);
     }
 
@@ -371,5 +390,35 @@ public class ProductDaoTest extends TestCase {
         Product p = getMockProductUpdate();
         boolean result = productDaoMock.updateProduct(p);
         assertEquals(result,true);
-    }*/
+    }
+    
+    
+    //tests for method public boolean checkStock(List<Product> productList)
+    @Test
+    public void checkStockNormal(){
+        List<Product> productList = getMockProductList();
+        boolean result = productDaoMock.checkStock(productList);
+        assertEquals(result, true);
+    }
+    
+    //tests for method public boolean updateStock(List<Product> productList, boolean addMode)
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void updateStockAddNormal(){
+        List<Product> productList = getMockProductList();
+        boolean result = productDaoMock.updateStock(productList, true);
+        Product p1 = productDaoMock.getProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
+        assertEquals(p1.getQuantity(), 123 + 3);
+    }
+    
+    @Test
+    @Transactional
+    @Rollback(true)
+    public void updateStockRemoveNormal(){
+        List<Product> productList = getMockProductList();
+        boolean result = productDaoMock.updateStock(productList, false);
+        Product p1 = productDaoMock.getProduct("1457473f-4036-11e9-91dc-448a5bec6a0c");
+        assertEquals(p1.getQuantity(), 123 - 3);
+    }
 }
