@@ -1,0 +1,214 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 31, 2019, 10:21:17 PM
+    Author     : Đào Minh Quang
+*/
+
+.search{
+    float: left;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.search input[type=text]{
+    float: left;
+    padding: 6px;
+    margin: auto;
+    font-size: 12px;
+    width: 200px;
+    border: 1px solid grey;
+}
+.search button {
+    float: left;
+    padding: 6px;
+    margin: auto;
+    background: #ddd;
+    font-size: 12px;
+    border: 1px solid grey;
+    cursor: pointer;
+
+}
+
+.notiSearch{
+    text-align: center;
+    font-size:18px;
+    color: red;
+    margin:auto;
+}
+
+.filCate{
+    float: left;
+    margin: auto;
+
+}
+
+.filCate select{
+    float: left;
+    margin-left: 20px;
+    height: 31px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top:10px;
+}
+
+td, th {
+    border: 0px solid #dddddd;
+    text-align: center;
+    text-transform: inherit;
+    padding: 8px;
+    white-space: nowrap;
+}
+
+.table-responsive{
+    clear:both;
+}
+
+.floatRight{
+    float:right;
+}
+
+.floatLeft{
+    float:left;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: gray;
+}
+
+.imageThumb {
+    max-height: 25%;
+    max-width: 25%;    
+    border: 2px solid;
+    margin: 10px 10px 0 0;
+    padding: 1px;
+}
+
+img.resize{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.resize{
+    margin:auto;
+    display: block;
+    clear:both;
+}
+
+.imageWidth{
+    width: 250px;
+}
+
+.imageHeight{
+    height:200px;
+}
+
+.yes {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px !important;
+}
+
+.margin-top{
+    margin-top:10px;
+}
+
+.btn_upload {
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    background-color: #2a72d4;
+    border: 1px solid #166b8a;
+    padding: 5px 10px;
+    clear:both;
+}
+
+.btn_upload:hover,
+.btn_upload:focus {
+    background-color: #7ca9e6;
+}
+
+.btn_upload input {
+    cursor: pointer;
+    height: 100%;
+    position: absolute;
+    filter: alpha(opacity=1);
+    -moz-opacity: 0;
+    opacity: 0;
+}
+
+.it {
+    width: 20%;
+    margin-left: 10px;
+}
+
+.btn-rmv1 {
+    display: none;
+}
+
+.rmv {
+    cursor: pointer;
+    color: #fff;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    display: inline-block;
+    background: rgba(255, 0, 0, 1);
+    margin: -5px -10px;
+}
+
+.rmv:hover {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.message {
+    font-size:90%;
+    color:blue;
+    font-style:italic;
+    margin:auto;
+    padding:10px;
+}
+
+
+.relative{position:relative; width:600px;}
+.absolute-text{
+    position:absolute; bottom:0; 
+    font-size:30px;
+    padding-right:30px; width:100%; 
+    color:white;
+    font-weight: bold;
+    text-align:center;
+}
+.absolute-text a{font-size:16px; color:white; }
+
+
+
+

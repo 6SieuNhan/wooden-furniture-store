@@ -1,0 +1,264 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+
+
+*, *:before, *:after {
+    box-sizing:border-box;
+}
+.csslogout{
+    float:right;
+    text-align: center;
+    width:auto;
+}
+
+.csslogout span{
+    color: #FF5722;
+}
+
+.floatRight{
+    float:right;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#page-wrapper {
+    max-width: 1400px;
+    margin: auto;
+    background-color:white;
+}
+#wrapper {
+    /**display: table;*/
+    max-width:1250px;	
+    background-color:white;
+    margin:auto;
+    /*box-shadow:0 10px 25px rgba(0,0,0,0.5);*/
+}
+
+#wrapper::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 0px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 5%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 40%;}
+.col-11 {width: 20%;}
+.col-12 {width: 100%;}
+
+
+#header-most-top{
+    width:1250px;
+    background: #966F33;
+    margin: auto;
+}
+
+#header-most-top p {
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px;
+    letter-spacing: 2px;
+}
+
+.header-top {
+    max-width: 1250px;
+    background: #1accfd;
+    margin: auto;
+}
+
+.headertitle {
+    padding:10px;
+    max-width: 1000px;
+    margin:auto;
+}
+
+.logo_agile {
+    text-align: center;
+}
+.logo_agile span {
+    color: #FF5722;
+}
+.logo_agile h1 a {
+    color: #000;
+    font-size: 38px;
+    font-style: italic;
+    text-decoration: none;
+}
+.logo_agile h1 a:hover {
+    text-decoration:none;
+}
+
+.fontBold{
+    font-weight: bold;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: gray;
+}
+
+.addnew{
+    padding:10px;
+}
+
+.addnew p{
+    margin-top:10px;
+}
+
+.btn_upload {
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    background-color: #2a72d4;
+    border: 1px solid #166b8a;
+    padding: 5px 10px;
+}
+
+.btn_upload:hover,
+.btn_upload:focus {
+    background-color: #7ca9e6;
+}
+
+.yes {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px !important;
+}
+
+.btn_upload input {
+    cursor: pointer;
+    height: 100%;
+    position: absolute;
+    filter: alpha(opacity=1);
+    -moz-opacity: 0;
+    opacity: 0;
+}
+
+.it {
+    width: 20%;
+    margin-left: 10px;
+}
+
+.btn-rmv1 {
+    display: none;
+}
+
+.rmv {
+    cursor: pointer;
+    color: #fff;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    display: inline-block;
+    background: rgba(255, 0, 0, 1);
+    margin: -5px -10px;
+}
+
+.rmv:hover {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+textarea {
+    overflow: auto;
+    resize:none;
+}
+
+.right_side{
+    padding-left: 50px;
+}
+
+.message {
+    font-size:90%;
+    color:blue;
+    font-style:italic;
+    margin:auto;
+    padding:10px;
+}
+
+img.resize{
+    max-width:40%;
+    max-height:40%;
+}
+
+
+.search{
+    float: left;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.search input[type=text]{
+    float: left;
+    padding: 6px;
+    margin: auto;
+    font-size: 15px;
+    width: 200px;
+    border: 1px solid grey;
+}
+.search button {
+    float: left;
+    padding: 6px;
+    margin: auto;
+    background: #ddd;
+    font-size: 15px;
+    border: 1px solid grey;
+    cursor: pointer;
+
+}
+
+.notiSearch{
+    text-align: center;
+    font-size:20px;
+    color: red;
+    margin:10px;
+}
+
+.filCate{
+    float: left;
+    margin: auto;
+
+}
+
+.filCate select{
+    float: left;
+    margin-left: 20px;
+    height: 30px;
+}
