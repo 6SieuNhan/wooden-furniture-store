@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
     </head>
     <body>
         <div>

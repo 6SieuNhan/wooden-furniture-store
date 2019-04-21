@@ -16,7 +16,10 @@ public class WBHConstants {
     
     public static final int PRODUCT_LIST_PAGE_SIZE = 15;
     
-    public static final String ROOT_URL = "http://localhost:8080/WebBanHang2";
+    public static final String ROOT_URL = "https://intense-wave-16883.herokuapp.com/";
+    
+    //localhost version
+    //public static final String ROOT_URL = "http://localhost:8080/WebBanHang2";
     
     //viewname/message stuff
     

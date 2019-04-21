@@ -4,6 +4,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+<%@ page buffer="64kb" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
     <head>
-        <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Single :: w3layouts</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <jsp:include page="fragment/metadump.jsp" />
     </head>
 
@@ -63,24 +64,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <p>
                         <span class="item_price number">${product.price}</span>
                         <span class="item_price">đ</span>
-                        <label>Free delivery</label>
+                        <!--                        <label>Free delivery</label>-->
                     </p>
                     <div class="single-infoagile">
                         <ul>
                             <li>
-                                Shipping Speed to Delivery.
+                                Chất liệu: <c style="font-style: italic;">
+                                <c:forEach var="pci" items="${productMaterialList}">
+                                    <c:if test="${pci.categoryId == product.productMaterialId}">
+                                        ${pci.categoryName}
+                                    </c:if>
+                                </c:forEach>
+                            </c>
                             </li>
                             <li>
-                                Sold and fulfilled by Supple Tek (3.6 out of 5 | 8 ratings).
+                                Nơi sản xuất: Cửa Hàng Đồ Gỗ Thủy Hằng
                             </li>
+                            <br/>
                             <li>
-                                ${product.quantity} in stock at
-                                <span class="item_price number">${product.price}</span>
-                                <span class="item_price">đ</span>
+                                <b style="color:green">${product.quantity}</b> sản phẩm có sẵn
                             </li>
                         </ul>
                     </div>
                     <div class="product-single-w3l">
+                        MÔ TẢ SẢN PHẨM
+                        <br/><br/>
                         ${product.description}
                     </div>
                     <br/>
@@ -90,7 +98,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <fieldset>
                                     <c:choose>
                                         <c:when test="${product.quantity == 0}">
-                                            <input type="submit" name="submit" value="Hết hàng" class="button" disabled />
+                                            <input type="submit" name="submit" value="Out of stock" class="button" disabled />
                                         </c:when>
                                         <c:otherwise>
                                             <input type="hidden" name="cmd" value="_cart" />

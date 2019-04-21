@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Checkout :: w3layouts</title>
+    <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
     <jsp:include page="fragment/metadump.jsp" />
 </head>
 

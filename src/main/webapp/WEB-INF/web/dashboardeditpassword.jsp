@@ -45,7 +45,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Thay đổi mật khẩu
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -53,21 +53,21 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Reset Password
+                                    Thay Đổi Mật Khẩu
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <form:form modelAttribute="login" action="editpassword" method="post">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>New password </label>
-                                                    <input name="password1" type="password" class="form-control" minlength="4" maxlength="16">
+                                                    <label>Mật Khẩu Mới </label>
+                                                    <input required id="password1" name="password1" type="password" class="form-control" minlength="4" maxlength="16">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Confirm old password:</label>
+                                                    <label>Xác Nhận Mật Khẩu Mới:</label>
                                                     <form:hidden path="userId" value="${user.userId}" />
                                                     <form:hidden path="username" value="${user.username}" />
-                                                    <form:password cssClass="form-control" path="password" />
+                                                    <form:password required="required" cssClass="form-control" path="password" />
                                                     <c:if test="${not empty message}">
                                                         <div class="simple-alert-msg" >
                                                             ${message}
@@ -75,14 +75,14 @@
                                                     </c:if>
                                                 </div>
 
-                                                <button id="submit" type="submit" class="btn btn-default">Submit Button</button>
-                                                <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Reset Button</button>
+                                                <button id="submit" type="submit"  class="btn btn-default">Lưu</button>
+                                                <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Hoàn Tác</button>
 
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Reenter new password:</label>
-                                                    <input name="password2" type="password" class="form-control" maxlength="16">
+                                                    <label>Xác Nhận Mật Khẩu Cũ:</label>
+                                                    <input required id="password2" name="password2" type="password" class="form-control" maxlength="16">
                                                 </div>
                                             </div>
                                         </form:form>
@@ -124,9 +124,24 @@
         <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
-                                                    function confirm_reset() {
-                                                        return confirm('Are you sure you want to reset the form?');
-                                                    }
+            window.onload = function () {
+            document.getElementById("password1").onchange = validatePassword;
+            document.getElementById("password2").onchange = validatePassword;
+        };
+        
+        function validatePassword() {
+            var pass2 = document.getElementById("password2").value;
+            var pass1 = document.getElementById("password1").value;
+            if (pass1 !== pass2)
+                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+            else
+                document.getElementById("password2").setCustomValidity('');
+            //empty string means no validation error
+        }
+        
+        function confirm_reset() {
+            return confirm('Are you sure you want to reset the form?');
+        }
         </script>
 
     </body>

@@ -13,7 +13,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -24,6 +24,7 @@
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
 
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 

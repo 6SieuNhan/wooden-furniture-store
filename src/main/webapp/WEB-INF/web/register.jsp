@@ -61,7 +61,7 @@
                                     <form:input type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input path="phone" placeholder = "Số điện thoại (tối đa 12 ký tự)" required="required" maxlength="12"/>
+                                    <form:input type="number" path="phone" placeholder = "Số điện thoại (tối đa 12 ký tự)" required="required" maxlength="12"/>
                                 </div>
                                 <div class="controls">
                                     <input type="password" placeholder="Nhập lại mật khẩu" id="password2" required="" maxlength="16">

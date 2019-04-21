@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->

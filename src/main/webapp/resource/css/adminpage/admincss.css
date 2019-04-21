@@ -111,6 +111,17 @@ img.resize{
     clear:both;
 }
 
+img.resize1{
+    max-height: 75%;
+    max-width: 75%;
+}
+
+.resize1{
+    margin:auto;
+    display: block;
+    clear:both;
+}
+
 .imageWidth{
     width: 250px;
 }

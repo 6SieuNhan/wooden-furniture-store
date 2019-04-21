@@ -23,6 +23,27 @@
         <bean id="datasource"
               class="org.springframework.jdbc.datasource.DriverManagerDataSource"
               p:driverClassName="com.mysql.jdbc.Driver"
+              p:url="jdbc:mysql://c25hzhjq6rnii300:zpq1hugjo4yym5vw@tj5iv8piornf713y.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ffaqjvrfh3n2l3ek"
+        />
+    </beans>
+    
+    <beans profile="test">
+        <bean id="datasource"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+              p:driverClassName="com.mysql.jdbc.Driver"
+              p:url="jdbc:mysql://localhost:3306/webbanhangtest?zeroDateTimeBehavior=convertToNull"
+              p:username="root"
+              p:password="DerpBottle123!" 
+        />
+    </beans>
+    
+    <!-- 
+    localhost version:
+    
+    <beans profile="default">
+        <bean id="datasource"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+              p:driverClassName="com.mysql.jdbc.Driver"
               p:url="jdbc:mysql://localhost:3306/webbanhang?zeroDateTimeBehavior=convertToNull"
               p:username="root"
               p:password="DerpBottle123!" 
@@ -37,7 +58,7 @@
               p:username="root"
               p:password="DerpBottle123!" 
         />
-    </beans>
+    </beans> -->
 
     
     

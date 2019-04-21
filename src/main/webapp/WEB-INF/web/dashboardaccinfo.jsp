@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -57,7 +57,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Thông tin tài khoản
-                                    <button class="btn btn-default pull-right" onclick="toggle_inputs()">Edit</button>
+                                    <button class="btn btn-default pull-right" onclick="toggle_inputs()">Sửa</button>
 
                                     <div class="clearfix"></div>
 
@@ -78,15 +78,15 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Số điện thoại:</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="12"/>
+                                                            <form:input required="required" type="number" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="12"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" maxlength="30"/>
+                                                            <form:input required="required" type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" maxlength="30"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user2.address}" maxlength="100"/>
+                                                            <form:input required="required" disabled="true" cssClass="form-control" path="address" value = "${user2.address}" maxlength="100"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quyền người dùng</label>
@@ -114,20 +114,20 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Số điện thoại:</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="12"/>
+                                                            <form:input required="required" type="number" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="12"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user.email}" maxlength="30"/>
+                                                            <form:input required="required" type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user.email}" maxlength="30"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user.address}" maxlength="100"/>
+                                                            <form:input required="required" disabled="true" cssClass="form-control" path="address" value = "${user.address}" maxlength="100"/>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Confirm password: </label>
-                                                            <form:password disabled="true" cssClass="form-control" path="password" maxlength="16"/>
+                                                            <label>Xác nhận mật khẩu: </label>
+                                                            <form:password required="required" disabled="true" cssClass="form-control" path="password" maxlength="16"/>
                                                             <c:if test="${not empty message}">
                                                                 <div class="simple-alert-msg" >
                                                                     ${message}
@@ -135,8 +135,8 @@
                                                             </c:if>
                                                         </div>
 
-                                                        <button disabled id="submit" type="submit" class="btn btn-default">Submit Button</button>
-                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Reset Button</button>
+                                                        <button disabled id="submit" type="submit" class="btn btn-default">Lưu</button>
+                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Hoàn Tác</button>
                                                     </form:form>
                                                 </c:otherwise>
 

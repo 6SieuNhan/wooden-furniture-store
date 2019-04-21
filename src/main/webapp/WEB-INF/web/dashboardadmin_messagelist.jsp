@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -44,7 +44,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Message
+                        Quản lý tin nhắn
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -53,7 +53,7 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Danh sách message
+                                    Danh sách tin nhắn
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -73,10 +73,10 @@
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>Subject</th>
-                                                            <th>Sender</th>
+                                                            <th>Nội dung</th>
+                                                            <th>Người gửi</th>
                                                             <th>Email</th>
-                                                            <th>Date</th>
+                                                            <th>Thời Gian</th>
                                                             <th></th>
                                                             <th></th>
                                                         </tr>

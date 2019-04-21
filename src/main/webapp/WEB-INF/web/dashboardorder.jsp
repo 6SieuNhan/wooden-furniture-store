@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -47,7 +47,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Quản lý đặt hàng
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -56,7 +56,7 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Order history
+                                    Lịch sử đặt hàng
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -80,13 +80,13 @@
                                                     <thead>
                                                         <tr>
                                                             <c:if test="${user.userRoleId == 1}">
-                                                                <th>Username</th>
+                                                                <th>Tên khách hàng</th>
                                                                 </c:if>
-                                                            <th>Address</th>
+                                                            <th>Địa chỉ</th>
                                                             <th>E-mail</th>
-                                                            <th>Phone Number</th>
-                                                            <th>Order Date</th>
-                                                            <th>Order Status</th>
+                                                            <th>Số điện thoại</th>
+                                                            <th>Ngày đặt hàng</th>
+                                                            <th>Tình trạng đơn hàng</th>
                                                             <th></th>
                                                                 <c:if test="${user.userRoleId == 1}">
                                                                 <th></th>
@@ -110,13 +110,13 @@
                                                                 </c:forEach>
                                                                 <td>
                                                                     <a href="dashboard?action=orderdetail&orderid=${o.orderId}">
-                                                                        View
+                                                                        Xem
                                                                     </a>
                                                                 </td>
                                                                 <c:if test="${user.userRoleId == 1 || o.orderStatusId=='1' || o.orderStatusId=='2'  }">
                                                                     <td>
                                                                         <a href="deleteorder?orderid=${o.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
-                                                                            Delete
+                                                                            Xóa
                                                                         </a>
                                                                     </td>
                                                                 </c:if>

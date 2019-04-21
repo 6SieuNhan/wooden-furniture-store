@@ -31,7 +31,7 @@
                     <c:if test= "${param.page == 'order'}">
                         class="active-menu"
                     </c:if>
-                        href="dashboard?action=order"><i class="fa"></i>Danh sách hóa đơn</a>
+                        href="dashboard?action=order"><i class="fa"></i>Danh sách đặt hàng</a>
             </li>
             <li>
                 <a

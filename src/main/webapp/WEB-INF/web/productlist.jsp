@@ -15,7 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
     <head>
-        <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Kitchen Products :: w3layouts</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <jsp:include page="fragment/metadump.jsp" />
         <!-- paging -->
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
@@ -31,7 +31,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </jsp:include>
         <!-- //navbar -->
         <!-- top Products -->
-        <div class="ads-grid">
             <div class="container">
                 <!-- product list left -->
                 <jsp:include page="fragment/productlistleft.jsp" />

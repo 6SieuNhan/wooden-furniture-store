@@ -33,3 +33,5 @@
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 <!-- flexslider -->
 <link rel="stylesheet" href="<c:url value="/resource/css/flexslider.css" />" type="text/css" media="screen" />
+
+<link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />

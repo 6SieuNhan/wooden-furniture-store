@@ -10,11 +10,11 @@
 <footer>
     <div class="container">
         <!-- footer first section -->
-        <p class="footer-main">
+<!--        <p class="footer-main">
             <span>"Grocery Shoppy"</span> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
             magni dolores eos qui ratione voluptatem sequi nesciunt.Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-            beatae vitae dicta sunt explicabo.</p>
+            beatae vitae dicta sunt explicabo.</p>-->
         <!-- //footer first section -->
         <!-- footer third section -->
         <div class="footer-info w3-agileits-info">
@@ -58,7 +58,7 @@
         </div>
         <!-- //footer third section -->
         <!-- footer fourth section (text) -->
-        <div class="agile-sometext">
+<!--        <div class="agile-sometext">
             <div class="sub-some">
                 <h5>Online Grocery Shopping</h5>
                 <p>Order online. All your favourite products from the low price online supermarket for grocery home delivery in Delhi,
@@ -70,7 +70,7 @@
                 <p>Now Get Upto 40% Off On Everyday Essential Products Shown On The Offer Page. The range includes Grocery, Personal Care,
                     Baby Care, Pet Supplies, Healthcare and Other Daily Need Products. Discount May Vary From Product To Product.</p>
             </div>
-        </div>
+        </div>-->
         <!-- //footer fourth section (text) -->
     </div>
 </footer>

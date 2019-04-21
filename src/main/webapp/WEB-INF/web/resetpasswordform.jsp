@@ -30,8 +30,8 @@
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
-                                <input type="text" name="userid" value="${param.userid}" >
-                                <input type="text" name="recovery" value="${param.recovery}" >
+                                <input type="hidden" name="userid" value="${param.userid}" >
+                                <input type="hidden" name="recovery" value="${param.recovery}" >
                                 <div class="controls">
                                     <input type="password" placeholder="Password (4-16 chars)" id="password1" name="password1" required="" minlength="4" maxlength="16">
                                 </div>

@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
-        <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | About Us :: w3layouts</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <jsp:include page="fragment/metadump.jsp" />
     </head>
 
@@ -43,12 +43,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="w3l-welcome-info">
                     <div class="col-sm-6 col-xs-6 welcome-grids">
                         <div class="welcome-img">
-                            <img src="<c:url value="resource/images/about.jpg"/>" class="img-responsive zoom-img" alt="">
+                            <img src="<c:url value="resource/images/homepage/phong-khach.jpg"/>" class="img-responsive zoom-img" alt="">
                         </div>
                     </div>
                     <div class="col-sm-6 col-xs-6 welcome-grids">
                         <div class="welcome-img">
-                            <img src="<c:url value="resource/images/about2.jpg"/>" class="img-responsive zoom-img" alt="">
+                            <img src="<c:url value="resource/images/homepage/phong-ngu.jpg"/>" class="img-responsive zoom-img" alt="">
                         </div>
                     </div>
                     <div class="clearfix"> </div>
@@ -57,12 +57,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="w3l-welcome-info">
                     <div class="col-sm-6 col-xs-6 welcome-grids">
                         <div class="welcome-img">
-                            <img src="<c:url value="resource/images/about.jpg"/>" class="img-responsive zoom-img" alt="">
+                            <img src="<c:url value="resource/images/homepage/phong-bep.jpg"/>" class="img-responsive zoom-img" alt="">
                         </div>
                     </div>
                     <div class="col-sm-6 col-xs-6 welcome-grids">
                         <div class="welcome-img">
-                            <img src="<c:url value="resource/images/about2.jpg"/>" class="img-responsive zoom-img" alt="">
+                            <img src="<c:url value="resource/images/homepage/phong-lam-viec.jpg"/>" class="img-responsive zoom-img" alt="">
                         </div>
                     </div>
                     <div class="clearfix"> </div>

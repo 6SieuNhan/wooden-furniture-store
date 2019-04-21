@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -46,7 +46,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Đơn hàng chi tiết
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -55,7 +55,7 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Order history
+                                    Lịch sử đặt hàng
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -64,11 +64,11 @@
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>SI No</th>
-                                                            <th>Product</th>
-                                                            <th>Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total</th>
+                                                            <th>STT</th>
+                                                            <th>Sản phẩm</th>
+                                                            <th>Giá</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Tổng giá</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -89,7 +89,7 @@
                                                 </table>
                                                 <table class="table table-borderless">
                                                     <tr>
-                                                        <td>Total:</td>
+                                                        <td>Tổng tiền:</td>
                                                         <td><label class="pull-right">${total}</label></td>
                                                     </tr>
                                                 </table>
@@ -97,13 +97,13 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label>Address</label>
+                                            <label>Địa Chỉ</label>
                                             <div>${order.userAddress}</div>
                                             <label>Email</label>
                                             <div>${order.userEmail}</div>
-                                            <label>Phone</label>
+                                            <label>Số Điện Thoại</label>
                                             <div>${order.userPhone}</div>
-                                            <label>Order Status</label>
+                                            <label>Tình trạng đơn hàng</label>
                                             <div>
                                                 <c:choose>
                                                     <c:when test="${user.userRoleId == 1}">
@@ -131,7 +131,7 @@
                                             <c:if test="${user.userRoleId == 1 || order.orderStatusId=='1' || order.orderStatusId=='2'  }">
                                                 <br>
                                                 <a role="button" class="btn btn-default" href="deleteorder?orderid=${order.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
-                                                    Delete
+                                                    Xóa
                                                 </a>
                                             </c:if>
                                         </div>

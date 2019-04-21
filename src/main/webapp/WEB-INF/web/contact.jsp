@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
     <head>
-        <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Contact Us :: w3layouts</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <jsp:include page="fragment/metadump.jsp" />
     </head>
 
@@ -24,6 +24,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <jsp:param name="page" value="contact" />
         </jsp:include>
         <!-- //navbar -->
+        <!-- banner-2 -->
+        <div class="page-head_agile_info_w3l">
+
+        </div>
+        <!-- //banner-2 -->
         <!-- contact page -->
         <div class="contact-w3l">
             <div class="container">
@@ -41,11 +46,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="contact-agileinfo">
                         <div class="contact-right wthree">
                             <div class="col-xs-5 contact-text w3-agileits">
-                                
+
                                 <form:form modelAttribute="messageForm" action="sendcontactmessage" method="post">
                                     <form:input path="senderName" placeholder = "Tên" required="required" maxlength="30"/>
                                     <form:input path="subject" placeholder = "Tiêu đề" required="required" maxlength="30" />
-                                    <form:input type="email" path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
+                                    <form:input path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
                                     <form:textarea path="message" placeholder = "Nội dung" required="required" maxlength="300" />
                                     <button class="submit check_out">Submit</button>
                                 </form:form>
@@ -62,7 +67,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <a href="mailto:dogothuyhang@gmail.com">dogothuyhang@gmail.com</a>
                                 </p>
                                 <br/>
-                                <div id="map2"></div>
+                                <div id="map"></div>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
@@ -72,7 +77,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         </div>
         <!-- footer -->
-        <jsp:include page="fragment/footer.jsp" />
+
         <!-- //footer -->
         <!-- copyright -->
         <jsp:include page="fragment/copyright.jsp" />

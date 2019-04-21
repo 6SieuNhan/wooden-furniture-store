@@ -30,6 +30,7 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +49,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SessionAttributes(value = {"login", "messageForm", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
-    "paymentMethodList", "orderStatusList", "userRoleList", "productlistByTop"})
+    "paymentMethodList", "orderStatusList", "userRoleList"})
 public class HomeController {
 
     @Autowired
@@ -133,17 +134,11 @@ public class HomeController {
     public List<Category> setUpUserRoleList() {
         return categoryService.getCategoryList(Category.USER_ROLE);
     }
-    
-        @ModelAttribute("productlistByTop")
-    public List<Product> showProductListByTop() {
-//        HashMap<String, Object> params = new HashMap<>();
-//        List<Product> productListbytop = productService.getProductListByTop(params, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
-//        ModelAndView mav = new ModelAndView("productlistByTop");
-//        mav.addObject("productListByTop", productListbytop);
-//        return mav;
-        return productService.getProductListByTop();
-    }
 
+    /*   @ModelAttribute("productlistByTop")
+    public List<Product> showProductListByTop() {
+        return productService.getProductListByTop();
+    }*/
     @RequestMapping("about")
     public String showAbout() {
         return "about";
@@ -172,12 +167,16 @@ public class HomeController {
     /**
      * Shows the index.jsp form.
      *
+     * @param model
      * @param request
      * @return The String 'index', signaling the dispatcher to show the
      * index.jsp form.
      */
     @RequestMapping({"/", "home"})
-    public String showIndex(HttpServletRequest request) {
+    public String showIndex(Model model, HttpServletRequest request) {
+
+        List<Product> productlistByTop = productService.getProductListByTop();
+        model.addAttribute("productlistByTop", productlistByTop);
         return "index";
     }
 
@@ -287,9 +286,9 @@ public class HomeController {
 
             if (itemId != null) {
                 quantityString = request.getParameter("quantity_" + i);
-                try{
+                try {
                     quantity = Integer.parseInt(quantityString);
-                } catch(NumberFormatException ex){
+                } catch (NumberFormatException ex) {
                     return new ModelAndView("redirect:home");
                 }
                 //Tracking line
@@ -303,16 +302,19 @@ public class HomeController {
             i++;
         } while (itemId != null);
 
-        //checks item quantity status
-        boolean hasItem = productService.checkStock(checkoutList);
-        if(!hasItem){
-            ModelAndView mav = new ModelAndView("message");
-            mav.addObject("message", "Không đủ sản phẩm trong kho hàng, xin mời kiểm tra lại đơn hàng và sửa lại nếu cần");
-            return mav;
-        }
-        
-        //redirects to home if no product is found
         existing = (ArrayList<Product>) request.getSession().getAttribute("checkoutList");
+
+        //checks item quantity status
+        if (existing == null || existing.isEmpty()) {
+            boolean hasItem = productService.checkStock(checkoutList);
+            if (!hasItem) {
+                ModelAndView mav = new ModelAndView("message");
+                mav.addObject("message", "Không đủ sản phẩm trong kho hàng, xin mời kiểm tra lại đơn hàng và sửa lại nếu cần");
+                return mav;
+            }
+        }
+
+        //redirects to home if no product is found
         if (checkoutList.isEmpty() && (existing == null || existing.isEmpty())) {
             return new ModelAndView("redirect:home");
         } else {
