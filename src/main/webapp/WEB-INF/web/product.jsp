@@ -44,9 +44,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </li>
                                 </c:if>
                                 <!-- Product images -->
-
-
-
                                 <c:forEach var="img" items="${imgList}">
                                     <li data-thumb="<c:url value="resource/images/product_img/${product.productCode}/${img}"/>">
                                         <div class="thumb-image">

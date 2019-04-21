@@ -66,10 +66,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="invert">$${item.price}</td>
+                                        <td><span class="number">${item.price}</span><span>đ</span></td>
                                     </tr>
                                 </c:forEach>
-
+                                    <tr>
+                                        <td class="text-left" colspan="4">Tổng cộng:</td>
+                                        <td><span class="number">${total}</span><span>đ</span></td>
+                                    </tr>
+                                    
                             </tbody>
                         </table>
                     </div>

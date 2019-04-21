@@ -85,20 +85,19 @@ public class OrderController {
         }
         return mav;
     }
-    
+
     @RequestMapping(value = "changeorderstatus")
     public ModelAndView changeOrderStatus(@RequestParam(value = "orderid", required = false) String orderId,
             @RequestParam(value = "orderstatusid", required = false) Integer orderStatusId,
-            HttpServletRequest request){
+            HttpServletRequest request) {
         //validation stuff
         User user = (User) request.getSession().getAttribute("user");
-        if(user.getUserRoleId()!=User.ADMIN || orderId==null || orderId.isEmpty() || orderStatusId == null){
+        if (user.getUserRoleId() != User.ADMIN || orderId == null || orderId.isEmpty() || orderStatusId == null) {
             return new ModelAndView("redirect:home");
-        }
-        else{
+        } else {
             boolean result = orderService.changeOrderStatus(orderId, orderStatusId);
             //do something with the result?
-            ModelAndView mav = new ModelAndView("redirect:dashboard?action=orderdetail&orderid="+orderId);
+            ModelAndView mav = new ModelAndView("redirect:dashboard?action=orderdetail&orderid=" + orderId);
             return mav;
         }
     }
@@ -114,22 +113,26 @@ public class OrderController {
         boolean allow = false;
         if (user.getUserRoleId() == User.ADMIN) {
             allow = true;
-        }
-        else{
+        } else {
             Order o = orderService.getOrder(orderId);
-            if((o.getOrderStatusId().equals("1")||o.getOrderStatusId().equals("2"))
-                    && o.getUserId().equals(user.getUserId())){
+            if ((o.getOrderStatusId().equals("1") || o.getOrderStatusId().equals("2"))
+                    && o.getUserId().equals(user.getUserId())) {
                 allow = true;
             }
         }
-        if(allow){
+        if (allow) {
             boolean res = orderService.deleteOrder(orderId);
         }
-            //do something if delete fails?
+        //do something if delete fails?
         return new ModelAndView("redirect:dashboard?action=order");
     }
 
     public String getCheckoutMailMessage(HttpServletRequest request, List<Product> items, Order order) {
+        int total = 0;
+        for (Product p : items) {
+            total += p.getPrice() * p.getQuantity();
+        }
+
         String s = "<div>\n"
                 + "            This is a test message for WebBanHang.<br/>\n"
                 + "            This message is included with a copy of the receipt of the latest purchase attempt <br/>\n"
@@ -152,6 +155,7 @@ public class OrderController {
             s += "</tr>\n";
         }
         s += "</table>\n"
+                + "<div> Total: " + total + "đ </div>\n"
                 + "        <div> <a href=\""
                 + WBHConstants.ROOT_URL + "/validate?orderid=" + order.getOrderId() + "&validation=" + order.getValidationCode()
                 + "\">Validation link</a> </div>"

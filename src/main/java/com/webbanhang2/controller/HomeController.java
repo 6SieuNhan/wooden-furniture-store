@@ -17,7 +17,6 @@ import com.webbanhang2.service.MessageService;
 import com.webbanhang2.service.OrderService;
 import com.webbanhang2.service.ProductService;
 import com.webbanhang2.service.UserService;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -263,13 +262,15 @@ public class HomeController {
                         System.out.println(path.getFileName());
                         imgList.add(path.getFileName().toString());
                     });
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 ModelAndView mav = new ModelAndView("product");
                 mav.addObject("product", p);
-                mav.addObject("imgList", imgList);
+                if (!imgList.isEmpty()) {
+                    mav.addObject("imgList", imgList);
+                }
                 return mav;
             }
         }
@@ -277,7 +278,7 @@ public class HomeController {
 
     @RequestMapping(value = "checkout")
     public ModelAndView showCheckout(HttpServletRequest request) {
-        int i = 1;
+        int i = 1, total = 0;
         Integer quantity;
         String itemId, quantityString;
         ArrayList<Product> checkoutList = new ArrayList<>(), existing;
@@ -318,11 +319,20 @@ public class HomeController {
         if (checkoutList.isEmpty() && (existing == null || existing.isEmpty())) {
             return new ModelAndView("redirect:home");
         } else {
-            //binds checkout list to result
+            //binds checkout list to result; gets the total price in the meantime
             if (!checkoutList.isEmpty()) {
                 request.getSession().setAttribute("checkoutList", checkoutList);
+                for (Product p : checkoutList) {
+                    total += p.getPrice() * p.getQuantity();
+                }
+            } //else get total price from existing list
+            else {
+                for (Product p : existing) {
+                    total += p.getPrice() * p.getQuantity();
+                }
             }
             ModelAndView mav = new ModelAndView("checkout");
+            mav.addObject("total", total);
             return mav;
         }
     }
