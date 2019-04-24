@@ -29,22 +29,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailDao.addOrderDetailList(orderId, items);
     }
 
-    @Transactional
-    @Override
-    public boolean addOrderDetail(String orderId, Product item) {
-        return orderDetailDao.addOrderDetail(orderId, item);
-    }
-
-    @Transactional
     @Override
     public List<OrderDetail> getOrderDetailList(String orderId) {
         return orderDetailDao.getOrderDetailList(orderId);
-    }
-
-    @Transactional
-    @Override
-    public OrderDetail getOrderDetail(String orderId, String productId) {
-        return orderDetailDao.getOrderDetail(orderId, productId);
     }
 
 }

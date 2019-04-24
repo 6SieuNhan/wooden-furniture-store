@@ -43,25 +43,25 @@ public class CategoryDaoImpl implements CategoryDao {
             String sql = "select * from ";
             switch (categoryType) {
                 case Category.PRODUCT_CATEGORY:
-                    sql += "product_categories";
+                    sql += "product_categories order by categories_id";
                     break;
                 case Category.PRODUCT_MATERIAL:
-                    sql += "product_material";
+                    sql += "product_material  order by material_id";
                     break;
                 case Category.PRODUCT_ORIGIN:
-                    sql += "product_origin";
+                    sql += "product_origin order by origin_id";
                     break;
                 case Category.PRODUCT_ROOM:
-                    sql += "product_room";
+                    sql += "product_room  order by room_id";
                     break;
                 case Category.PAYMENT_METHOD:
-                    sql += "payment_method";
+                    sql += "payment_method order by payment_method_id";
                     break;
                 case Category.ORDER_STATUS:
-                    sql += "order_status";
+                    sql += "order_status order by order_status_id";
                     break;
                 case Category.USER_ROLE:
-                    sql += "user_role";
+                    sql += "user_role order by user_role_id;";
                     break;
                 default:
                     return null;
@@ -310,7 +310,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public boolean deleteCategory(String categoryName, int categoryType) {
         Category old = getCategoryByName(categoryName, categoryType);
         if(old==null){
-            return true;
+            return false;
         }
         //reject delete if category still has products
         if (old.getProductCount() > 0) {
@@ -329,15 +329,6 @@ public class CategoryDaoImpl implements CategoryDao {
                     break;
                 case Category.PRODUCT_ROOM:
                     sql = "delete from product_room where room_name = ?;";
-                    break;
-                case Category.PAYMENT_METHOD:
-                    sql = "delete from payment_method where payment_method_name = ?;";
-                    break;
-                case Category.ORDER_STATUS:
-                    sql = "delete from order_status where order_status_name = ?;";
-                    break;
-                case Category.USER_ROLE:
-                    sql = "delete from user_role where user_role_name = ?;";
                     break;
                 default:
                     return false;

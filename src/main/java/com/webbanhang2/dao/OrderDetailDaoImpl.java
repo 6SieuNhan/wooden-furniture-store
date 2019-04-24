@@ -36,37 +36,12 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     ProductDao productDao;
 
     @Override
-    public OrderDetail getOrderDetail(String orderId, String productId) {
-        String sql = "SELECT * FROM order_detail left join product\n"
-                + "on order_detail.product_id = product.product_id\n"
-                + "where order_id = ?;\n"
-                + "and order_detail.product_id = ?;";
-        List<OrderDetail> orderList = jdbcTemplate.query(sql, new Object[]{orderId, productId}, new OrderDetailMapper(true));
-        if (orderList == null || orderList.isEmpty()) {
-            return null;
-        } else {
-            return orderList.get(0);
-        }
-    }
-
-    @Override
-    public boolean addOrderDetail(String orderId, Product item) {
-        try {
-            String sql = "insert into order_detail(order_id, product_id, quantity, price) values(?, ?, ?, ?)";
-            int i = jdbcTemplate.update(sql, orderId, item.getProductId(), item.getQuantity(), item.getPrice());
-            return i != 0;
-        } catch (DataAccessException ex) {
-            System.out.println(ex.getMessage());
-            return false;
-        }
-    }
-
-    @Override
     public List<OrderDetail> getOrderDetailList(String orderId) {
         String sql = "SELECT * FROM order_detail left join product\n"
                 + "on order_detail.product_id = product.product_id\n"
                 + "where order_id = ?;";
-        return jdbcTemplate.query(sql, new Object[]{orderId}, new OrderDetailMapper(true));
+        List<OrderDetail> l = jdbcTemplate.query(sql, new Object[]{orderId}, new OrderDetailMapper(true));
+        return l.size() > 0? l:null;
     }
 
     @Override
