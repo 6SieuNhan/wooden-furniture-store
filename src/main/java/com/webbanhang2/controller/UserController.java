@@ -195,7 +195,7 @@ public class UserController {
             if (result) {
                 redir.addFlashAttribute("message", "Edit successful.");
             } else {
-                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+                redir.addFlashAttribute("message", "Edit failed.");
             }
             //reset user info
             user = userService.getUser(user);
@@ -223,7 +223,7 @@ public class UserController {
             if (result) {
                 redir.addFlashAttribute("message", "Edit successful.");
             } else {
-                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+                redir.addFlashAttribute("message", "Edit failed.");
             }
             //in case user2 = current
             if(user2.getUserId().equals(current.getUserId())){

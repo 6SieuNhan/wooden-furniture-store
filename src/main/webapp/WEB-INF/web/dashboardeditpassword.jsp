@@ -64,7 +64,7 @@
                                                     <input required id="password1" name="password1" type="password" class="form-control" minlength="4" maxlength="16">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Xác Nhận Mật Khẩu Mới:</label>
+                                                    <label>Xác Nhận Mật Khẩu Cũ:</label>
                                                     <form:hidden path="userId" value="${user.userId}" />
                                                     <form:hidden path="username" value="${user.username}" />
                                                     <form:password required="required" cssClass="form-control" path="password" />
@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Xác Nhận Mật Khẩu Cũ:</label>
+                                                    <label>Xác Nhận Mật Khẩu Mới:</label>
                                                     <input required id="password2" name="password2" type="password" class="form-control" maxlength="16">
                                                 </div>
                                             </div>

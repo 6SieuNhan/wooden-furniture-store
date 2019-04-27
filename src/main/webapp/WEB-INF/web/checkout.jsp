@@ -95,12 +95,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <div class="controls">
                                             <form:input path="address" placeholder = "Địa chỉ nhận hàng (Xã, Phường/Tỉnh, Thành Phố)" required="required" value="${user.address}" maxlength="100"/>
                                         </div>
-
-
-
-
-
-
                                     </div>
 
                                 </div>

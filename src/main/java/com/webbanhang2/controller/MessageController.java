@@ -6,7 +6,9 @@
 package com.webbanhang2.controller;
 
 import com.webbanhang2.model.Message;
+import com.webbanhang2.model.User;
 import com.webbanhang2.service.MessageService;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,43 +22,45 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class MessageController {
-    
+
     @Autowired
     private MessageService messageService;
-    
+
     @RequestMapping("/sendcontactmessage")
-    public ModelAndView processMessage(@ModelAttribute("message") Message message){
+    public ModelAndView processMessage(@ModelAttribute("message") Message message) {
         //bogus request
-        if(message==null){
+        if (message == null) {
             return new ModelAndView("redirect:home");
-        }
-        else{
+        } else {
             //start the insert
             boolean result = messageService.addMessage(message);
             ModelAndView mav = new ModelAndView("message");
-            if(result)
-            {
-                mav.addObject("message","Your enquiry has been recorded. You will now be redirected to homepage.");
-            }
-            else{
-                mav.addObject("message","An error has occured. You will now be redirected to homepage.");
+            if (result) {
+                mav.addObject("message", "Your enquiry has been recorded. You will now be redirected to homepage.");
+            } else {
+                mav.addObject("message", "An error has occured. You will now be redirected to homepage.");
             }
             return mav;
         }
     }
-    
+
     @RequestMapping("/deletemessage")
-    public ModelAndView deleteMessage(@RequestParam(value = "messageid", required = false) String messageId){
+    public ModelAndView deleteMessage(@RequestParam(value = "messageid", required = false) String messageId,
+            HttpServletRequest request) {
+        //Authorization
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getUserRoleId() != User.ADMIN) {
+            return new ModelAndView("redirect:home");
+        }
         ModelAndView mav;
         boolean result = messageService.deleteMessage(messageId);
         //do something for result?
-        if(result){
-            return new ModelAndView("redirect:dashboard?action=messagelist");
+        mav = new ModelAndView("redirect:dashboard?action=messagelist");
+        if (result) {
+            mav.addObject("message", "Delete successful");
+        } else {
+            mav.addObject("message", "Delete failed");
         }
-        else{
-            mav = new ModelAndView("message");
-            mav.addObject("message", "something delete failed");
-            return mav;
-        }
+        return mav;
     }
 }

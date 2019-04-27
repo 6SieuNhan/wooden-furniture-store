@@ -114,7 +114,7 @@ public class AdminController {
                 redirectAttributes.addFlashAttribute("message", "Delete Product Successful");
             }
             else{
-                redirectAttributes.addFlashAttribute("message", "Delete product failed as some order currently contains this product");
+                redirectAttributes.addFlashAttribute("message", "Delete product failed; product does not exist, or some order currently contains this product");
             }
         }
         return new ModelAndView("redirect:dashboard?action=productlist");

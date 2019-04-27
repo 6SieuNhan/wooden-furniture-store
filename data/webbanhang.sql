@@ -15,12 +15,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-DROP DATABASE IF EXISTS `webbanhang`;
-DROP DATABASE IF EXISTS `webbanhangtest`;
 --
 -- Current Database: `webbanhang`
 --
-
+DROP DATABASE IF EXISTS `webbanhang`;
+DROP DATABASE IF EXISTS `webbanhangtest`;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `webbanhang` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 
 USE `webbanhang`;
@@ -550,7 +549,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES ('42081ee5-4ec6-11e9-90ab-20474704b06e','This is also a test message','huheuhuhuhuh','Kien Nguyen','f.kien1997@gmail.com','2019-03-25 13:21:42'),('9718390d-4d7f-11e9-90ab-20474704b06e','ASDF','This is an example message\r\nsdajflsafdslkafjlkdsajfkldsaf','dante','asd@example.com','2019-03-23 22:23:20'),('ebe0010d-5f83-11e9-a844-20474704b06e','Lorem ipsum dolor sit amet','HELP ME','John Smith','test@gmail.com','2019-04-15 20:39:41');
+INSERT INTO `message` VALUES ('42081ee5-4ec6-11e9-90ab-20474704b06e','AAAAAA','huheuhuhuhuh','Kien Nguyen','f.kien1997@gmail.com','2019-03-25 13:21:42'),('5bb86f18-6507-11e9-8b82-20474704b06e','Test message','HELP ME','John Smith','test@gmail.com','2019-04-22 21:30:23'),('9718390d-4d7f-11e9-90ab-20474704b06e','This is a test message','This is an example message\r\nsdajflsafdslkafjlkdsajfkldsaf','dante','asd@example.com','2019-03-23 22:23:20'),('b923e22b-6502-11e9-8b82-20474704b06e','Is this a test message','asdfdasasdfsaf','John Smith','test@gmail.com','2019-04-22 20:30:01'),('bdfc02e2-6502-11e9-8b82-20474704b06e','test message','asdfdassdafsdafsdaasdfsaf','John Smith','test@gmail.com','2019-04-22 20:30:09'),('c1bfd983-6502-11e9-8b82-20474704b06e','Not a test message','asdfdassdafsdafsdaasdfsaf','John Smith','test@gmail.com','2019-04-22 20:30:15'),('c616c2d6-6502-11e9-8b82-20474704b06e','Also a test message','asdfdassdafsdafsdaasdfsaf','John Smith','test@gmail.com','2019-04-22 20:30:23');
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -608,7 +607,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES ('2c90a6c6-5096-11e9-90ab-20474704b06e','defec356-38cc-11e9-97d5-20474704b06e','2019-03-27 20:42:47',NULL,'Số 1, ngách 178/30. phố Tây Sơn, quận Đống Đa, Hà Nội','123456789','kienntse04792@fpt.edu.vn',2,'2c90aa99-5096-11e9-90ab-20474704b06e',2),('7784c643-4be6-11e9-90ab-20474704b06e',NULL,'2019-03-21 21:34:43',NULL,'1, 178/30 Alley, Tay Son Street','973118854','kienntse04792@fpt.edu.vn',2,'7784c723-4be6-11e9-90ab-20474704b06e',1),('b957ee0b-60f3-11e9-96b3-9457a5ae8d38','defe4bf4-38cc-11e9-97d5-20474704b06e','2019-04-17 16:31:49',NULL,'aaaaa','091234567','admin1@gmail.com',1,'b957f060-60f3-11e9-96b3-9457a5ae8d38',2),('c07793b7-60f3-11e9-96b3-9457a5ae8d38','defe4bf4-38cc-11e9-97d5-20474704b06e','2019-04-17 16:32:01',NULL,'aaaaa','091234567','admin1@gmail.com',1,'c07794aa-60f3-11e9-96b3-9457a5ae8d38',1),('c0a4bb96-60f3-11e9-96b3-9457a5ae8d38','defe4bf4-38cc-11e9-97d5-20474704b06e','2019-04-17 16:32:02',NULL,'aaaaa','091234567','admin1@gmail.com',1,'c0a4bc14-60f3-11e9-96b3-9457a5ae8d38',1),('c28457a9-60f3-11e9-96b3-9457a5ae8d38','defe4bf4-38cc-11e9-97d5-20474704b06e','2019-04-17 16:32:05',NULL,'aaaaa','091234567','admin1@gmail.com',1,'c28457f4-60f3-11e9-96b3-9457a5ae8d38',1);
+INSERT INTO `order` VALUES ('2c90a6c6-5096-11e9-90ab-20474704b06e','defec356-38cc-11e9-97d5-20474704b06e','2019-03-27 20:42:47',NULL,'Số 1, ngách 178/30. phố Tây Sơn, quận Đống Đa, Hà Nội','123456789','kienntse04792@fpt.edu.vn',2,'2c90aa99-5096-11e9-90ab-20474704b06e',2),('7784c643-4be6-11e9-90ab-20474704b06e',NULL,'2019-03-21 21:34:43',NULL,'1, 178/30 Alley, Tay Son Street','973118854','kienntse04792@fpt.edu.vn',2,'7784c723-4be6-11e9-90ab-20474704b06e',1),('b957ee0b-60f3-11e9-96b3-9457a5ae8d38','defec356-38cc-11e9-97d5-20474704b06e','2019-04-17 16:31:49',NULL,'aaaaa','091234567','admin1@gmail.com',1,'b957f060-60f3-11e9-96b3-9457a5ae8d38',2),('c07793b7-60f3-11e9-96b3-9457a5ae8d38','defec356-38cc-11e9-97d5-20474704b06e','2019-04-17 16:32:01',NULL,'aaaaa','091234567','admin1@gmail.com',1,'c07794aa-60f3-11e9-96b3-9457a5ae8d38',1),('c0a4bb96-60f3-11e9-96b3-9457a5ae8d38','37ee6ada-52f6-11e9-90ab-20474704b06e','2019-04-17 16:32:02',NULL,'aaaaa','091234567','admin1@gmail.com',1,'c0a4bc14-60f3-11e9-96b3-9457a5ae8d38',1),('c28457a9-60f3-11e9-96b3-9457a5ae8d38','defec356-38cc-11e9-97d5-20474704b06e','2019-04-17 16:32:05',NULL,'aaaaa','091234567','admin1@gmail.com',3,'c28457f4-60f3-11e9-96b3-9457a5ae8d38',1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -660,7 +659,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` (`product_id`, `order_id`, `quantity`, `price`) VALUES ('1457473f-4036-11e9-91dc-448a5bec6a0c','2c90a6c6-5096-11e9-90ab-20474704b06e',1,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','b957ee0b-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','c07793b7-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','c0a4bb96-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','c28457a9-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1459461b-4036-11e9-91dc-448a5bec6a0c','2c90a6c6-5096-11e9-90ab-20474704b06e',1,100000000),('1459461b-4036-11e9-91dc-448a5bec6a0c','7784c643-4be6-11e9-90ab-20474704b06e',1,100000000),('145b39d6-4036-11e9-91dc-448a5bec6a0c','2c90a6c6-5096-11e9-90ab-20474704b06e',1,400000000);
+INSERT INTO `order_detail` (`product_id`, `order_id`, `quantity`, `price`) VALUES ('1457473f-4036-11e9-91dc-448a5bec6a0c','2c90a6c6-5096-11e9-90ab-20474704b06e',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','b957ee0b-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','c07793b7-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','c0a4bb96-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1457473f-4036-11e9-91dc-448a5bec6a0c','c28457a9-60f3-11e9-96b3-9457a5ae8d38',2,50000000),('1459461b-4036-11e9-91dc-448a5bec6a0c','2c90a6c6-5096-11e9-90ab-20474704b06e',1,100000000),('1459461b-4036-11e9-91dc-448a5bec6a0c','7784c643-4be6-11e9-90ab-20474704b06e',1,100000000),('145b39d6-4036-11e9-91dc-448a5bec6a0c','2c90a6c6-5096-11e9-90ab-20474704b06e',1,400000000);
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -677,7 +676,7 @@ CREATE TABLE `order_status` (
   PRIMARY KEY (`order_status_id`),
   UNIQUE KEY `order_status_id_UNIQUE` (`order_status_id`),
   UNIQUE KEY `order_status_name_UNIQUE` (`order_status_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -686,7 +685,7 @@ CREATE TABLE `order_status` (
 
 LOCK TABLES `order_status` WRITE;
 /*!40000 ALTER TABLE `order_status` DISABLE KEYS */;
-INSERT INTO `order_status` VALUES (3,'completed'),(4,'paid'),(1,'unverified'),(2,'verified');
+INSERT INTO `order_status` VALUES (5,'BLANK_CATEGORY'),(3,'completed'),(4,'paid'),(1,'unverified'),(2,'verified');
 /*!40000 ALTER TABLE `order_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -703,7 +702,7 @@ CREATE TABLE `payment_method` (
   PRIMARY KEY (`payment_method_id`),
   UNIQUE KEY `payment_method_id_UNIQUE` (`payment_method_id`),
   UNIQUE KEY `payment_method_name_UNIQUE` (`payment_method_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -712,7 +711,7 @@ CREATE TABLE `payment_method` (
 
 LOCK TABLES `payment_method` WRITE;
 /*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
-INSERT INTO `payment_method` VALUES (2,'cash'),(1,'cod');
+INSERT INTO `payment_method` VALUES (3,'BLANK_CATEGORY'),(2,'cash'),(1,'cod');
 /*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -792,7 +791,7 @@ CREATE TABLE `product_categories` (
   PRIMARY KEY (`categories_id`),
   UNIQUE KEY `categories_id_UNIQUE` (`categories_id`),
   UNIQUE KEY `categories_name_UNIQUE` (`categories_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -801,7 +800,7 @@ CREATE TABLE `product_categories` (
 
 LOCK TABLES `product_categories` WRITE;
 /*!40000 ALTER TABLE `product_categories` DISABLE KEYS */;
-INSERT INTO `product_categories` VALUES (14,'Bàn'),(8,'Bàn Ăn'),(1,'Bàn Ghế'),(10,'Bàn Làm Việc'),(11,'Bàn Phấn'),(19,'Bàn Thờ'),(6,'Bể Cá'),(20,'Câu Đối'),(23,'Cầu Thang'),(21,'Cửa '),(5,'Đồ Thờ'),(4,'Đồng Hồ'),(15,'Ghế'),(3,'Giường'),(13,'Gương'),(12,'Kệ'),(24,'Khác'),(22,'Khung Tranh'),(17,'Phản'),(16,'Sập'),(2,'Tủ'),(9,'Tủ Bếp'),(18,'Tủ Thờ'),(7,'Tượng');
+INSERT INTO `product_categories` VALUES (14,'Bàn'),(8,'Bàn Ăn'),(1,'Bàn Ghế'),(10,'Bàn Làm Việc'),(11,'Bàn Phấn'),(19,'Bàn Thờ'),(6,'Bể Cá'),(25,'BLANK_CATEGORY'),(20,'Câu Đối'),(23,'Cầu Thang'),(21,'Cửa '),(5,'Đồ Thờ'),(4,'Đồng Hồ'),(15,'Ghế'),(3,'Giường'),(13,'Gương'),(12,'Kệ'),(24,'Khác'),(22,'Khung Tranh'),(17,'Phản'),(16,'Sập'),(2,'Tủ'),(9,'Tủ Bếp'),(18,'Tủ Thờ'),(7,'Tượng');
 /*!40000 ALTER TABLE `product_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -818,7 +817,7 @@ CREATE TABLE `product_material` (
   PRIMARY KEY (`material_id`),
   UNIQUE KEY `material_id_UNIQUE` (`material_id`),
   UNIQUE KEY `material_name_UNIQUE` (`material_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -827,7 +826,7 @@ CREATE TABLE `product_material` (
 
 LOCK TABLES `product_material` WRITE;
 /*!40000 ALTER TABLE `product_material` DISABLE KEYS */;
-INSERT INTO `product_material` VALUES (3,'Gỗ Cẩm lai'),(5,'Gỗ Chắc'),(1,'Gỗ Gụ'),(2,'Gỗ Hương'),(4,'Gỗ Mun');
+INSERT INTO `product_material` VALUES (6,'BLANK_CATEGORY'),(3,'Gỗ Cẩm lai'),(5,'Gỗ Chắc'),(1,'Gỗ Gụ'),(2,'Gỗ Hương'),(4,'Gỗ Mun');
 /*!40000 ALTER TABLE `product_material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -844,7 +843,7 @@ CREATE TABLE `product_origin` (
   PRIMARY KEY (`origin_id`),
   UNIQUE KEY `origin_id_UNIQUE` (`origin_id`),
   UNIQUE KEY `origin_name_UNIQUE` (`origin_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -853,7 +852,7 @@ CREATE TABLE `product_origin` (
 
 LOCK TABLES `product_origin` WRITE;
 /*!40000 ALTER TABLE `product_origin` DISABLE KEYS */;
-INSERT INTO `product_origin` VALUES (1,'Thủy Hằng');
+INSERT INTO `product_origin` VALUES (4,'Ba Sa'),(5,'BLANK_CATEGORY'),(1,'Thủy Hằng');
 /*!40000 ALTER TABLE `product_origin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -870,7 +869,7 @@ CREATE TABLE `product_room` (
   PRIMARY KEY (`room_id`),
   UNIQUE KEY `room_id_UNIQUE` (`room_id`),
   UNIQUE KEY `room_name_UNIQUE` (`room_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -879,7 +878,7 @@ CREATE TABLE `product_room` (
 
 LOCK TABLES `product_room` WRITE;
 /*!40000 ALTER TABLE `product_room` DISABLE KEYS */;
-INSERT INTO `product_room` VALUES (6,'Khác'),(3,'Phòng ăn'),(1,'Phòng khách'),(2,'Phòng làm việc'),(5,'Phòng ngủ'),(4,'Phòng thờ');
+INSERT INTO `product_room` VALUES (7,'BLANK_CATEGORY'),(6,'Khác'),(3,'Phòng ăn'),(1,'Phòng khách'),(2,'Phòng làm việc'),(5,'Phòng ngủ'),(4,'Phòng thờ');
 /*!40000 ALTER TABLE `product_room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -950,7 +949,7 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`user_role_id`),
   UNIQUE KEY `user_role_id_UNIQUE` (`user_role_id`),
   UNIQUE KEY `user_role_name_UNIQUE` (`user_role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -959,7 +958,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,'admin'),(2,'user');
+INSERT INTO `user_role` VALUES (1,'admin'),(3,'BLANK_CATEGORY'),(2,'user');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1026,4 +1025,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-21 11:58:34
+-- Dump completed on 2019-04-27 17:19:00
