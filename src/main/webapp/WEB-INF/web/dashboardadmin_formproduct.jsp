@@ -75,25 +75,29 @@
                                                             ${message}
                                                         </div>
                                                         </c:if>
-                                                    <form:input class="form-control" path="productCode" required="required"/>
+                                                    <form:input class="form-control" path="productCode" required="required"
+                                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
 
                                                     </p>   
                                                     <p>
                                                         <label class="w3-text-brown"><b>Tên sản phẩm</b></label>
-                                                        <form:input class="form-control" path="productName" required="required"/>
+                                                        <form:input class="form-control" path="productName" required="required"
+                                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                     </p>
                                                     <p><form:errors path="productName" class="error-message" /></p>
 
                                                     <div id="myform">
                                                         <label class="w3-text-brown"><b>Hình đại diện</b></label>
                                                         <form:input id="img-txt" class="form-control" path="thumbnail" placeholder="CT-1/1.jpg" maxlength="45"/>
-                                                        <img id="img-preview" src="resource/images/product_img/${productForm.thumbnail}" class="preview1" alt="Image not found"/>
+                                                        <img id="img-preview" src="resource/images/product_img/${productForm.thumbnail}" class="preview1" alt="Không tìm thấy ảnh"
+                                                             oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
 
                                                     </div>                 
                                                     <p>
                                                         <label class="w3-text-brown"><b>Mô tả sản phẩm</b></label>
                                                         <br>
-                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80" required="required"/>
+                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80" required="required"
+                                                                        oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                     </p>
                                                 </div>
                                                 <div class="col-6 right_side">
@@ -135,11 +139,13 @@
                                                     </p>
                                                     <p>
                                                         <label class="w3-text-brown"><b>Giá bán (VNĐ)</b></label>
-                                                        <form:input type="number" class="form-control" path="price" required="required"/>
+                                                        <form:input type="number" class="form-control" path="price" required="required" min="0"
+                                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Giá không hợp lệ')"/>
                                                     </p>
                                                     <p>
                                                         <label class="w3-text-brown"><b>Số lượng</b></label>
-                                                        <form:input type="number" min="0" step="1" class="form-control" path="quantity" pattern="\d+" required="required"/>
+                                                        <form:input type="number" min="0" step="1" class="form-control" path="quantity" pattern="\d+" required="required"
+                                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Số lượng không hợp lệ')"/>
                                                     </p>
                                                     <p class="floatLeft">
                                                         <button class="w3-btn w3-blue submit"><i class="fa fa-save"></i> Lưu Dữ Liệu</button>

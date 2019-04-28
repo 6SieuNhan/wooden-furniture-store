@@ -76,13 +76,22 @@
                                                             <tr class="gradeA clickable-row" role="button" data-href="home">
                                                                 <td>${loop.index+1}</td>
                                                                 <td>
-                                                                    <a href="product?productid=${od.productId}">
+                                                                    <a 
+                                                                        <c:choose>
+                                                                            <c:when test="${user.userRoleId == 1}">
+                                                                                href="edit?productid=${od.productId}"
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                href="product?productid=${od.productId}"
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                        >
                                                                         ${od.product.productName}
                                                                     </a>
                                                                 </td>
-                                                                <td>${od.price}</td>
+                                                                <td><span class="number">${od.price}</span>đ</td>
                                                                 <td>${od.quantity}</td>
-                                                                <td>${od.total}</td>
+                                                                <td><span class="number">${od.total}</span>đ</td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -90,7 +99,7 @@
                                                 <table class="table table-borderless">
                                                     <tr>
                                                         <td>Tổng tiền:</td>
-                                                        <td><label class="pull-right">${total}</label></td>
+                                                        <td><label class="pull-right"><span class="number">${total}</span>đ</label></td>
                                                     </tr>
                                                 </table>
 
@@ -106,17 +115,20 @@
                                             <label>Tình trạng đơn hàng</label>
                                             <div>
                                                 <c:choose>
-                                                    <c:when test="${user.userRoleId == 1}">
-                                                        <select class="form-control" onchange="if (this.value)
-                                                            window.location.href = 'changeorderstatus?orderid=${order.orderId}&orderstatusid=' + this.value">
-                                                            <c:forEach var="pci" items="${orderStatusList}">
-                                                                <option
-                                                                    <c:if test="${pci.categoryId==order.orderStatusId}">
-                                                                        selected
-                                                                    </c:if>
-                                                                    value="${pci.categoryId}">${pci.categoryName}</option>
-                                                            </c:forEach>
-                                                        </select>
+                                                    <c:when test="${user.userRoleId == 1 && order.orderStatusId != 3}">
+                                                        <form action="changeorderstatus">
+                                                            <input type="hidden" name="orderid" value="${order.orderId}" />
+                                                            <select name="orderstatusid" class="form-control">
+                                                                <c:forEach var="pci" items="${orderStatusList}">
+                                                                    <option
+                                                                        <c:if test="${pci.categoryId==order.orderStatusId}">
+                                                                            selected
+                                                                        </c:if>
+                                                                        value="${pci.categoryId}">${pci.categoryName}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                            <input type="submit" class="btn btn-default" value="Thay đổi trạng thái">
+                                                        </form>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <c:forEach var="pci" items="${orderStatusList}">
@@ -157,6 +169,12 @@
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
+        <!-- number -->
+        <script src="/WebBanHang2/resource/js/jquery.number.min.js"></script>
+        <script>
+            $('span.number').number(true, 0, '.', ' ');
+        </script>
+        
         <script>
                                                     jQuery(document).ready(function ($) {
                                                         $(".clickable-row").click(function () {
