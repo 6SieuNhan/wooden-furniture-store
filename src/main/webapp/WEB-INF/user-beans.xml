@@ -27,18 +27,7 @@
         />
     </beans>
     
-    <beans profile="test">
-        <bean id="datasource"
-              class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-              p:driverClassName="com.mysql.jdbc.Driver"
-              p:url="jdbc:mysql://localhost:3306/webbanhangtest?zeroDateTimeBehavior=convertToNull"
-              p:username="root"
-              p:password="DerpBottle123!" 
-        />
-    </beans>
-    
-    <!-- 
-    localhost version:
+    <!-- localhost version:
     
     <beans profile="default">
         <bean id="datasource"
@@ -48,7 +37,7 @@
               p:username="root"
               p:password="DerpBottle123!" 
         />
-    </beans>
+    </beans> -->
     
     <beans profile="test">
         <bean id="datasource"
@@ -58,8 +47,7 @@
               p:username="root"
               p:password="DerpBottle123!" 
         />
-    </beans> -->
-
+    </beans>
     
     
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->

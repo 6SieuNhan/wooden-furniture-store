@@ -17,6 +17,7 @@ import com.webbanhang2.service.MessageService;
 import com.webbanhang2.service.OrderService;
 import com.webbanhang2.service.ProductService;
 import com.webbanhang2.service.UserService;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -292,11 +293,16 @@ public class HomeController {
                 } catch (NumberFormatException ex) {
                     return new ModelAndView("redirect:home");
                 }
-                //Tracking line
-                System.out.println(itemId + ": " + quantity);
-
+                
                 Product p = productService.getShortenedProduct(itemId);
                 p.setQuantity(quantity);
+                //Tracking line
+                
+                System.out.println("Default charset: ");
+                System.out.println(Charset.defaultCharset());
+                System.out.println(itemId + ": " + p.getProductName() + ": " + quantity);
+                
+                
                 checkoutList.add(p);
             }
 

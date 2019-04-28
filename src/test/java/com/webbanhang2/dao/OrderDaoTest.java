@@ -37,7 +37,7 @@ public class OrderDaoTest extends TestCase {
     @Test
     public void getOrderListSearchWithQuery(){
         List<Order> result = orderDaoMock.getOrderListSearch("%user1%", 0, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
-        assertEquals(result.get(0).getOrderId(),"2c90a6c6-5096-11e9-90ab-20474704b06e");
+        assertEquals(result.get(0).getOrderId(),"c28457a9-60f3-11e9-96b3-9457a5ae8d38");
         assertEquals(result.get(0).getUsername(),"user1");
     }
 }

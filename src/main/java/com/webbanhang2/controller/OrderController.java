@@ -41,6 +41,9 @@ public class OrderController {
     ) {
         //Order detail is stored in session attribute
         List<Product> checkoutList = (List<Product>) request.getSession().getAttribute("checkoutList");
+        for(Product p:checkoutList){
+            System.out.println(p.getProductName());
+        }
         if (checkoutList == null || checkoutList.isEmpty()) {
             return new ModelAndView("redirect:home");
         }
@@ -129,37 +132,58 @@ public class OrderController {
 
     public String getCheckoutMailMessage(HttpServletRequest request, List<Product> items, Order order) {
         int total = 0;
-        for (Product p : items) {
-            total += p.getPrice() * p.getQuantity();
-        }
 
-        String s = "<div>\n"
-                + "            This is a test message for WebBanHang.<br/>\n"
-                + "            This message is included with a copy of the receipt of the latest purchase attempt <br/>\n"
-                + "            Do not mark this as spam.\n"
-                + "        </div>\n"
-                + "        <table>\n"
-                + "            <tr>\n"
-                + "                <th>SL No.</th>\n"
-                + "                <th>Product</th>\n"
-                + "                <th>Quantity</th>\n"
-                + "                <th>Price</th>\n"
-                + "            </tr>";
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div>\n");
+        sb.append("            This is a test message for WebBanHang.<br/>\n");
+        sb.append("            This message is included with a copy of the receipt of the latest purchase attempt <br/>\n");
+        sb.append("            Do not mark this as spam.\n");
+        sb.append("        </div>\n");
+        sb.append("        <table>\n");
+        sb.append("            <tr>\n");
+        sb.append("                <th>SL No.</th>\n");
+        sb.append("                <th>Product</th>\n");
+        sb.append("                <th>Quantity</th>\n");
+        sb.append("                <th>Price</th>\n");
+        sb.append("                <th>Product total</th>\n");
+        sb.append("            </tr>\n");
         for (int i = 0; i < items.size(); i++) {
             Product item = items.get(i);
-            s += "<tr>\n";
-            s += "<td>" + (i + 1) + "</td>\n";
-            s += "<td>" + item.getProductName() + "</td>\n";
-            s += "<td>" + item.getQuantity() + "</td>\n";
-            s += "<td> $" + item.getPrice() + "</td>\n";
-            s += "</tr>\n";
+            total += item.getPrice() * item.getQuantity();
+            sb.append("<tr>\n");
+            sb.append("<td>");
+            sb.append((i + 1));
+            sb.append("</td>\n");
+            sb.append("<td>");
+            sb.append(item.getProductName());
+            sb.append("</td>\n");
+            sb.append("<td>");
+            sb.append(item.getQuantity());
+            sb.append("</td>\n");
+            sb.append("<td>");
+            sb.append(item.getPrice());
+            sb.append("</td>\n");
+            sb.append("<td>");
+            sb.append(item.getPrice() * item.getQuantity());
+            sb.append("</td>\n");
+            sb.append("</tr>\n");
         }
-        s += "</table>\n"
-                + "<div> Total: " + total + "đ </div>\n"
-                + "        <div> <a href=\""
-                + WBHConstants.ROOT_URL + "/validate?orderid=" + order.getOrderId() + "&validation=" + order.getValidationCode()
-                + "\">Validation link</a> </div>"
-                + "        <div>Copyright never.</div>";
-        return s;
+        sb.append("</table>\n");
+        sb.append("<div> Total: ");
+        sb.append(total);
+        sb.append("đ </div>\n");
+        sb.append("        <div> <a href=\"");
+        sb.append("<div> Total: ");
+        sb.append(total);
+        sb.append("đ </div>\n");
+        sb.append("        <div> <a href=\"");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("/validate?orderid=");
+        sb.append(order.getOrderId());
+        sb.append("&validation=");
+        sb.append(order.getValidationCode());
+        sb.append("\">Validation link</a> </div>");
+        sb.append("        <div>Copyright never.</div>");
+        return sb.toString();
     }
 }

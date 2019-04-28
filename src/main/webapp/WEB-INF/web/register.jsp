@@ -35,13 +35,15 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30"/>
+                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input path="address" placeholder = "Địa chỉ" required="required"  maxlength="100"/>
+                                    <form:input path="address" placeholder = "Địa chỉ" required="required"  maxlength="100"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" id="password1" placeholder = "Mật khẩu (4-16 ký tự)" required="required" minlength="4" maxlength="16"/>
+                                    <form:password path="password" id="password3" placeholder = "Mật khẩu (4-16 ký tự)" required="required" maxlength="16"/>
                                 </div>
                                 <c:if test="${not empty message}">
                                     <div class="simple-alert-msg" >
@@ -58,13 +60,13 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
+                                    <form:input id="email" type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input type="number" path="phone" placeholder = "Số điện thoại (tối đa 12 ký tự)" required="required" maxlength="12"/>
+                                    <form:input id="phone" type="number" path="phone" placeholder = "Số điện thoại (9 ký tự)" maxlength="9"/>
                                 </div>
                                 <div class="controls">
-                                    <input type="password" placeholder="Nhập lại mật khẩu" id="password2" required="" maxlength="16">
+                                    <input type="password" placeholder="Nhập lại mật khẩu" id="password4" required="" maxlength="16">
                                 </div>
                             </div>
                         </div>
@@ -89,22 +91,68 @@
     <!-- password-script -->
     <script>
         window.onload = function () {
-            document.getElementById("password1").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-        };
+            document.getElementById("password3").setCustomValidity("Mật khẩu phải từ 4 đến 16 ký tự");
+            document.getElementById("email").setCustomValidity("Trường không được để trống");
+            document.getElementById("phone").setCustomValidity("Bạn chưa điền số điện thoại");
 
+            document.getElementById("password3").oninput = validatePassword;
+            document.getElementById("password4").oninput = validatePassword;
+            document.getElementById("email").oninput = validateEmail;
+            document.getElementById("phone").oninput = validatePhone;
+        };
+    </script>
+    
+    <!-- email script -->
+    <script>
+        function validateEmail() {
+            document.getElementById("email").setCustomValidity('');
+            if (document.getElementById("email").checkValidity()) {
+                document.getElementById("email").setCustomValidity('');
+            } else {
+                document.getElementById("email").setCustomValidity('Địa chỉ email phải có ký tự @');
+            }
+        }
+    </script>
+    <!-- //email script -->
+    
+    <!-- password-script -->
+    <script>
         function validatePassword() {
-            var pass2 = document.getElementById("password2").value;
-            var pass1 = document.getElementById("password1").value;
-            if (pass1 !== pass2)
-                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+            var pass4 = document.getElementById("password4").value;
+            var pass3 = document.getElementById("password3").value;
+            
+             if (pass3.length < 4) {
+                document.getElementById("password3").setCustomValidity("Mật khẩu phải từ 4 đến 16 ký tự");
+            } else {
+                document.getElementById("password3").setCustomValidity('');
+            }
+
+            if (pass3 !== pass4)
+                document.getElementById("password4").setCustomValidity("Mật khẩu không trùng khớp");
             else
-                document.getElementById("password2").setCustomValidity('');
+                document.getElementById("password4").setCustomValidity('');
             //empty string means no validation error
         }
     </script>
     <!-- //password-script -->
 
+    <!-- phone script -->
+    <script>
+        function validatePhone() {
+            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+            var mobile = document.getElementById("phone").value;
+            if (mobile !== '') {
+                if (vnf_regex.test(mobile) === false)
+                {
+                    document.getElementById("phone").setCustomValidity('Số điện thoại không hợp lệ');
+                } else {
+                    document.getElementById("phone").setCustomValidity('');
+                }
+            } else {
+                document.getElementById("phone").setCustomValidity('Bạn chưa điền số điện thoại');
+            }
+        }
+    </script>
 </body>
 
 </html>
