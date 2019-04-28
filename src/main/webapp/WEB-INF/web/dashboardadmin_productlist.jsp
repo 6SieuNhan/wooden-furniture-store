@@ -32,9 +32,6 @@
         <!-- Google Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
-        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-        <script src="//code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-        <script src="simple.money.format.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
@@ -164,14 +161,15 @@
                                                                 </td>
                                                                 <td>${product.quantity}</td>
                                                                 <td>
-                                                                    <span id="money">${product.price} đ</span>
+                                                                    <span class="number">${product.price}</span>
+                                                                    <span>đ</span>
                                                                 </td>
                                                                 <td style="width:5px">
                                                                     <c:if test="${product.product_top}">
-                                                                         <input type="checkbox" checked disabled>
+                                                                        <input type="checkbox" checked disabled>
                                                                     </c:if>
                                                                     <c:if test="${!product.product_top}">
-                                                                         <input type="checkbox" disabled>
+                                                                        <input type="checkbox" disabled>
                                                                     </c:if>
                                                                 </td>
                                                                 <td>
@@ -219,7 +217,7 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
@@ -233,21 +231,12 @@
 
         </script>
 
+        <!-- number -->
+        <script src="/WebBanHang2/resource/js/jquery.number.min.js"></script>
+        <script>
+            $('span.number').number(true, 0, '.', ' ');
+        </script>
 
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
                                                                         $(function () {

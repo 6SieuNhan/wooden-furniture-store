@@ -113,10 +113,12 @@
 
                         <form:form id="loginForm" modelAttribute="login" action="login" method="post">
                             <div class="styled-input agile-styled-input-top">
-                                <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="30" />
+                                <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="50" 
+                                            oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                             </div>
                             <div class="styled-input">
-                                <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" />
+                                <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" 
+                                               oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                             </div>
                             <a href="login">Quên mật khẩu?</a><br>
                             <input type="submit" value="Đăng nhập">

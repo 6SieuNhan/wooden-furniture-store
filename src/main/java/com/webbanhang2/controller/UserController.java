@@ -112,7 +112,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/requestrecovery")
-    public ModelAndView sendRecoveryCode(@RequestParam(value = "recoveryemail", required = false) String email) {
+    public ModelAndView sendRecoveryCode(@RequestParam(value = "recoveryemail", required = false) String email, RedirectAttributes redirectAttributes) {
         boolean success;
         if (email == null) {
             return new ModelAndView("redirect:home");
@@ -140,8 +140,8 @@ public class UserController {
             mav.addObject("message", "An email with the password recovery link has been sent to your email account.");
             return mav;
         } else {
-            ModelAndView mav = new ModelAndView("login");
-            mav.addObject("message2", "No user with matching email can be found in the database");
+            ModelAndView mav = new ModelAndView("redirect:login");
+            redirectAttributes.addFlashAttribute("message2", "Không tìm được tài khoản nào có email tương ứng");
             return mav;
         }
     }

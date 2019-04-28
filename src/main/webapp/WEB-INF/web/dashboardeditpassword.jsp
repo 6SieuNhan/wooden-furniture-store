@@ -61,13 +61,14 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Mật Khẩu Mới </label>
-                                                    <input required id="password1" name="password1" type="password" class="form-control" minlength="4" maxlength="16">
+                                                    <input required id="password1" name="password1" type="password" class="form-control" maxlength="16">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Xác Nhận Mật Khẩu Cũ:</label>
                                                     <form:hidden path="userId" value="${user.userId}" />
                                                     <form:hidden path="username" value="${user.username}" />
-                                                    <form:password required="required" cssClass="form-control" path="password" />
+                                                    <form:password required="required" cssClass="form-control" path="password" 
+                                                                   oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                     <c:if test="${not empty message}">
                                                         <div class="simple-alert-msg" >
                                                             ${message}
@@ -104,44 +105,18 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
+        <!-- password-script -->
+        <jsp:include page="fragment/js/passwordscript.jsp" />
+        <!-- //password-script -->
 
         <script>
-            window.onload = function () {
-            document.getElementById("password1").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-        };
-        
-        function validatePassword() {
-            var pass2 = document.getElementById("password2").value;
-            var pass1 = document.getElementById("password1").value;
-            if (pass1 !== pass2)
-                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-            else
-                document.getElementById("password2").setCustomValidity('');
-            //empty string means no validation error
-        }
-        
-        function confirm_reset() {
-            return confirm('Are you sure you want to reset the form?');
-        }
+                                                    function confirm_reset() {
+                                                        return confirm('Bạn có muốn hoàn lại tất cả các trường hay không?');
+                                                    }
         </script>
 
     </body>

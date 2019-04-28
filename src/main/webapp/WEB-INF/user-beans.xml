@@ -27,8 +27,9 @@
         />
     </beans>
     
-    <!-- localhost version:
+    <!-- localhost version: -->
     
+    <!--
     <beans profile="default">
         <bean id="datasource"
               class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -37,7 +38,7 @@
               p:username="root"
               p:password="DerpBottle123!" 
         />
-    </beans> -->
+    </beans> 
     
     <beans profile="test">
         <bean id="datasource"
@@ -47,7 +48,7 @@
               p:username="root"
               p:password="DerpBottle123!" 
         />
-    </beans>
+    </beans> -->
     
     
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->

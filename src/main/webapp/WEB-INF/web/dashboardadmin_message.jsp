@@ -94,26 +94,10 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
-
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
             jQuery(document).ready(function ($) {

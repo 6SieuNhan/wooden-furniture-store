@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Checkout :: w3layouts</title>
+    <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
     <jsp:include page="fragment/metadump.jsp" />
 </head>
 
@@ -35,7 +35,7 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30"
+                                    <form:input id="username2" path="username" placeholder = "Tên người dùng" required="required" maxlength="30"
                                                 oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
@@ -43,7 +43,7 @@
                                                 oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" id="password3" placeholder = "Mật khẩu (4-16 ký tự)" required="required" maxlength="16"/>
+                                    <form:password path="password" id="password1" placeholder = "Mật khẩu (4-16 ký tự)" required="required" maxlength="16"/>
                                 </div>
                                 <c:if test="${not empty message}">
                                     <div class="simple-alert-msg" >
@@ -60,13 +60,13 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input id="email" type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
+                                    <form:input id="email" type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="50"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input id="phone" type="number" path="phone" placeholder = "Số điện thoại (9 ký tự)" maxlength="9"/>
+                                    <form:input id="phone" path="phone" placeholder = "Số điện thoại (10 ký tự)" maxlength="10"/>
                                 </div>
                                 <div class="controls">
-                                    <input type="password" placeholder="Nhập lại mật khẩu" id="password4" required="" maxlength="16">
+                                    <input type="password" placeholder="Nhập lại mật khẩu" id="password2" required="" maxlength="16">
                                 </div>
                             </div>
                         </div>
@@ -88,71 +88,18 @@
     <!-- js-files -->
     <jsp:include page="fragment/js/jsdump.jsp" />
     <!-- //js-files -->
-    <!-- password-script -->
-    <script>
-        window.onload = function () {
-            document.getElementById("password3").setCustomValidity("Mật khẩu phải từ 4 đến 16 ký tự");
-            document.getElementById("email").setCustomValidity("Trường không được để trống");
-            document.getElementById("phone").setCustomValidity("Bạn chưa điền số điện thoại");
-
-            document.getElementById("password3").oninput = validatePassword;
-            document.getElementById("password4").oninput = validatePassword;
-            document.getElementById("email").oninput = validateEmail;
-            document.getElementById("phone").oninput = validatePhone;
-        };
-    </script>
     
     <!-- email script -->
-    <script>
-        function validateEmail() {
-            document.getElementById("email").setCustomValidity('');
-            if (document.getElementById("email").checkValidity()) {
-                document.getElementById("email").setCustomValidity('');
-            } else {
-                document.getElementById("email").setCustomValidity('Địa chỉ email phải có ký tự @');
-            }
-        }
-    </script>
+    <jsp:include page="fragment/js/emailscript.jsp" />
     <!-- //email script -->
     
     <!-- password-script -->
-    <script>
-        function validatePassword() {
-            var pass4 = document.getElementById("password4").value;
-            var pass3 = document.getElementById("password3").value;
-            
-             if (pass3.length < 4) {
-                document.getElementById("password3").setCustomValidity("Mật khẩu phải từ 4 đến 16 ký tự");
-            } else {
-                document.getElementById("password3").setCustomValidity('');
-            }
-
-            if (pass3 !== pass4)
-                document.getElementById("password4").setCustomValidity("Mật khẩu không trùng khớp");
-            else
-                document.getElementById("password4").setCustomValidity('');
-            //empty string means no validation error
-        }
-    </script>
+    <jsp:include page="fragment/js/passwordscript.jsp" />
     <!-- //password-script -->
 
     <!-- phone script -->
-    <script>
-        function validatePhone() {
-            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-            var mobile = document.getElementById("phone").value;
-            if (mobile !== '') {
-                if (vnf_regex.test(mobile) === false)
-                {
-                    document.getElementById("phone").setCustomValidity('Số điện thoại không hợp lệ');
-                } else {
-                    document.getElementById("phone").setCustomValidity('');
-                }
-            } else {
-                document.getElementById("phone").setCustomValidity('Bạn chưa điền số điện thoại');
-            }
-        }
-    </script>
+    <jsp:include page="fragment/js/phonescript.jsp" />
+    <!-- //phone script -->
 </body>
 
 </html>

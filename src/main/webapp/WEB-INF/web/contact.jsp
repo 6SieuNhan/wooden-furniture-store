@@ -48,10 +48,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <div class="col-xs-5 contact-text w3-agileits">
 
                                 <form:form modelAttribute="messageForm" action="sendcontactmessage" method="post">
-                                    <form:input path="senderName" placeholder = "Tên" required="required" maxlength="30"/>
-                                    <form:input path="subject" placeholder = "Tiêu đề" required="required" maxlength="30" />
-                                    <form:input path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
-                                    <form:textarea path="message" placeholder = "Nội dung" required="required" maxlength="300" />
+                                    <form:input path="senderName" placeholder = "Tên" required="required" maxlength="30"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
+                                    <form:input path="subject" placeholder = "Tiêu đề" required="required" maxlength="30" 
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
+                                    <form:input id="email" type="email" path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="50"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
+                                    <form:textarea path="message" placeholder = "Nội dung" required="required" maxlength="300" 
+                                                   oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                     <button class="submit check_out">Submit</button>
                                 </form:form>
                             </div>
@@ -85,6 +89,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- js-files -->
         <jsp:include page="fragment/js/jsdump.jsp" />
         <!-- //js-files -->
+
+        <!-- email script -->
+        <jsp:include page="fragment/js/emailscript.jsp" />
+        <!-- //email script -->
+
+
     </body>
 
 </html>

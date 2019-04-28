@@ -24,7 +24,7 @@
             </c:choose>
         </div>
         <div>
-            <a href="home">Click here if it's not automatically redirecting to homepage.</a>
+            <a href="home">Ấn vào đây nếu trình duyệt không tự chuyển đến trang chủ</a>
         </div>
         <script>
             setTimeout(function(){
