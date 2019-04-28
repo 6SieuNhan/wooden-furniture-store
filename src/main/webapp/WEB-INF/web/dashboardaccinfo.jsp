@@ -77,7 +77,7 @@
                                                             <form:hidden disabled="true" path="username" value="${user2.username}" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Số điện thoại:</label>
+                                                            <label>Số điện thoại (10 ký tự):</label>
                                                             <form:input id="phone" required="required" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="10"/>
                                                         </div>
                                                         <div class="form-group">
@@ -114,8 +114,8 @@
                                                             <form:hidden disabled="true" path="username" value="${user.username}" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Số điện thoại:</label>
-                                                            <form:input id="phone" required="required" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="12"/>
+                                                            <label>Số điện thoại (10 ký tự):</label>
+                                                            <form:input id="phone" required="required" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="10"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>

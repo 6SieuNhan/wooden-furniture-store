@@ -87,10 +87,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <div class="first-row col-md-6">
                                         <h4>Thông tin khách hàng</h4>
                                         <div class="controls">
-                                            <form:input type="email" path="email" placeholder = "Email" required="required" value="${user.email}" maxlength="50"/>
+                                            <form:input id="email" type="email" path="email" placeholder = "Email" required="required" value="${user.email}" maxlength="50"/>
                                         </div>
                                         <div class="controls">
-                                            <form:input type="number" path="phone" placeholder = "Số điện thoại" required="required" value="${user.phone}" maxlength="12"/>
+                                            <form:input id="phone" path="phone" placeholder = "Số điện thoại (10 ký tự)" required="required" value="${user.phone}" maxlength="10"/>
                                         </div>
                                         <div class="controls">
                                             <form:input path="address" placeholder = "Địa chỉ nhận hàng (Xã, Phường/Tỉnh, Thành Phố)" required="required" value="${user.address}" maxlength="100"/>
@@ -131,18 +131,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <jsp:include page="fragment/js/jsdump.jsp" />
             <!-- //js-files -->
 
-            <script>
-                window.onload = function () {
-                    document.getElementById("password3").setCustomValidity("Mật khẩu phải từ 4 đến 16 ký tự");
-                    document.getElementById("email").setCustomValidity("Trường không được để trống");
-                    document.getElementById("phone").setCustomValidity("Bạn chưa điền số điện thoại");
+            <!-- email script -->
+            <jsp:include page="fragment/js/emailscript.jsp" />
+            <!-- //email script -->
 
-                    document.getElementById("password3").oninput = validatePassword;
-                    document.getElementById("password4").oninput = validatePassword;
-                    document.getElementById("email").oninput = validateEmail;
-                    document.getElementById("phone").oninput = validatePhone;
-                };
-            </script>
+            <!-- phone script -->
+            <jsp:include page="fragment/js/phonescript.jsp" />
+            <!-- //phone script -->
+
     </body>
 
 </html>
