@@ -53,10 +53,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <form:input path="subject" placeholder = "Tiêu đề" required="required" maxlength="30" 
                                                 oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                     <form:input id="email" type="email" path="senderEmail" placeholder = "Địa chỉ email" required="required" maxlength="50"
-                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
+                                                />
                                     <form:textarea path="message" placeholder = "Nội dung" required="required" maxlength="300" 
                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
-                                    <button class="submit check_out">Submit</button>
+                                    <button class="submit check_out">Gửi</button>
                                 </form:form>
                             </div>
                             <div class="col-xs-7 contact-agile">

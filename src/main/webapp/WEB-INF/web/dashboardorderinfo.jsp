@@ -115,16 +115,18 @@
                                             <label>Tình trạng đơn hàng</label>
                                             <div>
                                                 <c:choose>
-                                                    <c:when test="${user.userRoleId == 1 && order.orderStatusId != 3}">
+                                                    <c:when test="${user.userRoleId == 1 && order.orderStatusId != 4}">
                                                         <form action="changeorderstatus">
                                                             <input type="hidden" name="orderid" value="${order.orderId}" />
                                                             <select name="orderstatusid" class="form-control">
                                                                 <c:forEach var="pci" items="${orderStatusList}">
-                                                                    <option
+                                                                    <c:if test="${pci.categoryId>=order.orderStatusId}">
+                                                                        <option
                                                                         <c:if test="${pci.categoryId==order.orderStatusId}">
                                                                             selected
                                                                         </c:if>
                                                                         value="${pci.categoryId}">${pci.categoryName}</option>
+                                                                    </c:if>
                                                                 </c:forEach>
                                                             </select>
                                                             <input type="submit" class="btn btn-default" value="Thay đổi trạng thái">

@@ -17,7 +17,6 @@
 
 DROP DATABASE IF EXISTS `webbanhang`;
 DROP DATABASE IF EXISTS `webbanhangtest`;
-
 --
 -- Current Database: `webbanhang`
 --
@@ -178,7 +177,7 @@ CREATE TABLE `order_status` (
   PRIMARY KEY (`order_status_id`),
   UNIQUE KEY `order_status_id_UNIQUE` (`order_status_id`),
   UNIQUE KEY `order_status_name_UNIQUE` (`order_status_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +186,7 @@ CREATE TABLE `order_status` (
 
 LOCK TABLES `order_status` WRITE;
 /*!40000 ALTER TABLE `order_status` DISABLE KEYS */;
-INSERT INTO `order_status` VALUES (3,'completed'),(4,'paid'),(1,'unverified'),(2,'verified');
+INSERT INTO `order_status` VALUES (1,'Chưa xác nhận'),(3,'Đã thanh toán'),(2,'Đã xác nhận'),(4,'Hoàn tất');
 /*!40000 ALTER TABLE `order_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +212,7 @@ CREATE TABLE `payment_method` (
 
 LOCK TABLES `payment_method` WRITE;
 /*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
-INSERT INTO `payment_method` VALUES (2,'cash'),(1,'cod');
+INSERT INTO `payment_method` VALUES (2,'Thẻ tín dụng (credit card)'),(1,'Thanh toán khi giao hàng (COD)');
 /*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1027,4 +1026,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-29 15:57:35
+-- Dump completed on 2019-04-29 20:43:22
