@@ -962,8 +962,8 @@ h3.heading-tittle {
 }
 
 .men-thumb-item img {
-    max-height:100%;
-    max-width:100%;
+    max-width: 100%;
+    max-height: 132px;
 }
 
 .item-info-product {
