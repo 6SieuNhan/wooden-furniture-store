@@ -71,6 +71,11 @@
                                                         <input type="hidden" id="action" name="action" value="order">
                                                         <button type="submit" value=" "><i class="fa fa-search"></i></button>
                                                     </form>
+                                                    <c:if test="${not empty message}">
+                                                        <div class="simple-alert-msg" >
+                                                            ${message}
+                                                        </div>
+                                                    </c:if>
                                                 </div>
                                             </c:if>
 

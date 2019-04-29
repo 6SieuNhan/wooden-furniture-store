@@ -65,19 +65,26 @@
                                                     <option <c:if test="${categoryType == 3}">selected</c:if> value="3">Không gian</option>
                                                     </select>
                                                 </div>
-                                                <!-- //search garbage -->
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Tên danh mục</th>
-                                                                <th>Số lượng sản phẩm</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                    
+                                            <c:if test="${not empty message}">
+                                                <div class="simple-alert-msg" >
+                                                    ${message}
+                                                </div>
+                                            </c:if>
+
+                                            <!-- //search garbage -->
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Tên danh mục</th>
+                                                            <th>Số lượng sản phẩm</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                         <c:forEach var="o" items="${categoryList}" varStatus="loop">
                                                             <tr class="gradeA" >
                                                                 <td>${loop.index+1}</td>
@@ -154,13 +161,9 @@
                                                 <label>Tên danh mục mới</label>
                                                 <input class="form-control" name="newcategory">
                                                 <input type="hidden" name="categorytype" value="${categoryType}" maxlength="45"
-                                                   oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')">
+                                                       oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')">
                                             </div>
-                                            <c:if test="${not empty message}">
-                                                <div class="simple-alert-msg" >
-                                                    ${message}
-                                                </div>
-                                            </c:if>
+
                                             <button type="submit" class="btn btn-default">Lưu</button>
                                             <button type="reset" class="btn btn-default" onclick = "add_mode()">Hoàn Tác (Chuyển sang Thêm danh mục)</button>
                                         </div>

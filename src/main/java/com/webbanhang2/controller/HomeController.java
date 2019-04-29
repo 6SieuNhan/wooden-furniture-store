@@ -494,7 +494,7 @@ public class HomeController {
                 if (m == null) {
                     //what do I do here
                     mav = new ModelAndView("message");
-                    mav.addObject("message", "something not found.");
+                    mav.addObject("message", "Không tìm được tin nhắn nào có ID tương ứng.");
                 } else {
                     mav = new ModelAndView("dashboardadmin_message");
                     mav.addObject("messageObject", m);

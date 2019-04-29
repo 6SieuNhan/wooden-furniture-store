@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -64,9 +65,9 @@ public class OrderController {
         //Return message view
         ModelAndView mav = new ModelAndView("message");
         if (res) {
-            mav.addObject("message", "Mail sent");
+            mav.addObject("message", "Đơn hàng của bạn đã được ghi lại; xin mời bạn hãy kiểm tra địa chỉ email của mình để nhận link xác nhận đơn hàng.");
         } else {
-            mav.addObject("message", "Mail send failed");
+            mav.addObject("message", "Có lỗi đã xảy ra trong việc ghi lại đơn hàng; xin mời bạn thử lại sau.");
         }
         return mav;
     }
@@ -82,9 +83,9 @@ public class OrderController {
         }
         ModelAndView mav = new ModelAndView("message");
         if (res) {
-            mav.addObject("message", "Validation successful");
+            mav.addObject("message", "Xác nhận đơn hàng thành công.");
         } else {
-            mav.addObject("message", "Validation failed");
+            mav.addObject("message", "Xác nhận đơn hàng không thành công; bạn hãy trực tiếp liên hệ qua email hoặc trang Liên Hệ để thông báo với chúng tôi về vấn đề này.");
         }
         return mav;
     }
@@ -107,7 +108,7 @@ public class OrderController {
 
     @RequestMapping(value = "deleteorder")
     public ModelAndView deleteOrder(@RequestParam(value = "orderid", required = false) String orderId,
-            HttpServletRequest request) {
+            HttpServletRequest request, RedirectAttributes redirectAttributes) {
         //validation stuff
         //user: Can only delete pending order (orders in Unverified and Verified statuses,
         //belonging to the user in question
@@ -125,6 +126,12 @@ public class OrderController {
         }
         if (allow) {
             boolean res = orderService.deleteOrder(orderId);
+            if(res){
+                redirectAttributes.addFlashAttribute("message", "Xóa đơn hàng thành công.");
+            }
+            else{
+                redirectAttributes.addFlashAttribute("message", "Có lỗi trong việc xóa đơn hàng; xin mời bạn thử lại sau.");
+            }
         }
         //do something if delete fails?
         return new ModelAndView("redirect:dashboard?action=order");

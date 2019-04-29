@@ -36,9 +36,9 @@ public class MessageController {
             boolean result = messageService.addMessage(message);
             ModelAndView mav = new ModelAndView("message");
             if (result) {
-                mav.addObject("message", "Your enquiry has been recorded. You will now be redirected to homepage.");
+                mav.addObject("message", "Thông điệp của bạn đã được ghi lại. Chúng tôi sẽ trả lời bạn trong vòng 24h thông qua địa chỉ email mà bạn đã nhập vào.");
             } else {
-                mav.addObject("message", "An error has occured. You will now be redirected to homepage.");
+                mav.addObject("message", "Có lỗi đã xảy ra trong việc ghi lại thông điệp của bạn, xin mời bạn thử lại sau.");
             }
             return mav;
         }
@@ -57,9 +57,9 @@ public class MessageController {
         //do something for result?
         mav = new ModelAndView("redirect:dashboard?action=messagelist");
         if (result) {
-            mav.addObject("message", "Delete successful");
+            mav.addObject("message", "Xóa tin nhắn thành công.");
         } else {
-            mav.addObject("message", "Delete failed");
+            mav.addObject("message", "Có lỗi trong việc xóa tin nhắn, xin mời bạn thử lại sau.");
         }
         return mav;
     }

@@ -120,7 +120,7 @@ public class MessageDaoTest extends TestCase {
     @Rollback(true)
     public void addMessageLongSenderEmail() {
         Message test = getTestMessageAdd();
-        test.setSenderEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        test.setSenderEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         boolean result = messageDaoMock.addMessage(test);
         assertEquals(result, false);
     }

@@ -39,7 +39,7 @@ public class CategoryController {
         }
         ModelAndView mav = new ModelAndView("redirect:dashboard?action=categorylist&categorytype=" + categoryType);
         if (categoryType == null) {
-            redir.addFlashAttribute("message", "Invalid edit request");
+            redir.addFlashAttribute("message", "Yêu cầu sửa danh mục không hợp lệ.");
         }
         String f = null;
         switch (categoryType) {
@@ -56,7 +56,7 @@ public class CategoryController {
                 f = "productRoomList";
                 break;
             default:
-                redir.addFlashAttribute("message", "Invalid edit request");
+                redir.addFlashAttribute("message", "Yêu cầu sửa danh mục không hợp lệ.");
                 return mav;
         }
         System.out.println(oldCategory);
@@ -65,9 +65,9 @@ public class CategoryController {
         if (result) {
             List<Category> newList = categoryService.getCategoryList(categoryType);
             request.getSession().setAttribute(f, newList);
-            redir.addFlashAttribute("message", "Edit successful.");
+            redir.addFlashAttribute("message", "Sửa danh mục thành công.");
         } else {
-            redir.addFlashAttribute("message", "Edit failed, name must be unique.");
+            redir.addFlashAttribute("message", "Sửa danh mục không thành công; tên danh mục mới không được trùng với tên của một danh mục sẵn có.");
         }
 
         return mav;
@@ -85,7 +85,7 @@ public class CategoryController {
         }
         ModelAndView mav = new ModelAndView("redirect:dashboard?action=categorylist&categorytype=" + categoryType);
         if (categoryType == null) {
-            redir.addFlashAttribute("message", "Invalid delete request");
+            redir.addFlashAttribute("message", "Yêu cầu xóa danh mục không hợp lệ.");
         }
         String f = null;
         switch (categoryType) {
@@ -102,16 +102,16 @@ public class CategoryController {
                 f = "productRoomList";
                 break;
             default:
-                redir.addFlashAttribute("message", "Invalid delete request");
+                redir.addFlashAttribute("message", "Yêu cầu xóa danh mục không hợp lệ.");
                 return mav;
         }
         boolean result = categoryService.deleteCategory(categoryName, categoryType);
         if (result) {
             List<Category> newList = categoryService.getCategoryList(categoryType);
             request.getSession().setAttribute(f, newList);
-            redir.addFlashAttribute("message", "Delete successful.");
+            redir.addFlashAttribute("message", "Xóa danh mục thành công.");
         } else {
-            redir.addFlashAttribute("message", "Delete failed; cannot delete category when there are still products inside");
+            redir.addFlashAttribute("message", "Xóa danh mục không thành công; không thể xóa danh mục vẫn còn chứa sản phẩm bên trong.");
         }
 
         return mav;

@@ -72,6 +72,12 @@
                                     <div class="row">
                                         <div class="col-lg-12">
 
+                                            <c:if test="${not empty message}">
+                                                <div class="simple-alert-msg" >
+                                                    ${message}
+                                                </div>
+                                            </c:if>
+
                                             <!-- search garbage -->
                                             <form action="dashboard?action=productlist" method="get" >
                                                 <div class="search">
@@ -234,24 +240,24 @@
         <!-- number -->
         <script src="/WebBanHang2/resource/js/jquery.number.min.js"></script>
         <script>
-            $('span.number').number(true, 0, '.', ' ');
+                                                                        $('span.number').number(true, 0, '.', ' ');
         </script>
 
 
         <script>
-                                                                        $(function () {
-                                                                            $('optgroup').each(function () {
-                                                                                var
-                                                                                        optgroup = $(this),
-                                                                                        options = optgroup.children().toArray().sort(function (a, b) {
-                                                                                    return $(a).text() < $(b).text() ? 1 : -1;
-                                                                                });
-                                                                                $.each(options, function (i, v) {
-                                                                                    optgroup.prepend(v);
-                                                                                });
+            $(function () {
+                $('optgroup').each(function () {
+                    var
+                            optgroup = $(this),
+                            options = optgroup.children().toArray().sort(function (a, b) {
+                        return $(a).text() < $(b).text() ? 1 : -1;
+                    });
+                    $.each(options, function (i, v) {
+                        optgroup.prepend(v);
+                    });
 
-                                                                            });
-                                                                        });
+                });
+            });
         </script>
     </body>
 </body>
