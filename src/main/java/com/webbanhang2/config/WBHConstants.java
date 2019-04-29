@@ -16,7 +16,7 @@ public class WBHConstants {
     
     public static final int PRODUCT_LIST_PAGE_SIZE = 15;
     
-    public static final String ROOT_URL = "https://webbanhang123.herokuapp.com/";
+    public static final String ROOT_URL = "https://dogothuyhang.herokuapp.com/";
     
     //localhost version
     //public static final String ROOT_URL = "http://localhost:8080/WebBanHang2";
@@ -25,5 +25,5 @@ public class WBHConstants {
     
     public static final String LOGIN_VIEW_NAME = "login";
     
-    public static final String LOGIN_FAIL_MESSAGE = "Login failed; either your username or password is incorrect.";
+    public static final String LOGIN_FAIL_MESSAGE = "Đăng nhập không thành công; bạn vui lòng kiểm tra lại tên đăng nhập và mật khẩu.";
 }

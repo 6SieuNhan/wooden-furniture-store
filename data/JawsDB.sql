@@ -202,7 +202,7 @@ CREATE TABLE `payment_method` (
 
 LOCK TABLES `payment_method` WRITE;
 /*!40000 ALTER TABLE `payment_method` DISABLE KEYS */;
-INSERT INTO `payment_method` VALUES (2,'Thẻ tín dụng (credit card)'),(1,'Thanh toán khi giao hàng (COD)');
+INSERT INTO `payment_method` VALUES (1,'Thanh toán khi giao hàng (COD)');
 /*!40000 ALTER TABLE `payment_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
