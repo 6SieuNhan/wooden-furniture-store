@@ -178,17 +178,14 @@ public class OrderController {
         sb.append("<div> Tổng: ");
         sb.append(total);
         sb.append("đ </div>\n");
-        sb.append("        <div> <a href=\"");
-        sb.append("<div> Total: ");
-        sb.append(total);
-        sb.append("đ </div>\n");
-        sb.append("        <div> <a href=\"");
+        
+        sb.append("<a href=\"");
         sb.append(WBHConstants.ROOT_URL);
-        sb.append("/validate?orderid=");
+        sb.append("validate?orderid=");
         sb.append(order.getOrderId());
         sb.append("&validation=");
         sb.append(order.getValidationCode());
-        sb.append("\">Link xác nhận sản phẩm</a> </div>");
+        sb.append("\">Link xác nhận sản phẩm</a>");
         sb.append("<br/>\n");
         
         //contact
@@ -198,7 +195,7 @@ public class OrderController {
         sb.append(WBHConstants.ROOT_URL);
         sb.append("\"> ");
         sb.append(WBHConstants.ROOT_URL);
-        sb.append("\"</a><br/>\n");
+        sb.append("</a><br/>\n");
         sb.append("Email: ");
         sb.append(WBHConstants.MAIL_SENDER_ADDRESS);
         sb.append("<br/>");

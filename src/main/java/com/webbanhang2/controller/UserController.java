@@ -263,13 +263,13 @@ public class UserController {
         sb.append("            Chúng tôi xin phép được gửi bạn link để đặt lại mật khẩu tài khoản của bạn tại cửa hàng đồ gỗ Thủy Hằng.<br/>\n");
         sb.append("            Nếu có vấn đề gì, xin mời bạn liên hệ với chúng tôi qua trang web, hoặc trực tiếp qua mail.<br/>\n");
         
-        sb.append("        <div> <a href=\"");
+        sb.append("<a href=\"");
         sb.append(WBHConstants.ROOT_URL);
-        sb.append("/resetpasswordform?userid=");
+        sb.append("resetpasswordform?userid=");
         sb.append(user.getUserId());
         sb.append("&recovery=");
         sb.append(recoveryCode);
-        sb.append("\">Link đặt lại mật khẩu</a> </div>");
+        sb.append("\">Link đặt lại mật khẩu</a>");
         sb.append("<br/>\n");
         
         //contact
@@ -279,7 +279,7 @@ public class UserController {
         sb.append(WBHConstants.ROOT_URL);
         sb.append("\"> ");
         sb.append(WBHConstants.ROOT_URL);
-        sb.append("\"</a><br/>\n");
+        sb.append("</a><br/>\n");
         sb.append("Email: ");
         sb.append(WBHConstants.MAIL_SENDER_ADDRESS);
         sb.append("<br/>");
