@@ -138,7 +138,7 @@
                                             </form> 
                                             <div class="floatRight">
                                                 <a href="createProduct">
-                                                    <button class="button">Create Product</button>
+                                                    <button class="button">Tạo sản phẩm mới</button>
                                                 </a>
                                             </div>
 
@@ -179,9 +179,9 @@
                                                                     </c:if>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="edit?productid=${product.productId}">Edit</a>
+                                                                    <a href="edit?productid=${product.productId}">Sửa</a>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Delete</a>
+                                                                    <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Xóa</a>
                                                                 </td>
                                                             </tr>
                                                             <c:if test="${(loop.index + 1)!= fn:length(productList) && (loop.index+1) % 3 == 0}">
@@ -193,7 +193,7 @@
                                                 </table>
                                                 <c:if test = "${empty productList}">
                                                     <div class="notiSearch">
-                                                        No product with this keyword can be found.
+                                                        Không tìm được sản phẩm nào
                                                     </div>
                                                 </c:if>
 

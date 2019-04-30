@@ -78,10 +78,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <br>
                 </div>
                 <!-- video -->
-                <iframe src="https://player.vimeo.com/video/15520702?color=ffffff&title=0&byline=0"></iframe>
+                <!--<iframe src="https://player.vimeo.com/video/15520702?color=ffffff&title=0&byline=0"></iframe>
                 <div class="text-center">
                     <p>Eaque ipsa quae ab illo inventore veritatis</p>
-                </div>
+                </div> -->
                 <!-- //video -->
             </div>
         </div>

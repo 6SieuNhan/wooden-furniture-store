@@ -57,7 +57,7 @@ public class OrderController {
         Order order = orderService.addOrder(checkoutList, user, paymentMethodId);
         //Send email
         String to = user.getEmail(),
-                subject = "Test message for WebBanHang";
+                subject = "Hóa đơn từ cửa hàng đồ gỗ Thủy Hằng";
         checkoutMailMessage = getCheckoutMailMessage(request, checkoutList, order);
         System.out.println(checkoutMailMessage);
         boolean res = emailService.sendHTMLMessage(to, subject, checkoutMailMessage);
@@ -142,17 +142,16 @@ public class OrderController {
 
         StringBuilder sb = new StringBuilder();
         sb.append("<div>\n");
-        sb.append("            This is a test message for WebBanHang.<br/>\n");
-        sb.append("            This message is included with a copy of the receipt of the latest purchase attempt <br/>\n");
-        sb.append("            Do not mark this as spam.\n");
+        sb.append("            Chúng tôi xin phép được gửi bạn chi tiết hóa đơn mà bạn vừa đặt tại cửa hàng đồ gỗ Thủy Hằng.<br/>\n");
+        sb.append("            Nếu có vấn đề gì, xin mời bạn liên hệ với chúng tôi qua trang web, hoặc trực tiếp qua mail.<br/>\n");
         sb.append("        </div>\n");
         sb.append("        <table>\n");
         sb.append("            <tr>\n");
-        sb.append("                <th>SL No.</th>\n");
-        sb.append("                <th>Product</th>\n");
-        sb.append("                <th>Quantity</th>\n");
-        sb.append("                <th>Price</th>\n");
-        sb.append("                <th>Product total</th>\n");
+        sb.append("                <th>Số</th>\n");
+        sb.append("                <th>Tên sản phẩm</th>\n");
+        sb.append("                <th>Số lượng</th>\n");
+        sb.append("                <th>Giá</th>\n");
+        sb.append("                <th>Tổng sản phẩm</th>\n");
         sb.append("            </tr>\n");
         for (int i = 0; i < items.size(); i++) {
             Product item = items.get(i);
@@ -169,14 +168,14 @@ public class OrderController {
             sb.append("</td>\n");
             sb.append("<td>");
             sb.append(item.getPrice());
-            sb.append("</td>\n");
+            sb.append("đ</td>\n");
             sb.append("<td>");
             sb.append(item.getPrice() * item.getQuantity());
-            sb.append("</td>\n");
+            sb.append("đ</td>\n");
             sb.append("</tr>\n");
         }
         sb.append("</table>\n");
-        sb.append("<div> Total: ");
+        sb.append("<div> Tổng: ");
         sb.append(total);
         sb.append("đ </div>\n");
         sb.append("        <div> <a href=\"");
@@ -189,8 +188,25 @@ public class OrderController {
         sb.append(order.getOrderId());
         sb.append("&validation=");
         sb.append(order.getValidationCode());
-        sb.append("\">Validation link</a> </div>");
-        sb.append("        <div>Copyright never.</div>");
+        sb.append("\">Link xác nhận sản phẩm</a> </div>");
+        sb.append("<br/>\n");
+        
+        //contact
+        sb.append("<div>\n");
+        sb.append("Cửa hàng đồ gỗ Thủy Hằng<br/>\n");
+        sb.append("Website: <a href=\"");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("\"> ");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("\"</a><br/>\n");
+        sb.append("Email: ");
+        sb.append(WBHConstants.MAIL_SENDER_ADDRESS);
+        sb.append("<br/>");
+        sb.append("Số 2, Kho Sau - Van Diem - Thuong Tin - Ha Noi<br/>");
+        sb.append("0347545020 - 0913076724<br/>");
+        sb.append("+1 888 888 4444<br/>");
+        sb.append("</div>\n");
+        
         return sb.toString();
     }
 }

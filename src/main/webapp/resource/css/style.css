@@ -9,8 +9,6 @@ html, body{
     font-size: 100%;
     background: #fff;
     font-family: 'Open Sans', sans-serif;
-    background-image: url("../../resource/images/homepage/untitled.png");
-    background-repeat: repeat;
 }
 body a {
     text-decoration:none;

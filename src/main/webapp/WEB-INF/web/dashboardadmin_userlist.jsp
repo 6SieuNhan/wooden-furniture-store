@@ -68,17 +68,17 @@
                                                     <input type="text" placeholder="Số điện thoại"
                                                            name="phonequery" value="${param.phonequery}" maxlength="12">
                                                     <select name="userroleid">
-                                                        <option value="0">All users</option>
+                                                        <option value="0">Tất cả người dùng</option>
                                                         <option
                                                             <c:if test="${param.userroleid == 1}">
                                                                 selected
                                                             </c:if>
-                                                            value="1">Admin</option>
+                                                            value="1">Quản trị</option>
                                                         <option
                                                             <c:if test="${param.userroleid == 2}">
                                                                 selected
                                                             </c:if>
-                                                                value="2">User</option>
+                                                                value="2">Người dùng thông thường</option>
                                                     </select>
                                                     <input type="hidden" id="action" name="action" value="userlist">
                                                 </div>

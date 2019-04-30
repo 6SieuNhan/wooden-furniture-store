@@ -71,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <fieldset>
                                                         <c:choose>
                                                             <c:when test="${product.quantity == 0}">
-                                                                <input type="submit" name="submit" value="Out of stock" class="button" disabled />
+                                                                <input type="submit" name="submit" value="Hết hàng" class="button" disabled />
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <input type="hidden" name="cmd" value="_cart" />

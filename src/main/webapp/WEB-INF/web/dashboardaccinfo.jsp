@@ -99,8 +99,8 @@
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
-                                                        <button disabled id="submit" type="submit" class="btn btn-default">Submit Button</button>
-                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Reset Button</button>
+                                                        <button disabled id="submit" type="submit" class="btn btn-default">Lưu</button>
+                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Hoàn tác</button>
                                                     </form:form>
 
                                                 </c:when>

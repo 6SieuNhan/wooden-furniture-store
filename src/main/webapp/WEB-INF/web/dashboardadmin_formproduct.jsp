@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
@@ -24,28 +24,18 @@
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
-
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
+        <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="home"><strong>Cửa hàng đồ gỗ</strong></a>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li style="color: white;">
-                        Welcome ${user.username}
-                    </li>
-                    <li>
-                        <a href="logout">Sign Out</a>
-                    </li>
-                </ul>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/dashboardadminnav.jsp" />
+            <jsp:include page="fragment/dashboardadminnav.jsp" >
+                <jsp:param name="page" value="productlist" />
+            </jsp:include>
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
@@ -74,7 +64,7 @@
                                                         <div class="simple-alert-msg" >
                                                             ${message}
                                                         </div>
-                                                        </c:if>
+                                                    </c:if>
                                                     <form:input class="form-control" path="productCode" required="required"
                                                                 oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
 
@@ -182,9 +172,9 @@
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
         <script>
-            $('#img-txt').on('input', function () {
-                $('#img-preview').attr("src", 'resource/images/product_img/' + $(this).val());
-            });
+                                                    $('#img-txt').on('input', function () {
+                                                        $('#img-preview').attr("src", 'resource/images/product_img/' + $(this).val());
+                                                    });
 
         </script>
 

@@ -115,13 +115,13 @@
                                                                 <td>${o.productCount}</td>
                                                                 <td>
                                                                     <a href="#edit" onclick="edit_mode('${o.categoryName}')">
-                                                                        Edit
+                                                                        Sửa
                                                                     </a>
                                                                 </td>
                                                                 <td>
                                                                     <c:if test="${o.productCount==0}">
                                                                         <a href="deletecategory?categoryname=${o.categoryName}&categorytype=${categoryType}" onclick="return confirm('Bạn có muốn xóa mục này?')">
-                                                                            Delete
+                                                                            Xóa
                                                                         </a>
                                                                     </c:if>
                                                                 </td>

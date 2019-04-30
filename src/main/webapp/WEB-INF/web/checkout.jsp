@@ -111,7 +111,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <label for="paymentmethod${pm.categoryId}">${pm.categoryName}</label>
                                     </div>
                                 </c:forEach>
-                                <button class="submit check_out" onsubmit="clearCart()" >Delivery to this Address</button>
+                                <button class="submit check_out" onsubmit="clearCart()" >Xác nhận đơn hàng</button>
                                 <script>
                                     function clearCart() {
                                         paypalm.minicartk.cart.destroy();

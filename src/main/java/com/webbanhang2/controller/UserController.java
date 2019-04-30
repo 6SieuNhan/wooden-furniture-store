@@ -126,8 +126,8 @@ public class UserController {
                 //Generate recovery code
                 String recoveryCode = userService.createRecoveryCode(user);
                 //send email
-                String to = "kienntse04792@fpt.edu.vn",
-                        subject = "Password recovery for WebBanHang";
+                String to = email,
+                        subject = "Về việc đặt lại mật khẩu ở cửa hàng đồ gỗ Thủy Hằng";
                 String recoveryMessage = getRecoveryMessage(user, recoveryCode);
 
                 System.out.println(recoveryMessage);
@@ -258,13 +258,38 @@ public class UserController {
     }
 
     String getRecoveryMessage(User user, String recoveryCode) {
-        return "<div>\n"
-                + "            This mail was sent because somebody request a recovery email on this account<br/>\n"
-                + "            The following link should be valid until another recovery request with the same email address is created<br/>\n"
-                + "            Do not mark this as spam.<br/>\n"
-                + "            <a href=\""
-                + WBHConstants.ROOT_URL + "/resetpasswordform?userid=" + user.getUserId() + "&recovery=" + recoveryCode
-                + "\">Recovery link</a> \n"
-                + "        </div>\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div>\n");
+        sb.append("            Chúng tôi xin phép được gửi bạn link để đặt lại mật khẩu tài khoản của bạn tại cửa hàng đồ gỗ Thủy Hằng.<br/>\n");
+        sb.append("            Nếu có vấn đề gì, xin mời bạn liên hệ với chúng tôi qua trang web, hoặc trực tiếp qua mail.<br/>\n");
+        
+        sb.append("        <div> <a href=\"");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("/resetpasswordform?userid=");
+        sb.append(user.getUserId());
+        sb.append("&recovery=");
+        sb.append(recoveryCode);
+        sb.append("\">Link đặt lại mật khẩu</a> </div>");
+        sb.append("<br/>\n");
+        
+        //contact
+        sb.append("<div>\n");
+        sb.append("Cửa hàng đồ gỗ Thủy Hằng<br/>\n");
+        sb.append("Website: <a href=\"");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("\"> ");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("\"</a><br/>\n");
+        sb.append("Email: ");
+        sb.append(WBHConstants.MAIL_SENDER_ADDRESS);
+        sb.append("<br/>");
+        sb.append("Số 2, Kho Sau - Van Diem - Thuong Tin - Ha Noi<br/>");
+        sb.append("0347545020 - 0913076724<br/>");
+        sb.append("+1 888 888 4444<br/>");
+        sb.append("</div>\n");
+        
+        return sb.toString();
+        
+        
     }
 }

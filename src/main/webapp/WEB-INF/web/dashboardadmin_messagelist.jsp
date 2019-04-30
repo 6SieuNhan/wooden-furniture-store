@@ -90,12 +90,12 @@
                                                                 <td>${o.date}</td>
                                                                 <td>
                                                                     <a href="dashboard?action=message&messageid=${o.messageId}">
-                                                                        View
+                                                                        Xem
                                                                     </a>
                                                                 </td>
                                                                 <td>
                                                                     <a href="deletemessage?messageid=${o.messageId}" onclick="return confirm('Bạn có muốn xóa tin nhắn này?')">
-                                                                        Delete
+                                                                        Xóa
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -104,7 +104,7 @@
                                                 </table>
                                                 <c:if test = "${empty messageList}">
                                                     <div class="notiSearch">
-                                                        No message with this keyword can be found.
+                                                        Không tìm được tin nhắn nào.
                                                     </div>
                                                 </c:if>
 
