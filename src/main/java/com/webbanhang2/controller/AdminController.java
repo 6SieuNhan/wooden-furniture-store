@@ -155,7 +155,7 @@ public class AdminController {
         //case of insertion fail (most likely due to duplicate key)
         if (saveResult) {
             // Add message to flash scope
-            redirectAttributes.addFlashAttribute("message", "Sửa sản phẩm thành công.");
+            redirectAttributes.addFlashAttribute("message", "Tạo/Sửa sản phẩm thành công.");
 
             return "redirect:dashboard?action=productlist"; 
         } else {
