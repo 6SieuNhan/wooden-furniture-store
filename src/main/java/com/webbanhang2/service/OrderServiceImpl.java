@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean validateOrder(String orderId, String validationCode) {
         Order o = getOrder(orderId);
-        if (o == null || !o.getValidationCode().equals(validationCode)) {
+        if (o == null || o.getValidationCode() == null || !o.getValidationCode().equals(validationCode)) {
             return false;
         } else {
             return orderDao.validateOrder(orderId);
