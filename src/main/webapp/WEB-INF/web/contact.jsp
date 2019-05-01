@@ -45,7 +45,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="contact agileits">
                     <div class="contact-agileinfo">
                         <div class="contact-right wthree">
-                            <div class="col-xs-5 contact-text w3-agileits">
+                            <div class="col-xs-5 contact-agile">
 
                                 <form:form modelAttribute="messageForm" action="sendcontactmessage" method="post">
                                     <form:input path="senderName" placeholder = "Tên" required="required" maxlength="30"
@@ -68,7 +68,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <i class="fa fa-fax"></i> +1 888 888 4444</p>
                                 <p>
                                     <i class="fa fa-envelope-o"></i> Email :
-                                    <a href="mailto:dogothuyhang@gmail.com">dogothuyhang@gmail.com</a>
+                                    <a href="mailto:dogomynghecaocapthuyhang@gmail.com">dogomynghecaocapthuyhang@gmail.com</a>
                                 </p>
                                 <br/>
                                 <div id="map"></div>

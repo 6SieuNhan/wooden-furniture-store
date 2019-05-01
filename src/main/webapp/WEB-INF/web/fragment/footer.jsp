@@ -41,7 +41,7 @@
                             <i class="fa fa-fax"></i>+1 888 888 4444</li>
                         <li>
                             <i class="fa fa-envelope-o"></i>
-                            <a href="mailto:dogothuyhang@gmail.com">dogothuyhang@gmail.com</a>
+                            <a href="mailto:dogomynghecaocapthuyhang@gmail.com">dogomynghecaocapthuyhang@gmail.com</a>
                         </li>
                     </ul>
                 </div>
