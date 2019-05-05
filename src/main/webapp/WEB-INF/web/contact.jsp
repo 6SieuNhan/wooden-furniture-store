@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         </div>
         <!-- footer -->
-
+        <jsp:include page="fragment/footer.jsp" />
         <!-- //footer -->
         <!-- copyright -->
         <jsp:include page="fragment/copyright.jsp" />

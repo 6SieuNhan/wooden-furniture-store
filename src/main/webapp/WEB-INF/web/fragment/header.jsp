@@ -113,7 +113,7 @@
 
                         <form:form id="loginForm" modelAttribute="login" action="login" method="post">
                             <div class="styled-input agile-styled-input-top">
-                                <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="50" 
+                                <form:input path="username" placeholder = "Tên đăng nhập hoặc email" required="required" maxlength="50" 
                                             oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                             </div>
                             <div class="styled-input">

@@ -87,9 +87,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <!-- //welcome -->
         <!-- //about page -->
-        <!-- newsletter -->
-        <jsp:include page="fragment/newsletter.jsp" />
-        <!-- //newsletter -->
         <!-- footer -->
         <jsp:include page="fragment/footer.jsp" />
         <!-- //footer -->

@@ -19,7 +19,7 @@
         if(email.checkValidity()){
             email.setCustomValidity('');
         } else {
-            email.setCustomValidity('Địa chỉ email phải có ký tự @');
+            email.setCustomValidity('Vui lòng nhập địa chỉ email đúng định dạng; ví dụ: example@gmail.com');
         }
     }
 </script>

@@ -34,7 +34,7 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="30"
+                                    <form:input path="username" placeholder = "Tên đăng nhập hoặc email" required="required" maxlength="30"
                                                 oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">

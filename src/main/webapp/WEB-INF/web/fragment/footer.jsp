@@ -19,8 +19,8 @@
         <!-- footer third section -->
         <div class="footer-info w3-agileits-info">
             <!-- quick links -->
-            <div class="col-sm-5 address-right">
-                <div class="col-xs-6 footer-grids">
+            <div class="col-sm-6 address-right">
+                <div class="col-xs-5 footer-grids">
                     <h3>Không gian</h3>
                     <ul>
                         <c:forEach var="pci" items="${productRoomList}">
@@ -30,7 +30,7 @@
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="col-xs-6 footer-grids">
+                <div class="col-xs-7 footer-grids">
                     <h3>Thông tin liên hệ</h3>
                     <ul>
                         <li>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <!-- //quick links -->
-            <div class="col-sm-7 address-right">
+            <div class="col-sm-6 address-right">
                 <!-- map -->
                 <!--The div element for the map -->
                 <div id="map"></div>
@@ -57,20 +57,5 @@
             <div class="clearfix"></div>
         </div>
         <!-- //footer third section -->
-        <!-- footer fourth section (text) -->
-<!--        <div class="agile-sometext">
-            <div class="sub-some">
-                <h5>Online Grocery Shopping</h5>
-                <p>Order online. All your favourite products from the low price online supermarket for grocery home delivery in Delhi,
-                    Gurgaon, Bengaluru, Mumbai and other cities in India. Lowest prices guaranteed on Patanjali, Aashirvaad, Pampers, Maggi,
-                    Saffola, Huggies, Fortune, Nestle, Amul, MamyPoko Pants, Surf Excel, Ariel, Vim, Haldiram's and others.</p>
-            </div>
-            <div class="sub-some">
-                <h5>Shop online with the best deals & offers</h5>
-                <p>Now Get Upto 40% Off On Everyday Essential Products Shown On The Offer Page. The range includes Grocery, Personal Care,
-                    Baby Care, Pet Supplies, Healthcare and Other Daily Need Products. Discount May Vary From Product To Product.</p>
-            </div>
-        </div>-->
-        <!-- //footer fourth section (text) -->
     </div>
 </footer>

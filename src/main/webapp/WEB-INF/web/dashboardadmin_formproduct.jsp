@@ -86,8 +86,7 @@
                                                     <p>
                                                         <label class="w3-text-brown"><b>Mô tả sản phẩm</b></label>
                                                         <br>
-                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80" required="required"
-                                                                        oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
+                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80"/>
                                                     </p>
                                                 </div>
                                                 <div class="col-6 right_side">
