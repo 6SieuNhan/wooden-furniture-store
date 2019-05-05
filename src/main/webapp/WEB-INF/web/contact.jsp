@@ -71,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <a href="mailto:dogomynghecaocapthuyhang@gmail.com">dogomynghecaocapthuyhang@gmail.com</a>
                                 </p>
                                 <br/>
-                                <div id="map"></div>
+                                <div id="map2"></div>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
