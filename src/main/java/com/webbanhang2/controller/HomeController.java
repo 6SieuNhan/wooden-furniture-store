@@ -297,11 +297,7 @@ public class HomeController {
                 Product p = productService.getShortenedProduct(itemId);
                 p.setQuantity(quantity);
                 //Tracking line
-                
-                System.out.println("Default charset: ");
-                System.out.println(Charset.defaultCharset());
                 System.out.println(itemId + ": " + p.getProductName() + ": " + quantity);
-                
                 
                 checkoutList.add(p);
             }

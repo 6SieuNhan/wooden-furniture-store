@@ -42,9 +42,6 @@ public class OrderController {
     ) {
         //Order detail is stored in session attribute
         List<Product> checkoutList = (List<Product>) request.getSession().getAttribute("checkoutList");
-        for(Product p:checkoutList){
-            System.out.println(p.getProductName());
-        }
         if (checkoutList == null || checkoutList.isEmpty()) {
             return new ModelAndView("redirect:home");
         }
@@ -59,7 +56,6 @@ public class OrderController {
         String to = user.getEmail(),
                 subject = "Hóa đơn từ cửa hàng đồ gỗ Thủy Hằng";
         checkoutMailMessage = getCheckoutMailMessage(request, checkoutList, order);
-        System.out.println(checkoutMailMessage);
         boolean res = emailService.sendHTMLMessage(to, subject, checkoutMailMessage);
         System.out.println(res);
         //Return message view
