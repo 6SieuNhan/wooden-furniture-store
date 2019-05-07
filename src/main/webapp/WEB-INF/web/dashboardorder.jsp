@@ -22,7 +22,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
     </head>

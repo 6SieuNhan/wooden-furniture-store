@@ -22,7 +22,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
     </head>
     <body>
@@ -172,7 +172,7 @@
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
         <!-- number -->
-        <script src="/WebBanHang2/resource/js/jquery.number.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery.number.min.js"/>"></script>
         <script>
             $('span.number').number(true, 0, '.', ' ');
         </script>
