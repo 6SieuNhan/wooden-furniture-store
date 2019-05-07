@@ -118,7 +118,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
             od.setProductId(rs.getString("product_id"));
             od.setQuantity(rs.getInt("quantity"));
             od.setPrice(rs.getInt("price"));
-            od.setTotal(rs.getInt("total"));
+            od.setTotal(od.getQuantity() * od.getPrice());
             //Do Product object
             if (getProduct) {
                 Product product = new Product();
