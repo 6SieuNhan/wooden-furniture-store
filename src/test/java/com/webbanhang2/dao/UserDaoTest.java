@@ -169,7 +169,7 @@ public class UserDaoTest extends TestCase {
     @Rollback(true)
     public void registerUserLongEmail() {
         User test = getMockUserRegister();
-        test.setEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        test.setEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         boolean result = userDaoMock.registerUser(test);
         assertEquals(result, false);
     }
@@ -415,7 +415,7 @@ public class UserDaoTest extends TestCase {
     @Rollback(true)
     public void editUserLongEmail() {
         User test = getMockUserEdit();
-        test.setEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        test.setEmail("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         boolean result = userDaoMock.editUser(test);
         assertEquals(result, false);
     }

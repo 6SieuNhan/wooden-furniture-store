@@ -158,26 +158,29 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean changeOrderStatus(String orderId, int orderStatusId) {
         try {
-            //get order, to prepare for unverified <-> verified
+            //get order
+            //only allows 1 way modification: unverified -> verified -> completed
+            //As a result, new status ID should be higher than old status ID
             Order o = getOrder(orderId);
-
-            if ((o.getOrderStatusId().equals("1") && orderStatusId == 2)
-                    || (o.getOrderStatusId().equals("2") && orderStatusId == 1)) {
+            int oldStatusId = Integer.parseInt(o.getOrderStatusId());
+            if(orderStatusId < oldStatusId){
+                return false;
+            }
+            //if new = old, there's nothing to change so return true
+            if(orderStatusId == oldStatusId){
+                return true;
+            }
+            //remove item from stock for unverified -> verified or complete action
+            if(oldStatusId == 1){
                 ArrayList<Product> productList = new ArrayList<>();
                 for (OrderDetail od : o.getOrderDetailList()) {
                     Product p = od.getProduct();
                     p.setQuantity(od.getQuantity());
                     productList.add(p);
                 }
-                //removes stock if unverified -> verified
-                if (orderStatusId == 2) {
-                    productDao.updateStock(productList, false);
-                } //adds stock if verified -> unverified
-                else {
-                    productDao.updateStock(productList, true);
-                }
+                productDao.updateStock(productList, false);
             }
-
+            //the actual change status ID part
             String sql;
             try {
                 if (Integer.parseInt(orderId) == Order.COMPLETE) {

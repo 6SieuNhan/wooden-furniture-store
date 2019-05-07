@@ -9,8 +9,6 @@ html, body{
     font-size: 100%;
     background: #fff;
     font-family: 'Open Sans', sans-serif;
-    background-image: url("resource/images/homepage/untitled.png");
-    background-repeat: repeat;
 }
 body a {
     text-decoration:none;
@@ -800,6 +798,15 @@ button.w3view-cart {
 .btn {
     display: inline-block;
 }
+.search-hotel select {
+    background:#fff;
+    border: none;
+    width: 40%;
+    outline: none;
+    padding: 11px 10px 10px 10px;
+    font-size: 13px;
+}
+
 .search-hotel input[type="search"] {
     background:#fff;
     border: none;
@@ -807,7 +814,6 @@ button.w3view-cart {
     outline: none;
     padding: 11px 10px 10px 10px;
     font-size: 13px;
-    color: #c4c4c4;
 }
 
 .search-hotel input[type="number"] {
@@ -818,15 +824,6 @@ button.w3view-cart {
     padding: 11px 10px 10px 10px;
     font-size: 13px;
     color: #c4c4c4;
-}
-
-.search-hotel select {
-    background:#fff;
-    border: none;
-    width: 40%;
-    outline: none;
-    padding: 11px 10px 10px 10px;
-    font-size: 13px;
 }
 
 
@@ -958,11 +955,13 @@ h3.heading-tittle {
 }
 .men-thumb-item {
     text-align: center;
+    height:250px;
+    width:100%;
 }
 
 .men-thumb-item img {
-    max-width:80%;
-    max-height:80%;
+    max-width: 100%;
+    max-height: 250px;
 }
 
 .item-info-product {
@@ -1026,7 +1025,7 @@ h3.w3l-nut-middle {
     -webkit-transform: rotate(-64deg);
 }
 /*-- //nuts --*/
-.ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits, .privacy {
+.ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits{
     padding: 5em 0;
 }
 /*-- tittle heading --*/
@@ -1464,7 +1463,7 @@ p.footer-main span {
 /*-- //bottom-to-top --*/
 /* contact page */
 .page-head_agile_info_w3l {
-    background: url(../images/banner2.jpg) no-repeat;
+    background: url(../images/homepage/pexels-photo-276651.jpg) no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -2229,12 +2228,12 @@ img.zoom-img:hover{
 /*-- //about page --*/
 /*-- product page --*/
 .w3l-rightpro .product-men {
-    margin: 0;
+    margin-bottom:10px;
 }
 /*-- //product page --*/
 /*-- single-page --*/
 .single-right-left h3 {
-    font-size: 25px;
+    font-size: 27px;
     color: #000;
     margin-bottom: 13px;
 }
@@ -2290,13 +2289,19 @@ img.zoom-img:hover{
     opacity : 1;
 }
 /*-- //Ratings --*/
+
+.single-infoagile{
+    border-bottom: 1px solid #1accfd;
+}
+
 .single-infoagile ul li {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 12px;
 }
 .product-single-w3l {
-    border-top: 1px solid #1accfd;
+/*    border-top: 1px solid #1accfd;*/
+    margin-top:10px;
 }
 .product-single-w3l p i {
     color: #1accfd;
@@ -2330,7 +2335,7 @@ table.timetable_sub {
     margin:0 auto;
 }
 .timetable_sub th {
-    background: #000;
+    background: gray;
     color: #fff;
     font-size: 16px;
     border-right: 1px solid #ded2d2;
@@ -2349,7 +2354,8 @@ table.timetable_sub {
     border:1px solid #CDCDCD;
 }
 td.invert-image a img {
-    width:30%;
+    max-width: -webkit-fill-available;
+    max-height: -webkit-fill-available;
     margin: 0 auto;
 }
 .rem{
@@ -2462,6 +2468,7 @@ button.submit.check_out {
     color: #fff;
     border: none;
     outline: none;
+    float:right;
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
@@ -2818,9 +2825,11 @@ select.form-control.option-w3ls {
         min-height: 500px;
         padding-top: 5.5em;
     }
-    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits, .privacy {
+    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits {
         padding: 4em 0;
     }
+
+
     h3.tittle-w3l {
         font-size: 2.8em;
     }
@@ -3084,7 +3093,7 @@ select.form-control.option-w3ls {
         min-height: 400px;
         padding-top: 4.5em;
     }
-    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits, .privacy {
+    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits {
         padding: 3em 0;
     }
     .side-bar {
@@ -3982,7 +3991,7 @@ select.form-control.option-w3ls {
     h3.tittle-w3l {
         font-size: 2em;
     }
-    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits, .privacy {
+    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits {
         padding: 2.5em 0;
     }
     .img-deals {
@@ -4238,7 +4247,7 @@ select.form-control.option-w3ls {
     .carousel-indicators {
         bottom: 2%;
     }
-    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits, .privacy {
+    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits {
         padding: 2em 0;
     }
     h3.tittle-w3l:after {
@@ -4595,7 +4604,7 @@ select.form-control.option-w3ls {
         width: 10px;
         height: 10px;
     }
-    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits, .privacy {
+    .ads-grid, footer, .contact-w3l, .w3_wthree_agileits_icons, .typo, .faqs-w3l, .terms-of-use, .welcome, .about, .banner-bootom-w3-agileits {
         padding: 1.5em 0;
     }
     h3.tittle-w3l {
@@ -5064,3 +5073,20 @@ select.form-control.option-w3ls {
     background-color:transparent
 }
 /*--//responsive--*/
+
+
+.privacy{
+    padding:0;
+}
+
+.back {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 8px;
+}

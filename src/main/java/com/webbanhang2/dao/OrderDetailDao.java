@@ -16,12 +16,8 @@ import java.util.List;
 public interface OrderDetailDao {
     
     boolean addOrderDetailList(String orderId, List<Product> items);
-    
-    boolean addOrderDetail(String orderId, Product item);
-    
+
     List<OrderDetail> getOrderDetailList(String orderId);
-    
-    OrderDetail getOrderDetail(String orderId, String productId);
-    
+       
     boolean deleteOrderDetail(String orderId);
 }

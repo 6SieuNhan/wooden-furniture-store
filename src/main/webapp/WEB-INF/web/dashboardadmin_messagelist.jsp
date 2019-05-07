@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -25,7 +25,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,7 +44,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Message
+                        Quản lý tin nhắn
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -53,7 +53,7 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Danh sách message
+                                    Danh sách tin nhắn
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -73,10 +73,10 @@
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>Subject</th>
-                                                            <th>Sender</th>
+                                                            <th>Nội dung</th>
+                                                            <th>Người gửi</th>
                                                             <th>Email</th>
-                                                            <th>Date</th>
+                                                            <th>Thời Gian</th>
                                                             <th></th>
                                                             <th></th>
                                                         </tr>
@@ -90,12 +90,12 @@
                                                                 <td>${o.date}</td>
                                                                 <td>
                                                                     <a href="dashboard?action=message&messageid=${o.messageId}">
-                                                                        View
+                                                                        Xem
                                                                     </a>
                                                                 </td>
                                                                 <td>
                                                                     <a href="deletemessage?messageid=${o.messageId}" onclick="return confirm('Bạn có muốn xóa tin nhắn này?')">
-                                                                        Delete
+                                                                        Xóa
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -104,7 +104,7 @@
                                                 </table>
                                                 <c:if test = "${empty messageList}">
                                                     <div class="notiSearch">
-                                                        No message with this keyword can be found.
+                                                        Không tìm được tin nhắn nào.
                                                     </div>
                                                 </c:if>
 
@@ -134,7 +134,7 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
@@ -148,21 +148,6 @@
 
         </script>
 
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
 
     </body>

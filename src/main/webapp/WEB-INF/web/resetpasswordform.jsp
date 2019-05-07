@@ -23,20 +23,20 @@
     <div class="privacy">
         <div class="container">
             <div class="address_form_agile">
-                <h4>Reset Password</h4>
-                <p>Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod:</p>
+                <h4>Đặt lại mật khẩu</h4>
+                <p>Bạn hãy điền vào 2 trường phía dưới mật khẩu mới của bạn:</p>
                 <br/>
                 <form action="resetpassword" method="post" class="creditly-card-form agileinfo_form">
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
-                                <input type="text" name="userid" value="${param.userid}" >
-                                <input type="text" name="recovery" value="${param.recovery}" >
+                                <input type="hidden" name="userid" value="${param.userid}" >
+                                <input type="hidden" name="recovery" value="${param.recovery}" >
                                 <div class="controls">
-                                    <input type="password" placeholder="Password (4-16 chars)" id="password1" name="password1" required="" minlength="4" maxlength="16">
+                                    <input type="password" placeholder="Mật khẩu mới (4-16 ký tự)" id="password1" name="password1" required="" maxlength="16">
                                 </div>
                                 <div class="controls">
-                                    <input type="password" placeholder="Confirm password" id="password2" name="password2" required="" maxlength="16">
+                                    <input type="password" placeholder="Xác nhận mật khẩu mới" id="password2" name="password2" required="" maxlength="16">
                                 </div>
                             </div>
                             <c:if test="${not empty message}">
@@ -44,7 +44,7 @@
                                     ${message}
                                 </div>
                             </c:if>
-                            <button class="submit check_out">Reset Password</button>
+                            <button class="submit check_out">Đặt lại mật khẩu</button>
                         </div>
                     </div>
                 </form>
@@ -59,28 +59,14 @@
         <!-- jquery -->
         <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- //jquery -->
-        <!-- password-script -->
-        <script>
-            window.onload = function () {
-                document.getElementById("password1").onchange = validatePassword;
-                document.getElementById("password2").onchange = validatePassword;
-            };
 
-            function validatePassword() {
-                var pass2 = document.getElementById("password2").value;
-                var pass1 = document.getElementById("password1").value;
-                if (pass1 !== pass2)
-                    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-                else
-                    document.getElementById("password2").setCustomValidity('');
-                //empty string means no validation error
-            }
-        </script>
-        <!-- //password-script -->
         <!-- for bootstrap working -->
         <script src="js/bootstrap.js"></script>
         <!-- //for bootstrap working -->
-        <!-- //js-files -->
+
+        <!-- password-script -->
+        <jsp:include page="fragment/js/passwordscript.jsp" />
+        <!-- //password-script -->
 </body>
 
 </html>

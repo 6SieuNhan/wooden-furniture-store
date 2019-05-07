@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <!-- top-header -->
 <div class="header-most-top">
-    <p>Grocery Offer Zone Top Deals & Discounts</p>
+    <p>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</p>
 </div>
 <!-- //top-header -->
 <!-- header-bot-->
@@ -20,7 +20,7 @@
         <div class="col-md-4 logo_agile">
             <h1>
                 <a href="home">
-                    <span>Đ</span>ồ <span>G</span>ỗ <span>T</span>húy <span>H</span>ằng 
+                    <span>Đ</span>ồ <span>G</span>ỗ <span>T</span>hủy <span>H</span>ằng 
                 </a>
             </h1>
         </div>
@@ -62,7 +62,7 @@
             <!-- search -->
             <div class="agileits_search">
                 <form action="productlist" method="get">
-                    <input name="searchquery" type="search" placeholder="Tôi có thể giúp gì bạn hôm nay?" required="">
+                    <input name="searchquery" type="search" placeholder="Tìm kiếm sản phẩm ..." required="">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
@@ -113,10 +113,12 @@
 
                         <form:form id="loginForm" modelAttribute="login" action="login" method="post">
                             <div class="styled-input agile-styled-input-top">
-                                <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="30" />
+                                <form:input path="username" placeholder = "Tên đăng nhập hoặc email" required="required" maxlength="50" 
+                                            oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                             </div>
                             <div class="styled-input">
-                                <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" />
+                                <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" 
+                                               oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                             </div>
                             <a href="login">Quên mật khẩu?</a><br>
                             <input type="submit" value="Đăng nhập">

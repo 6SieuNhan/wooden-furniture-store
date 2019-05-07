@@ -16,9 +16,6 @@ import java.util.List;
 public interface OrderDetailService {
     boolean addOrderDetailList(String orderId, List<Product> items);
     
-    boolean addOrderDetail(String orderId, Product item);
-    
     List<OrderDetail> getOrderDetailList(String orderId);
     
-    OrderDetail getOrderDetail(String orderId, String productId);
 }

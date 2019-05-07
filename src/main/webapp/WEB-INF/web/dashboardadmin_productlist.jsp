@@ -20,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -30,11 +30,8 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
-        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-        <script src="//code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-        <script src="simple.money.format.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
@@ -74,6 +71,12 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
+
+                                            <c:if test="${not empty message}">
+                                                <div class="simple-alert-msg" >
+                                                    ${message}
+                                                </div>
+                                            </c:if>
 
                                             <!-- search garbage -->
                                             <form action="dashboard?action=productlist" method="get" >
@@ -135,7 +138,7 @@
                                             </form> 
                                             <div class="floatRight">
                                                 <a href="createProduct">
-                                                    <button class="button">Create Product</button>
+                                                    <button class="button">Tạo sản phẩm mới</button>
                                                 </a>
                                             </div>
 
@@ -160,24 +163,25 @@
                                                                 <td>${product.productCode}</td>
                                                                 <td>${product.productName}</td>
                                                                 <td class="imageWidth">
-                                                                    <img class="resize" src="<c:url value="resource/images/product/${product.thumbnail}"/> " alt="">
+                                                                    <img class="resize1" src="<c:url value="resource/images/product_img/${product.thumbnail}"/> " alt="">
                                                                 </td>
                                                                 <td>${product.quantity}</td>
                                                                 <td>
-                                                                    <span id="money">${product.price}</span>
+                                                                    <span class="number">${product.price}</span>
+                                                                    <span>đ</span>
                                                                 </td>
-                                                                <td width="5px">
+                                                                <td style="width:5px">
                                                                     <c:if test="${product.product_top}">
-                                                                         <input type="checkbox" checked disabled>
+                                                                        <input type="checkbox" checked disabled>
                                                                     </c:if>
                                                                     <c:if test="${!product.product_top}">
-                                                                         <input type="checkbox" disabled>
+                                                                        <input type="checkbox" disabled>
                                                                     </c:if>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="edit?productid=${product.productId}">Edit</a>
+                                                                    <a href="edit?productid=${product.productId}">Sửa</a>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Delete</a>
+                                                                    <a href="delete?productid=${product.productId}" onclick="return confirm('Bạn có muốn xóa sản phẩm này?')">Xóa</a>
                                                                 </td>
                                                             </tr>
                                                             <c:if test="${(loop.index + 1)!= fn:length(productList) && (loop.index+1) % 3 == 0}">
@@ -189,7 +193,7 @@
                                                 </table>
                                                 <c:if test = "${empty productList}">
                                                     <div class="notiSearch">
-                                                        No product with this keyword can be found.
+                                                        Không tìm được sản phẩm nào
                                                     </div>
                                                 </c:if>
 
@@ -219,7 +223,7 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
@@ -233,36 +237,27 @@
 
         </script>
 
+        <!-- number -->
+        <script src="/WebBanHang2/resource/js/jquery.number.min.js"></script>
+        <script>
+                                                                        $('span.number').number(true, 0, '.', ' ');
+        </script>
 
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
-                                                                        $(function () {
-                                                                            $('optgroup').each(function () {
-                                                                                var
-                                                                                        optgroup = $(this),
-                                                                                        options = optgroup.children().toArray().sort(function (a, b) {
-                                                                                    return $(a).text() < $(b).text() ? 1 : -1;
-                                                                                });
-                                                                                $.each(options, function (i, v) {
-                                                                                    optgroup.prepend(v);
-                                                                                });
+            $(function () {
+                $('optgroup').each(function () {
+                    var
+                            optgroup = $(this),
+                            options = optgroup.children().toArray().sort(function (a, b) {
+                        return $(a).text() < $(b).text() ? 1 : -1;
+                    });
+                    $.each(options, function (i, v) {
+                        optgroup.prepend(v);
+                    });
 
-                                                                            });
-                                                                        });
+                });
+            });
         </script>
     </body>
 </body>

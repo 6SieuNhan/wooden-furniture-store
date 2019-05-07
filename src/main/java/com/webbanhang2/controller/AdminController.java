@@ -111,10 +111,10 @@ public class AdminController {
         if (productId != null) {
             boolean result = productService.deleteProduct(productId);
             if(result){
-                redirectAttributes.addFlashAttribute("message", "Delete Product Successful");
+                redirectAttributes.addFlashAttribute("message", "Xóa sản phẩm thành công.");
             }
             else{
-                redirectAttributes.addFlashAttribute("message", "Delete product failed as some order currently contains this product");
+                redirectAttributes.addFlashAttribute("message", "Xóa sản phẩm không thành công; một số đơn hàng đang chứa sản phẩm này.");
             }
         }
         return new ModelAndView("redirect:dashboard?action=productlist");
@@ -155,11 +155,11 @@ public class AdminController {
         //case of insertion fail (most likely due to duplicate key)
         if (saveResult) {
             // Add message to flash scope
-            redirectAttributes.addFlashAttribute("message", "Save Product Successful");
+            redirectAttributes.addFlashAttribute("message", "Tạo/Sửa sản phẩm thành công.");
 
             return "redirect:dashboard?action=productlist"; 
         } else {
-            redirectAttributes.addFlashAttribute("message", "Duplicate product code");
+            redirectAttributes.addFlashAttribute("message", "Mã sản phẩm không được trùng với một sản phẩm khác trong dữ liệu.");
             if(p.getProductId()==null||p.getProductId().isEmpty()){
                 return "redirect:createProduct";
             }

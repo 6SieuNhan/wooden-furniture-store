@@ -11,9 +11,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -23,28 +23,19 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-        <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
-
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
+        <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
     </head>
     <body>
         <div id="wrapper">
-            <nav class="navbar navbar-default top-navbar" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="home"><strong>Cửa hàng đồ gỗ</strong></a>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li style="color: white;">
-                        Welcome ${user.username}
-                    </li>
-                    <li>
-                        <a href="logout">Sign Out</a>
-                    </li>
-                </ul>
-            </nav>
+            <jsp:include page="fragment/dashboardheader.jsp" />
             <!--/. NAV TOP  -->
-            <jsp:include page="fragment/dashboardadminnav.jsp" />
+            <jsp:include page="fragment/dashboardadminnav.jsp" >
+                <jsp:param name="page" value="productlist" />
+            </jsp:include>
             <!-- /. NAV SIDE  -->
 
             <div id="page-wrapper">
@@ -73,26 +64,29 @@
                                                         <div class="simple-alert-msg" >
                                                             ${message}
                                                         </div>
-                                                        </c:if>
-                                                    <form:input class="form-control" path="productCode" required="required"/>
+                                                    </c:if>
+                                                    <form:input class="form-control" path="productCode" required="required"
+                                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
 
                                                     </p>   
                                                     <p>
                                                         <label class="w3-text-brown"><b>Tên sản phẩm</b></label>
-                                                        <form:input class="form-control" path="productName" required="required"/>
+                                                        <form:input class="form-control" path="productName" required="required"
+                                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                     </p>
                                                     <p><form:errors path="productName" class="error-message" /></p>
 
                                                     <div id="myform">
                                                         <label class="w3-text-brown"><b>Hình đại diện</b></label>
                                                         <form:input id="img-txt" class="form-control" path="thumbnail" placeholder="CT-1/1.jpg" maxlength="45"/>
-                                                        <img id="img-preview" src="resource/images/product_img/${productForm.thumbnail}" class="preview1" alt="Image not found"/>
+                                                        <img id="img-preview" src="resource/images/product_img/${productForm.thumbnail}" class="preview1" alt="Không tìm thấy ảnh"
+                                                             oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
 
                                                     </div>                 
                                                     <p>
                                                         <label class="w3-text-brown"><b>Mô tả sản phẩm</b></label>
                                                         <br>
-                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80" required="required"/>
+                                                        <form:textarea  path="description" placeholder="Giới thiệu về sản phẩm" rows="5" cols="80"/>
                                                     </p>
                                                 </div>
                                                 <div class="col-6 right_side">
@@ -134,11 +128,13 @@
                                                     </p>
                                                     <p>
                                                         <label class="w3-text-brown"><b>Giá bán (VNĐ)</b></label>
-                                                        <form:input type="number" class="form-control" path="price" required="required"/>
+                                                        <form:input type="number" class="form-control" path="price" required="required" min="0"
+                                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Giá không hợp lệ')"/>
                                                     </p>
                                                     <p>
                                                         <label class="w3-text-brown"><b>Số lượng</b></label>
-                                                        <form:input type="number" min="0" step="1" class="form-control" path="quantity" pattern="\d+" required="required"/>
+                                                        <form:input type="number" min="0" step="1" class="form-control" path="quantity" pattern="\d+" required="required"
+                                                                    oninput="setCustomValidity('')" oninvalid="setCustomValidity('Số lượng không hợp lệ')"/>
                                                     </p>
                                                     <p class="floatLeft">
                                                         <button class="w3-btn w3-blue submit"><i class="fa fa-save"></i> Lưu Dữ Liệu</button>
@@ -170,35 +166,9 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/jquery.simplePagination.js"/>"></script>
-        <script>
-                                                    $('#light-pagination').pagination({
-                                                        pages: ${pageCount},
-                                                        currentPage: ${(empty param.page) ? '1': param.page},
-                                                        selectOnClick: false
-                                                    });
-
-        </script>
-
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
                                                     $('#img-txt').on('input', function () {

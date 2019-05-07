@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -22,7 +22,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
     </head>
     <body>
@@ -46,7 +46,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Đơn hàng chi tiết
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -55,7 +55,7 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Order history
+                                    Lịch sử đặt hàng
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -64,11 +64,11 @@
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>SI No</th>
-                                                            <th>Product</th>
-                                                            <th>Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total</th>
+                                                            <th>STT</th>
+                                                            <th>Sản phẩm</th>
+                                                            <th>Giá</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Tổng giá</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -76,47 +76,61 @@
                                                             <tr class="gradeA clickable-row" role="button" data-href="home">
                                                                 <td>${loop.index+1}</td>
                                                                 <td>
-                                                                    <a href="product?productid=${od.productId}">
+                                                                    <a 
+                                                                        <c:choose>
+                                                                            <c:when test="${user.userRoleId == 1}">
+                                                                                href="edit?productid=${od.productId}"
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                href="product?productid=${od.productId}"
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                        >
                                                                         ${od.product.productName}
                                                                     </a>
                                                                 </td>
-                                                                <td>${od.price}</td>
+                                                                <td><span class="number">${od.price}</span>đ</td>
                                                                 <td>${od.quantity}</td>
-                                                                <td>${od.total}</td>
+                                                                <td><span class="number">${od.total}</span>đ</td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>
                                                 <table class="table table-borderless">
                                                     <tr>
-                                                        <td>Total:</td>
-                                                        <td><label class="pull-right">${total}</label></td>
+                                                        <td>Tổng tiền:</td>
+                                                        <td><label class="pull-right"><span class="number">${total}</span>đ</label></td>
                                                     </tr>
                                                 </table>
 
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label>Address</label>
+                                            <label>Địa Chỉ</label>
                                             <div>${order.userAddress}</div>
                                             <label>Email</label>
                                             <div>${order.userEmail}</div>
-                                            <label>Phone</label>
+                                            <label>Số Điện Thoại</label>
                                             <div>${order.userPhone}</div>
-                                            <label>Order Status</label>
+                                            <label>Tình trạng đơn hàng</label>
                                             <div>
                                                 <c:choose>
-                                                    <c:when test="${user.userRoleId == 1}">
-                                                        <select class="form-control" onchange="if (this.value)
-                                                            window.location.href = 'changeorderstatus?orderid=${order.orderId}&orderstatusid=' + this.value">
-                                                            <c:forEach var="pci" items="${orderStatusList}">
-                                                                <option
-                                                                    <c:if test="${pci.categoryId==order.orderStatusId}">
-                                                                        selected
+                                                    <c:when test="${user.userRoleId == 1 && order.orderStatusId != 4}">
+                                                        <form action="changeorderstatus">
+                                                            <input type="hidden" name="orderid" value="${order.orderId}" />
+                                                            <select name="orderstatusid" class="form-control">
+                                                                <c:forEach var="pci" items="${orderStatusList}">
+                                                                    <c:if test="${pci.categoryId>=order.orderStatusId}">
+                                                                        <option
+                                                                        <c:if test="${pci.categoryId==order.orderStatusId}">
+                                                                            selected
+                                                                        </c:if>
+                                                                        value="${pci.categoryId}">${pci.categoryName}</option>
                                                                     </c:if>
-                                                                    value="${pci.categoryId}">${pci.categoryName}</option>
-                                                            </c:forEach>
-                                                        </select>
+                                                                </c:forEach>
+                                                            </select>
+                                                            <input type="submit" class="btn btn-default" value="Thay đổi trạng thái">
+                                                        </form>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <c:forEach var="pci" items="${orderStatusList}">
@@ -131,7 +145,7 @@
                                             <c:if test="${user.userRoleId == 1 || order.orderStatusId=='1' || order.orderStatusId=='2'  }">
                                                 <br>
                                                 <a role="button" class="btn btn-default" href="deleteorder?orderid=${order.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
-                                                    Delete
+                                                    Xóa
                                                 </a>
                                             </c:if>
                                         </div>
@@ -153,27 +167,16 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
-
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
-
+        <!-- number -->
+        <script src="<c:url value="/resource/js/jquery.number.min.js"/>"></script>
+        <script>
+            $('span.number').number(true, 0, '.', ' ');
+        </script>
+        
         <script>
                                                     jQuery(document).ready(function ($) {
                                                         $(".clickable-row").click(function () {

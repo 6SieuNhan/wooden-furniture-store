@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -21,7 +21,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -40,7 +40,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Quản lý các loại danh mục
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -65,19 +65,26 @@
                                                     <option <c:if test="${categoryType == 3}">selected</c:if> value="3">Không gian</option>
                                                     </select>
                                                 </div>
-                                                <!-- //search garbage -->
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Tên danh mục</th>
-                                                                <th>Số lượng sản phẩm</th>
-                                                                <th></th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                    
+                                            <c:if test="${not empty message}">
+                                                <div class="simple-alert-msg" >
+                                                    ${message}
+                                                </div>
+                                            </c:if>
+
+                                            <!-- //search garbage -->
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Tên danh mục</th>
+                                                            <th>Số lượng sản phẩm</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                         <c:forEach var="o" items="${categoryList}" varStatus="loop">
                                                             <tr class="gradeA" >
                                                                 <td>${loop.index+1}</td>
@@ -108,13 +115,13 @@
                                                                 <td>${o.productCount}</td>
                                                                 <td>
                                                                     <a href="#edit" onclick="edit_mode('${o.categoryName}')">
-                                                                        Edit
+                                                                        Sửa
                                                                     </a>
                                                                 </td>
                                                                 <td>
                                                                     <c:if test="${o.productCount==0}">
                                                                         <a href="deletecategory?categoryname=${o.categoryName}&categorytype=${categoryType}" onclick="return confirm('Bạn có muốn xóa mục này?')">
-                                                                            Delete
+                                                                            Xóa
                                                                         </a>
                                                                     </c:if>
                                                                 </td>
@@ -153,15 +160,12 @@
                                             <div class="form-group">
                                                 <label>Tên danh mục mới</label>
                                                 <input class="form-control" name="newcategory">
-                                                <input type="hidden" name="categorytype" value="${categoryType}" maxlength="45">
+                                                <input type="hidden" name="categorytype" value="${categoryType}" maxlength="45"
+                                                       oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')">
                                             </div>
-                                            <c:if test="${not empty message}">
-                                                <div class="simple-alert-msg" >
-                                                    ${message}
-                                                </div>
-                                            </c:if>
-                                            <button type="submit" class="btn btn-default">Submit Button</button>
-                                            <button type="reset" class="btn btn-default" onclick = "add_mode()">Reset Button (Switches to Add mode)</button>
+
+                                            <button type="submit" class="btn btn-default">Lưu</button>
+                                            <button type="reset" class="btn btn-default" onclick = "add_mode()">Hoàn Tác (Chuyển sang Thêm danh mục)</button>
                                         </div>
                                     </form>
                                 </div>
@@ -180,7 +184,7 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
@@ -197,22 +201,6 @@
                                                 }
 
         </script>
-
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
 
     </body>

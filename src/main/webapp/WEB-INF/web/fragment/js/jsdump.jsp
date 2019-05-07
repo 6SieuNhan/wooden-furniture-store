@@ -36,27 +36,6 @@
 <script>
     $('span.number').number( true, 0, '.', ' ' );
 </script>
-<!-- password-script -->
-<script>
-    window.onload = function () {
-        document.getElementById("password1").onchange = validatePassword;
-        document.getElementById("password2").onchange = validatePassword;
-    };
-
-    function validatePassword() {
-        var pass2 = document.getElementById("password2").value;
-        var pass1 = document.getElementById("password1").value;
-        if (pass1 !== pass2)
-            document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-        else
-            document.getElementById("password2").setCustomValidity('');
-        //empty string means no validation error
-    }
-</script>
-<!-- //password-script -->
-<!-- cart-js -->
-<script src="<c:url value="/resource/js/minicart.js"/>"></script>
-<!-- //cart-js -->
 <!-- cart-js -->
 <script src="<c:url value="/resource/js/minicart.js"/>"></script>
 <script>
@@ -88,18 +67,19 @@
     // Initialize and add the map
     function initMap() {
         // The location of Uluru
-        var uluru = {lat: 21.012010, lng: 105.824451};
+        //20.7754621, 105.9092907
+        var uluru = {lat: 20.7754621, lng: 105.9092907};
         // The map, centered at Uluru
         var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 17, center: uluru});
+                document.getElementById('map'), {zoom: 18, center: uluru});
         // The marker, positioned at Uluru
         var marker = new google.maps.Marker({position: uluru, map: map});
 
         // The location of Uluru
-        var uluru2 = {lat: 21.012010, lng: 105.824451};
+        var uluru2 = {lat: 20.7754621, lng: 105.9092907};
         // The map, centered at Uluru
         var map2 = new google.maps.Map(
-                document.getElementById('map2'), {zoom: 17, center: uluru2});
+                document.getElementById('map2'), {zoom: 18, center: uluru2});
         // The marker, positioned at Uluru
         var marker2 = new google.maps.Marker({position: uluru2, map: map2});
     }

@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Checkout :: w3layouts</title>
+    <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
     <jsp:include page="fragment/metadump.jsp" />
 </head>
 
@@ -34,10 +34,12 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng hoặc email" required="required" maxlength="30" />
+                                    <form:input path="username" placeholder = "Tên đăng nhập hoặc email" required="required" maxlength="30"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16" />
+                                    <form:password path="password" placeholder = "Mật khẩu" required="required" maxlength="16"
+                                                   oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                             </div>
                             <c:if test="${not empty message}">
@@ -60,7 +62,7 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <input type="text" placeholder="mail@example.com" name="recoveryemail" required="" maxlength="30">
+                                    <input id="email" type="email" placeholder="mail@example.com" name="recoveryemail" required="" maxlength="30">
                                 </div>
                             </div>
                             <c:if test="${not empty message2}">
@@ -88,6 +90,10 @@
     <!-- js-files -->
     <jsp:include page="fragment/js/jsdump.jsp" />
     <!-- //js-files -->
+
+    <!-- email script -->
+    <jsp:include page="fragment/js/emailscript.jsp" />
+    <!-- //email script -->
 </body>
 
 </html>

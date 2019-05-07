@@ -10,7 +10,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Grocery Shoppy an Ecommerce Category Bootstrap Responsive Web Template | Checkout :: w3layouts</title>
+    <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
     <jsp:include page="fragment/metadump.jsp" />
 </head>
 
@@ -35,13 +35,15 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input path="username" placeholder = "Tên người dùng" required="required" maxlength="30"/>
+                                    <form:input id="username2" path="username" placeholder = "Tên đăng nhập" required="required" maxlength="30"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input path="address" placeholder = "Địa chỉ" required="required"  maxlength="100"/>
+                                    <form:input path="address" placeholder = "Địa chỉ" required="required"  maxlength="100"
+                                                oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                 </div>
                                 <div class="controls">
-                                    <form:password path="password" id="password1" placeholder = "Mật khẩu (4-16 ký tự)" required="required" minlength="4" maxlength="16"/>
+                                    <form:password path="password" id="password1" placeholder = "Mật khẩu (4-16 ký tự)" required="required" maxlength="16"/>
                                 </div>
                                 <c:if test="${not empty message}">
                                     <div class="simple-alert-msg" >
@@ -58,10 +60,10 @@
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <form:input type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="30"/>
+                                    <form:input id="email" type="email"  path="email" placeholder = "Địa chỉ email" required="required" maxlength="50"/>
                                 </div>
                                 <div class="controls">
-                                    <form:input path="phone" placeholder = "Số điện thoại (tối đa 12 ký tự)" required="required" maxlength="12"/>
+                                    <form:input id="phone" path="phone" placeholder = "Số điện thoại (10 ký tự)" maxlength="10"/>
                                 </div>
                                 <div class="controls">
                                     <input type="password" placeholder="Nhập lại mật khẩu" id="password2" required="" maxlength="16">
@@ -86,25 +88,18 @@
     <!-- js-files -->
     <jsp:include page="fragment/js/jsdump.jsp" />
     <!-- //js-files -->
+    
+    <!-- email script -->
+    <jsp:include page="fragment/js/emailscript.jsp" />
+    <!-- //email script -->
+    
     <!-- password-script -->
-    <script>
-        window.onload = function () {
-            document.getElementById("password1").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-        };
-
-        function validatePassword() {
-            var pass2 = document.getElementById("password2").value;
-            var pass1 = document.getElementById("password1").value;
-            if (pass1 !== pass2)
-                document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-            else
-                document.getElementById("password2").setCustomValidity('');
-            //empty string means no validation error
-        }
-    </script>
+    <jsp:include page="fragment/js/passwordscript.jsp" />
     <!-- //password-script -->
 
+    <!-- phone script -->
+    <jsp:include page="fragment/js/phonescript.jsp" />
+    <!-- //phone script -->
 </body>
 
 </html>

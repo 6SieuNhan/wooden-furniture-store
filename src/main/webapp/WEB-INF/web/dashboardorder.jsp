@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -22,7 +22,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
     </head>
@@ -47,7 +47,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Quản lý đặt hàng
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -56,7 +56,7 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Order history
+                                    Lịch sử đặt hàng
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -71,6 +71,11 @@
                                                         <input type="hidden" id="action" name="action" value="order">
                                                         <button type="submit" value=" "><i class="fa fa-search"></i></button>
                                                     </form>
+                                                    <c:if test="${not empty message}">
+                                                        <div class="simple-alert-msg" >
+                                                            ${message}
+                                                        </div>
+                                                    </c:if>
                                                 </div>
                                             </c:if>
 
@@ -80,13 +85,13 @@
                                                     <thead>
                                                         <tr>
                                                             <c:if test="${user.userRoleId == 1}">
-                                                                <th>Username</th>
+                                                                <th>Tên khách hàng</th>
                                                                 </c:if>
-                                                            <th>Address</th>
+                                                            <th>Địa chỉ</th>
                                                             <th>E-mail</th>
-                                                            <th>Phone Number</th>
-                                                            <th>Order Date</th>
-                                                            <th>Order Status</th>
+                                                            <th>Số điện thoại</th>
+                                                            <th>Ngày đặt hàng</th>
+                                                            <th>Tình trạng đơn hàng</th>
                                                             <th></th>
                                                                 <c:if test="${user.userRoleId == 1}">
                                                                 <th></th>
@@ -110,13 +115,13 @@
                                                                 </c:forEach>
                                                                 <td>
                                                                     <a href="dashboard?action=orderdetail&orderid=${o.orderId}">
-                                                                        View
+                                                                        Xem
                                                                     </a>
                                                                 </td>
                                                                 <c:if test="${user.userRoleId == 1 || o.orderStatusId=='1' || o.orderStatusId=='2'  }">
                                                                     <td>
                                                                         <a href="deleteorder?orderid=${o.orderId}" onclick="return confirm('Bạn có muốn xóa đơn hàng này?')">
-                                                                            Delete
+                                                                            Xóa
                                                                         </a>
                                                                     </td>
                                                                 </c:if>
@@ -155,7 +160,7 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
@@ -168,22 +173,6 @@
                                                                             });
 
         </script>
-
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
 
     </body>

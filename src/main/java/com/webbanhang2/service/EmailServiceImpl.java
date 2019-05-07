@@ -48,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
     public boolean sendHTMLMessage(String to, String subject, String text) {
         try {
             MimeMessage mimeMessage = emailSender.createMimeMessage();
-            mimeMessage.setContent(text, "text/html");
+            mimeMessage.setContent(text, "text/html; charset=utf-8");
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
             helper.setTo(to);
             helper.setSubject(subject);

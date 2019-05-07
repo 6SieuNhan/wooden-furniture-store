@@ -47,20 +47,20 @@ public class UserController {
         User test = userService.getUserByEmail(user.getEmail());
         if (test != null) {
             mav = new ModelAndView("register");
-            mav.addObject("message", "There is already an account associated with this e-mail address.");
+            mav.addObject("message", "Đã có một người dùng khác với tài khoản email này rồi.");
         } else {
             //check username
             test = userService.getUserByName(user.getUsername());
             if (test != null) {
                 mav = new ModelAndView("register");
-                mav.addObject("message", "There is already an account with this username.");
+                mav.addObject("message", "Đã có một người dùng khác với tên đăng nhập này rồi");
             } else {
                 boolean result = userService.registerUser(user);
                 mav = new ModelAndView("message");
                 if (result) {
-                    mav.addObject("message", "Register successful, please login to continue.");
+                    mav.addObject("message", "Đăng ký tài khoản thành công; bạn vui lòng đăng nhập để tiếp tục.");
                 } else {
-                    mav.addObject("message", "An unfortunate error has happened; please try again later.");
+                    mav.addObject("message", "Đã có lỗi xảy ra trong quá trình đăng ký, xin mời bạn thử lại sau.");
                 }
 
             }
@@ -109,10 +109,11 @@ public class UserController {
      * WIP
      *
      * @param email
+     * @param redirectAttributes
      * @return
      */
     @RequestMapping("/requestrecovery")
-    public ModelAndView sendRecoveryCode(@RequestParam(value = "recoveryemail", required = false) String email) {
+    public ModelAndView sendRecoveryCode(@RequestParam(value = "recoveryemail", required = false) String email, RedirectAttributes redirectAttributes) {
         boolean success;
         if (email == null) {
             return new ModelAndView("redirect:home");
@@ -125,8 +126,8 @@ public class UserController {
                 //Generate recovery code
                 String recoveryCode = userService.createRecoveryCode(user);
                 //send email
-                String to = "kienntse04792@fpt.edu.vn",
-                        subject = "Password recovery for WebBanHang";
+                String to = email,
+                        subject = "Về việc đặt lại mật khẩu ở cửa hàng đồ gỗ Thủy Hằng";
                 String recoveryMessage = getRecoveryMessage(user, recoveryCode);
 
                 System.out.println(recoveryMessage);
@@ -137,11 +138,11 @@ public class UserController {
         }
         if (success) {
             ModelAndView mav = new ModelAndView("message");
-            mav.addObject("message", "An email with the password recovery link has been sent to your email account.");
+            mav.addObject("message", "Yêu cầu đặt lại mật khẩu đã được ghi nhận; bạn hãy kiểm tra tài khoản email của mình để nhận link đặt lại mật khẩu");
             return mav;
         } else {
-            ModelAndView mav = new ModelAndView("login");
-            mav.addObject("message2", "No user with matching email can be found in the database");
+            ModelAndView mav = new ModelAndView("redirect:login");
+            redirectAttributes.addFlashAttribute("message2", "Không tìm được tài khoản nào có email tương ứng");
             return mav;
         }
     }
@@ -171,9 +172,9 @@ public class UserController {
             ModelAndView mav = new ModelAndView("message");
             boolean success = userService.changePassword(userId, password);
             if (success) {
-                mav.addObject("message", "Reset password successful. You will now be redirected to the home page.");
+                mav.addObject("message", "Thay đổi mật khẩu thành công; bạn vui lòng đăng nhập để tiếp tục.");
             } else {
-                mav.addObject("message", "The server is currently experiencing some difficulties. You will now be redirected to the home page.");
+                mav.addObject("message", "Đã có lỗi xảy ra trong quá trình đặt lại mật khẩu, xin mời bạn thử lại sau.");
             }
             return mav;
         }
@@ -185,7 +186,7 @@ public class UserController {
         ModelAndView mav = new ModelAndView("redirect:dashboard");
         User valid = userService.getUser(user);
         if (valid == null) {
-            redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
+            redir.addFlashAttribute("message", "Mật khẩu không đúng, xin mời bạn thử lại.");
         } else {
             //set user Id
             User current = (User) request.getSession().getAttribute("user");
@@ -193,9 +194,9 @@ public class UserController {
             boolean result = userService.editUser(user);
             //we do something?
             if (result) {
-                redir.addFlashAttribute("message", "Edit successful.");
+                redir.addFlashAttribute("message", "Thay đổi thông tin tài khoản thành công.");
             } else {
-                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+                redir.addFlashAttribute("message", "Đã có lỗi xảy ra trong quá trình thay đổi thông tin tài khoản, xin mời bạn thử lại sau.");
             }
             //reset user info
             user = userService.getUser(user);
@@ -221,9 +222,9 @@ public class UserController {
             boolean result = userService.editUser(user2);
             //we do something?
             if (result) {
-                redir.addFlashAttribute("message", "Edit successful.");
+                redir.addFlashAttribute("message", "Thay đổi thông tin tài khoản thành công.");
             } else {
-                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+                redir.addFlashAttribute("message", "Đã có lỗi xảy ra trong quá trình thay đổi thông tin tài khoản, xin mời bạn thử lại sau.");
             }
             //in case user2 = current
             if(user2.getUserId().equals(current.getUserId())){
@@ -242,14 +243,14 @@ public class UserController {
         ModelAndView mav = new ModelAndView("redirect:dashboard?action=editpassword");
         User valid = userService.getUser(user);
         if (valid == null) {
-            redir.addFlashAttribute("message", "Inputted password is not valid; please try again.");
+            redir.addFlashAttribute("message", "Mật khẩu cũ không đúng, xin mời bạn thử lại.");
         } else {
             boolean result = userService.changePassword(user.getUserId(), newPassword);
             //we do something?
             if (result) {
-                redir.addFlashAttribute("message", "Edit successful.");
+                redir.addFlashAttribute("message", "Thay đổi mật khẩu thành công.");
             } else {
-                redir.addFlashAttribute("message", "Edit failed due to server having encounted an error.");
+                redir.addFlashAttribute("message", "Đã có lỗi xảy ra trong quá trình thay đổi mật khẩu, xin mời bạn thử lại sau.");
             }
         }
         return mav;
@@ -257,13 +258,38 @@ public class UserController {
     }
 
     String getRecoveryMessage(User user, String recoveryCode) {
-        return "<div>\n"
-                + "            This mail was sent because somebody request a recovery email on this account<br/>\n"
-                + "            The following link should be valid until another recovery request with the same email address is created<br/>\n"
-                + "            Do not mark this as spam.<br/>\n"
-                + "            <a href=\""
-                + WBHConstants.ROOT_URL + "/resetpasswordform?userid=" + user.getUserId() + "&recovery=" + recoveryCode
-                + "\">Recovery link</a> \n"
-                + "        </div>\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div>\n");
+        sb.append("            Chúng tôi xin phép được gửi bạn link để đặt lại mật khẩu tài khoản của bạn tại cửa hàng đồ gỗ Thủy Hằng.<br/>\n");
+        sb.append("            Nếu có vấn đề gì, xin mời bạn liên hệ với chúng tôi qua trang web, hoặc trực tiếp qua mail.<br/>\n");
+        
+        sb.append("<a href=\"");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("resetpasswordform?userid=");
+        sb.append(user.getUserId());
+        sb.append("&recovery=");
+        sb.append(recoveryCode);
+        sb.append("\">Link đặt lại mật khẩu</a>");
+        sb.append("<br/>\n");
+        
+        //contact
+        sb.append("<div>\n");
+        sb.append("Cửa hàng đồ gỗ Thủy Hằng<br/>\n");
+        sb.append("Website: <a href=\"");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("\"> ");
+        sb.append(WBHConstants.ROOT_URL);
+        sb.append("</a><br/>\n");
+        sb.append("Email: ");
+        sb.append(WBHConstants.MAIL_SENDER_ADDRESS);
+        sb.append("<br/>");
+        sb.append("Số 2, Kho Sau - Van Diem - Thuong Tin - Ha Noi<br/>");
+        sb.append("0347545020 - 0913076724<br/>");
+        sb.append("+1 888 888 4444<br/>");
+        sb.append("</div>\n");
+        
+        return sb.toString();
+        
+        
     }
 }

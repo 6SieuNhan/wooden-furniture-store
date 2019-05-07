@@ -17,7 +17,7 @@ import com.webbanhang2.service.MessageService;
 import com.webbanhang2.service.OrderService;
 import com.webbanhang2.service.ProductService;
 import com.webbanhang2.service.UserService;
-import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +30,7 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +49,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SessionAttributes(value = {"login", "messageForm", "productCategoryList",
     "productMaterialList", "productOriginList", "productRoomList",
-    "paymentMethodList", "orderStatusList", "userRoleList", "productlistByTop"})
+    "paymentMethodList", "orderStatusList", "userRoleList"})
 public class HomeController {
 
     @Autowired
@@ -133,17 +134,11 @@ public class HomeController {
     public List<Category> setUpUserRoleList() {
         return categoryService.getCategoryList(Category.USER_ROLE);
     }
-    
-        @ModelAttribute("productlistByTop")
-    public List<Product> showProductListByTop() {
-//        HashMap<String, Object> params = new HashMap<>();
-//        List<Product> productListbytop = productService.getProductListByTop(params, (page - 1) * WBHConstants.PRODUCT_LIST_PAGE_SIZE, WBHConstants.PRODUCT_LIST_PAGE_SIZE);
-//        ModelAndView mav = new ModelAndView("productlistByTop");
-//        mav.addObject("productListByTop", productListbytop);
-//        return mav;
-        return productService.getProductListByTop();
-    }
 
+    /*   @ModelAttribute("productlistByTop")
+    public List<Product> showProductListByTop() {
+        return productService.getProductListByTop();
+    }*/
     @RequestMapping("about")
     public String showAbout() {
         return "about";
@@ -172,12 +167,16 @@ public class HomeController {
     /**
      * Shows the index.jsp form.
      *
+     * @param model
      * @param request
      * @return The String 'index', signaling the dispatcher to show the
      * index.jsp form.
      */
     @RequestMapping({"/", "home"})
-    public String showIndex(HttpServletRequest request) {
+    public String showIndex(Model model, HttpServletRequest request) {
+
+        List<Product> productlistByTop = productService.getProductListByTop();
+        model.addAttribute("productlistByTop", productlistByTop);
         return "index";
     }
 
@@ -264,13 +263,15 @@ public class HomeController {
                         System.out.println(path.getFileName());
                         imgList.add(path.getFileName().toString());
                     });
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 ModelAndView mav = new ModelAndView("product");
                 mav.addObject("product", p);
-                mav.addObject("imgList", imgList);
+                if (!imgList.isEmpty()) {
+                    mav.addObject("imgList", imgList);
+                }
                 return mav;
             }
         }
@@ -279,7 +280,8 @@ public class HomeController {
     @RequestMapping(value = "checkout")
     public ModelAndView showCheckout(HttpServletRequest request) {
         int i = 1;
-        Integer quantity;
+        long total = 0;
+        long quantity;
         String itemId, quantityString;
         ArrayList<Product> checkoutList = new ArrayList<>(), existing;
         do {
@@ -287,40 +289,53 @@ public class HomeController {
 
             if (itemId != null) {
                 quantityString = request.getParameter("quantity_" + i);
-                try{
-                    quantity = Integer.parseInt(quantityString);
-                } catch(NumberFormatException ex){
+                try {
+                    quantity = Long.parseLong(quantityString);
+                } catch (NumberFormatException ex) {
                     return new ModelAndView("redirect:home");
                 }
-                //Tracking line
-                System.out.println(itemId + ": " + quantity);
-
+                
                 Product p = productService.getShortenedProduct(itemId);
                 p.setQuantity(quantity);
+                //Tracking line
+                System.out.println(itemId + ": " + p.getProductName() + ": " + quantity);
+                
                 checkoutList.add(p);
             }
 
             i++;
         } while (itemId != null);
 
-        //checks item quantity status
-        boolean hasItem = productService.checkStock(checkoutList);
-        if(!hasItem){
-            ModelAndView mav = new ModelAndView("message");
-            mav.addObject("message", "Không đủ sản phẩm trong kho hàng, xin mời kiểm tra lại đơn hàng và sửa lại nếu cần");
-            return mav;
-        }
-        
-        //redirects to home if no product is found
         existing = (ArrayList<Product>) request.getSession().getAttribute("checkoutList");
+
+        //checks item quantity status
+        if (existing == null || existing.isEmpty()) {
+            boolean hasItem = productService.checkStock(checkoutList);
+            if (!hasItem) {
+                ModelAndView mav = new ModelAndView("message");
+                mav.addObject("message", "Không đủ sản phẩm trong kho hàng, xin mời kiểm tra lại đơn hàng và sửa lại nếu cần");
+                return mav;
+            }
+        }
+
+        //redirects to home if no product is found
         if (checkoutList.isEmpty() && (existing == null || existing.isEmpty())) {
             return new ModelAndView("redirect:home");
         } else {
-            //binds checkout list to result
+            //binds checkout list to result; gets the total price in the meantime
             if (!checkoutList.isEmpty()) {
                 request.getSession().setAttribute("checkoutList", checkoutList);
+                for (Product p : checkoutList) {
+                    total += p.getPrice() * p.getQuantity();
+                }
+            } //else get total price from existing list
+            else {
+                for (Product p : existing) {
+                    total += p.getPrice() * p.getQuantity();
+                }
             }
             ModelAndView mav = new ModelAndView("checkout");
+            mav.addObject("total", total);
             return mav;
         }
     }
@@ -476,7 +491,7 @@ public class HomeController {
                 if (m == null) {
                     //what do I do here
                     mav = new ModelAndView("message");
-                    mav.addObject("message", "something not found.");
+                    mav.addObject("message", "Không tìm được tin nhắn nào có ID tương ứng.");
                 } else {
                     mav = new ModelAndView("dashboardadmin_message");
                     mav.addObject("messageObject", m);

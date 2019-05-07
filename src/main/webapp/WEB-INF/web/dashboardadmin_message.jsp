@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -22,7 +22,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
     </head>
     <body>
@@ -37,7 +37,7 @@
             <div id="page-wrapper">
                 <div class="header"> 
                     <h1 class="page-header">
-                        Dashboard
+                        Chi tiết tin nhắn
                     </h1>
                 </div>
                 <div id="page-inner"> 
@@ -46,22 +46,22 @@
                             <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Message detail
+                                    Chi tiết tin nhắn
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <table class="table table-borderless">
                                                 <tr>
-                                                    <th colspan="3">Subject</th>
+                                                    <th colspan="3">Nội Dung</th>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3">${messageObject.subject}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Sender</th>
+                                                    <th>Người Gửi</th>
                                                     <th>Email</th>
-                                                    <th>Date</th>
+                                                    <th>Thời Gian</th>
                                                 </tr>
                                                 <tr>
                                                     <td>${messageObject.senderName}</td>
@@ -69,7 +69,7 @@
                                                     <td>${messageObject.date}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th colspan="3">Message</th>
+                                                    <th colspan="3">Tin Nhắn</th>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3">${messageObject.message}</td>
@@ -94,26 +94,10 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
-
-
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
-
-
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
 
         <script>
             jQuery(document).ready(function ($) {

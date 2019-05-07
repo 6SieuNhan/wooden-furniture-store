@@ -67,7 +67,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getShortenedProduct(String productId) {
         String sql = "SELECT product_id, product_name, thumbnail, price, quantity "
-                + "FROM webbanhang.product where product_id = '" + productId + "';";
+                + "FROM product where product_id = '" + productId + "';";
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList.size() > 0 ? productList.get(0) : null;
     }
@@ -88,7 +88,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> getProductList(Map<String, Object> params, int top, int count) {
         String sql = "SELECT product_id, product_name, thumbnail, price, quantity "
-                + "FROM webbanhang.product " + getSQLParamString(params, top, count);
+                + "FROM product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList;
@@ -96,9 +96,9 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getProductListByTop() {
-        String sql = "SELECT product_id, product_name, thumbnail,price FROM webbanhang.product where product_top = true";
+        String sql = "SELECT product_id, product_name, thumbnail, price, quantity FROM product where product_top = true";
         System.out.println(sql);
-        List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper1());
+        List<Product> productList = jdbcTemplate.query(sql, new ShortenedProductMapper());
         return productList;
     }
 
@@ -115,7 +115,7 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public int getProductListPageCount(Map<String, Object> params, int size) {
-        String sql = "SELECT COUNT(*) FROM webbanhang.product " + getSQLParamString(params);
+        String sql = "SELECT COUNT(*) FROM product " + getSQLParamString(params);
         SingleColumnRowMapper rowMapper = new SingleColumnRowMapper(Integer.class);
 
         List<Integer> rs = jdbcTemplate.query(sql, rowMapper);
@@ -248,7 +248,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> getProductListForAdmin(Map<String, Object> params, int top, int count) {
         String sql = "SELECT product_id,product_code, product_name, thumbnail, quantity,price ,product_top "
-                + "FROM webbanhang.product " + getSQLParamString(params, top, count);
+                + "FROM product " + getSQLParamString(params, top, count);
         System.out.println(sql);
         List<Product> productList = jdbcTemplate.query(sql, new ProductForAdmin());
         return productList;
@@ -275,8 +275,8 @@ public class ProductDaoImpl implements ProductDao {
             int productRoomId = p.getProductRoomId();
             String thumbnail = p.getThumbnail();
             String descipt = p.getDescription();
-            int quantity = p.getQuantity();
-            double price = p.getPrice();
+            long quantity = p.getQuantity();
+            long price = p.getPrice();
             String sql = "insert into product"
                     + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price) "
                     + "values(?,?,?,?,?,?,?,?,?)";
@@ -380,7 +380,7 @@ public class ProductDaoImpl implements ProductDao {
         public void setValues(PreparedStatement ps, int i) throws SQLException {
             Product p = productList.get(i);
             ps.setString(1, p.getProductId());
-            ps.setInt(2, p.getQuantity());
+            ps.setLong(2, p.getQuantity());
         }
 
         @Override
@@ -403,22 +403,8 @@ public class ProductDaoImpl implements ProductDao {
             product.setProductId(rs.getString("product_id"));
             product.setProductName(rs.getString("product_name"));
             product.setThumbnail(rs.getString("thumbnail"));
-            product.setPrice(rs.getInt("price"));
-            product.setQuantity(rs.getInt("quantity"));
-            return product;
-        }
-    }
-
-    class ShortenedProductMapper1 implements RowMapper<Product> {
-
-        @Override
-        public Product mapRow(ResultSet rs, int arg1) throws SQLException {
-            Product product = new Product();
-            product.setProductId(rs.getString("product_id"));
-            product.setProductName(rs.getString("product_name"));
-            product.setThumbnail(rs.getString("thumbnail"));
-            product.setPrice(rs.getInt("price"));
-//            product.setProduct_top(rs.getBoolean("product_top"));
+            product.setPrice(rs.getLong("price"));
+            product.setQuantity(rs.getLong("quantity"));
             return product;
         }
     }
@@ -439,8 +425,8 @@ public class ProductDaoImpl implements ProductDao {
             product.setProductOriginId(rs.getInt("product_origin_id"));
             product.setProductRoomId(rs.getInt("product_room_id"));
             product.setDescription(rs.getString("description"));
-            product.setQuantity(rs.getInt("quantity"));
-            product.setPrice(rs.getInt("price"));
+            product.setQuantity(rs.getLong("quantity"));
+            product.setPrice(rs.getLong("price"));
             product.setThumbnail(rs.getString("thumbnail"));
             return product;
         }
@@ -470,8 +456,8 @@ public class ProductDaoImpl implements ProductDao {
 //                    + "where`product_code` = '"
 //                    + product.getProductId() + "';";
 //            product.setImgList(jdbcTemplate.query(sql, new ImgNameMapper()));
-            product.setQuantity(rs.getInt("quantity"));
-            product.setPrice(rs.getInt("price"));
+            product.setQuantity(rs.getLong("quantity"));
+            product.setPrice(rs.getLong("price"));
             product.setProduct_top(rs.getBoolean("product_top"));
             return product;
         }

@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluebox Free Bootstrap Admin Template</title>
+        <title>Đồ Gỗ Mỹ Nghệ Cao Cấp Thủy Hằng</title>
         <!-- Bootstrap Styles-->
         <link href="<c:url value="/resource/css/bootstrap.css"/>" rel="stylesheet" />
         <!-- FontAwesome Styles-->
@@ -22,7 +22,7 @@
         <!-- Custom Styles-->
         <link href="<c:url value="/resource/css/dashboard/custom-styles.css"/>" rel="stylesheet" />
         <!-- Google Fonts-->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
     </head>
     <body>
@@ -57,7 +57,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Thông tin tài khoản
-                                    <button class="btn btn-default pull-right" onclick="toggle_inputs()">Edit</button>
+                                    <button class="btn btn-default pull-right" onclick="toggle_inputs()">Sửa</button>
 
                                     <div class="clearfix"></div>
 
@@ -77,16 +77,17 @@
                                                             <form:hidden disabled="true" path="username" value="${user2.username}" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Số điện thoại:</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="12"/>
+                                                            <label>Số điện thoại (10 ký tự):</label>
+                                                            <form:input id="phone" required="required" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="10"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" maxlength="30"/>
+                                                            <form:input id="email" required="required" type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" maxlength="50"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user2.address}" maxlength="100"/>
+                                                            <form:input required="required" disabled="true" cssClass="form-control" path="address" value = "${user2.address}" maxlength="100"
+                                                                        oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quyền người dùng</label>
@@ -98,8 +99,8 @@
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
-                                                        <button disabled id="submit" type="submit" class="btn btn-default">Submit Button</button>
-                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Reset Button</button>
+                                                        <button disabled id="submit" type="submit" class="btn btn-default">Lưu</button>
+                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Hoàn tác</button>
                                                     </form:form>
 
                                                 </c:when>
@@ -113,21 +114,23 @@
                                                             <form:hidden disabled="true" path="username" value="${user.username}" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Số điện thoại:</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="12"/>
+                                                            <label>Số điện thoại (10 ký tự):</label>
+                                                            <form:input id="phone" required="required" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user.phone}" maxlength="10"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user.email}" maxlength="30"/>
+                                                            <form:input id="email" required="required" type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user.email}" maxlength="50"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input disabled="true" cssClass="form-control" path="address" value = "${user.address}" maxlength="100"/>
+                                                            <form:input required="required" disabled="true" cssClass="form-control" path="address" value = "${user.address}" maxlength="100"
+                                                                        oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label>Confirm password: </label>
-                                                            <form:password disabled="true" cssClass="form-control" path="password" maxlength="16"/>
+                                                            <label>Xác nhận mật khẩu: </label>
+                                                            <form:password required="required" disabled="true" cssClass="form-control" path="password" maxlength="16"
+                                                                           oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
                                                             <c:if test="${not empty message}">
                                                                 <div class="simple-alert-msg" >
                                                                     ${message}
@@ -135,8 +138,8 @@
                                                             </c:if>
                                                         </div>
 
-                                                        <button disabled id="submit" type="submit" class="btn btn-default">Submit Button</button>
-                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Reset Button</button>
+                                                        <button disabled id="submit" type="submit" class="btn btn-default">Lưu</button>
+                                                        <button id="reset" type="reset" class="btn btn-default" onclick="return confirm_reset()" on>Hoàn Tác</button>
                                                     </form:form>
                                                 </c:otherwise>
 
@@ -160,45 +163,39 @@
         <!-- /. WRAPPER  -->
         <!-- JS Scripts-->
         <!-- jQuery Js -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<c:url value="/resource/js/jquery-2.1.4.min.js"/>"></script>
         <!-- Bootstrap Js -->
         <script src="<c:url value="/resource/js/bootstrap.min.js"/>"></script>
 
-        <!-- Metis Menu Js -->
-        <script src="<c:url value="/resource/js/dashboard/jquery.metisMenu.js"/>"></script>
-        <!-- Morris Chart Js -->
-        <script src="<c:url value="/resource/js/dashboard/morris/raphael-2.1.0.min.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/morris/morris.js"/>"></script>
 
+        <!-- email script -->
+        <jsp:include page="fragment/js/emailscript.jsp" />
+        <!-- //email script -->
 
-        <script src="<c:url value="/resource/js/dashboard/easypiechart.js"/>"></script>
-        <script src="<c:url value="/resource/js/dashboard/easypiechart-data.js"/>"></script>
-
-        <script src="<c:url value="/resource/js/dashboard/Lightweight-Chart/jquery.chart.js"/>"></script>
-
-        <!-- Custom Js -->
-        <script src="<c:url value="/resource/js/dashboard/custom-scripts.js"/>"></script>
+        <!-- phone script -->
+        <jsp:include page="fragment/js/phonescript.jsp" />
+        <!-- //phone script -->
 
         <script>
-                                                            function toggle_inputs() {
-                                                                var inputs = document.getElementsByTagName('input');
-                                                                for (var i = inputs.length, n = 0; n < i; n++) {
-                                                                    inputs[n].disabled = !inputs[n].disabled;
-                                                                }
-                                                                var textareas = document.getElementsByTagName('textarea');
-                                                                for (var i = textareas.length, n = 0; n < i; n++) {
-                                                                    textareas[n].disabled = !textareas[n].disabled;
-                                                                }
-                                                                var selects = document.getElementsByTagName('select');
-                                                                for (var i = selects.length, n = 0; n < i; n++) {
-                                                                    selects[n].disabled = !selects[n].disabled;
-                                                                }
-                                                                document.getElementById('submit').disabled = !document.getElementById('submit').disabled;
-                                                            }
+        function toggle_inputs() {
+            var inputs = document.getElementsByTagName('input');
+            for (var i = inputs.length, n = 0; n < i; n++) {
+                inputs[n].disabled = !inputs[n].disabled;
+            }
+            var textareas = document.getElementsByTagName('textarea');
+            for (var i = textareas.length, n = 0; n < i; n++) {
+                textareas[n].disabled = !textareas[n].disabled;
+            }
+            var selects = document.getElementsByTagName('select');
+            for (var i = selects.length, n = 0; n < i; n++) {
+                selects[n].disabled = !selects[n].disabled;
+            }
+            document.getElementById('submit').disabled = !document.getElementById('submit').disabled;
+        }
 
-                                                            function confirm_reset() {
-                                                                return confirm('Are you sure you want to reset the form?');
-                                                            }
+        function confirm_reset() {
+            return confirm('Bạn có muốn hoàn lại tất cả các trường hay không?');
+        }
         </script>
 
     </body>
