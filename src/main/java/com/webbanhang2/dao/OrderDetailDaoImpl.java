@@ -91,7 +91,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
         public void setValues(PreparedStatement ps, int i) throws SQLException {
             ps.setString(1, orderId);
             ps.setString(2, items.get(i).getProductId());
-            ps.setInt(3, items.get(i).getQuantity());
+            ps.setLong(3, items.get(i).getQuantity());
             ps.setDouble(4, items.get(i).getPrice());
         }
 
@@ -116,8 +116,8 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
             OrderDetail od = new OrderDetail();
             od.setOrderId(rs.getString("order_id"));
             od.setProductId(rs.getString("product_id"));
-            od.setQuantity(rs.getInt("quantity"));
-            od.setPrice(rs.getInt("price"));
+            od.setQuantity(rs.getLong("quantity"));
+            od.setPrice(rs.getLong("price"));
             od.setTotal(od.getQuantity() * od.getPrice());
             //Do Product object
             if (getProduct) {

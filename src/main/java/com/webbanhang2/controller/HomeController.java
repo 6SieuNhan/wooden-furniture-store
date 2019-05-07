@@ -279,8 +279,9 @@ public class HomeController {
 
     @RequestMapping(value = "checkout")
     public ModelAndView showCheckout(HttpServletRequest request) {
-        int i = 1, total = 0;
-        Integer quantity;
+        int i = 1;
+        long total = 0;
+        long quantity;
         String itemId, quantityString;
         ArrayList<Product> checkoutList = new ArrayList<>(), existing;
         do {
@@ -289,7 +290,7 @@ public class HomeController {
             if (itemId != null) {
                 quantityString = request.getParameter("quantity_" + i);
                 try {
-                    quantity = Integer.parseInt(quantityString);
+                    quantity = Long.parseLong(quantityString);
                 } catch (NumberFormatException ex) {
                     return new ModelAndView("redirect:home");
                 }

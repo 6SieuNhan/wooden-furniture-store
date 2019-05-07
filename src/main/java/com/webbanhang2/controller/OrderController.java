@@ -134,7 +134,7 @@ public class OrderController {
     }
 
     public String getCheckoutMailMessage(HttpServletRequest request, List<Product> items, Order order) {
-        int total = 0;
+        long total = 0;
 
         StringBuilder sb = new StringBuilder();
         sb.append("<div>\n");

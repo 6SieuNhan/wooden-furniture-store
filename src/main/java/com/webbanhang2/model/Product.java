@@ -5,7 +5,6 @@
  */
 package com.webbanhang2.model;
 
-import java.util.List;
 
 /**
  *
@@ -15,9 +14,9 @@ public class Product {
 
     private String productId, productName, description, thumbnail, shortName, productCode;
 
-    private int productCategoryId, productMaterialId, productOriginId, productRoomId, quantity;
+    private int productCategoryId, productMaterialId, productOriginId, productRoomId;
 
-    private int price;
+    private long price, quantity;
     
     private boolean product_top;
 
@@ -112,19 +111,20 @@ public class Product {
         this.productOriginId = productOriginId;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
+
 }
