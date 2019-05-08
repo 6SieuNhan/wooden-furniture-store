@@ -20,7 +20,7 @@
         <div class="col-md-4 logo_agile">
             <h1>
                 <a href="home">
-                    <span>Đ</span>ồ <span>G</span>ỗ <span>T</span>hủy <span>H</span>ằng 
+                    <img style="width: 175px" src="<c:url value="/resource/images/homepage/logo2.jpg"/>" alt="Đồ gỗ Thủy Hằng ">
                 </a>
             </h1>
         </div>
@@ -62,7 +62,7 @@
             <!-- search -->
             <div class="agileits_search">
                 <form action="productlist" method="get">
-                    <input name="searchquery" type="search" placeholder="Tìm kiếm sản phẩm ..." required="">
+                    <input name="searchquery" type="search" placeholder="Tìm kiếm sản phẩm ...">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>

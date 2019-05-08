@@ -65,8 +65,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <p>
                                     <i class="fa fa-phone"></i> 0347545020 - 0913076724</p>
                                 <p>
-                                    <i class="fa fa-fax"></i> +1 888 888 4444</p>
-                                <p>
                                     <i class="fa fa-envelope-o"></i> Email :
                                     <a href="mailto:dogomynghecaocapthuyhang@gmail.com">dogomynghecaocapthuyhang@gmail.com</a>
                                 </p>

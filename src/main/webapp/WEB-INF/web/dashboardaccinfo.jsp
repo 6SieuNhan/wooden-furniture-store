@@ -24,6 +24,7 @@
         <!-- Google Fonts-->
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
+        <link rel="shortcut icon" href="<c:url value="/resource/images/homepage/logo1.jpg"/>" />
     </head>
     <body>
         <div id="wrapper">
@@ -77,17 +78,19 @@
                                                             <form:hidden disabled="true" path="username" value="${user2.username}" />
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Số điện thoại (10 ký tự):</label>
-                                                            <form:input id="phone" required="required" disabled="true" cssClass="form-control" placeholder="Phone number" path="phone" value = "${user2.phone}" maxlength="10"/>
+                                                            <label>Số điện thoại</label>
+                                                            <p>${user2.phone}</p>
+                                                            <form:hidden disabled="true" path="phone" value = "${user2.phone}"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Email</label>
-                                                            <form:input id="email" required="required" type="email" disabled="true" cssClass="form-control" placeholder="youremail@example.com" path="email" value = "${user2.email}" maxlength="50"/>
+                                                            <p>${user2.email}</p>
+                                                            <form:hidden disabled="true" path="email" value = "${user2.email}"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Địa chỉ</label>
-                                                            <form:input required="required" disabled="true" cssClass="form-control" path="address" value = "${user2.address}" maxlength="100"
-                                                                        oninput="setCustomValidity('')" oninvalid="setCustomValidity('Trường không được để trống')"/>
+                                                            <p>${user2.address}</p>
+                                                            <form:hidden disabled="true" path="address" value = "${user2.address}"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quyền người dùng</label>

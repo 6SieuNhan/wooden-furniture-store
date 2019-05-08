@@ -278,9 +278,9 @@ public class ProductDaoImpl implements ProductDao {
             long quantity = p.getQuantity();
             long price = p.getPrice();
             String sql = "insert into product"
-                    + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price) "
-                    + "values(?,?,?,?,?,?,?,?,?)";
-            int res = jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price);
+                    + "(product_code, product_name,product_categories_id,product_material_id,product_room_id,thumbnail,description,quantity,price, product_top) "
+                    + "values(?,?,?,?,?,?,?,?,?, ?)";
+            int res = jdbcTemplate.update(sql, productCode, productName, productCategoryId, productMaterialId, productRoomId, thumbnail, descipt, quantity, price, p.isProduct_top());
             return (res > 0);
         } catch (DataAccessException ex) {
             return false;
@@ -298,12 +298,13 @@ public class ProductDaoImpl implements ProductDao {
                     + ",description=?"
                     + ",quantity=?"
                     + ",price=? "
+                    + ",product_top=? "
                     + "where product_id=?";
             int result = jdbcTemplate.update(sql, p.getProductCode(), p.getProductName(),
                     p.getProductCategoryId(), p.getProductMaterialId(),
                     p.getProductRoomId(), p.getThumbnail(),
                     p.getDescription(), p.getQuantity(),
-                    p.getPrice(), p.getProductId());
+                    p.getPrice(), p.isProduct_top(), p.getProductId());
             return result > 0;
         } catch (DataAccessException ex) {
             System.out.println(ex.getMessage());
@@ -428,18 +429,8 @@ public class ProductDaoImpl implements ProductDao {
             product.setQuantity(rs.getLong("quantity"));
             product.setPrice(rs.getLong("price"));
             product.setThumbnail(rs.getString("thumbnail"));
+            product.setProduct_top(rs.getBoolean("product_top"));
             return product;
-        }
-    }
-
-    /**
-     * Responsible for mapping image names from product_img result sets.
-     */
-    class ImgNameMapper implements RowMapper<String> {
-
-        @Override
-        public String mapRow(ResultSet rs, int arg1) throws SQLException {
-            return rs.getString("img_name");
         }
     }
 

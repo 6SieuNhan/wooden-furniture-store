@@ -35,6 +35,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
+        <link rel="shortcut icon" href="<c:url value="/resource/images/homepage/logo1.jpg"/>" />
     </head>
     <body>
         <div id="wrapper">

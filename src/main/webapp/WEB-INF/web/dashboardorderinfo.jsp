@@ -24,6 +24,7 @@
         <!-- Google Fonts-->
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="<c:url value="/resource/js/dashboard/Lightweight-Chart/cssCharts.css"/>"> 
+        <link rel="shortcut icon" href="<c:url value="/resource/images/homepage/logo1.jpg"/>" />
     </head>
     <body>
         <div id="wrapper">

@@ -35,3 +35,5 @@
 <link rel="stylesheet" href="<c:url value="/resource/css/flexslider.css" />" type="text/css" media="screen" />
 
 <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
+
+<link rel="shortcut icon" href="<c:url value="/resource/images/homepage/logo1.jpg"/>" />

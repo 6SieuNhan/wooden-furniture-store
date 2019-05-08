@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
+        <link rel="shortcut icon" href="<c:url value="/resource/images/homepage/logo1.jpg"/>" />
     </head>
     <body>
         <div id="wrapper">
@@ -50,6 +51,12 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Danh sách các loại danh mục
+                                    <a role="button" class="btn btn-default pull-right" href="#edit" onclick = "add_mode()">
+                                        Thêm danh mục
+                                    </a>
+
+
+                                    <div class="clearfix"></div>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -65,7 +72,7 @@
                                                     <option <c:if test="${categoryType == 3}">selected</c:if> value="3">Không gian</option>
                                                     </select>
                                                 </div>
-                                                    
+
                                             <c:if test="${not empty message}">
                                                 <div class="simple-alert-msg" >
                                                     ${message}
@@ -165,7 +172,7 @@
                                             </div>
 
                                             <button type="submit" class="btn btn-default">Lưu</button>
-                                            <button type="reset" class="btn btn-default" onclick = "add_mode()">Hoàn Tác (Chuyển sang Thêm danh mục)</button>
+                                            <button type="reset" class="btn btn-default" onclick = "add_mode()">Hoàn Tác</button>
                                         </div>
                                     </form>
                                 </div>

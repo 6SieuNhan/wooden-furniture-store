@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="<c:url value="/resource/css/simplePagination.css" />" rel="stylesheet" type="text/css"/>
         <link href=" <c:url value="/resource/css/adminpage/admincss.css" />" rel="stylesheet" type="text/css" media="all" />
+        <link rel="shortcut icon" href="<c:url value="/resource/images/homepage/logo1.jpg"/>" />
     </head>
     <body>
         <div id="wrapper">
@@ -135,6 +136,11 @@
                                                         <label class="w3-text-brown"><b>Số lượng</b></label>
                                                         <form:input type="number" min="0" step="1" class="form-control" path="quantity" pattern="\d+" required="required"
                                                                     oninput="setCustomValidity('')" oninvalid="setCustomValidity('Số lượng không hợp lệ')"/>
+                                                    </p>
+                                                    <p>
+                                                        <label class="w3-text-brown"><b>Sản phẩm đặc biệt</b></label>
+                                                        <br>
+                                                        <form:checkbox path="product_top" /> Là sản phẩm đặc biệt
                                                     </p>
                                                     <p class="floatLeft">
                                                         <button class="w3-btn w3-blue submit"><i class="fa fa-save"></i> Lưu Dữ Liệu</button>

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <nav class="navbar navbar-default top-navbar" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" href="home"><strong>Cửa hàng đồ gỗ</strong></a>
+        <a class="navbar-brand" href="home"><strong>Đồ gỗ Thủy Hằng</strong></a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
         <li style="color: white;">

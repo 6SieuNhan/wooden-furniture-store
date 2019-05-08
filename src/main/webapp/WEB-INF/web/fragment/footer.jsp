@@ -38,8 +38,6 @@
                         <li>
                             <i class="fa fa-mobile"></i>0347545020 - 0913076724</li>
                         <li>
-                            <i class="fa fa-fax"></i>+1 888 888 4444</li>
-                        <li>
                             <i class="fa fa-envelope-o"></i>
                             <a href="mailto:dogomynghecaocapthuyhang@gmail.com">dogomynghecaocapthuyhang@gmail.com</a>
                         </li>
